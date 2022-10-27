@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,10 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserType {
-  OWNER
-  MANAGER
-  EMPLOYEE
+model UserType {
+  id   Int    @id @default(autoincrement())
+  type String @unique
+  User User[]
+
+  @@map("user_types")
+}
+
+model ProjectPhase {
+  id      Int       @id @default(autoincrement())
+  type    String    @unique
+  Project Project[]
 }
 
 model User {
@@ -22,7 +27,8 @@ model User {
   lastname  String
   email     String     @unique
   password  String
-  user_type UserType   @default(OWNER)
+  usertype  UserType   @relation(fields: [user_type], references: [id])
+  user_type Int
   Company   Company[]
   Employee  Employee[]
 
@@ -38,32 +44,98 @@ model Company {
   owner    User       @relation(fields: [ownerId], references: [id])
   ownerId  Int
   Employee Employee[]
+  Expense  Expense[]
+  Customer Customer[]
+  Project  Project[]
+  Revenue  Revenue[]
 
   @@map("companies")
 }
 
+model Expense {
+  id        Int      @id @default(autoincrement())
+  companyId Int
+  bill_name String
+  price     Int
+  date      DateTime @default(now())
+  company   Company  @relation(fields: [companyId], references: [id])
+
+  @@map("expenses")
+}
+
 model Employee {
+  employeeId   Int       @id @default(autoincrement())
   companyId    Int
   userId       Int
   wage         Int
   job_position String
-  start_date   DateTime
+  start_date   DateTime  @default(now())
+  user         User      @relation(fields: [userId], references: [id])
+  company      Company   @relation(fields: [companyId], references: [id])
+  ProjectId    Project[] @relation("ManagerId")
+  Project      Project[] @relation("TeamMembers")
+  // @@id([companyId, userId])
 
-  user    User    @relation(fields: [userId], references: [id])
-  company Company @relation(fields: [companyId], references: [id])
-
-  @@id([companyId, userId])
   @@map("employees")
 }
 
-// model Project {
-//   id Int @id @default(autoincrement())
+model Customer {
+  customer_email String    @id @unique
+  customer_name  String
+  first_date     DateTime  @default(now())
+  company        Company   @relation(fields: [companyId], references: [id])
+  companyId      Int
+  Project        Project[]
+  Revenue        Revenue[]
 
-//   @@map("projects")
-// }
+  @@map("customers")
+}
 
-// model Activity {
-//   id Int @id @default(autoincrement())
+model Project {
+  id               Int          @id @default(autoincrement())
+  project_name     String
+  manager          Employee     @relation("ManagerId", fields: [managerId], references: [employeeId])
+  managerId        Int
+  company          Company      @relation(fields: [companyId], references: [id])
+  companyId        Int
+  customer         Customer     @relation(fields: [customerId], references: [customer_email])
+  customerId       String
+  budget           Int
+  money_spent      Int
+  start_date       DateTime     @default(now())
+  end_date         DateTime
+  deadline         DateTime
+  project_phase    ProjectPhase @relation(fields: [project_phase_id], references: [id])
+  project_phase_id Int
+  Activity         Activity[]
+  team             Employee[]   @relation("TeamMembers")
+  Revenue          Revenue?
 
-//   @@map("activities")
-// }
+  @@map("projects")
+}
+
+model Activity {
+  id         Int      @id @default(autoincrement())
+  project    Project  @relation(fields: [projectId], references: [id])
+  projectId  Int
+  objective  String
+  money      Int
+  start_date DateTime @default(now())
+  end_date   DateTime
+
+  @@map("activities")
+}
+
+model Revenue {
+  id             Int      @id
+  project        Project  @relation(fields: [projectId], references: [id])
+  projectId      Int      @unique
+  company        Company  @relation(fields: [companyId], references: [id])
+  companyId      Int
+  customer       Customer @relation(fields: [customer_email], references: [customer_email])
+  customer_email String
+  payment_date   DateTime
+  payment        Int
+
+  @@map("revenues")
+}
