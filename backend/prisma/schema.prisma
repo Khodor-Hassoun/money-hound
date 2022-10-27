@@ -10,8 +10,60 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserType {
+  OWNER
+  MANAGER
+  EMPLOYEE
+}
+
 model User {
-  id Int @id @default(autoincrement())
-  name String
+  id        Int        @id @default(autoincrement())
+  firstname String
+  lastname  String
+  email     String     @unique
+  password  String
+  user_type UserType   @default(OWNER)
+  Company   Company[]
+  Employee  Employee[]
+
   @@map("users")
 }
+
+model Company {
+  id       Int        @id @default(autoincrement())
+  name     String
+  email    String
+  address  String
+  phone    Int
+  owner    User       @relation(fields: [ownerId], references: [id])
+  ownerId  Int
+  Employee Employee[]
+
+  @@map("companies")
+}
+
+model Employee {
+  companyId    Int
+  userId       Int
+  wage         Int
+  job_position String
+  start_date   DateTime
+
+  user    User    @relation(fields: [userId], references: [id])
+  company Company @relation(fields: [companyId], references: [id])
+
+  @@id([companyId, userId])
+  @@map("employees")
+}
+
+// model Project {
+//   id Int @id @default(autoincrement())
+
+//   @@map("projects")
+// }
+
+// model Activity {
+//   id Int @id @default(autoincrement())
+
+//   @@map("activities")
+// }
