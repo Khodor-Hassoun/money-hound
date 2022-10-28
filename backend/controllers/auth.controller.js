@@ -10,10 +10,10 @@ const signUp = async (req, res) => {
       email: email,
     },
   });
-  //   if (!email || userEmailTest) {
-  //     res.status(400).json({ message: "user Email Something went wrong" });
-  //     return;
-  //   }
+  if (!email || userEmailTest) {
+    res.status(400).json({ message: "user Email Something went wrong" });
+    return;
+  }
   const companyEmailTest = await prisma.company.findFirst({
     where: {
       email: company_email,
@@ -23,17 +23,17 @@ const signUp = async (req, res) => {
     res.status(400).json({ message: " company Email Something went wrong" });
     return;
   }
-  //   Create user
-  //   const user = await prisma.user.create({
-  //     data: {
-  //       firstname: firstname,
-  //       lastname: lastname,
-  //       email: email,
-  //       password: password,
-  //       user_type: 1,
-  //     },
-  //   });
-  //   console.log(user);
+  // Create user
+  const user = await prisma.user.create({
+    data: {
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      password: password,
+      user_type: 1,
+    },
+  });
+  console.log(user);
   const company = await prisma.company.create({
     data: {
       name: name,
@@ -41,11 +41,12 @@ const signUp = async (req, res) => {
       phone: phone,
       address: address,
       capital: capital,
-      ownerId: 2,
+      //   ownerId: 2,
+      ownerId: user.id,
     },
   });
-
-  res.json(company);
+  console.log(company);
+  res.json({ user, company });
 };
 
 const logIn = async (req, res) => {};
