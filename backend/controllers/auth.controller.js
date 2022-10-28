@@ -1,26 +1,48 @@
+const saveImage = require("../helpers/save_images");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const saveImage = require("../helpers/save_images");
+const bcrypt = require("bcrypt");
+
 const signUp = async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
   const { name, company_email, address, phone, capital } = req.body;
+  let { logo } = req.body;
+  let encryptedpassword;
+
+  //   const deleteCompanies = await prisma.company.deleteMany({});
+  //   const deleteUsers = await prisma.user.deleteMany({});
+  //   res.json({ deleteCompanies, deleteUsers });
+  //   return;
+  //   Check logo
+  if (logo)
+    logo = `${saveImage(profile_picture).localPath}${
+      saveImage(profile_picture).filename
+    }`;
+  else logo = null;
   //   validate if email exists
   const userEmailTest = await prisma.user.findFirst({
     where: {
       email: email,
     },
   });
-  if (!email || userEmailTest) {
-    res.status(400).json({ message: "user Email Something went wrong" });
-    return;
-  }
   const companyEmailTest = await prisma.company.findFirst({
     where: {
       email: company_email,
     },
   });
+  if (!email || userEmailTest) {
+    res.status(400).json({ message: "user Email Something went wrong" });
+    return;
+  }
   if (!company_email || companyEmailTest) {
     res.status(400).json({ message: " company Email Something went wrong" });
+    return;
+  }
+  //   Check if password
+  if (password) {
+    encryptedpassword = await bcrypt.hash(password, 10);
+  } else {
+    res.status(400).json({ message: " User password Something went wrong" });
     return;
   }
   // Create user
@@ -29,7 +51,7 @@ const signUp = async (req, res) => {
       firstname: firstname,
       lastname: lastname,
       email: email,
-      password: password,
+      password: encryptedpassword,
       user_type: 1,
     },
   });
@@ -41,7 +63,6 @@ const signUp = async (req, res) => {
       phone: phone,
       address: address,
       capital: capital,
-      //   ownerId: 2,
       ownerId: user.id,
     },
   });
