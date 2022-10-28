@@ -2,6 +2,7 @@ const saveImage = require("../helpers/save_images");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const signUp = async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
@@ -70,6 +71,29 @@ const signUp = async (req, res) => {
   res.json({ user, company });
 };
 
-const logIn = async (req, res) => {};
+const logIn = async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+    // select: {
+    //   //   id: true,
+    //   email: true,
+    //   firstname: true,
+    //   lastname: true,
+    //   user_type: true,
+    //   password: true,
+    // },
+  });
+  if (!user) return res.status(404).json({ message: "Invalid Credentials" });
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return res.status(404).json({ message: "Invalid Credentials" });
+  const token = jwt.sign({ user }, process.env.JWT_SECRET, {
+    expiresIn: "100000000h",
+  });
+  res.status(200).json({ user, token });
+};
 
 module.exports = { signUp, logIn };
