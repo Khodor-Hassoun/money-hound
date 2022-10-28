@@ -14,8 +14,10 @@ const signUp = async (req, res) => {
   //   res.json({ deleteCompanies, deleteUsers });
   //   return;
   //   Check logo
-  if (logo) logo = `${saveImage(logo).localPath}${saveImage(logo).filename}`;
-  else logo = null;
+  if (logo) {
+    let image = saveImage(logo);
+    logo = `${image.localPath}${image.filename}`;
+  } else logo = null;
   //   validate if email exists
   const userEmailTest = await prisma.user.findFirst({
     where: {
