@@ -41,9 +41,10 @@ model Company {
   email    String
   address  String
   phone    Int
-  Owner    User       @relation(fields: [ownerId], references: [id])
+  owner    User       @relation(fields: [ownerId], references: [id])
   ownerId  Int
-  logo     String
+  logo     String?
+  capital  Int
   Employee Employee[]
   Expense  Expense[]
   Customer Customer[]
