@@ -9,7 +9,7 @@ const { Router } = require("express");
 const router = Router();
 
 router.get("/:id", authMiddleware, getUser);
-// router.put("/", authMiddleware, updateUser);
+router.put("/", authMiddleware, updateUser);
 // router.delete("/", authMiddleware, deleteUser);
 
 module.exports = router;
