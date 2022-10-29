@@ -1,5 +1,4 @@
 const authMiddleware = require("../middlewares/auth.middleware");
-const ownerMiddleware = require("../middlewares/owner.middleware");
 const {
   getUser,
   updateUser,

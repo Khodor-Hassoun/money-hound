@@ -12,9 +12,13 @@ const authMiddleware = async (req, res, next) => {
         id: decoded.userId,
       },
     });
-    console.log("---------------------------------------------------");
+    console.log(
+      "---------------------AUTHMIDDLEWARE------------------------------"
+    );
     console.log(decoded);
-    console.log("---------------------------------------------------");
+    console.log(
+      "--------------------/AUTHMIDDLEWARE------------------------------"
+    );
 
     req.user = user;
     next();
