@@ -11,6 +11,9 @@ app.use(cors());
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
+const userRoutes = require("./routes/user.routes");
+app.use("/", userRoutes);
+
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`Listening on ${process.env.SERVER_PORT}`);
 });
