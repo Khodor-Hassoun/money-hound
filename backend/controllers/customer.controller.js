@@ -18,8 +18,6 @@ const addCustomer = async (req, res) => {
           customer_name: customer_name,
         },
       ],
-      //   customer_email: customer_email,
-      //   customer_name: customer_name,
     },
   });
   if (customerExistTest)

@@ -12,12 +12,12 @@ const {
 } = require("../controllers/customer.controller");
 const { Router } = require("express");
 const router = Router();
+router.post("/customer", authMiddleware, ownerMiddleware, addCustomer);
+router.get("/customers", authMiddleware, ownerMiddleware, getCustomers);
 
 router.get("/user/:ownerId", authMiddleware, ownerMiddleware, getUserCompanies);
 router.get("/:companyId", authMiddleware, ownerMiddleware, getCompany);
 router.put("/", authMiddleware, ownerMiddleware, updateCompany);
 // router.delete("/", authMiddleware, ownerMiddleware, deleteCompany);
 
-router.post("/customer", addCustomer);
-router.post("/customer", getCustomers);
 module.exports = router;
