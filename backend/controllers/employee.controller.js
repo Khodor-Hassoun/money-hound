@@ -98,8 +98,19 @@ const addEmployee = async (req, res) => {
   });
 };
 const updateEmployee = async (req, res) => {
-  const { job_position, wage } = req.body;
+  let { job_position, wage } = req.body;
   const employeeId = req.params.id;
+  const employee = await prisma.employee.findFirst({
+    where: {
+      employeeId: parseInt(employeeId),
+    },
+  });
+  console.log(employee);
+  return;
+  if (!employee)
+    return res.status(400).json({ message: "Something went wrong" });
+  if (!job_position) job_position = employee.job_position;
+  if (!wage) wage = employee.wage;
   const updatedEmployee = await prisma.employee.update({
     where: {
       employeeId: parseInt(employeeId),
