@@ -7,8 +7,14 @@ const getEmployees = async (req, res) => {};
 const addEmployee = async (req, res) => {
   const { companyId, firstname, lastname, email, wage, job_position } =
     req.body;
+  // Check if all data is present
+  if (!(firstname && lastname && email && wage && job_position)) {
+    res.status(400).json({ message: "Invalid data" });
+    return;
+  }
+
   // Check if user exists
-  const userTestExist = await prisma.user.findFirst({
+  let userTestExist = await prisma.user.findFirst({
     where: {
       firstname: firstname,
       lastname: lastname,
@@ -27,6 +33,24 @@ const addEmployee = async (req, res) => {
     res.status(200).json(user);
     return;
   }
+
+  //   If user does not exist
+  // Check if email taken
+  userTestExist = await prisma.user.findFirst({
+    where: {
+      email: email,
+    },
+  });
+  if (userTestExist) return res.status(400).json({ message: "Invalid data" });
+  const user = await prisma.user.create({
+    data: {
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      user_type: 3,
+      // password:
+    },
+  });
 };
 
 module.exports = { addEmployee, getEmployees };
