@@ -18,8 +18,7 @@ const companyRoutes = require("./routes/company.routes");
 app.use("/company", companyRoutes);
 
 const randomPassword = require("./helpers/generate_password");
-const password = randomPassword();
-console.log(password);
+
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`Listening on ${process.env.SERVER_PORT}`);
 });
