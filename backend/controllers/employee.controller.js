@@ -6,7 +6,15 @@ const bcrypt = require("bcrypt");
 
 // to add an employee. they either already exist in the database or they do not. If they exist we only add them to employee table
 // If not create a new account for them and send their details along the password in an email
-const getEmployees = async (req, res) => {};
+const getEmployees = async (req, res) => {
+  const { companyId } = req.body;
+  const employees = await prisma.employee.findMany({
+    where: {
+      companyId: parseInt(companyId),
+    },
+  });
+  res.status(200).json(employees);
+};
 const addEmployee = async (req, res) => {
   const { companyId, firstname, lastname, email, wage, job_position } =
     req.body;
@@ -26,6 +34,15 @@ const addEmployee = async (req, res) => {
   });
 
   if (userTestExist) {
+    // Check if user is already an employee
+    const employee = await prisma.employee.findFirst({
+      where: {
+        userId: parseInt(userTestExist.id),
+        companyId: parseInt(companyId),
+      },
+    });
+    if (employee)
+      return res.status(400).json({ message: "User already is an employee" });
     const user = await prisma.employee.create({
       data: {
         companyId: parseInt(companyId),
