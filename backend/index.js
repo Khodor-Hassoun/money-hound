@@ -18,8 +18,8 @@ app.use("/", userRoutes);
 const companyRoutes = require("./routes/company.routes");
 app.use("/company", companyRoutes);
 
-const email = require("./helpers/send_email");
-email();
+// const email = require("./helpers/send_email");
+// email();
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`Listening on ${process.env.SERVER_PORT}`);
