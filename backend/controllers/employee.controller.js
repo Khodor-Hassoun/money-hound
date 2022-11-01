@@ -13,7 +13,8 @@ const getEmployees = async (req, res) => {
       companyId: parseInt(companyId),
     },
   });
-  res.status(200).json(employees);
+  const count = employees.length;
+  res.status(200).json({ employees, count: count });
 };
 const addEmployee = async (req, res) => {
   const { companyId, firstname, lastname, email, wage, job_position } =
