@@ -97,5 +97,18 @@ const addEmployee = async (req, res) => {
     employee: employee,
   });
 };
-
-module.exports = { addEmployee, getEmployees };
+const updateEmployee = async (req, res) => {
+  const { job_position, wage } = req.body;
+  const employeeId = req.params.id;
+  const updatedEmployee = await prisma.employee.update({
+    where: {
+      employeeId: parseInt(employeeId),
+    },
+    data: {
+      wage: wage,
+      job_position: job_position,
+    },
+  });
+  res.status(200).json(updatedEmployee);
+};
+module.exports = { addEmployee, getEmployees, updateEmployee };
