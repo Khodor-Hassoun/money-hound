@@ -29,6 +29,7 @@
 const nodemailer = require("nodemailer");
 // let transporter = nodemailer.createTransport({
 //   service: "gmail",
+//   tls: { rejectUnauthorized: false },
 //   auth: {
 //     type: "OAuth2",
 //     user: process.env.EMAIL_USERNAME,
@@ -56,8 +57,36 @@ const nodemailer = require("nodemailer");
 // };
 // const nodemailer = require("nodemailer");
 
+// EMAIL SENT OUTLOOK
+
+// const transporter = nodemailer.createTransport({
+//   service: "hotmail",
+//   tls: { rejectUnauthorized: false },
+//   auth: {
+//     user: process.env.EMAIL_USERNAME,
+//     pass: process.env.EMAIL_PASSWORD,
+//   },
+// });
+
+// const mailOptions = {
+//   from: process.env.EMAIL_USERNAME,
+//   to: "khodorhassoun26@gmail.com",
+//   subject: "Subject",
+//   text: "Email content",
+// };
+// const sendEmail = () => {
+//   transporter.sendMail(mailOptions, function (error, info) {
+//     if (error) {
+//       console.log(error);
+//     } else {
+//       console.log("Email sent: " + info.response);
+//       // do something useful
+//     }
+//   });
+// };
+
 const transporter = nodemailer.createTransport({
-  service: "hotmail",
+  service: "gmail",
   tls: { rejectUnauthorized: false },
   auth: {
     user: process.env.EMAIL_USERNAME,
@@ -67,7 +96,7 @@ const transporter = nodemailer.createTransport({
 
 const mailOptions = {
   from: process.env.EMAIL_USERNAME,
-  to: "khodorhassoun26@gmail.com",
+  to: "khodorhassoun@outlook.com",
   subject: "Subject",
   text: "Email content",
 };
@@ -81,4 +110,5 @@ const sendEmail = () => {
     }
   });
 };
+
 module.exports = sendEmail;
