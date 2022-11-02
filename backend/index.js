@@ -18,6 +18,9 @@ app.use("/user", userRoutes);
 const companyRoutes = require("./routes/company.routes");
 app.use("/company", companyRoutes);
 
+const projectRoutes = require("./routes/project.routes");
+app.use("/project", projectRoutes);
+
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`Listening on ${process.env.SERVER_PORT}`);
 });

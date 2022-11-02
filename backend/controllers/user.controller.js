@@ -151,7 +151,6 @@ const selectCompany = async (req, res) => {
     });
     res.status(200).json({ message: "This is an Employee", user });
   }
-  res.json(company);
 };
 const deleteUser = async (req, res) => {};
 module.exports = {
