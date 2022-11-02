@@ -118,8 +118,7 @@ const selectCompany = async (req, res) => {
   }
   const employee = await prisma.employee.findFirst({
     where: {
-      companyId: parseInt(company.id),
-      userId: parseInt(id),
+      AND: [{ companyId: parseInt(company.id) }, { userId: parseInt(id) }],
     },
   });
   const projectMangerTest = await prisma.project.findMany({
