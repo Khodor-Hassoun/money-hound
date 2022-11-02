@@ -13,7 +13,7 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 const userRoutes = require("./routes/user.routes");
-app.use("/", userRoutes);
+app.use("/user", userRoutes);
 
 const companyRoutes = require("./routes/company.routes");
 app.use("/company", companyRoutes);

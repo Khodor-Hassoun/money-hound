@@ -59,5 +59,40 @@ const updateUser = async (req, res) => {
   });
   res.json(updatedUser);
 };
+const getCompanies = async (req, res) => {
+  const { id } = req.user;
+  const options = [];
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+  //   Get the companies the user works for
+  const isOwner = await prisma.company.findMany({
+    where: {
+      ownerId: parseInt(user.id),
+    },
+  });
+  for (isntance of isOwner) {
+    options.push(isntance.id);
+  }
+  const isEmployee = await prisma.employee.findMany({
+    where: {
+      userId: user.id,
+    },
+  });
+  for (isntance of isEmployee) {
+    options.push(isntance.companyId);
+  }
+  const companies = await prisma.company.findMany({
+    where: {
+      id: {
+        in: options,
+      },
+    },
+  });
+  res.status(200).json(companies);
+};
 const deleteUser = async (req, res) => {};
-module.exports = { getUser, updateUser, deleteUser };
+module.exports = { getUser, updateUser, deleteUser, getCompanies };

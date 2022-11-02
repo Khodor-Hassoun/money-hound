@@ -85,7 +85,48 @@ const logIn = async (req, res) => {
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
     expiresIn: "100000000h",
   });
+  // res.redirect
   res.status(200).json({ user, token });
 };
 
+// const logIn2 = async (req, res) => {
+//   const { email, password } = req.body;
+//   const options = [];
+
+//   const user = await prisma.user.findUnique({
+//     where: {
+//       email: email,
+//     },
+//   });
+//   if (!user) return res.status(404).json({ message: "Invalid Credentials" });
+//   const isMatch = await bcrypt.compare(password, user.password);
+//   if (!isMatch) return res.status(404).json({ message: "Invalid Credentials" });
+
+//   //   Get the companies the user works for
+//   const isOwner = await prisma.company.findMany({
+//     where: {
+//       ownerId: parseInt(user.id),
+//     },
+//   });
+//   for (isntance of isOwner) {
+//     options.push(isntance.id);
+//   }
+//   const isEmployee = await prisma.employee.findMany({
+//     where: {
+//       userId: user.id,
+//     },
+//   });
+//   for (isntance of isEmployee) {
+//     options.push(isntance.companyId);
+//   }
+//   console.log(options);
+//   //   console.log(isOwner, isEmployee);
+//   const companies = await prisma.company.findMany({
+//     where: {
+//       id: {
+//         in: options,
+//       },
+//     },
+//   });
+// };
 module.exports = { signUp, logIn };
