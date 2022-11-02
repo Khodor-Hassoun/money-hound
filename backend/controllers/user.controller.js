@@ -94,5 +94,71 @@ const getCompanies = async (req, res) => {
   });
   res.status(200).json(companies);
 };
+const selectCompany = async (req, res) => {
+  const { companyId } = req.body;
+  const { id } = req.user;
+
+  const company = await prisma.company.findUnique({
+    where: {
+      id: companyId,
+    },
+  });
+  if (parseInt(company.ownerId) === parseInt(id)) {
+    console.log("OWNER");
+    const user = await prisma.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        user_type: 1,
+      },
+    });
+    res.status(200).json({ message: "This is the owner", user });
+    return;
+  }
+  const employee = await prisma.employee.findFirst({
+    where: {
+      companyId: parseInt(company.id),
+      userId: parseInt(id),
+    },
+  });
+  const projectMangerTest = await prisma.project.findMany({
+    where: {
+      managerId: parseInt(employee.employeeId),
+      end_date: undefined,
+    },
+  });
+  if (projectMangerTest.length > 0) {
+    console.log("PROJECT MANAGER");
+    const user = await prisma.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        user_type: 3,
+      },
+    });
+    res.status(200).json({ message: "This is the PROJECT MANAGER", user });
+    return;
+  } else {
+    console.log("EMPLOYEE");
+    const user = await prisma.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        user_type: 2,
+      },
+    });
+    res.status(200).json({ message: "This is an Employee", user });
+  }
+  res.json(company);
+};
 const deleteUser = async (req, res) => {};
-module.exports = { getUser, updateUser, deleteUser, getCompanies };
+module.exports = {
+  getUser,
+  updateUser,
+  deleteUser,
+  getCompanies,
+  selectCompany,
+};
