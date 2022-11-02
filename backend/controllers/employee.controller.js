@@ -105,8 +105,6 @@ const updateEmployee = async (req, res) => {
       employeeId: parseInt(employeeId),
     },
   });
-  console.log(employee);
-  return;
   if (!employee)
     return res.status(400).json({ message: "Something went wrong" });
   if (!job_position) job_position = employee.job_position;
@@ -122,4 +120,5 @@ const updateEmployee = async (req, res) => {
   });
   res.status(200).json(updatedEmployee);
 };
-module.exports = { addEmployee, getEmployees, updateEmployee };
+const deleteEmployee = async (req, res) => {};
+module.exports = { addEmployee, getEmployees, updateEmployee, deleteEmployee };
