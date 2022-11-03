@@ -103,7 +103,7 @@ model Project {
   customer         Customer     @relation(fields: [customerId], references: [customer_email])
   customerId       String
   budget           Int
-  money_spent      Int?
+  money_spent      Int          @default(0)
   start_date       DateTime     @default(now())
   end_date         DateTime?
   deadline         DateTime?
