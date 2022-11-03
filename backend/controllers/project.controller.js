@@ -23,7 +23,15 @@ const addProject = async (req, res) => {
   });
   res.status(200).json(project);
 };
-const getProjects = async (req, res) => {};
+const getProjects = async (req, res) => {
+  const { id } = req.company;
+  const projects = await prisma.project.findMany({
+    where: {
+      companyId: id,
+    },
+  });
+  res.status(200).json(projects);
+};
 const getProject = async (req, res) => {};
 const updateProject = async (req, res) => {};
 

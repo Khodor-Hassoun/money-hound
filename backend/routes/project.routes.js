@@ -10,7 +10,7 @@ const { Router } = require("express");
 const router = Router();
 
 router.post("/", authMiddleware, ownerMiddleware, addProject);
-router.get("/", authMiddleware, getProjects);
+router.get("/", authMiddleware, ownerMiddleware, getProjects);
 router.get("/:id", authMiddleware, getProject);
 router.put("/", authMiddleware, updateProject);
 
