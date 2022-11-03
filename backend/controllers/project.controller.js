@@ -50,11 +50,22 @@ const getProject = async (req, res) => {
 };
 const updateProject = async (req, res) => {
   const { project_id, project_name, managerId, budget, deadline } = req.body;
-  const userId = req.user.id;
-  const company = req.company;
-
+  const { project_phase, end_date } = req.body;
+  const user = req.user;
   let customerDeadline = new Date(deadline);
-  if (parseInt(company.ownerId) === parseInt(userId)) {
+  //   Get the company of the project
+  const projectDet = await prisma.project.findUnique({
+    where: {
+      id: project_id,
+    },
+    select: {
+      managerId: true,
+      company: true,
+    },
+  });
+  //   res.json(company);
+  //   return;
+  if (parseInt(projectDet.company.ownerId) === parseInt(user.id)) {
     const project = await prisma.project.update({
       where: {
         id: parseInt(project_id),
@@ -67,7 +78,21 @@ const updateProject = async (req, res) => {
       },
     });
     res.status(200).json(project);
+    return;
   }
+  if (parseInt(projectDet.managerId) !== parseInt(managerId))
+    return { message: "Wrong place" };
+
+  const project = await prisma.project.update({
+    where: {
+      id: parseInt(project_id),
+    },
+    data: {
+      project_phase: project_phase,
+      end_date: end_date,
+    },
+  });
+  res.json(project);
 };
 
 module.exports = { addProject, getProject, getProjects, updateProject };
