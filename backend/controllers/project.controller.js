@@ -71,6 +71,8 @@ const updateProject = async (req, res) => {
       },
     },
   });
+  //   res.json(projectDet);
+  //   return;
   //   validate data
   project_name = project_name ? project_name : projectDet.project_name;
   managerId = managerId ? managerId : projectDet.managerId;
@@ -81,8 +83,6 @@ const updateProject = async (req, res) => {
 
   let customerDeadline = new Date(deadline);
   let endDate = new Date(end_date);
-  //   res.json(projectDet);
-  //   return;
   //   check if they are the owner
   if (parseInt(projectDet.company.ownerId) === parseInt(user.id)) {
     const project = await prisma.project.update({
