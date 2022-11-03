@@ -5,6 +5,10 @@ const addProject = async (req, res) => {
   const { customer_email, project_name, budget, deadline, managerId } =
     req.body;
   const { id } = req.company;
+  if (!(customer_email && project_name && budget && deadline && managerId)) {
+    res.status(400).json({ message: "Invalid data" });
+    return;
+  }
   let customerDeadline = new Date(deadline);
   const project = await prisma.project.create({
     data: {
@@ -17,6 +21,7 @@ const addProject = async (req, res) => {
       project_phase_id: 1,
     },
   });
+  res.status(200).json(project);
 };
 const getProjects = async (req, res) => {};
 const getProject = async (req, res) => {};
