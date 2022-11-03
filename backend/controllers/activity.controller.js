@@ -4,6 +4,9 @@ const prisma = new PrismaClient();
 const addActivity = async (req, res) => {
   const { objective, money, end_date } = req.body;
   const projectId = req.params.id;
+  if (!projectId) return res.json({ message: "No id to validate" });
+  if (!objective || !money || !end_date)
+    return res.json({ message: "Incomplete data" });
   let endDate = new Date(end_date);
   //   res.json({ endDate, objective, projectId });
   //   return;
@@ -16,7 +19,7 @@ const addActivity = async (req, res) => {
     },
   });
   if (!activity.id) return res.json({ message: "whoops" });
-  const updateProject = await prisma.project.update({
+  const updatedProject = await prisma.project.update({
     where: {
       id: parseInt(projectId),
     },
@@ -26,6 +29,6 @@ const addActivity = async (req, res) => {
       },
     },
   });
-  res.json({ activity, updateProject });
+  res.json({ activity, updatedProject });
 };
 module.exports = { addActivity };
