@@ -27,12 +27,25 @@ const getProjects = async (req, res) => {
   const { id } = req.company;
   const projects = await prisma.project.findMany({
     where: {
-      companyId: id,
+      companyId: parseInt(id),
     },
   });
   res.status(200).json(projects);
 };
-const getProject = async (req, res) => {};
+const getProject = async (req, res) => {
+  const { id } = req.params;
+  const project = await prisma.project.findUnique({
+    where: {
+      id: parseInt(id),
+    },
+    include: {
+      team: true,
+      Activity: true,
+      Revenue: true,
+    },
+  });
+  res.status(200).json(project);
+};
 const updateProject = async (req, res) => {};
 
 module.exports = { addProject, getProject, getProjects, updateProject };
