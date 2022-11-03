@@ -49,25 +49,38 @@ const getProject = async (req, res) => {
   res.status(200).json(project);
 };
 const updateProject = async (req, res) => {
-  const { project_id, project_name, managerId, budget, deadline } = req.body;
-  const { project_phase, end_date } = req.body;
+  const { project_id } = req.body;
+  let { project_name, managerId, budget, deadline } = req.body;
+  let { project_phase, end_date } = req.body;
   const user = req.user;
-  let customerDeadline = new Date(deadline);
-  let endDate = new Date(end_date);
+
+  if (!project_id) {
+    return res.json({ message: "no project id" });
+  }
   //   Get the company of the project
   const projectDet = await prisma.project.findUnique({
     where: {
       id: project_id,
     },
-    select: {
+    include: {
       company: true,
       manager: {
-        select: {
+        include: {
           user: true,
         },
       },
     },
   });
+  //   validate data
+  project_name = project_name ? project_name : projectDet.project_name;
+  managerId = managerId ? managerId : projectDet.managerId;
+  budget = budget ? budget : projectDet.budget;
+  deadline = deadline ? deadline : projectDet.deadline;
+  project_phase = project_phase ? project_phase : projectDet.project_phase_id;
+  end_date = end_date ? end_date : projectDet.end_date;
+
+  let customerDeadline = new Date(deadline);
+  let endDate = new Date(end_date);
   //   res.json(projectDet);
   //   return;
   //   check if they are the owner
@@ -88,7 +101,7 @@ const updateProject = async (req, res) => {
   }
   //   check if they are not the manager
   if (parseInt(projectDet.manager.user.id) !== parseInt(user.id))
-    return console.log("Wrong place");
+    return res.json({ message: "Wrong place" });
 
   const project = await prisma.project.update({
     where: {
