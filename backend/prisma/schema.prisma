@@ -103,10 +103,10 @@ model Project {
   customer         Customer     @relation(fields: [customerId], references: [customer_email])
   customerId       String
   budget           Int
-  money_spent      Int
+  money_spent      Int?
   start_date       DateTime     @default(now())
-  end_date         DateTime
-  deadline         DateTime
+  end_date         DateTime?
+  deadline         DateTime?
   project_phase    ProjectPhase @relation(fields: [project_phase_id], references: [id])
   project_phase_id Int
   Activity         Activity[]
