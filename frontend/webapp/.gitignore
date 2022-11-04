@@ -5,7 +5,9 @@
 /.pnp
 .pnp.js
 moneylogo.svg
-
+money.jpg
+*.png
+*.jpg
 # testing
 /coverage
 
