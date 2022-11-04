@@ -27,7 +27,7 @@ model User {
   lastname  String
   email     String     @unique
   password  String
-  usertype  UserType   @relation(fields: [user_type], references: [id])
+  Usertype  UserType   @relation(fields: [user_type], references: [id])
   user_type Int
   Company   Company[]
   Employee  Employee[]
@@ -43,6 +43,8 @@ model Company {
   phone    Int
   owner    User       @relation(fields: [ownerId], references: [id])
   ownerId  Int
+  logo     String?
+  capital  Int
   Employee Employee[]
   Expense  Expense[]
   Customer Customer[]
@@ -58,7 +60,7 @@ model Expense {
   bill_name String
   price     Int
   date      DateTime @default(now())
-  company   Company  @relation(fields: [companyId], references: [id])
+  Company   Company  @relation(fields: [companyId], references: [id])
 
   @@map("expenses")
 }
@@ -101,10 +103,10 @@ model Project {
   customer         Customer     @relation(fields: [customerId], references: [customer_email])
   customerId       String
   budget           Int
-  money_spent      Int
+  money_spent      Int          @default(0)
   start_date       DateTime     @default(now())
-  end_date         DateTime
-  deadline         DateTime
+  end_date         DateTime?
+  deadline         DateTime?
   project_phase    ProjectPhase @relation(fields: [project_phase_id], references: [id])
   project_phase_id Int
   Activity         Activity[]
