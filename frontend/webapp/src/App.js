@@ -1,12 +1,23 @@
 import "./App.css";
 import money from "./moneyhound.jpg";
 import { useRef, useState } from "react";
+import axios from "axios";
 function App() {
   const emailRef = useRef("");
   const passwordRef = useRef("");
   function handleClick() {
     console.log(emailRef.current.value);
     console.log(passwordRef.current.value);
+  }
+  function request() {
+    axios
+      .post("http://localhost:3002/auth/login", {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      })
+      .then((res) => {
+        console.log(res);
+      });
   }
 
   return (
@@ -42,7 +53,10 @@ function App() {
         {/* BUTTON */}
         <button
           className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
-          onClick={handleClick}
+          onClick={() => {
+            handleClick();
+            request();
+          }}
         >
           SIGN UP
         </button>
