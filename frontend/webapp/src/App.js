@@ -4,30 +4,40 @@ import money from "./moneyhound.jpg";
 function App() {
   return (
     <body className="bg-ming w-screen h-screen flex justify-center items-center">
-      <div className="bg-offWhite flex flex-col px-20 py-10">
-        <div className="h-24">
+      {/* CARD DIV */}
+      <div className="bg-offWhite flex flex-col py-10 w-[500px] px-12 items-center">
+        <div className="h-24 w-full">
           <img src={money} alt="Logo" className="h-full w-full" />
         </div>
-        <div className="flex flex-col p-2">
+        {/* EMAIL LABEL AND INPUT */}
+        <div className="flex flex-col p-2 w-full">
           <label htmlFor="email">Email</label>
           <input
-            typeof="text"
+            type="text"
             placeholder="Email"
             id="email"
-            className="border-black border-solid border rounded"
+            className="border-black border-solid border rounded py-2 px-1"
           ></input>
         </div>
-        <div className="flex flex-col p-2">
+        {/* PASSWORD LABEL AND INPUT */}
+        <div className="flex flex-col p-2 w-full">
           <label htmlFor="password">Password</label>
           <input
-            typeof="password"
+            type="password"
             placeholder="password"
             id="password"
-            className="border-black border-solid border rounded"
+            className="border-black border-solid border rounded py-2 px-1"
           ></input>
-          <span className="text-tangerine self-end p-2">Forgot password?</span>
+          <span className="text-tangerine self-end">Forgot password?</span>
         </div>
-        <button className="bg-tangerine text-white rounded-md">SIGN UP</button>
+        {/* BUTTON */}
+        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full">
+          SIGN UP
+        </button>
+        <span className="my-4">
+          Don't have an account?
+          <span className="text-tangerine"> Register here</span>
+        </span>
       </div>
     </body>
   );
