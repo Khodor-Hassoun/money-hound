@@ -1,6 +1,6 @@
-import money from "../../moneyhound.jpg";
+import money from "../../resources/images/moneyhound.jpg";
 import { useRef, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route,Link } from "react-router-dom";
 import axios from "axios";
 function LogIn() {
   const emailRef = useRef("");
@@ -62,7 +62,7 @@ function LogIn() {
         </button>
         <span className="my-4">
           Don't have an account?
-          <span className="text-tangerine"> Register here</span>
+          <span className="text-tangerine"> <Link to="/signup">Register here</Link></span>
         </span>
       </div>
     </section>

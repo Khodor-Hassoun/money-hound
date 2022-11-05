@@ -10,7 +10,7 @@ money.jpg
 *.jpg
 # testing
 /coverage
-
+resources/
 # production
 /build
 
