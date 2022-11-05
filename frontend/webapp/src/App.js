@@ -1,9 +1,16 @@
 import "./App.css";
-import logo from "./moneylogo.svg";
 import money from "./moneyhound.jpg";
+import { useRef, useState } from "react";
 function App() {
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+  function handleClick() {
+    console.log(emailRef.current.value);
+    console.log(passwordRef.current.value);
+  }
+
   return (
-    <body className="bg-ming w-screen h-screen flex justify-center items-center">
+    <section className="bg-ming w-screen h-screen flex justify-center items-center">
       {/* CARD DIV */}
       <div className="bg-offWhite flex flex-col py-10 w-[500px] px-12 items-center">
         <div className="h-24 w-full">
@@ -17,6 +24,7 @@ function App() {
             placeholder="Email"
             id="email"
             className="border-black border-solid border rounded py-2 px-1"
+            ref={emailRef}
           ></input>
         </div>
         {/* PASSWORD LABEL AND INPUT */}
@@ -27,11 +35,15 @@ function App() {
             placeholder="password"
             id="password"
             className="border-black border-solid border rounded py-2 px-1"
+            ref={passwordRef}
           ></input>
           <span className="text-tangerine self-end">Forgot password?</span>
         </div>
         {/* BUTTON */}
-        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full">
+        <button
+          className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
+          onClick={handleClick}
+        >
           SIGN UP
         </button>
         <span className="my-4">
@@ -39,7 +51,7 @@ function App() {
           <span className="text-tangerine"> Register here</span>
         </span>
       </div>
-    </body>
+    </section>
   );
 }
 
