@@ -9,6 +9,11 @@ module.exports = {
         beau: "#C8DAE4",
         offWhite: "#F2F2F2",
       },
+      backgroundImage: {
+        building:
+          "url(/src/resources/images/seanpollockPhYq704ffdAunsplash.jpg)",
+        arrow: "url(/src/resources/images/arrow-121-24.png)",
+      },
     },
   },
   plugins: [],
