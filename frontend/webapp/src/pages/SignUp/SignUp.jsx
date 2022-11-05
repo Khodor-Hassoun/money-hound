@@ -7,10 +7,9 @@ import arrow from "../../resources/images/arrow-121-24.png"
 function SignUp(){
     const [showModal, setShowModal] = useState(false)
     return(
-        
         <section className="bg-ming w-screen h-screen flex justify-center items-center">
             {/* FORM SECTION */}
-            <div className="bg-offWhite py-10 px-6 w-[410px] pointer-events-none hidden">
+            <div className="bg-offWhite py-10 px-6 w-[410px]">
                 {/* HEADER SECTION */}
                 <div className="flex p-2">
                     <span className="text-2xl"><Link to="/">&#10005;</Link></span>
@@ -43,7 +42,7 @@ function SignUp(){
                 <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full">NEXT</button>
             </div>
             {/* IMAGE SECTION */}
-            <div className="w-[410px] h-[446px] pointer-events-none hidden">
+            <div className="w-[410px] h-[446px]">
                 <img src={placeholder} alt='placeholder' className="h-full w-full bg-cover"/>
             </div>
 
