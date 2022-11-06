@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import placeholder from "../../resources/images/christin-hume-Hcfwew744z4-unsplash111.jpg"
-import placeholder2 from "../../resources/images/seanpollockPhYq704ffdAunsplash.jpg"
-import arrow from "../../resources/images/arrow-121-24.png"
+
 
 function SignUp() {
     const [showModal, setShowModal] = useState(false)
@@ -51,10 +51,16 @@ function SignUp() {
             name: nameRef.current.value,
             company_email: companyEmailRef.current.value,
             address: addressRef.current.value,
-            phone: phoneRef.current.value,
-            capital: capitalRef.current.value
+            phone: parseInt(phoneRef.current.value),
+            capital: parseInt(capitalRef.current.value)
         }
         console.log(data)
+        axios
+            .post("http://localhost:3002/auth/signup", data)
+            .then((res) => {
+                console.log(res);
+            });
+
     }
     return (
         <>
@@ -102,7 +108,7 @@ function SignUp() {
                     </div>
                 </section>
             ) : (null)}
-            <section className="bg-ming w-screen h-screen flex justify-center items-center">
+            <section className="bg-ming w-screen h-screen flex justify-center items-center absolute">
                 {/* FORM SECTION */}
                 <div className="bg-offWhite py-10 px-6 w-[410px]">
                     {/* HEADER SECTION */}
