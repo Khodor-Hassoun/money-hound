@@ -23,7 +23,7 @@ function Navbar() {
             </div>
 
             {/* OPTIONS LINKS */}
-            <div className="space-y-6">
+            <div className="space-y-6 ">
                 {/* LINK 1 */}
                 <div className="flex h-[70px] items-center bg-ming brightness-110">
                     {/* Lightbar */}
@@ -31,7 +31,7 @@ function Navbar() {
                     <p className="text-tangerine w-full ml-8">Dashboard</p>
                 </div>
                 {/* LINK 2 */}
-                <div className="flex h-[70px] items-center bg-ming brightness-100">
+                <div className="flex h-[70px] items-center bg-ming brightness-100 hover:brightness-110 cursor-pointer">
                     {/* Lightbar */}
                     <div className="h-full bg-white w-[12px]" />
                     <p className=" w-full ml-8">Dashboard</p>
