@@ -9,6 +9,8 @@ const signUp = async (req, res) => {
   const { name, company_email, address, phone, capital } = req.body;
   let { logo } = req.body;
   let encryptedpassword;
+  if (!firstname || !lastname || !name || !address || !phone || !capital)
+    return res.status(400).json({ message: "Incomplete data" });
 
   //   const deleteCompanies = await prisma.company.deleteMany({});
   //   const deleteUsers = await prisma.user.deleteMany({});
