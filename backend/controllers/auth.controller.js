@@ -60,9 +60,9 @@ const signUp = async (req, res) => {
     data: {
       name: name,
       email: company_email,
-      phone: phone,
+      phone: parseInt(phone),
       address: address,
-      capital: capital,
+      capital: parseInt(capital),
       ownerId: user.id,
       logo: logo,
     },
