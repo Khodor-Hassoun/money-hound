@@ -21,6 +21,16 @@ function Navbar() {
                     <img src={dots} alt="options" />
                 </div>
             </div>
+
+            {/* OPTIONS LINKS */}
+            <div>
+                {/* LINK 1 */}
+                <div className="flex h-[70px] items-center bg-ming brightness-110">
+                    {/* Lightbar */}
+                    <div className="h-full bg-tangerine w-[12px]" />
+                    <p className="text-tangerine w-full ml-8">Dashboard</p>
+                </div>
+            </div>
         </nav>
     )
 }
