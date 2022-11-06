@@ -2,7 +2,7 @@ import logo from "../resources/images/seanpollockPhYq704ffdAunsplash.jpg"
 import dots from "../resources/images/icons8-more-24.png"
 function Navbar() {
     return (
-        <nav className="h-screen w-[400px] bg-ming text-white">
+        <nav className="h-screen w-[350px] bg-ming text-white">
             {/* COMPANY LOGO, NAME AND COMPANY SETTINGS */}
             <div className="flex items-center w-full pt-6 justify-between px-4">
                 {/* COMPANY LOGO AND NAME */}
@@ -23,12 +23,18 @@ function Navbar() {
             </div>
 
             {/* OPTIONS LINKS */}
-            <div>
+            <div className="space-y-6">
                 {/* LINK 1 */}
                 <div className="flex h-[70px] items-center bg-ming brightness-110">
                     {/* Lightbar */}
                     <div className="h-full bg-tangerine w-[12px]" />
                     <p className="text-tangerine w-full ml-8">Dashboard</p>
+                </div>
+                {/* LINK 2 */}
+                <div className="flex h-[70px] items-center bg-ming brightness-100">
+                    {/* Lightbar */}
+                    <div className="h-full bg-white w-[12px]" />
+                    <p className=" w-full ml-8">Dashboard</p>
                 </div>
             </div>
         </nav>
