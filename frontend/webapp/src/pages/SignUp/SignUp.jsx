@@ -15,33 +15,7 @@ function SignUp() {
     const companyEmailRef = useRef("")
     const addressRef = useRef("")
     const phoneRef = useRef("")
-    const userData = new FormData()
-    const companyData = new FormData()
 
-    // const data = new FormData()
-    // data.append('firstname', firstnameRef.current.value)
-    // data.append("lastname", lastnameRef.current.value)
-    // data.append("email", emailRef.current.value)
-    // data.append('password', passwordRef.current.value)
-    // data.append('name', nameRef.current.value)
-    // data.append("company_email", companyEmailRef.current.value)
-    // data.append('address', addressRef.current.value)
-    // data.append("phone", phoneRef.current.value)
-    // data.append("capital", capitalRef.current.value)
-    function logUserData() {
-        userData.append('firstname', firstnameRef.current.value)
-        userData.append("lastname", lastnameRef.current.value)
-        userData.append("email", emailRef.current.value)
-        userData.append('password', passwordRef.current.value)
-    }
-    function logCompanyData() {
-        companyData.append('name', nameRef.current.value)
-        companyData.append("company_email", companyEmailRef.current.value)
-        companyData.append('address', addressRef.current.value)
-        companyData.append("phone", phoneRef.current.value)
-        companyData.append("capital", capitalRef.current.value)
-        console.log(...userData, ...companyData)
-    }
     function logData() {
         const data = {
             firstname: firstnameRef.current.value,
