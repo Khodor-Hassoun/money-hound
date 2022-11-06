@@ -6,13 +6,48 @@ import arrow from "../../resources/images/arrow-121-24.png"
 
 function SignUp() {
     const [showModal, setShowModal] = useState(false)
+    const firstnameRef = useRef('')
+    const lastnameRef = useRef("")
+    const emailRef = useRef("")
+    const passwordRef = useRef("")
+    const nameRef = useRef("")
+    const capitalRef = useRef("")
+    const companyEmailRef = useRef("")
+    const addressRef = useRef("")
+    const phoneRef = useRef("")
+    const userData = new FormData()
+    const companyData = new FormData()
+    // const data = new FormData()
+    // data.append('firstname', firstnameRef.current.value)
+    // data.append("lastname", lastnameRef.current.value)
+    // data.append("email", emailRef.current.value)
+    // data.append('password', passwordRef.current.value)
+    // data.append('name', nameRef.current.value)
+    // data.append("company_email", companyEmailRef.current.value)
+    // data.append('address', addressRef.current.value)
+    // data.append("phone", phoneRef.current.value)
+    // data.append("capital", capitalRef.current.value)
+    function logUserData() {
+        userData.append('firstname', firstnameRef.current.value)
+        userData.append("lastname", lastnameRef.current.value)
+        userData.append("email", emailRef.current.value)
+        userData.append('password', passwordRef.current.value)
+    }
+    function logCompanyData() {
+        companyData.append('name', nameRef.current.value)
+        companyData.append("company_email", companyEmailRef.current.value)
+        companyData.append('address', addressRef.current.value)
+        companyData.append("phone", phoneRef.current.value)
+        companyData.append("capital", capitalRef.current.value)
+        console.log(...userData, ...companyData)
+    }
     return (
         <>
             {showModal ? (
                 <section className="bg-ming w-screen h-screen flex justify-center items-center">
                     <div className="w-[410px] h-[430px] bg-building bg-center bg-cover bg-no-repeat brightness-75">
                         <div className="w-[24px] h-[24px] py-10 px-6">
-                            <div className="bg-arrow w-[24px] h-[24px]" onClick={() => setShowModal(false)} />
+                            <div className="bg-arrow w-[24px] h-[24px] cursor-pointer" onClick={() => setShowModal(false)} />
                         </div>
                     </div>
                     {/* CONTENT SECTION */}
@@ -22,32 +57,32 @@ function SignUp() {
                         <div className="flex p-2 w-full">
                             {/* FIRST NAME LAST NAME */}
                             <div className="flex flex-col mr-0.5 w-2/4">
-                                <label htmlFor="firstname">Firstname</label>
-                                <input type="text" id="firstname" placeholder="firstname" className="border-black border-solid border rounded py-2 px-1"></input>
+                                <label htmlFor="name">Company name</label>
+                                <input type="text" id="name" placeholder="Mcdonalds" className="border-black border-solid border rounded py-2 px-1" ref={nameRef}></input>
                             </div>
                             <div className="flex flex-col w-2/4">
-                                <label htmlFor="lastname">lastname</label>
-                                <input type="text" id="lastname" placeholder="lastname" className="border-black border-solid border rounded py-2 px-1"></input>
+                                <label htmlFor="capital">Capital</label>
+                                <input type="text" id="capital" placeholder="ex. 45000" className="border-black border-solid border rounded py-2 px-1" ref={capitalRef}></input>
                             </div>
                         </div>
                         {/* EMAIL */}
                         <div className="flex flex-col p-2">
-                            <label htmlFor="email">Email</label>
-                            <input type="text" id="email" placeholder="email" className="border-black border-solid border rounded py-2 px-1"></input>
+                            <label htmlFor="companyemail">Email</label>
+                            <input type="text" id="companyemail" placeholder="name@domain.com" className="border-black border-solid border rounded py-2 px-1" ref={companyEmailRef}></input>
                         </div>
                         {/* ADRRESS AND PHONE */}
                         <div className="flex p-2 w-full">
                             {/* FIRST NAME LAST NAME */}
                             <div className="flex flex-col mr-0.5 w-2/4">
-                                <label htmlFor="firstname">Firstname</label>
-                                <input type="text" id="firstname" placeholder="firstname" className="border-black border-solid border rounded py-2 px-1"></input>
+                                <label htmlFor="address">Address</label>
+                                <input type="text" id="address" placeholder="123 st." className="border-black border-solid border rounded py-2 px-1" ref={addressRef}></input>
                             </div>
                             <div className="flex flex-col w-2/4">
-                                <label htmlFor="lastname">lastname</label>
-                                <input type="text" id="lastname" placeholder="lastname" className="border-black border-solid border rounded py-2 px-1"></input>
+                                <label htmlFor="phone">Phone</label>
+                                <input type="text" id="phone" placeholder="01455678" className="border-black border-solid border rounded py-2 px-1" ref={phoneRef}></input>
                             </div>
                         </div>
-                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full">NEXT</button>
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={logCompanyData}>REGISTER</button>
 
                     </div>
                 </section>
@@ -67,24 +102,24 @@ function SignUp() {
                             {/* FIRST NAME LAST NAME */}
                             <div className="flex flex-col mr-0.5 w-2/4">
                                 <label htmlFor="firstname">Firstname</label>
-                                <input type="text" id="firstname" placeholder="firstname" className="border-black border-solid border rounded py-2 px-1"></input>
+                                <input type="text" id="firstname" placeholder="John" ref={firstnameRef} className="border-black border-solid border rounded py-2 px-1"></input>
                             </div>
                             <div className="flex flex-col w-2/4">
                                 <label htmlFor="lastname">lastname</label>
-                                <input type="text" id="lastname" placeholder="lastname" className="border-black border-solid border rounded py-2 px-1"></input>
+                                <input type="text" id="lastname" placeholder="Doe" ref={lastnameRef} className="border-black border-solid border rounded py-2 px-1"></input>
                             </div>
                         </div>
                         {/* EMAIL */}
                         <div className="flex flex-col p-2">
                             <label htmlFor="email">Email</label>
-                            <input type="text" id="email" placeholder="email" className="border-black border-solid border rounded py-2 px-1"></input>
+                            <input type="text" id="email" placeholder="john@outlook.com" ref={emailRef} className="border-black border-solid border rounded py-2 px-1"></input>
                         </div>
                         {/* PASSWORD */}
                         <div className="flex flex-col p-2">
-                            <label htmlFor="password">Email</label>
-                            <input type="password" id="password" placeholder="password" className="border-black border-solid border rounded py-2 px-1"></input>
+                            <label htmlFor="password">Password</label>
+                            <input type="password" id="password" ref={passwordRef} className="border-black border-solid border rounded py-2 px-1"></input>
                         </div>
-                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => setShowModal(true)}>NEXT</button>
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => { logUserData(); setShowModal(true) }}>NEXT</button>
                     </div>
                     {/* IMAGE SECTION */}
                     <div className="w-[410px] h-[446px]">
