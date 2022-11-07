@@ -55,7 +55,7 @@ const updateProject = async (req, res) => {
   const user = req.user;
 
   if (!project_id) {
-    return res.json({ message: "no project id" });
+    return res.status(405).json({ message: "no project id" });
   }
   //   Get the company of the project
   const projectDet = await prisma.project.findUnique({
