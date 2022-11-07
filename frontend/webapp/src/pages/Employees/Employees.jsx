@@ -30,7 +30,7 @@ function Employees() {
                 {/* TABLE HERE */}
                 <table className="table-auto w-full border border-black">
                     <thead className="bg-ming text-white [&>*]:border [&>*]:border-black">
-                        <tr className="[&>*]:border [&>*]:border-black">
+                        <tr className="[&>*]:border [&>*]:border-black hover:bg-red-600">
                             <th className="justify-items-start">Name</th>
                             <th>Email</th>
                             <th>Job position</th>

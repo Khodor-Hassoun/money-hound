@@ -3,11 +3,11 @@ import dots from "../resources/images/icons8-more-24.png"
 function Navbar() {
     const isActive = false
     return (
-        <nav className="h-screen w-[350px] bg-ming text-white flex flex-col justify-between m-0 mr-4 ">
+        <nav className="h-screen w-[300px] bg-ming text-white flex flex-col justify-between m-0 mr-4 ">
             {/* COMPANY LOGO, NAME AND COMPANY SETTINGS */}
             <div className="flex items-center w-full pt-6 justify-between px-4">
                 {/* COMPANY LOGO AND NAME */}
-                <div className="flex items-center w-2/3 ">
+                <div className="flex items-center w-4/5 ">
                     {/* COMPANY LOGO WHITE BACKGROUND */}
                     <div className="h-[60px] w-[60px] bg-white flex justify-center items-center rounded-xl">
                         <div className="h-[50px] w-[50px] rounded-xl">
