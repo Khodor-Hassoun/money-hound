@@ -3,8 +3,7 @@ import dots from "../resources/images/icons8-more-24.png"
 function Navbar() {
     const isActive = false
     return (
-        //justify-between
-        <nav className="h-screen w-[350px] bg-ming text-white flex flex-col justify-between">
+        <nav className="h-screen w-[350px] bg-ming text-white flex flex-col justify-between m-0 mr-4 ">
             {/* COMPANY LOGO, NAME AND COMPANY SETTINGS */}
             <div className="flex items-center w-full pt-6 justify-between px-4">
                 {/* COMPANY LOGO AND NAME */}
@@ -53,7 +52,7 @@ function Navbar() {
             <div className="pb-6 w-full px-4">
                 {/* NAME AND OPTIONS */}
                 <div className="flex w-full justify-between">
-                    <h2>Khodor Hassoun</h2>
+                    <h2 className="text-xl">Khodor Hassoun</h2>
                     <div className="cursor-pointer">
                         <img src={dots} alt="options" />
                     </div>
@@ -61,7 +60,7 @@ function Navbar() {
                 {/* SIGNOUT BUTTON */}
                 <button
                     className="bg-tangerine text-white my-4 p-2 rounded-xl w-full cursor-pointer">
-                    SIGN UP
+                    SIGN OUT
                 </button>
                 <div>
 
