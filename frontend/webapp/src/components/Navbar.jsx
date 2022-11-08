@@ -7,9 +7,6 @@ import { useState } from "react"
 function Navbar() {
     const [userForm, setUserForm] = useState(false)
     const [companyForm, setCompanyForm] = useState(false)
-    let userFormPop = true
-    let companyFormPop = false
-    const isActive = false
     function userFormOpen() {
         setUserForm((userForm) => !userForm)
     }

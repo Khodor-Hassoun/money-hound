@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-function AddEmployeeForm() {
+function AddEmployeeForm({ closePopup }) {
   const firstnameRef = useRef("");
   const lastnameRef = useRef("");
   const companyEmailRef = useRef("");
@@ -9,7 +9,13 @@ function AddEmployeeForm() {
   return (
     <>
       <div className="bg-offWhite py-10 px-6 w-[410px]">
-        <h2 className="flex justify-center text-2xl">Employee Details</h2>
+        <div className="flex p-2">
+          <span className="text-2xl cursor-pointer" onClick={() => closePopup(false)}>&#10005;</span>
+          {/* <span className="text-2xl"><Link to="/">&#10005;</Link></span>/ */}
+          <div className="w-full">
+            <h2 className="flex justify-center text-2xl">Employee information</h2>
+          </div>
+        </div>
         {/* NAME AND CAPITAL */}
         {/* LABELS AND INPUTS */}
         <div className="flex p-2 w-full justify-between">

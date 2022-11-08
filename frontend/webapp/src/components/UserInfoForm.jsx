@@ -12,7 +12,7 @@ function UserInfoForm({ popupMode = false, closePopup }) {
                 <div className="flex p-2">
                     {
                         popupMode ?
-                            <span className="text-2xl" onClick={() => closePopup(false)}>&#10005;</span> :
+                            <span className="text-2xl cursor-pointer" onClick={() => closePopup(false)}>&#10005;</span> :
                             <span className="text-2xl"><Link to="/">&#10005;</Link></span>
                     }
                     {/* <span className="text-2xl"><Link to="/">&#10005;</Link></span>/ */}

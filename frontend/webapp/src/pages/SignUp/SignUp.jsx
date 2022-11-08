@@ -50,7 +50,7 @@ function SignUp() {
                         <h2 className="flex justify-center text-2xl">Company Details</h2>
                         {/* NAME AND CAPITAL */}
                         <div className="flex p-2 w-full">
-                            {/* FIRST NAME LAST NAME */}
+                            {/* NAME */}
                             <div className="flex flex-col mr-0.5 w-2/4">
                                 <label htmlFor="name">Company name</label>
                                 <input type="text" id="name" placeholder="Mcdonalds" className="border-black border-solid border rounded py-2 px-1" ref={nameRef}></input>
