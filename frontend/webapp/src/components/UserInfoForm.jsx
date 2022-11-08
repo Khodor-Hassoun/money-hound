@@ -1,16 +1,22 @@
 import { Link } from "react-router-dom";
 import { useRef } from 'react'
-function UserInfoForm() {
+function UserInfoForm({ popupMode, test }) {
     const firstnameRef = useRef('')
     const lastnameRef = useRef("")
     const emailRef = useRef("")
     const passwordRef = useRef("")
+    let closePopup = false
     return (
         <>
             <div className="bg-offWhite py-10 px-6 w-[410px]">
                 {/* HEADER SECTION */}
                 <div className="flex p-2">
-                    <span className="text-2xl"><Link to="/">&#10005;</Link></span>
+                    {
+                        popupMode ?
+                            <span className="text-2xl" onClick={() => test(false)}>&#10005;</span> :
+                            <span className="text-2xl"><Link to="/">&#10005;</Link></span>
+                    }
+                    {/* <span className="text-2xl"><Link to="/">&#10005;</Link></span>/ */}
                     <div className="w-full">
                         <h2 className="flex justify-center text-2xl">Personal information</h2>
                     </div>
@@ -37,7 +43,12 @@ function UserInfoForm() {
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" ref={passwordRef} className="border-black border-solid border rounded py-2 px-1"></input>
                 </div>
-                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >NEXT</button>
+                {
+                    popupMode ?
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >UPDATE</button>
+                        :
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >NEXT</button>
+                }
             </div>
         </>
     )
