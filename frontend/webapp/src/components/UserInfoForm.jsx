@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { useRef } from 'react'
-function UserInfoForm({ popupMode, test }) {
+function UserInfoForm({ popupMode = false, closePopup }) {
     const firstnameRef = useRef('')
     const lastnameRef = useRef("")
     const emailRef = useRef("")
     const passwordRef = useRef("")
-    let closePopup = false
     return (
         <>
             <div className="bg-offWhite py-10 px-6 w-[410px]">
@@ -13,7 +12,7 @@ function UserInfoForm({ popupMode, test }) {
                 <div className="flex p-2">
                     {
                         popupMode ?
-                            <span className="text-2xl" onClick={() => test(false)}>&#10005;</span> :
+                            <span className="text-2xl" onClick={() => closePopup(false)}>&#10005;</span> :
                             <span className="text-2xl"><Link to="/">&#10005;</Link></span>
                     }
                     {/* <span className="text-2xl"><Link to="/">&#10005;</Link></span>/ */}

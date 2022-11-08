@@ -14,7 +14,7 @@ function Navbar() {
         setUserForm((userForm) => !userForm)
     }
     function companyFormOpen() {
-        setUserForm((companyForm) => !companyForm)
+        setCompanyForm((companyForm) => !companyForm)
     }
     return (
         <>
@@ -85,10 +85,10 @@ function Navbar() {
             {/* USERINFO POPUP */}
 
             <div className={`${userForm ? "fixed z-50 bg-black bg-opacity-50 w-screen h-screen inset-0 flex justify-center items-center" : " pointer-events-none hidden"}`}>
-                <UserInfoForm popupMode={true} test={setUserForm} />
+                <UserInfoForm popupMode={true} closePopup={setUserForm} />
             </div>
-            <div className="fixed z-50 bg-black bg-opacity-50 w-screen h-screen inset-0 flex justify-center items-center ">
-                <CompanyInfoForm popupMode={true} test={setCompanyForm} />
+            <div className={`${companyForm ? "fixed z-50 bg-black bg-opacity-50 w-screen h-screen inset-0 flex justify-center items-center" : " pointer-events-none hidden"}`}>
+                <CompanyInfoForm popupMode={true} closePopup={setCompanyForm} />
             </div>
             {/* <div className="fixed z-50 bg-black bg-opacity-50 w-screen h-screen inset-0 flex justify-center items-center ">
                 <AddEmployeeForm />

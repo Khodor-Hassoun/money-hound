@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useRef } from 'react'
 
-function CompanyInfoForm() {
+function CompanyInfoForm({ popupMode = false, closePopup }) {
     const nameRef = useRef("")
     const capitalRef = useRef("")
     const companyEmailRef = useRef("")
@@ -10,7 +10,18 @@ function CompanyInfoForm() {
     return (
         <>
             <div className="bg-offWhite py-10 px-6 w-[410px]">
-                <h2 className="flex justify-center text-2xl">Company Details</h2>
+                <div className="flex p-2">
+                    {
+                        popupMode ?
+                            <span className="text-2xl" onClick={() => closePopup(false)}>&#10005;</span>
+                            :
+                            <span className="text-2xl"></span>
+                    }
+                    <div className="w-full">
+                        <h2 className="flex justify-center text-2xl">Company Details</h2>
+                    </div>
+                </div>
+
                 {/* NAME AND CAPITAL */}
                 <div className="flex p-2 w-full justify-between">
                     {/* NAME */}
@@ -40,7 +51,12 @@ function CompanyInfoForm() {
                         <input type="text" id="phone" placeholder="01455678" className="border-black border-solid border rounded py-2 px-1" ref={phoneRef}></input>
                     </div>
                 </div>
-                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full">REGISTER</button>
+                {
+                    popupMode ?
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >UPDATE</button>
+                        :
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full">REGISTER</button>
+                }
 
             </div>
         </>
