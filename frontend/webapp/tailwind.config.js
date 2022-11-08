@@ -8,6 +8,9 @@ module.exports = {
         tangerine: "#F69983",
         beau: "#C8DAE4",
         offWhite: "#F2F2F2",
+        tea: "#C2F8CB",
+        mint: "#52B788",
+        duneGold: "#FFBB21",
       },
       backgroundImage: {
         building:
