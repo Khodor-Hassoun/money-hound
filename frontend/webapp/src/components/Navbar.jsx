@@ -1,12 +1,30 @@
-import logo from "../resources/images/seanpollockPhYq704ffdAunsplash.jpg"
+import logo from "../resources/images/Your-Logo-here.png"
 import dots from "../resources/images/icons8-more-24.png"
 import UserInfoForm from "./UserInfoForm"
 import CompanyInfoForm from "./CompanyInfoForm"
-import AddEmployeeForm from "./AddEmployeeForm"
 import { useState } from "react"
 function Navbar() {
     const [userForm, setUserForm] = useState(false)
     const [companyForm, setCompanyForm] = useState(false)
+    const [image, setImage] = useState(null)
+
+    const onImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setImage(URL.createObjectURL(event.target.files[0]));
+        }
+    }
+    const convertToBase64 = (image) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(image);
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
     function userFormOpen() {
         setUserForm((userForm) => !userForm)
     }
@@ -23,7 +41,17 @@ function Navbar() {
                         {/* COMPANY LOGO WHITE BACKGROUND */}
                         <div className="h-[60px] w-[60px] bg-white flex justify-center items-center rounded-xl">
                             <div className="h-[50px] w-[50px] rounded-xl">
-                                <img src={logo} alt="logo" className="h-full w-full rounded-xl" />
+                                <label htmlFor="hidden-input">
+                                    {
+                                        image ?
+                                            <img src={image} alt="logo" className="h-full w-full rounded-xl" />
+                                            :
+                                            <img src={logo} alt="logo" className="h-full w-full rounded-xl" />
+
+                                    }
+                                    {/* <img src={logo} alt="logo" className="h-full w-full rounded-xl" /> */}
+                                </label>
+                                <input type="file" className="invisible" id="hidden-input" onChange={() => { onImageChange(); convertToBase64(image) }} />
                             </div>
                         </div>
                         {/* COMPANY NAME */}
@@ -87,9 +115,6 @@ function Navbar() {
             <div className={`${companyForm ? "fixed z-50 bg-black bg-opacity-50 w-screen h-screen inset-0 flex justify-center items-center" : " pointer-events-none hidden"}`}>
                 <CompanyInfoForm popupMode={true} closePopup={setCompanyForm} />
             </div>
-            {/* <div className="fixed z-50 bg-black bg-opacity-50 w-screen h-screen inset-0 flex justify-center items-center ">
-                <AddEmployeeForm />
-            </div> */}
         </>
     )
 }

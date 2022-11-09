@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getFirstname, getlastname, getemail, getpassword } from "../redux/user"
 function UserInfoForm({ popupMode = false, closePopup }) {
+    const user = useSelector((state) => state.user)
+    const dispatch = useDispatch()
     const firstnameRef = useRef('')
     const lastnameRef = useRef("")
     const emailRef = useRef("")
@@ -25,28 +29,28 @@ function UserInfoForm({ popupMode = false, closePopup }) {
                     {/* FIRST NAME LAST NAME */}
                     <div className="flex flex-col mr-0.5 w-[48%]">
                         <label htmlFor="firstname">Firstname</label>
-                        <input type="text" id="firstname" placeholder="John" ref={firstnameRef} className="border-black border-solid border rounded py-2 px-1"></input>
+                        <input type="text" id="firstname" placeholder="John" ref={firstnameRef} onChange={() => dispatch(getFirstname(firstnameRef.current.value))} className="border-black border-solid border rounded py-2 px-1"></input>
                     </div>
                     <div className="flex flex-col w-[48%]">
                         <label htmlFor="lastname">lastname</label>
-                        <input type="text" id="lastname" placeholder="Doe" ref={lastnameRef} className="border-black border-solid border rounded py-2 px-1"></input>
+                        <input type="text" id="lastname" placeholder="Doe" ref={lastnameRef} onChange={() => dispatch(getlastname(lastnameRef.current.value))} className="border-black border-solid border rounded py-2 px-1"></input>
                     </div>
                 </div>
                 {/* EMAIL */}
                 <div className="flex flex-col p-2">
                     <label htmlFor="email">Email</label>
-                    <input type="text" id="email" placeholder="john@outlook.com" ref={emailRef} className="border-black border-solid border rounded py-2 px-1"></input>
+                    <input type="text" id="email" placeholder="john@outlook.com" ref={emailRef} onChange={() => dispatch(getemail(emailRef.current.value))} className="border-black border-solid border rounded py-2 px-1"></input>
                 </div>
                 {/* PASSWORD */}
                 <div className="flex flex-col p-2">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" ref={passwordRef} className="border-black border-solid border rounded py-2 px-1"></input>
+                    <input type="password" id="password" ref={passwordRef} onChange={() => dispatch(getpassword(passwordRef.current.value))} className="border-black border-solid border rounded py-2 px-1"></input>
                 </div>
                 {
                     popupMode ?
                         <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >UPDATE</button>
                         :
-                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >NEXT</button>
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => console.log(user)} >NEXT</button>
                 }
             </div>
         </>

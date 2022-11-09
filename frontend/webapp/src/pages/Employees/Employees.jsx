@@ -1,4 +1,3 @@
-import searchIcon from "../../resources/images/icons8-search-24.png"
 import Navbar from "../../components/Navbar"
 import { FaSearch } from "react-icons/fa"
 import { useState } from "react"
@@ -20,12 +19,6 @@ function Employees() {
                     {/* SEARCH AND ADD BUTTON */}
                     <div className="flex items-center h-[30px] space-x-2">
                         {/* SEARCH BAR */}
-                        {/* <div className="w-[200px] h-full flex rounded-md border-solid border-black border-2  justify-between bg-offWhite px-1 items-center">
-                            <input type="text" placeholder="search..." className="rounded-lg w-3/5 bg-offWhite flex-grow ring-transparent border-opacity-0 border-white" />
-                            <label className="h-full w-3 flex items-center">
-                                <FaSearch size={100} />
-                            </label>
-                        </div> */}
                         <input type="text" placeholder="search..." className="rounded-md w-3/5 bg-offWhite flex-grow border-2 px-1 border-black" />
                         <div className="h-full w-3 flex items-center relative right-7">
                             <FaSearch size={100} />
