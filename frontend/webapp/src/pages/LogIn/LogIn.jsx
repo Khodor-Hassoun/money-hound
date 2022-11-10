@@ -2,8 +2,16 @@ import money from "../../resources/images/moneyhound.jpg";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux'
+import { setUser } from "../../redux/user"
 
 function LogIn() {
+
+  const user = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+  function userChange(e) {
+    dispatch(setUser({ ...user, [e.target.name]: e.target.value }))
+  }
 
   const emailRef = useRef("");
   const passwordRef = useRef("");

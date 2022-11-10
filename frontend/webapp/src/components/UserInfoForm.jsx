@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getFirstname, getlastname, getemail, getpassword, setUser } from "../redux/user"
+import { setUser } from "../redux/user"
 function UserInfoForm({ popupMode = false, closePopup }) {
     const user = useSelector((state) => state.user)
     const dispatch = useDispatch()
@@ -10,7 +10,6 @@ function UserInfoForm({ popupMode = false, closePopup }) {
     const emailRef = useRef("")
     const passwordRef = useRef("")
     function userChange(e) {
-        // console.log({ [e.target.name]: e.target.value })
         dispatch(setUser({ ...user, [e.target.name]: e.target.value }))
     }
     return (

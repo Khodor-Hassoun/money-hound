@@ -12,6 +12,7 @@ export const userSlice = createSlice({
     email: "",
     user_type: "",
     password: "",
+    id: null,
   },
   reducers: {
     getFirstname: (state, action) => {
@@ -31,6 +32,7 @@ export const userSlice = createSlice({
       state.firstname = action.payload.firstname;
       state.lastname = action.payload.lastname;
       state.password = action.payload.password;
+      state.id = parseInt(action.payload.id);
     },
   },
 });
