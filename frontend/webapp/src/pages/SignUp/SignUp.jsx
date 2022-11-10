@@ -6,7 +6,7 @@ import placeholder from "../../resources/images/christin-hume-Hcfwew744z4-unspla
 import placeholder2 from "../../resources/images/seanpollockPhYq704ffdAunsplash.jpg"
 import UserInfoForm from "../../components/UserInfoForm";
 import CompanyInfoForm from "../../components/CompanyInfoForm";
-import { setUser } from "../../redux/user";
+import { setUser, gettoken } from "../../redux/user";
 import { setCompany } from "../../redux/company";
 
 
@@ -14,6 +14,7 @@ function SignUp() {
     const [showModal, setShowModal] = useState(false)
     const state = useSelector((state) => state)
     const user = useSelector((state) => state.user)
+    // console.log(user)
     const company = useSelector((state) => state.company)
     const dispatch = useDispatch()
     function logData() {
@@ -33,24 +34,45 @@ function SignUp() {
             .post("http://localhost:3002/auth/signup", data)
             .then((res) => {
                 console.log(res);
-                if (res.status === 200) {
-                    dispatch(setUser({
-                        firstname: res.data.user.firstname,
-                        lastname: res.data.user.lastname,
-                        email: res.data.user.email,
-                        id: parseInt(res.data.user.id),
-                        password: res.data.user.password,
-                        user_type: 1
+
+                dispatch(setUser({
+                    ...user,
+                    firstname: res.data.user.firstname,
+                    lastname: res.data.user.lastname,
+                    email: res.data.user.email,
+                    id: parseInt(res.data.user.id),
+                    // password: res.data.user.password,
+                    user_type: 1
+                }))
+
+                dispatch(setCompany({
+                    name: res.data.company.name,
+                    capital: res.data.company.capital,
+                    email: res.data.company.email,
+                    id: parseInt(res.data.company.id),
+                    address: res.data.company.address,
+                    phone: res.data.company.phone
+                }))
+            }).then(() => {
+                axios.post("http://localhost:3002/auth/login", {
+                    email: user.email,
+                    password: user.password,
+                }).then(res => {
+                    console.log("------------------------Sign IN---------------------")
+                    console.log(res)
+                    dispatch(gettoken({
+                        token: res.data.token
                     }))
-                    dispatch(setCompany({
-                        name: res.data.company.name,
-                        capital: res.data.company.capital,
-                        email: res.data.company.email,
-                        id: parseInt(res.data.company.id),
-                        address: res.data.company.address,
-                        phone: res.data.company.phone
-                    }))
-                }
+                    console.log("------------------------/Sign IN---------------------")
+
+                }).catch(e => {
+                    console.log("------------------------Sign IN---------------------")
+                    console.log(e)
+                    console.log("------------------------/Sign IN---------------------")
+
+                })
+            }).catch(e => {
+                console.log(e)
             });
 
     }

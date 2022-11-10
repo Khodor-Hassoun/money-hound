@@ -7,12 +7,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    firstname: "",
-    lastname: "",
-    email: "",
-    user_type: "",
-    password: "",
-    id: null,
+    // firstname: "",
+    // lastname: "",
+    // email: "",
+    // user_type: "",
+    // password: "",
+    // id: null,
+    // token: null,
   },
   reducers: {
     getFirstname: (state, action) => {
@@ -27,19 +28,29 @@ export const userSlice = createSlice({
     getpassword: (state, action) => {
       state.password = action.payload;
     },
+    gettoken: (state, action) => {
+      state.token = action.payload.token;
+    },
     setUser: (state, action) => {
       state.email = action.payload.email;
       state.firstname = action.payload.firstname;
       state.lastname = action.payload.lastname;
       state.password = action.payload.password;
-      state.id = parseInt(action.payload.id);
-      state.user_type = parseInt(action.payload.user_type);
+      state.id = action.payload.id;
+      state.user_type = action.payload.user_type;
+      state.token = action.payload.token;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { getFirstname, getlastname, getemail, getpassword, setUser } =
-  userSlice.actions;
+export const {
+  getFirstname,
+  getlastname,
+  getemail,
+  getpassword,
+  setUser,
+  gettoken,
+} = userSlice.actions;
 
 export default userSlice.reducer;
