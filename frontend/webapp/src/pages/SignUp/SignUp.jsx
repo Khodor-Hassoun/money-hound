@@ -44,20 +44,28 @@ function SignUp() {
         <section className="bg-ming w-screen h-screen flex justify-center items-center">
             {/* USER INFO SECTION */}
             <div className="flex">
-                <UserInfoForm />
-                <div className="w-[410px] h-[446px]">
-                    <img src={placeholder} alt='placeholder' className="h-full w-full bg-cover" onClick={() => console.log(state)} />
+                {/* FORM CONTAINER */}
+                <div className=" w-1/2 h-1/2">
+                    {/* FORM CONTENT */}
+                    <div className="bg-offWhite flex flex-col py-10 px-6">
+                        {/* FORM HEADER */}
+                        <div className="flex p-2">
+                            <span className="text-2xl"><Link to="/">&#10005;</Link></span>
+                            <div className="w-full">
+                                <h2 className="flex justify-center text-2xl">Personal information</h2>
+                            </div>
+                        </div>
+                        {/* FORM CONTEENT */}
+                        <UserInfoForm />
+                        {/* FORM BUTTON */}
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => console.log(state)} >NEXT</button>
+                    </div>
+                </div>
+                <div>
+                    <img src={placeholder} alt='placeholder' className="w-full h-full bg-cover" />
                 </div>
             </div>
             {/* COMPANY INFO SECTION */}
-            <div className="flex">
-                {/* PLACEHOLDER IMAGE */}
-                {/* <div className="w-[24px] h-[24px] py-10 px-6 relative left-12 z-10">
-                    <div className="bg-arrow w-[24px] h-[24px] cursor-pointer" onClick={() => setShowModal(false)} />
-                </div>
-                <div className="w-[410px] h-[450px] bg-building bg-center bg-cover bg-no-repeat brightness-75" />
-                <CompanyInfoForm /> */}
-            </div>
 
         </section>
     )
