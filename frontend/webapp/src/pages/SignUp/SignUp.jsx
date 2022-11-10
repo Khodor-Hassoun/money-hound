@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import placeholder from "../../resources/images/christin-hume-Hcfwew744z4-unsplash111.jpg"
 import UserInfoForm from "../../components/UserInfoForm";
 import CompanyInfoForm from "../../components/CompanyInfoForm";
@@ -8,6 +9,7 @@ import CompanyInfoForm from "../../components/CompanyInfoForm";
 
 function SignUp() {
     const [showModal, setShowModal] = useState(false)
+    const state = useSelector((state) => state)
     const firstnameRef = useRef('')
     const lastnameRef = useRef("")
     const emailRef = useRef("")
@@ -43,9 +45,9 @@ function SignUp() {
             {/* USER INFO SECTION */}
             <div className="flex">
                 <UserInfoForm />
-                {/* <div className="w-[410px] h-[446px]">
-                    <img src={placeholder} alt='placeholder' className="h-full w-full bg-cover" />
-                </div> */}
+                <div className="w-[410px] h-[446px]">
+                    <img src={placeholder} alt='placeholder' className="h-full w-full bg-cover" onClick={() => console.log(state)} />
+                </div>
             </div>
             {/* COMPANY INFO SECTION */}
             <div className="flex">
