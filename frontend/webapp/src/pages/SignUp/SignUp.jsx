@@ -43,18 +43,18 @@ function SignUp() {
             {/* USER INFO SECTION */}
             <div className="flex">
                 <UserInfoForm />
-                <div className="w-[410px] h-[446px]">
+                {/* <div className="w-[410px] h-[446px]">
                     <img src={placeholder} alt='placeholder' className="h-full w-full bg-cover" />
-                </div>
+                </div> */}
             </div>
             {/* COMPANY INFO SECTION */}
             <div className="flex">
                 {/* PLACEHOLDER IMAGE */}
-                <div className="w-[24px] h-[24px] py-10 px-6 relative left-12 z-10">
+                {/* <div className="w-[24px] h-[24px] py-10 px-6 relative left-12 z-10">
                     <div className="bg-arrow w-[24px] h-[24px] cursor-pointer" onClick={() => setShowModal(false)} />
                 </div>
                 <div className="w-[410px] h-[450px] bg-building bg-center bg-cover bg-no-repeat brightness-75" />
-                <CompanyInfoForm />
+                <CompanyInfoForm /> */}
             </div>
 
         </section>
