@@ -33,6 +33,7 @@ export const userSlice = createSlice({
       state.lastname = action.payload.lastname;
       state.password = action.payload.password;
       state.id = parseInt(action.payload.id);
+      state.user_type = parseInt(action.payload.user_type);
     },
   },
 });

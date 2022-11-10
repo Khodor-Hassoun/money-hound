@@ -15,7 +15,6 @@ function UserInfoForm({ popupMode = false, closePopup }) {
     return (
         <>
             <div className="flex flex-col">
-                {/* HEADER SECTION */}
                 {/* LABELS AND INPUTS */}
                 <div className="flex p-2 w-full justify-between">
                     {/* FIRST NAME LAST NAME */}

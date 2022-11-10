@@ -1,49 +1,63 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import placeholder from "../../resources/images/christin-hume-Hcfwew744z4-unsplash111.jpg"
+import placeholder2 from "../../resources/images/seanpollockPhYq704ffdAunsplash.jpg"
 import UserInfoForm from "../../components/UserInfoForm";
 import CompanyInfoForm from "../../components/CompanyInfoForm";
+import { setUser } from "../../redux/user";
+import { setCompany } from "../../redux/company";
 
 
 function SignUp() {
     const [showModal, setShowModal] = useState(false)
     const state = useSelector((state) => state)
-    const firstnameRef = useRef('')
-    const lastnameRef = useRef("")
-    const emailRef = useRef("")
-    const passwordRef = useRef("")
-    const nameRef = useRef("")
-    const capitalRef = useRef("")
-    const companyEmailRef = useRef("")
-    const addressRef = useRef("")
-    const phoneRef = useRef("")
-
+    const user = useSelector((state) => state.user)
+    const company = useSelector((state) => state.company)
+    const dispatch = useDispatch()
     function logData() {
         const data = {
-            firstname: firstnameRef.current.value,
-            lastname: lastnameRef.current.value,
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
-            name: nameRef.current.value,
-            company_email: companyEmailRef.current.value,
-            address: addressRef.current.value,
-            phone: parseInt(phoneRef.current.value),
-            capital: parseInt(capitalRef.current.value)
+            firstname: state.user.firstname,
+            lastname: state.user.lastname,
+            email: state.user.email,
+            password: state.user.password,
+            name: state.company.name,
+            company_email: state.company.email,
+            address: state.company.address,
+            phone: parseInt(state.company.phone),
+            capital: parseInt(state.company.capital)
         }
-        console.log(data)
+        // console.log(data)
         axios
             .post("http://localhost:3002/auth/signup", data)
             .then((res) => {
                 console.log(res);
+                if (res.status === 200) {
+                    dispatch(setUser({
+                        firstname: res.data.user.firstname,
+                        lastname: res.data.user.lastname,
+                        email: res.data.user.email,
+                        id: parseInt(res.data.user.id),
+                        password: res.data.user.password,
+                        user_type: 1
+                    }))
+                    dispatch(setCompany({
+                        name: res.data.company.name,
+                        capital: res.data.company.capital,
+                        email: res.data.company.email,
+                        id: parseInt(res.data.company.id),
+                        address: res.data.company.address,
+                        phone: res.data.company.phone
+                    }))
+                }
             });
 
     }
     return (
         <section className="bg-ming w-screen h-screen flex justify-center items-center">
             {/* USER INFO SECTION */}
-            <div className="flex">
+            <div className={`flex ${showModal ? "hidden pointer-events-none" : ""}`}>
                 {/* FORM CONTAINER */}
                 <div className=" w-1/2 h-1/2">
                     {/* FORM CONTENT */}
@@ -58,7 +72,7 @@ function SignUp() {
                         {/* FORM CONTEENT */}
                         <UserInfoForm />
                         {/* FORM BUTTON */}
-                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => console.log(state)} >NEXT</button>
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => setShowModal(true)} >NEXT</button>
                     </div>
                 </div>
                 <div>
@@ -66,8 +80,26 @@ function SignUp() {
                 </div>
             </div>
             {/* COMPANY INFO SECTION */}
-
-        </section>
+            <div className={`flex ${showModal ? "" : "hidden pointer-events-none"}`} >
+                <div className="w-[24px] h-[24px] py-10 px-6 relative left-12 z-10">
+                    <div className="bg-arrow w-[24px] h-[24px] cursor-pointer" onClick={() => setShowModal(false)} />
+                </div>
+                <div className="w-1/2 h-1/2">
+                    <img src={placeholder2} alt='placeholder' className="w-full h-full bg-cover max-w-lg" />
+                </div>
+                <div className="w-1/2 h-1/2">
+                    <div className="bg-offWhite flex flex-col py-10 px-6">
+                        <div className="flex p-2">
+                            <div className="w-full">
+                                <h2 className="flex justify-center text-2xl">Company information</h2>
+                            </div>
+                        </div>
+                        <CompanyInfoForm />
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => logData()}>Register</button>
+                    </div>
+                </div>
+            </div>
+        </section >
     )
 }
 
