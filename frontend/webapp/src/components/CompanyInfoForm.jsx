@@ -11,19 +11,7 @@ function CompanyInfoForm({ popupMode = false, closePopup }) {
     }
     return (
         <>
-            <div className="bg-offWhite py-10 px-6 w-[410px]">
-                <div className="flex p-2">
-                    {
-                        popupMode ?
-                            <span className="text-2xl cursor-pointer" onClick={() => closePopup(false)}>&#10005;</span>
-                            :
-                            <span className="text-2xl"></span>
-                    }
-                    <div className="w-full">
-                        <h2 className="flex justify-center text-2xl">Company Details</h2>
-                    </div>
-                </div>
-
+            <div className="flex flex-col">
                 {/* NAME AND CAPITAL */}
                 <div className="flex p-2 w-full justify-between">
                     {/* NAME */}
@@ -53,13 +41,6 @@ function CompanyInfoForm({ popupMode = false, closePopup }) {
                         <input type="text" id="phone" placeholder="01455678" name="phone" onChange={companyChange} className="border-black border-solid border rounded py-2 px-1" ></input>
                     </div>
                 </div>
-                {
-                    popupMode ?
-                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >UPDATE</button>
-                        :
-                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => console.log(company)}>REGISTER</button>
-                }
-
             </div>
         </>
     )
