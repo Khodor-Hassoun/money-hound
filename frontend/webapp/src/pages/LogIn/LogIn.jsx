@@ -1,32 +1,41 @@
 import money from "../../resources/images/moneyhound.jpg";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from 'react-redux'
-import { setUser } from "../../redux/user"
+import { gettoken, setUser } from "../../redux/user"
 
 function LogIn() {
-
+  const [athenticated, setAuthentication] = useState(false)
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
+
   function userChange(e) {
     dispatch(setUser({ ...user, [e.target.name]: e.target.value }))
   }
 
-  const emailRef = useRef("");
-  const passwordRef = useRef("");
-  function handleClick() {
-    console.log(emailRef.current.value);
-    console.log(passwordRef.current.value);
-  }
   function request() {
     axios
       .post("http://localhost:3002/auth/login", {
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
+        email: user.email,
+        password: user.password,
       })
       .then((res) => {
-        console.log(res);
+        setAuthentication(bool => bool = true)
+        dispatch(setUser({
+          ...user,
+          firstname: res.data.user.firstname,
+          lastname: res.data.user.lastname,
+          email: res.data.user.email,
+          id: parseInt(res.data.user.id),
+          // password: res.data.user.password,
+          user_type: 1
+        }))
+        dispatch(gettoken({
+          token: res.data.token
+        }))
+      }).catch(e => {
+        console.log(e)
       });
   }
 
@@ -44,8 +53,9 @@ function LogIn() {
             type="text"
             placeholder="Email"
             id="email"
+            name="email"
             className="border-black border-solid border rounded py-2 px-1"
-            ref={emailRef}
+            onChange={userChange}
           ></input>
         </div>
         {/* PASSWORD LABEL AND INPUT */}
@@ -55,8 +65,9 @@ function LogIn() {
             type="password"
             placeholder="password"
             id="password"
+            name="password"
             className="border-black border-solid border rounded py-2 px-1"
-            ref={passwordRef}
+            onChange={userChange}
           ></input>
           <span className="text-tangerine self-end">Forgot password?</span>
         </div>
@@ -64,11 +75,10 @@ function LogIn() {
         <button
           className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
           onClick={() => {
-            handleClick();
             request();
           }}
         >
-          SIGN UP
+          {athenticated ? <Link to="/companies">SIGN UP</Link> : ""}
         </button>
         <span className="my-4">
           Don't have an account?
