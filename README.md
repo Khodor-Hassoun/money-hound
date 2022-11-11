@@ -13,14 +13,14 @@
 <img src="./readme/title2.svg"/>
 
 > The Well app is a mental health and mindfulness app built on top of the science of positive psychology. The Well app is more than just another meditation or journaling app; it encourages you to enhance and reflect on your day with structured, guided activities.
+> Money Hound is an accounting and project management website that helps companies handle their employees, projects and finances 
 >
-> There are 5 daily tasks that the Well app asks you to complete each day: record 3 gratitudes, write a journal entry, perform 3 acts of kindness, exercise for 20 minutes, and meditate for 15 minutes.
+> There are 3 user types. The owner who can add employees, create projects and moniter the companies finances. The project manager who can be responsible for multiple projects and are able to add employees to their team.
 
 ### User Stories
 
 - As an idependent business owner, I want to be able to moniter all my companies financial activity from a single place
 - As a project manager, I want control over who joins my team and set activities and milestones with a few button clicks, so I would increase productivity
-- As a user, I want to browsse ablums, so that I can find quick links
 
 <br><br>
 
