@@ -7,11 +7,12 @@ import Navbar from "./components/Navbar";
 import Employees from "./pages/Employees/Employees";
 import Companies from "./pages/Companies/Companies";
 import CompanyCard from "./components/CompanyCard";
+import CompanyChoice from "./pages/CompanyCard/CompanyChoice";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CompanyCard />}></Route>
+        <Route path="/" element={<CompanyChoice />}></Route>
         <Route path="/companies" element={<Companies />}></Route>
         {/* <Route path="/" element={<Navbar />}></Route> */}
         <Route path="/login" element={<LogIn />}></Route>
