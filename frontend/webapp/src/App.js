@@ -6,11 +6,12 @@ import SignUp from "./pages/SignUp/SignUp";
 import Navbar from "./components/Navbar";
 import Employees from "./pages/Employees/Employees";
 import Companies from "./pages/Companies/Companies";
+import CompanyCard from "./components/CompanyCard";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Employees />}></Route>
+        <Route path="/" element={<CompanyCard />}></Route>
         <Route path="/companies" element={<Companies />}></Route>
         {/* <Route path="/" element={<Navbar />}></Route> */}
         <Route path="/login" element={<LogIn />}></Route>
