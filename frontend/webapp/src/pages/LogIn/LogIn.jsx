@@ -1,12 +1,13 @@
 import money from "../../resources/images/moneyhound.jpg";
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from 'react-redux'
 import { gettoken, setUser } from "../../redux/user"
 
 function LogIn() {
   const [athenticated, setAuthentication] = useState(false)
+  const navigate = useNavigate()
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
@@ -34,9 +35,13 @@ function LogIn() {
         dispatch(gettoken({
           token: res.data.token
         }))
+        navigate("/companies")
       }).catch(e => {
         console.log(e)
       });
+    if (athenticated) {
+
+    }
   }
 
   return (
@@ -77,9 +82,12 @@ function LogIn() {
           onClick={() => {
             request();
           }}
-        >
-          {athenticated ? <Link to="/companies">SIGN UP</Link> : ""}
+        >SIGN IN
+          {/* <Link to="/companies">SIGN IN</Link> */}
         </button>
+        {
+          athenticated ? <Link to="/companies" /> : ""
+        }
         <span className="my-4">
           Don't have an account?
           <span className="text-tangerine"> <Link to="/signup">Register here</Link></span>
