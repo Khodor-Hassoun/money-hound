@@ -32,7 +32,7 @@ function Employees() {
                 </header>
 
                 {/* TABLE HERE */}
-                <table className="table-auto w-full border border-black">
+                <table className="table-auto w-full border border-black [&>odd]:bg-beau">
                     <thead className="bg-ming text-white [&>*]:border [&>*]:border-black">
                         <tr className="[&>*]:border [&>*]:border-black">
                             <th className="justify-items-start">Name</th>
@@ -43,16 +43,16 @@ function Employees() {
                     </thead>
                     <tbody className=" [&>*]:border [&>*]:border-black [&>odd]:bg-beau odd:bg-beau">
                         <tr className="border border-black [&>*]:border [&>*]:border-black [&>*]:hover:bg-duneGold">
-                            <th className="border border-black flex justify-start">Khodor</th>
-                            <th className="border border-black">Khodorhassoun@outlook.com</th>
-                            <th>Project Manager</th>
-                            <th>3000</th>
+                            <td className="border border-black flex justify-start">Khodor</td>
+                            <td className="border border-black">Khodorhassoun@outlook.com</td>
+                            <td>Project Manager</td>
+                            <td>3000</td>
                         </tr>
                         <tr className="bg-beau [&>*]:border [&>*]:border-black">
-                            <th>Khodor</th>
-                            <th>Khodorhassoun@outlook.com</th>
-                            <th>Project Manager</th>
-                            <th>3000</th>
+                            <td>Khodor</td>
+                            <td>Khodorhassoun@outlook.com</td>
+                            <td>Project Manager</td>
+                            <td>3000</td>
                         </tr>
                         <tr className="[&>*]:border [&>*]:border-black">
                             <th>Khodor</th>
