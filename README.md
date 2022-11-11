@@ -18,8 +18,8 @@
 
 ### User Stories
 
-- As a user, I want to browsse ablums, so that I can find quick links
-- As a user, I want to browsse ablums, so that I can find quick links
+- As an idependent business owner, I want to be able to moniter all my companies financial activity from a single place
+- As a project manager, I want control over who joins my team and set activities and milestones with a few button clicks, so I would increase productivity
 - As a user, I want to browsse ablums, so that I can find quick links
 
 <br><br>
