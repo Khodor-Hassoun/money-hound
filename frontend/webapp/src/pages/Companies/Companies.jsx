@@ -14,12 +14,13 @@ function Companies() {
                 authorization: `Bearer ${user.token}`
             }
         }).then(res => {
+            console.log(res.data)
             setCompanies(res.data)
         })
     }, [])
 
     return (
-        <section className="bg-ming flex flex-col justify-center items-center h-screen space-y-3">
+        <section className="bg-ming flex flex-col justify-center items-center h-screen w-screen space-y-3">
             {
                 companies.map((value, index) => <CompanyCard value={value} />)
             }

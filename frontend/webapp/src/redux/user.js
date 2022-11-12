@@ -31,6 +31,9 @@ export const userSlice = createSlice({
     gettoken: (state, action) => {
       state.token = action.payload.token;
     },
+    setUserType: (state, action) => {
+      state.user_type = action.payload.user_type;
+    },
     setUser: (state, action) => {
       state.email = action.payload.email;
       state.firstname = action.payload.firstname;
@@ -51,6 +54,7 @@ export const {
   getpassword,
   setUser,
   gettoken,
+  setUserType,
 } = userSlice.actions;
 
 export default userSlice.reducer;
