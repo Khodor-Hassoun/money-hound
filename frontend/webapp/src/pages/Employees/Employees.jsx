@@ -2,6 +2,7 @@ import Navbar from "../../components/Navbar"
 import { FaSearch } from "react-icons/fa"
 import { useState } from "react"
 import AddEmployeeForm from "../../components/AddEmployeeForm"
+import TableRow from "../../components/TableRow"
 function Employees() {
     const [addEmployee, setAddEmployee] = useState(false)
     function addEmployeeForm() {
@@ -42,8 +43,8 @@ function Employees() {
                         </tr>
                     </thead>
                     <tbody className=" [&>*]:border [&>*]:border-black [&>odd]:bg-beau odd:bg-beau">
-                        <tr className="border border-black [&>*]:border [&>*]:border-black [&>*]:hover:bg-duneGold">
-                            <td className="border border-black flex justify-start">Khodor</td>
+                        {/* <tr className="border border-black [&>*]:border  [&>*]:hover:bg-duneGold">
+                            <td className="border border-black px-1">Khodor</td>
                             <td className="border border-black">Khodorhassoun@outlook.com</td>
                             <td>Project Manager</td>
                             <td>3000</td>
@@ -71,7 +72,12 @@ function Employees() {
                             <th>Khodorhassoun@outlook.com</th>
                             <th>Project Manager</th>
                             <th>3000</th>
-                        </tr>
+                        </tr> */}
+                        <TableRow />
+                        <TableRow />
+                        <TableRow />
+                        <TableRow />
+                        <TableRow />
                     </tbody>
 
                 </table>
