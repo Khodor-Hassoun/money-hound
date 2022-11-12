@@ -5,6 +5,7 @@ import AddEmployeeForm from "../../components/AddEmployeeForm"
 import TableRow from "../../components/TableRow"
 function Employees() {
     const [addEmployee, setAddEmployee] = useState(false)
+    const [newEmployee, setNewEmployee] = useState({})
     function addEmployeeForm() {
         setAddEmployee((empForm) => !empForm)
     }
@@ -63,8 +64,8 @@ function Employees() {
                                 <h2 className="flex justify-center text-2xl">Personal information</h2>
                             </div>
                         </div>
-                        <AddEmployeeForm />
-                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"  >NEXT</button>
+                        <AddEmployeeForm setNewEmployee={setNewEmployee} />
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => console.log(newEmployee)} >NEXT</button>
                     </div>
                 </div>
             </section>

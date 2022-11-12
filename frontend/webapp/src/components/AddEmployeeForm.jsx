@@ -1,11 +1,20 @@
 import { useRef } from "react";
 
-function AddEmployeeForm({ closePopup }) {
+function AddEmployeeForm({ setNewEmployee }) {
   const firstnameRef = useRef("");
   const lastnameRef = useRef("");
   const companyEmailRef = useRef("");
   const jobPositionRef = useRef("");
   const payrollRef = useRef("");
+  function employeeDetails() {
+    setNewEmployee({
+      firstname: firstnameRef.current.value,
+      lastname: lastnameRef.current.value,
+      email: companyEmailRef.current.value,
+      wage: payrollRef.current.value,
+      job_position: jobPositionRef.current.value
+    })
+  }
   return (
     <>
       <div className="">
@@ -15,11 +24,11 @@ function AddEmployeeForm({ closePopup }) {
           {/* FIRST NAME LAST NAME */}
           <div className="flex flex-col mr-0.5 w-[48%]">
             <label htmlFor="firstname">Firstname</label>
-            <input type="text" id="firstname" placeholder="John" ref={firstnameRef} className="border-black border-solid border rounded py-2 px-1"></input>
+            <input type="text" id="firstname" placeholder="John" ref={firstnameRef} onChange={employeeDetails} className="border-black border-solid border rounded py-2 px-1"></input>
           </div>
           <div className="flex flex-col w-[48%]">
             <label htmlFor="lastname">lastname</label>
-            <input type="text" id="lastname" placeholder="Doe" ref={lastnameRef} className="border-black border-solid border rounded py-2 px-1"></input>
+            <input type="text" id="lastname" placeholder="Doe" ref={lastnameRef} onChange={employeeDetails} className="border-black border-solid border rounded py-2 px-1"></input>
           </div>
         </div>
         {/* EMAIL */}
@@ -31,6 +40,7 @@ function AddEmployeeForm({ closePopup }) {
             placeholder="name@domain.com"
             className="border-black border-solid border rounded py-2 px-1"
             ref={companyEmailRef}
+            onChange={employeeDetails}
           ></input>
         </div>
         {/* JOB POSITION AND PAYROLL */}
@@ -44,6 +54,7 @@ function AddEmployeeForm({ closePopup }) {
               placeholder="123 st."
               className="border-black border-solid border rounded py-2 px-1"
               ref={jobPositionRef}
+              onChange={employeeDetails}
             ></input>
           </div>
           <div className="flex flex-col w-[48%]">
@@ -54,6 +65,7 @@ function AddEmployeeForm({ closePopup }) {
               placeholder="01455678"
               className="border-black border-solid border rounded py-2 px-1"
               ref={payrollRef}
+              onChange={employeeDetails}
             ></input>
           </div>
         </div>
