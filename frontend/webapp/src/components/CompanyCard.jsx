@@ -1,6 +1,6 @@
 import logo from "../resources/images/Your-Logo-here.png"
 
-function CompanyCard() {
+function CompanyCard({ value }) {
     return (
         <>
             <div className="bg-beau rounded-xl flex w-1/3 items-center space-x-5 p-2 shadow-xl hover:p-3 hover:shadow-2xl">
@@ -16,7 +16,7 @@ function CompanyCard() {
                     </div>
                 </div>
                 <div className="flex flex-col justify-between">
-                    <h2 className="text-2xl">Company Name</h2>
+                    <h2 className="text-2xl">{value.name}</h2>
                     <span>Owner</span>
                 </div>
 
