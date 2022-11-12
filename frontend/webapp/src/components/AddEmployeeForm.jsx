@@ -8,14 +8,7 @@ function AddEmployeeForm({ closePopup }) {
   const payrollRef = useRef("");
   return (
     <>
-      <div className="bg-offWhite py-10 px-6 w-[410px]">
-        <div className="flex p-2">
-          <span className="text-2xl cursor-pointer" onClick={() => closePopup(false)}>&#10005;</span>
-          {/* <span className="text-2xl"><Link to="/">&#10005;</Link></span>/ */}
-          <div className="w-full">
-            <h2 className="flex justify-center text-2xl">Employee information</h2>
-          </div>
-        </div>
+      <div className="">
         {/* NAME AND CAPITAL */}
         {/* LABELS AND INPUTS */}
         <div className="flex p-2 w-full justify-between">
@@ -64,9 +57,6 @@ function AddEmployeeForm({ closePopup }) {
             ></input>
           </div>
         </div>
-        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full">
-          REGISTER
-        </button>
       </div>
     </>
   );

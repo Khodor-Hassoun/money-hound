@@ -43,46 +43,29 @@ function Employees() {
                         </tr>
                     </thead>
                     <tbody className=" [&>*]:border [&>*]:border-black [&>odd]:bg-beau odd:bg-beau">
-                        {/* <tr className="border border-black [&>*]:border  [&>*]:hover:bg-duneGold">
-                            <td className="border border-black px-1">Khodor</td>
-                            <td className="border border-black">Khodorhassoun@outlook.com</td>
-                            <td>Project Manager</td>
-                            <td>3000</td>
-                        </tr>
-                        <tr className="bg-beau [&>*]:border [&>*]:border-black">
-                            <td>Khodor</td>
-                            <td>Khodorhassoun@outlook.com</td>
-                            <td>Project Manager</td>
-                            <td>3000</td>
-                        </tr>
-                        <tr className="[&>*]:border [&>*]:border-black">
-                            <th>Khodor</th>
-                            <th>Khodorhassoun@outlook.com</th>
-                            <th>Project Manager</th>
-                            <th>3000</th>
-                        </tr>
-                        <tr className="[&>*]:border [&>*]:border-black ">
-                            <th>Khodor</th>
-                            <th>Khodorhassoun@outlook.com</th>
-                            <th>Project Manager</th>
-                            <th>3000</th>
-                        </tr>
-                        <tr className="[&>*]:border [&>*]:border-black">
-                            <th>Khodorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</th>
-                            <th>Khodorhassoun@outlook.com</th>
-                            <th>Project Manager</th>
-                            <th>3000</th>
-                        </tr> */}
-                        <TableRow />
-                        <TableRow />
-                        <TableRow />
-                        <TableRow />
-                        <TableRow />
+                        {
+                            [1, 2, 3, 4, 5, 6].map(val => {
+                                if (val % 2 === 0) {
+                                    return <TableRow background={'bg-beau'} />
+                                } else {
+                                    return <TableRow background={'bg-offWhite'} />
+                                }
+                            })
+                        }
                     </tbody>
 
                 </table>
-                <div className={`${addEmployee ? "fixed z-50 bg-black bg-opacity-50 w-screen h-screen inset-0 flex justify-center items-center" : " pointer-events-none hidden"}`}>
-                    <AddEmployeeForm popupMode={true} closePopup={setAddEmployee} />
+                <div className={`${addEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                    <div className="bg-offWhite flex flex-col py-10 px-6">
+                        <div className="flex p-2">
+                            <span className="text-2xl" onClick={addEmployeeForm}>&#10005;</span>
+                            <div className="w-full">
+                                <h2 className="flex justify-center text-2xl">Personal information</h2>
+                            </div>
+                        </div>
+                        <AddEmployeeForm />
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"  >NEXT</button>
+                    </div>
                 </div>
             </section>
         </section>
