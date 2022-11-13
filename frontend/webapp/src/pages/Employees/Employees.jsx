@@ -1,15 +1,19 @@
 import Navbar from "../../components/Navbar"
 import { FaSearch } from "react-icons/fa"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AddEmployeeForm from "../../components/AddEmployeeForm"
 import TableRow from "../../components/TableRow"
 import { useSelector } from "react-redux"
 import axios from "axios"
+
 function Employees() {
     const user = useSelector(state => state.user)
     const company = useSelector((state) => state.company)
+    const [employees, setEmployees] = useState([])
+    const [employeesCount, setEmployeesCount] = useState(0)
     const [addEmployee, setAddEmployee] = useState(false)
     const [newEmployee, setNewEmployee] = useState({})
+
     function addEmployeeForm() {
         setAddEmployee((empForm) => !empForm)
     }
@@ -22,6 +26,21 @@ function Employees() {
             console.log(res)
         })
     }
+
+    useEffect(() => {
+        axios.get("http://localhost:3002/company/employees", {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res.data)
+            // setEmployees(res.data.employees)
+            // setEmployees(res.data.employees)
+            // setEmployeesCount(res.data.count)
+        })
+
+    }, ["", addEmployee])
+
     return (
         <section className="flex bg-offWhite pr-4">
             {/* <Navbar /> */}
@@ -47,7 +66,7 @@ function Employees() {
                 </header>
 
                 {/* TABLE HERE */}
-                <table className="table-auto w-full border border-black [&>odd]:bg-beau">
+                <table className="table-auto w-full border border-black [&>odd]:bg-beau" onClick={() => console.log(employeesCount)}>
                     <thead className="bg-ming text-white [&>*]:border [&>*]:border-black">
                         <tr className="[&>*]:border [&>*]:border-black">
                             <th className="justify-items-start">Name</th>
@@ -57,12 +76,21 @@ function Employees() {
                         </tr>
                     </thead>
                     <tbody className=" [&>*]:border [&>*]:border-black [&>odd]:bg-beau odd:bg-beau">
-                        {
+                        {/* {
                             [1, 2, 3, 4, 5, 6].map(employee => {
                                 if (employee % 2 === 0) {
                                     return <TableRow background={'bg-beau'} employee={employee} />
                                 } else {
                                     return <TableRow background={'bg-offWhite'} />
+                                }
+                            })
+                        } */}
+                        {
+                            employees.map((employee, index) => {
+                                if (index % 2 === 0) {
+                                    return <TableRow background={'bg-offWhite'} employee={employee} />
+                                } else {
+                                    return <TableRow background={'bg-beau'} employee={employee} />
                                 }
                             })
                         }
