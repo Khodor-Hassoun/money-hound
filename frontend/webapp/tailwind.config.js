@@ -11,6 +11,8 @@ module.exports = {
         tea: "#C2F8CB",
         mint: "#52B788",
         duneGold: "#FFBB21",
+        duke: "#240090",
+        venetian: "#C1121F",
       },
       backgroundImage: {
         building:
