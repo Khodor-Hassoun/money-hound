@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 // to add an employee. they either already exist in the database or they do not. If they exist we only add them to employee table
 // If not create a new account for them and send their details along the password in an email
 const getEmployees = async (req, res) => {
-  const { companyId } = req.body;
+  const companyId = req.company.id;
   const employees = await prisma.employee.findMany({
     where: {
       companyId: parseInt(companyId),
