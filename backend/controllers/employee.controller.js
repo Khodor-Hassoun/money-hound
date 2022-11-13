@@ -12,6 +12,9 @@ const getEmployees = async (req, res) => {
     where: {
       companyId: parseInt(companyId),
     },
+    include: {
+      user: true,
+    },
   });
   const count = employees.length;
   res.status(200).json({ employees, count: count });

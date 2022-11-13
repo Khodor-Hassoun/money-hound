@@ -35,8 +35,8 @@ function Employees() {
         }).then(res => {
             console.log(res.data)
             // setEmployees(res.data.employees)
-            // setEmployees(res.data.employees)
-            // setEmployeesCount(res.data.count)
+            setEmployees(res.data.employees)
+            setEmployeesCount(res.data.count)
         })
 
     }, ["", addEmployee])
