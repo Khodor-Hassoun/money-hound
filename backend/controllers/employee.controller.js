@@ -84,7 +84,7 @@ const addEmployee = async (req, res) => {
     data: {
       companyId: parseInt(companyId),
       userId: parseInt(user.id),
-      wage: wage,
+      wage: parseInt(wage),
       job_position: job_position,
     },
   });
