@@ -16,9 +16,13 @@ function Employees() {
     const [showEmployee, setShowEmployee] = useState(false)
     const [newEmployee, setNewEmployee] = useState({})
     const [employeeData, setEmployeeData] = useState({})
+    const [update, setUpdate] = useState(false)
 
     function addEmployeeForm() {
         setAddEmployee((empForm) => !empForm)
+    }
+    function updateEmployee() {
+        setUpdate(bool => !bool)
     }
     function showEmployeeForm() {
         setShowEmployee(bool => !bool)
@@ -35,7 +39,7 @@ function Employees() {
     function employeeInfo(employee) {
         setEmployeeData(employee)
     }
-    function updateEmployee(id) {
+    function updateEmployeeRequest(id) {
         axios.put(`http://localhost:3002/company/employee/${id}`, employeeData, {
             headers: {
                 authorization: `Bearer ${user.token}`
@@ -57,7 +61,7 @@ function Employees() {
             setEmployeesCount(res.data.count)
         })
 
-    }, ["", addEmployee])
+    }, ["", addEmployee, update])
 
     return (
         <section className="flex bg-offWhite pr-4">
@@ -124,23 +128,26 @@ function Employees() {
                         <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => { console.log(newEmployee); addEmployeeRequest() }} >NEXT</button>
                     </div>
                 </div>
-
-                <div className={`${showEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                    <div className="bg-offWhite flex flex-col py-10 px-6">
-                        <div className="flex p-2">
-                            <span className="text-2xl" onClick={showEmployeeForm}>&#10005;</span>
-                            <div className="w-full">
-                                <h2 className="flex justify-center text-2xl">Employee information</h2>
+                {
+                    showEmployee ?
+                        <div className={`${showEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                            <div className="bg-offWhite flex flex-col py-10 px-6">
+                                <div className="flex p-2">
+                                    <span className="text-2xl" onClick={() => { showEmployeeForm(); setEmployeeData({}); updateEmployee() }}>&#10005;</span>
+                                    <div className="w-full">
+                                        <h2 className="flex justify-center text-2xl">Employee information</h2>
+                                    </div>
+                                </div>
+                                <EmployeeDataForm employee={employeeData} updateEmployee={setEmployeeData} />
+                                <div className="px-2 w-full flex justify-between space-x-2">
+                                    <button className="bg-duke text-white my-4 rounded-lg  w-2/5 py-2" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>Update</button>
+                                    <button className="bg-venetian text-white my-4 rounded-lg w-2/5 py-2">Delete</button>
+                                </div>
                             </div>
                         </div>
-                        <EmployeeDataForm employee={employeeData} updateEmployee={setEmployeeData} />
-                        <div className="px-2 w-full flex justify-between space-x-2">
-                            <button className="bg-duke text-white my-4 rounded-lg  w-2/5 py-2" onClick={() => updateEmployee(employeeData.employeeId)}>Update</button>
-                            <button className="bg-venetian text-white my-4 rounded-lg w-2/5 py-2">Delete</button>
-                        </div>
-                        {/* <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"  >NEXT</button> */}
-                    </div>
-                </div>
+                        :
+                        ""
+                }
             </section>
         </section>
     )
