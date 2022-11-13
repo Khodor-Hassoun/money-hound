@@ -3,15 +3,28 @@ import { FaSearch } from "react-icons/fa"
 import { useState } from "react"
 import AddEmployeeForm from "../../components/AddEmployeeForm"
 import TableRow from "../../components/TableRow"
+import { useSelector } from "react-redux"
+import axios from "axios"
 function Employees() {
+    const user = useSelector(state => state.user)
+    const company = useSelector((state) => state.company)
     const [addEmployee, setAddEmployee] = useState(false)
     const [newEmployee, setNewEmployee] = useState({})
     function addEmployeeForm() {
         setAddEmployee((empForm) => !empForm)
     }
+    function addEmployeeRequest() {
+        axios.post("http://localhost:3002/company/employee", { companyId: company.id, ...newEmployee }, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res)
+        })
+    }
     return (
         <section className="flex bg-offWhite pr-4">
-            <Navbar />
+            {/* <Navbar /> */}
             {/* EMPLOYEE CONTENT */}
             <section className="flex-grow">
                 {/* HEADER SECTION TITLE NAME SEARCH BAR BUTTON */}
@@ -45,9 +58,9 @@ function Employees() {
                     </thead>
                     <tbody className=" [&>*]:border [&>*]:border-black [&>odd]:bg-beau odd:bg-beau">
                         {
-                            [1, 2, 3, 4, 5, 6].map(val => {
-                                if (val % 2 === 0) {
-                                    return <TableRow background={'bg-beau'} />
+                            [1, 2, 3, 4, 5, 6].map(employee => {
+                                if (employee % 2 === 0) {
+                                    return <TableRow background={'bg-beau'} employee={employee} />
                                 } else {
                                     return <TableRow background={'bg-offWhite'} />
                                 }
@@ -65,7 +78,7 @@ function Employees() {
                             </div>
                         </div>
                         <AddEmployeeForm setNewEmployee={setNewEmployee} />
-                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => console.log(newEmployee)} >NEXT</button>
+                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => { console.log(newEmployee); addEmployeeRequest() }} >NEXT</button>
                     </div>
                 </div>
             </section>
