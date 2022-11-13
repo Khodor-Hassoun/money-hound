@@ -118,7 +118,7 @@ const updateEmployee = async (req, res) => {
       employeeId: parseInt(employeeId),
     },
     data: {
-      wage: wage,
+      wage: parseInt(wage),
       job_position: job_position,
     },
   });

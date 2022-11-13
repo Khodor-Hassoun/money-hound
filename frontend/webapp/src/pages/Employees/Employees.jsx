@@ -35,6 +35,15 @@ function Employees() {
     function employeeInfo(employee) {
         setEmployeeData(employee)
     }
+    function updateEmployee(id) {
+        axios.put(`http://localhost:3002/company/employee/${id}`, employeeData, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res)
+        })
+    }
 
     useEffect(() => {
         axios.get("http://localhost:3002/company/employees", {
@@ -85,26 +94,8 @@ function Employees() {
                         </tr>
                     </thead>
                     <tbody className=" [&>*]:border [&>*]:border-black [&>odd]:bg-beau odd:bg-beau">
-                        {/* {
-                            [1, 2, 3, 4, 5, 6].map(employee => {
-                                if (employee % 2 === 0) {
-                                    return <TableRow background={'bg-beau'} employee={employee} />
-                                } else {
-                                    return <TableRow background={'bg-offWhite'} />
-                                }
-                            })
-                        } */}
-                        {/* {
-                            employees.map((employee, index) => {
-                                if (index % 2 === 0) {
-                                    return <TableRow background={'bg-offWhite'} employee={employee} onClick={() => { console.log("hello") }} />
-                                } else {
-                                    return <TableRow background={'bg-beau'} employee={employee} />
-                                }
-                            })
-                        } */}
                         {
-                            employees.map((val, index) => {
+                            employees.map((employee, index) => {
                                 let background
                                 if (index % 2 === 0) {
                                     background = 'bg-offWhite'
@@ -112,11 +103,8 @@ function Employees() {
                                     background = 'bg-beau'
                                 }
                                 return (
-                                    <tr className={`[&>*]:border [&>*]:border-black [&>*]:p-1 hover:scale-105 hover:bg-cyan-50 ${background}`} onClick={() => { setEmployeeData(val); showEmployeeForm() }}>
-                                        <td className="" onclick={() => { console.log('hello') }}>{`${val.user.firstname} ${val.user.lastname}`}</td>
-                                        <td className="" >{val.user.email}</td>
-                                        <td className="">{val.job_position}</td>
-                                        <td className="">{val.wage}</td>
+                                    <tr className={`[&>*]:border [&>*]:border-black [&>*]:p-1 hover:scale-105 hover:bg-cyan-50 ${background}`} onClick={() => { setEmployeeData(employee); showEmployeeForm() }}>
+                                        <TableRow employee={employee} />
                                     </tr>
                                 )
                             })
@@ -145,14 +133,13 @@ function Employees() {
                                 <h2 className="flex justify-center text-2xl">Employee information</h2>
                             </div>
                         </div>
-                        <EmployeeDataForm employee={employeeData} />
+                        <EmployeeDataForm employee={employeeData} updateEmployee={setEmployeeData} />
                         <div className="px-2 w-full flex justify-between space-x-2">
-                            <button className="bg-duke text-white my-4 rounded-lg  w-2/5 py-2">Update</button>
+                            <button className="bg-duke text-white my-4 rounded-lg  w-2/5 py-2" onClick={() => updateEmployee(employeeData.employeeId)}>Update</button>
                             <button className="bg-venetian text-white my-4 rounded-lg w-2/5 py-2">Delete</button>
                         </div>
                         {/* <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"  >NEXT</button> */}
                     </div>
-
                 </div>
             </section>
         </section>
