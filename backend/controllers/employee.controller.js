@@ -14,6 +14,7 @@ const getEmployees = async (req, res) => {
     },
     include: {
       user: true,
+      Project: true,
     },
   });
   const count = employees.length;
