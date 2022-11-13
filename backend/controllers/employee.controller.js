@@ -88,9 +88,9 @@ const addEmployee = async (req, res) => {
       job_position: job_position,
     },
   });
-  if (employee) {
-    registerEmail(user.email, password);
-  }
+  // if (employee) {
+  //   registerEmail(user.email, password);
+  // }
   res.status(200).json({
     message: "User created succesfully",
     user: user,
