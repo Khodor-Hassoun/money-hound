@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from 'react-redux'
 import { gettoken, setUser } from "../../redux/user"
+import Navbar from "../../components/Navbar";
 
 function LogIn() {
   const [athenticated, setAuthentication] = useState(false)
@@ -46,6 +47,7 @@ function LogIn() {
 
   return (
     <section className="bg-ming w-screen h-screen flex justify-center items-center">
+      <Navbar />
       {/* CARD DIV */}
       <div className="bg-offWhite flex flex-col py-10 w-[500px] px-12 items-center">
         <div className="h-24 w-full">

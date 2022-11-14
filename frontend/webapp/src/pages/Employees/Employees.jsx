@@ -65,7 +65,7 @@ function Employees() {
 
     return (
         <section className="flex bg-offWhite pr-4">
-            {/* <Navbar /> */}
+            <Navbar />
             {/* EMPLOYEE CONTENT */}
             <section className="flex-grow">
                 {/* HEADER SECTION TITLE NAME SEARCH BAR BUTTON */}

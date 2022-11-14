@@ -3,6 +3,8 @@ import dots from "../resources/images/icons8-more-24.png"
 import UserInfoForm from "./UserInfoForm"
 import CompanyInfoForm from "./CompanyInfoForm"
 import { useState } from "react"
+import { MdSpaceDashboard } from "react-icons/md"
+import { Link, NavLink } from "react-router-dom"
 function Navbar() {
     const [userForm, setUserForm] = useState(false)
     const [companyForm, setCompanyForm] = useState(false)
@@ -33,82 +35,87 @@ function Navbar() {
     }
     return (
         <>
-            <nav className="h-screen w-[300px] bg-ming text-white flex flex-col justify-between m-0 mr-4 ">
-                {/* COMPANY LOGO, NAME AND COMPANY SETTINGS */}
-                <div className="flex items-center w-full pt-6 justify-between px-4">
-                    {/* COMPANY LOGO AND NAME */}
-                    <div className="flex items-center w-4/5 ">
-                        {/* COMPANY LOGO WHITE BACKGROUND */}
-                        <div className="h-[60px] w-[60px] bg-white flex justify-center items-center rounded-xl">
-                            <div className="h-[50px] w-[50px] rounded-xl">
-                                <label htmlFor="hidden-input">
-                                    {
-                                        image ?
-                                            <img src={image} alt="logo" className="h-full w-full rounded-xl" />
-                                            :
-                                            <img src={logo} alt="logo" className="h-full w-full rounded-xl" />
-
-                                    }
-                                    {/* <img src={logo} alt="logo" className="h-full w-full rounded-xl" /> */}
-                                </label>
-                                <input type="file" className="invisible" id="hidden-input" onChange={() => { onImageChange(); convertToBase64(image) }} />
-                            </div>
-                        </div>
-                        {/* COMPANY NAME */}
-                        <h2 className="text-xl ml-3">Company name</h2>
-                    </div>
-                    {/* COMPANY SETTINGS FOR OWNER */}
-                    <div className="cursor-pointer">
-                        <img src={dots} alt="options" onClick={companyFormOpen} />
-                    </div>
-                </div>
-
-                {/* OPTIONS LINKS */}
-                <div className="space-y-6 ">
-                    {/* LINK 1 */}
-                    <div className="flex h-[50px] items-center bg-ming brightness-110">
-                        {/* Lightbar */}
-                        <div className="h-full bg-tangerine w-[12px]" />
-                        <p className="text-tangerine w-full ml-8">Dashboard</p>
-                    </div>
-                    {/* LINK 2 */}
-                    <div className="flex h-[50px] items-center bg-ming brightness-100 hover:brightness-110 cursor-pointer first:active:bg-tangerine last:focus:text-tangerine">
-                        <div className="h-full bg-white w-[12px] active:bg-tangerine" />
-                        <p className=" w-full ml-8">Employees</p>
-                    </div>
-                    {/* LINK 3 */}
-                    <div className="flex h-[50px] items-center bg-ming brightness-100 hover:brightness-110 cursor-pointer first:active:bg-tangerine last:focus:text-tangerine">
-                        <div className="h-full bg-white w-[12px] active:bg-tangerine" />
-                        <p className=" w-full ml-8">Projects</p>
-                    </div>
-                    {/* LINK 4 */}
-                    <div className="flex h-[50px] items-center bg-ming brightness-100 hover:brightness-110 cursor-pointer first:active:bg-tangerine last:focus:text-tangerine">
-                        <div className="h-full bg-white w-[12px] active:bg-tangerine " />
-                        <p className=" w-full ml-8">Insights</p>
-                    </div>
-                </div>
-
-                {/* NAME AND SIGNOUT BUTTON */}
-                <div className="pb-6 w-full px-4">
-                    {/* NAME AND OPTIONS */}
-                    <div className="flex w-full justify-between">
-                        <h2 className="text-xl">Khodor Hassoun</h2>
-                        <div className="cursor-pointer">
-                            <img src={dots} alt="options" onClick={userFormOpen} />
+            <nav
+                className="h-screen w-1/6 lg:w-1/5 bg-ming text-white flex flex-col  m-0 mr-4 py-4">
+                {/* LOGO NAME AND OPTIONS */}
+                <div
+                    className="flex flex-col xl:flex-row xl:items-center px-2 space-y-2 xl:justify-between">
+                    <div
+                        className="h-[60px] w-[60px] bg-white flex justify-center items-center rounded-xl">
+                        <div
+                            className="h-[50px] w-[50px] rounded-xl">
+                            <img
+                                src={logo}
+                                alt="logo"
+                                className="h-full w-full rounded-xl"
+                            />
                         </div>
                     </div>
-                    {/* SIGNOUT BUTTON */}
-                    <button
-                        className="bg-tangerine text-white my-4 p-2 rounded-xl w-full cursor-pointer">
-                        SIGN OUT
-                    </button>
+                    <h2
+                        className="text-2xl">
+                        Company Name
+                    </h2>
+                    <img
+                        src={dots}
+                        className="cursor-pointer max-w-[24px]"
+                        alt="options"
+                        onClick={companyFormOpen}
+                    />
+                </div>
+                {/* LINKS */}
+                <div
+                    className="space-y-6">
                     <div>
-
+                        <NavLink to={'/employees'}>
+                            {({ isActive }) => {
+                                return isActive ? (
+                                    <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
+                                        {/* Lightbar */}
+                                        <div className="h-full bg-tangerine w-[12px]" />
+                                        <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-xl">Employees</p>
+                                    </div>
+                                ) : (
+                                    <div
+                                        className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                        <div
+                                            className="h-full bg-white w-[12px]"
+                                        />
+                                        <p
+                                            className="text-white w-full ml-2 lg:ml-6 lg:text-xl">Employees
+                                        </p>
+                                    </div>
+                                )
+                            }}
+                        </NavLink>
+                    </div>
+                    <div>
+                        <NavLink to={'/login'}>
+                            {({ isActive }) => {
+                                return isActive ? (
+                                    <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
+                                        {/* Lightbar */}
+                                        <div className="h-full bg-tangerine w-[12px]" />
+                                        <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-xl">Employees</p>
+                                    </div>
+                                ) : (
+                                    <div
+                                        className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                        <div
+                                            className="h-full bg-white w-[12px]"
+                                        />
+                                        <p
+                                            className="text-white w-full ml-2 lg:ml-8 lg:text-xl">Employees
+                                        </p>
+                                    </div>
+                                )
+                            }}
+                        </NavLink>
                     </div>
                 </div>
             </nav>
-            {/* USERINFO POPUP */}
 
+
+            {/* USERINFO POPUP */}
             <div className={`${userForm ? "fixed z-50 bg-black bg-opacity-50 w-screen h-screen inset-0 flex justify-center items-center" : " pointer-events-none hidden"}`}>
                 <UserInfoForm popupMode={true} closePopup={setUserForm} />
             </div>
