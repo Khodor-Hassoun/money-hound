@@ -252,6 +252,20 @@ function Projects() {
                     >Add</button>
                 </div>
             </div>
+            <div className={`${customerForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                <div className="bg-offWhite flex flex-col py-6 px-6 w-1/4">
+                    <div className="flex p-2">
+                        <span className="text-2xl cursor-pointer" onClick={addProjectFomrOpen}>&#10005;</span>
+                        <div className="w-full">
+                            <h2 className="flex justify-center text-2xl">Employee information</h2>
+                        </div>
+                    </div>
+                    <CustomerForm setNewProjectData={setNewProjectData} />
+                    <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
+                        onClick={() => console.log(newProjectData)}
+                    >Add</button>
+                </div>
+            </div>
 
         </section>
     )
