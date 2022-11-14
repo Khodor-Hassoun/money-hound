@@ -1,12 +1,20 @@
 import { useState } from "react"
 import Navbar from "../../components/Navbar"
+import CustomerForm from "../../components/CustomerForm"
 
 function Projects() {
-    const [customerForm, setCustomerForm] = useState(false)
+    const [customerForm, setCustomerForm] = useState(true)
     const [projectForm, setProjectForm] = useState(false)
     const [customerData, setCustomerData] = useState({})
     const [newProjectData, setNewProjectData] = useState({})
     const [projects, setProjects] = useState([])
+
+    function customerFormOpen() {
+        setCustomerForm(bool => !bool)
+    }
+    function addProjectFomrOpen() {
+        setProjectForm(bool => !bool)
+    }
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
@@ -18,7 +26,8 @@ function Projects() {
                     <div className="flex items-center h-[30px] space-x-2">
                         {/* SEARCH BAR */}
                         <button
-                            className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer">
+                            className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer"
+                            onClick={customerFormOpen}>
                             ADD CUSTOMER
                         </button>
                         {/* BUTTON */}
@@ -229,7 +238,20 @@ function Projects() {
                     </div>
                 </div>
             </section>
-
+            <div className={`${customerForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                <div className="bg-offWhite flex flex-col py-6 px-6 w-1/4">
+                    <div className="flex p-2">
+                        <span className="text-2xl cursor-pointer" onClick={customerFormOpen}>&#10005;</span>
+                        <div className="w-full">
+                            <h2 className="flex justify-center text-2xl">Employee information</h2>
+                        </div>
+                    </div>
+                    <CustomerForm setCustomerData={setCustomerData} />
+                    <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
+                        onClick={() => console.log(customerData)}
+                    >Add</button>
+                </div>
+            </div>
 
         </section>
     )
