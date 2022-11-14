@@ -107,7 +107,7 @@ function Employees() {
                                     background = 'bg-beau'
                                 }
                                 return (
-                                    <tr className={`[&>*]:border [&>*]:border-black [&>*]:p-1 hover:scale-105 hover:bg-cyan-50 ${background}`} onClick={() => { setEmployeeData(employee); showEmployeeForm() }}>
+                                    <tr className={`[&>*]:border [&>*]:border-black [&>*]:p-1 hover:scale-y-125 hover:bg-cyan-50 cursor-pointer ${background}`} onClick={() => { setEmployeeData(employee); showEmployeeForm() }}>
                                         <TableRow employee={employee} />
                                     </tr>
                                 )
@@ -119,9 +119,9 @@ function Employees() {
                 <div className={`${addEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
                     <div className="bg-offWhite flex flex-col py-10 px-6">
                         <div className="flex p-2">
-                            <span className="text-2xl" onClick={addEmployeeForm}>&#10005;</span>
+                            <span className="text-2xl cursor-pointer" onClick={addEmployeeForm}>&#10005;</span>
                             <div className="w-full">
-                                <h2 className="flex justify-center text-2xl">Personal information</h2>
+                                <h2 className="flex justify-center text-2xl">Employee information</h2>
                             </div>
                         </div>
                         <AddEmployeeForm setNewEmployee={setNewEmployee} />

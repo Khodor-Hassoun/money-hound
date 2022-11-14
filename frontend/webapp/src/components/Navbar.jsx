@@ -36,7 +36,7 @@ function Navbar() {
     return (
         <>
             <nav
-                className="h-screen w-1/6 lg:w-1/5 bg-ming text-white flex flex-col  m-0 mr-4 py-4">
+                className="h-screen w-1/6 lg:w-1/5 bg-ming text-white flex flex-col justify-between m-0 mr-4 py-4">
                 {/* LOGO NAME AND OPTIONS */}
                 <div
                     className="flex flex-col xl:flex-row xl:items-center px-2 space-y-2 xl:justify-between">
@@ -52,7 +52,7 @@ function Navbar() {
                         </div>
                     </div>
                     <h2
-                        className="text-2xl">
+                        className="text-xl lg:text-2xl">
                         Company Name
                     </h2>
                     <img
@@ -95,7 +95,7 @@ function Navbar() {
                                     <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
                                         {/* Lightbar */}
                                         <div className="h-full bg-tangerine w-[12px]" />
-                                        <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-xl">Employees</p>
+                                        <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-xl">Projects</p>
                                     </div>
                                 ) : (
                                     <div
@@ -104,7 +104,7 @@ function Navbar() {
                                             className="h-full bg-white w-[12px]"
                                         />
                                         <p
-                                            className="text-white w-full ml-2 lg:ml-8 lg:text-xl">Employees
+                                            className="text-white w-full ml-2 lg:ml-8 lg:text-xl">Projects
                                         </p>
                                     </div>
                                 )
@@ -112,15 +112,54 @@ function Navbar() {
                         </NavLink>
                     </div>
                 </div>
+                <div
+                    className="flex flex-col px-2">
+                    <div
+                        className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center">
+                        <h2
+                            className="text-xl lg:text-2xl"
+                        >Khodor Hassoun
+                        </h2>
+                        <img
+                            src={dots}
+                            className="cursor-pointer max-w-[24px]"
+                            alt="options"
+                            onClick={userFormOpen}
+                        />
+                    </div>
+                    <button
+                        className="bg-tangerine text-white my-4 lg:p-2 lg:rounded-xl w-full cursor-pointer p-1 rounded-xl"
+                    >SIGN OUT
+                    </button>
+                </div>
             </nav>
 
 
             {/* USERINFO POPUP */}
-            <div className={`${userForm ? "fixed z-50 bg-black bg-opacity-50 w-screen h-screen inset-0 flex justify-center items-center" : " pointer-events-none hidden"}`}>
-                <UserInfoForm popupMode={true} closePopup={setUserForm} />
+            <div className={`${userForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                <div className="bg-offWhite flex flex-col py-10 px-6">
+                    <div className="flex p-2">
+                        <span className="text-2xl" onClick={userFormOpen}>&#10005;</span>
+                        <div className="w-full">
+                            <h2 className="flex justify-center text-2xl">Personal information</h2>
+                        </div>
+                    </div>
+                    <UserInfoForm />
+                    <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >UPDATE</button>
+                </div>
             </div>
-            <div className={`${companyForm ? "fixed z-50 bg-black bg-opacity-50 w-screen h-screen inset-0 flex justify-center items-center" : " pointer-events-none hidden"}`}>
-                <CompanyInfoForm popupMode={true} closePopup={setCompanyForm} />
+            {/* COMPANY POPUP */}
+            <div className={`${companyForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                <div className="bg-offWhite flex flex-col py-10 px-6">
+                    <div className="flex p-2">
+                        <span className="text-2xl" onClick={companyFormOpen}>&#10005;</span>
+                        <div className="w-full">
+                            <h2 className="flex justify-center text-2xl">Company information</h2>
+                        </div>
+                    </div>
+                    <CompanyInfoForm />
+                    <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full">UPDATE</button>
+                </div>
             </div>
         </>
     )

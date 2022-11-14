@@ -47,7 +47,6 @@ function LogIn() {
 
   return (
     <section className="bg-ming w-screen h-screen flex justify-center items-center">
-      <Navbar />
       {/* CARD DIV */}
       <div className="bg-offWhite flex flex-col py-10 w-[500px] px-12 items-center">
         <div className="h-24 w-full">
