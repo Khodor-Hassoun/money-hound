@@ -5,15 +5,16 @@ import SignUp from "./pages/SignUp/SignUp";
 import Employees from "./pages/Employees/Employees";
 import Companies from "./pages/Companies/Companies";
 import Navbar from "./components/Navbar";
+import Projects from "./pages/Projects/Projects";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navbar />}></Route>
+        <Route path="/" element={<LogIn />}></Route>
         <Route path="/companies" element={<Companies />}></Route>
         <Route path="/employees" element={<Employees />}></Route>
-        {/* <Route path="/employees" element={<Employees />}></Route> */}
+        <Route path="/projects" element={<Projects />}></Route>
         <Route path="/login" element={<LogIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
       </Routes>

@@ -89,7 +89,7 @@ function Navbar() {
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink to={'/login'}>
+                        <NavLink to={'/projects'}>
                             {({ isActive }) => {
                                 return isActive ? (
                                     <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
