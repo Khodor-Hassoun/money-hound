@@ -1,6 +1,12 @@
+import { useState } from "react"
 import Navbar from "../../components/Navbar"
 
 function Projects() {
+    const [customerForm, setCustomerForm] = useState(false)
+    const [projectForm, setProjectForm] = useState(false)
+    const [customerData, setCustomerData] = useState({})
+    const [newProjectData, setNewProjectData] = useState({})
+    const [projects, setProjects] = useState([])
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
@@ -223,6 +229,8 @@ function Projects() {
                     </div>
                 </div>
             </section>
+
+
         </section>
     )
 }
