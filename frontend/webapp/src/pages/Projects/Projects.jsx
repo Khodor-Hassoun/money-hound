@@ -9,10 +9,12 @@ function Projects() {
     const company = useSelector(state => state.company)
     const user = useSelector(state => state.user)
     const [customerForm, setCustomerForm] = useState(false)
-    const [projectForm, setProjectForm] = useState(true)
+    const [projectForm, setProjectForm] = useState(false)
     const [customerData, setCustomerData] = useState({})
     const [newProjectData, setNewProjectData] = useState({})
     const [projects, setProjects] = useState([])
+    const [customers, setCustomers] = useState([])
+    const [employees, setEmployees] = useState([])
 
     function customerFormOpen() {
         setCustomerForm(bool => !bool)
@@ -20,6 +22,7 @@ function Projects() {
     function addProjectFomrOpen() {
         setProjectForm(bool => !bool)
     }
+    // GET PROJECTS
     useEffect(() => {
         axios.get("http://localhost:3002/project/", {
             headers: {
@@ -28,7 +31,7 @@ function Projects() {
         }).then(res => {
             console.log(res)
         })
-    }, [])
+    }, [projectForm])
     // GET CUSTOMERS
     useEffect(() => {
         axios.get("http://localhost:3002/company/customers", {
@@ -38,13 +41,36 @@ function Projects() {
         }).then(res => {
             console.log('---------CUSTOMERS----------')
             console.log(res)
+            setCustomers(res.data)
             console.log('---------/CUSTOMERS----------')
 
         })
+    }, [customerForm])
+    // GET EMPLOYEES
+    useEffect(() => {
+        axios.get("http://localhost:3002/company/employees", {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res.data)
+            // setEmployees(res.data.employees)
+            setEmployees(res.data.employees)
+        })
     }, [])
-
+    // ADD CUSTOMER
     function addCustomer() {
         axios.post("http://localhost:3002/company/customer", { id: company.id, ...customerData }, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res)
+        })
+    }
+    // ADD PROJECT
+    function addProject() {
+        axios.post("http://localhost:3002/project/", newProjectData, {
             headers: {
                 authorization: `Bearer ${user.token}`
             },
@@ -298,9 +324,9 @@ function Projects() {
                             <h2 className="flex justify-center text-2xl">New Project information</h2>
                         </div>
                     </div>
-                    <NewProjectForm setNewProjectData={setNewProjectData} />
+                    <NewProjectForm setNewProjectData={setNewProjectData} customers={customers} employees={employees} />
                     <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
-                        onClick={() => console.log(newProjectData)}
+                        onClick={() => { console.log(newProjectData, customers, employees); addProject() }}
                     >Add</button>
                 </div>
             </div>
