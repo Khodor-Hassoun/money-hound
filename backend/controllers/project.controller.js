@@ -30,7 +30,18 @@ const getProjects = async (req, res) => {
       companyId: parseInt(id),
     },
     include: {
-      Activity: true,
+      Activity: {
+        orderBy: [
+          {
+            start_date: "desc",
+          },
+        ],
+      },
+      manager: {
+        include: {
+          user: true,
+        },
+      },
     },
   });
   res.status(200).json(projects);
