@@ -106,8 +106,8 @@ function SignUp() {
                 <div className="w-[24px] h-[24px] py-10 px-6 relative left-12 z-10">
                     <div className="bg-arrow w-[24px] h-[24px] cursor-pointer" onClick={() => setShowModal(false)} />
                 </div>
-                <div className="w-1/2 h-1/2">
-                    <img src={placeholder2} alt='placeholder' className="w-full h-full bg-cover max-w-lg" />
+                <div className="">
+                    <img src={placeholder2} alt='placeholder' className="w-full h-full bg-cover max-w-lg object-cover" />
                 </div>
                 <div className="w-1/2 h-1/2">
                     <div className="bg-offWhite flex flex-col py-10 px-6">

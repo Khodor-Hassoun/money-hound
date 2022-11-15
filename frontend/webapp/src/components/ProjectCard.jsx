@@ -1,8 +1,9 @@
 function ProjectCard({ project }) {
-    let moneyPercentage = Math.floor((project.money_spent / project.budget) * 100)
-    moneyPercentage = 'w-[' + moneyPercentage.toString() + '%]'
-    const percent = ('w-[' + Math.floor((project.money_spent / project.budget) * 100) + '%]').toString()
+
+    const percentstr = (Math.floor((project.money_spent / project.budget) * 100) + '%').toString()
     const activities = project.Activity
+    const percent = Math.floor((project.money_spent / project.budget) * 100)
+    // style={{ height: "calc(100vh - 8rem)" }}
 
     return (
         <>
@@ -15,8 +16,16 @@ function ProjectCard({ project }) {
             <div className="my-4">
                 {/* MONEY BAR */}
                 <div className="w-full bg-tea h-[40px]">
-                    <div className={`bg-mint h-full ${percent}`}>
-                    </div>
+                    {
+                        percent > 100 ?
+                            <div className={`bg-venetian h-full w-full`}>
+                            </div>
+                            :
+                            <div className={`bg-mint h-full`} style={{ width: `${percentstr}` }}>
+                            </div>
+                    }
+                    {/* <div className={`bg-mint h-full`} style={{ width: `${percent}` }}>
+                    </div> */}
                 </div>
                 {/* BUDGET */}
                 <div className="flex justify-between w-full">

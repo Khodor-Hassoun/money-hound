@@ -5,6 +5,8 @@ import NewProjectForm from "../../components/NewProjectForm"
 import axios from "axios"
 import { useSelector } from "react-redux"
 import ProjectCard from "../../components/ProjectCard"
+import ProjectDetails from "../../components/ProjectDetails"
+import ProjectActivityDetails from "../../components/ProjectActivityDetails"
 
 function Projects() {
     const company = useSelector(state => state.company)
@@ -16,7 +18,7 @@ function Projects() {
     const [projects, setProjects] = useState([])
     const [customers, setCustomers] = useState([])
     const [employees, setEmployees] = useState([])
-    const [project, setProject] = useState([])
+    const [project, setProject] = useState({})
 
     function customerFormOpen() {
         setCustomerForm(bool => !bool)
@@ -88,7 +90,7 @@ function Projects() {
         <section className="flex bg-offWhite pr-4">
             <Navbar />
             <section className="flex-grow max-h-screen overflow-auto">
-                <header className="flex items-center justify-between w-full my-6">
+                <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-6">
                     <h2 className="text-4xl font-bold">Projects</h2>
 
                     {/* SEARCH AND ADD BUTTON */}
@@ -108,9 +110,11 @@ function Projects() {
                     </div>
                 </header>
                 {/* CONTENT CONTAINER */}
-                <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
+                    {/* <ProjectDetails /> */}
+                    {/* <ProjectActivityDetails /> */}
 
-                    {
+                    {/* {
                         Object.keys(projects).length === 0 ? <></>
                             :
                             projects.map(project => {
@@ -122,60 +126,19 @@ function Projects() {
                                 )
 
                             })
-                    }
-
-
-
-
-
-
-
-
-
+                    } */}
 
                     {/* CARD */}
-                    <div className="p-4 bg-white shadow-lg rounded-2xl">
-                        {/* CARD TITLE AND MANAGER */}
+                    {/* <div className="p-4 bg-white shadow-lg rounded-2xl">
                         <div className="flex flex-col mb-3">
                             <h2 className="text-xl font-bold">Project Name</h2>
                             <span>Project manager: John Smith</span>
                         </div>
-                        {/* MONEY BAR, BUDGET, SPENT */}
                         <div className="my-4">
-                            {/* MONEY BAR */}
-                            <div className="w-full bg-tea h-[40px]">
-                                <div className="w-[40%] bg-mint h-full">
-                                </div>
-                            </div>
-                            {/* BUDGET */}
-                            <div className="flex justify-between w-full">
-                                <p>Budget: 1000$</p>
-                                <p>Money Spent: 7000$</p>
-                            </div>
-                        </div>
-                        <div className="py-2 space-y-2">
-                            <p className="font-bold">Recent activity:</p>
-                            <ul className="list-disc list-inside space-y-1">
-                                <li>Activity</li>
-                                <li>Activity</li>
-                                <li>Activity</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="p-4 bg-white shadow-lg rounded-2xl">
-                        {/* CARD TITLE AND MANAGER */}
-                        <div className="flex flex-col mb-3">
-                            <h2 className="text-xl font-bold">Project Name</h2>
-                            <span>Project manager: John Smith</span>
-                        </div>
-                        {/* MONEY BAR, BUDGET, SPENT */}
-                        <div className="my-4">
-                            {/* MONEY BAR */}
                             <div className="w-full bg-tea h-[40px]">
                                 <div className="w-[70%] bg-mint h-full">
                                 </div>
                             </div>
-                            {/* BUDGET */}
                             <div className="flex justify-between w-full">
                                 <p>Budget: 1000$</p>
                                 <p>Money Spent: 7000$</p>
@@ -189,149 +152,9 @@ function Projects() {
                                 <li>Activity</li>
                             </ul>
                         </div>
-                    </div>
-                    <div className="p-4 bg-white shadow-lg rounded-2xl">
-                        {/* CARD TITLE AND MANAGER */}
-                        <div className="flex flex-col mb-3">
-                            <h2 className="text-xl font-bold">Project Name</h2>
-                            <span>Project manager: John Smith</span>
-                        </div>
-                        {/* MONEY BAR, BUDGET, SPENT */}
-                        <div className="my-4">
-                            {/* MONEY BAR */}
-                            <div className="w-full bg-tea h-[40px]">
-                                <div className="w-[70%] bg-mint h-full">
-                                </div>
-                            </div>
-                            {/* BUDGET */}
-                            <div className="flex justify-between w-full">
-                                <p>Budget: 1000$</p>
-                                <p>Money Spent: 7000$</p>
-                            </div>
-                        </div>
-                        <div className="py-2 space-y-2">
-                            <p className="font-bold">Recent activity:</p>
-                            <ul className="list-disc list-inside space-y-1">
-                                <li>Activity</li>
-                                <li>Activity</li>
-                                <li>Activity</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="p-4 bg-white shadow-lg rounded-2xl">
-                        {/* CARD TITLE AND MANAGER */}
-                        <div className="flex flex-col mb-3">
-                            <h2 className="text-xl font-bold">Project Name</h2>
-                            <span>Project manager: John Smith</span>
-                        </div>
-                        {/* MONEY BAR, BUDGET, SPENT */}
-                        <div className="my-4">
-                            {/* MONEY BAR */}
-                            <div className="w-full bg-tea h-[40px]">
-                                <div className="w-[70%] bg-mint h-full">
-                                </div>
-                            </div>
-                            {/* BUDGET */}
-                            <div className="flex justify-between w-full">
-                                <p>Budget: 1000$</p>
-                                <p>Money Spent: 7000$</p>
-                            </div>
-                        </div>
-                        <div className="py-2 space-y-2">
-                            <p className="font-bold">Recent activity:</p>
-                            <ul className="list-disc list-inside space-y-1">
-                                <li>Activity</li>
-                                <li>Activity</li>
-                                <li>Activity</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="p-4 bg-white shadow-lg rounded-2xl">
-                        {/* CARD TITLE AND MANAGER */}
-                        <div className="flex flex-col mb-3">
-                            <h2 className="text-xl font-bold">Project Name</h2>
-                            <span>Project manager: John Smith</span>
-                        </div>
-                        {/* MONEY BAR, BUDGET, SPENT */}
-                        <div className="my-4">
-                            {/* MONEY BAR */}
-                            <div className="w-full bg-tea h-[40px]">
-                                <div className="w-[70%] bg-mint h-full">
-                                </div>
-                            </div>
-                            {/* BUDGET */}
-                            <div className="flex justify-between w-full">
-                                <p>Budget: 1000$</p>
-                                <p>Money Spent: 7000$</p>
-                            </div>
-                        </div>
-                        <div className="py-2 space-y-2">
-                            <p className="font-bold">Recent activity:</p>
-                            <ul className="list-disc list-inside space-y-1">
-                                <li>Activity</li>
-                                <li>Activity</li>
-                                <li>Activity</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="p-4 bg-white shadow-lg rounded-2xl">
-                        {/* CARD TITLE AND MANAGER */}
-                        <div className="flex flex-col mb-3">
-                            <h2 className="text-xl font-bold">Project Name</h2>
-                            <span>Project manager: John Smith</span>
-                        </div>
-                        {/* MONEY BAR, BUDGET, SPENT */}
-                        <div className="my-4">
-                            {/* MONEY BAR */}
-                            <div className="w-full bg-tea h-[40px]">
-                                <div className="w-[70%] bg-mint h-full">
-                                </div>
-                            </div>
-                            {/* BUDGET */}
-                            <div className="flex justify-between w-full">
-                                <p>Budget: 1000$</p>
-                                <p>Money Spent: 7000$</p>
-                            </div>
-                        </div>
-                        <div className="py-2 space-y-2">
-                            <p className="font-bold">Recent activity:</p>
-                            <ul className="list-disc list-inside space-y-1">
-                                <li>Activity</li>
-                                <li>Activity</li>
-                                <li>Activity</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="p-4 bg-white shadow-lg rounded-2xl">
-                        {/* CARD TITLE AND MANAGER */}
-                        <div className="flex flex-col mb-3">
-                            <h2 className="text-xl font-bold">Project Name</h2>
-                            <span>Project manager: John Smith</span>
-                        </div>
-                        {/* MONEY BAR, BUDGET, SPENT */}
-                        <div className="my-4">
-                            {/* MONEY BAR */}
-                            <div className="w-full bg-tea h-[40px]">
-                                <div className="w-[70%] bg-mint h-full">
-                                </div>
-                            </div>
-                            {/* BUDGET */}
-                            <div className="flex justify-between w-full">
-                                <p>Budget: 1000$</p>
-                                <p>Money Spent: 7000$</p>
-                            </div>
-                        </div>
-                        <div className="py-2 space-y-2">
-                            <p className="font-bold">Recent activity:</p>
-                            <ul className="list-disc list-inside space-y-1">
-                                <li>Activity</li>
-                                <li>Activity</li>
-                                <li>Activity</li>
-                            </ul>
-                        </div>
-                    </div>
+                    </div> */}
                 </div>
-            </section>
+            </section >
             <div className={`${customerForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
                 <div className="bg-offWhite flex flex-col py-6 px-6 w-1/4">
                     <div className="flex p-2">
@@ -360,8 +183,15 @@ function Projects() {
                     >Add</button>
                 </div>
             </div>
+            <div className="z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0">
+                <div className="w-11/12">
+                    <ProjectActivityDetails />
 
-        </section>
+                </div>
+
+            </div>
+
+        </section >
     )
 }
 export default Projects
