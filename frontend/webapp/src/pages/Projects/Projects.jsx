@@ -4,6 +4,7 @@ import CustomerForm from "../../components/CustomerForm"
 import NewProjectForm from "../../components/NewProjectForm"
 import axios from "axios"
 import { useSelector } from "react-redux"
+import ProjectCard from "../../components/ProjectCard"
 
 function Projects() {
     const company = useSelector(state => state.company)
@@ -103,6 +104,10 @@ function Projects() {
                 </header>
                 {/* CONTENT CONTAINER */}
                 <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
+                    <div className="p-4 bg-white shadow-lg rounded-2xl">
+                        <ProjectCard />
+
+                    </div>
                     {/* CARD */}
                     <div className="p-4 bg-white shadow-lg rounded-2xl">
                         {/* CARD TITLE AND MANAGER */}
@@ -319,7 +324,7 @@ function Projects() {
             <div className={`${projectForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
                 <div className="bg-offWhite flex flex-col py-10 px-6">
                     <div className="flex p-2">
-                        <span className="text-2xl cursor-pointer" onClick={addProjectFomrOpen}>&#10005;</span>
+                        <span className="text-2xl cursor-pointer" onClick={() => { addProjectFomrOpen(); setNewProjectData({}) }}>&#10005;</span>
                         <div className="w-full">
                             <h2 className="flex justify-center text-2xl">New Project information</h2>
                         </div>

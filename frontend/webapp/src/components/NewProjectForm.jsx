@@ -31,31 +31,23 @@ function NewProjectForm({ setNewProjectData, customers, employees }) {
             <div className="flex flex-col p-2">
                 <label htmlFor="email">Customer Email</label>
                 <select className="border-black border-solid border rounded py-2 px-1" id="email" ref={emailRef} onClick={dataChange}>
+                    <option value={''} disabled selected hidden>Customers</option>
                     {
                         customers.map(customer => {
                             return <option value={customer.customer_email}>{customer.customer_name}</option>
                         })
                     }
-                    {/* <option value={1}>1</option>
-                    <option value={2}>1</option>
-                    <option value={3}>1</option>
-                    <option value={4}>1</option>
-                    <option value={5}>1</option> */}
                 </select>
             </div>
             <div className="flex flex-col p-2">
-                <label htmlFor="manager">Customer Email</label>
+                <label htmlFor="manager">Project Manager</label>
                 <select className="border-black border-solid border rounded py-2 px-1" id="manager" ref={managerIdRef} onClick={dataChange}>
+                    <option value={''} disabled selected hidden>Employees</option>
                     {
                         employees.map(employee => {
                             return <option value={employee.employeeId}>{`${employee.user.firstname} ${employee.user.lastname}`}</option>
                         })
                     }
-                    {/* <option value={1}>1</option>
-                    <option value={2}>1</option>
-                    <option value={3}>1</option>
-                    <option value={4}>1</option>
-                    <option value={5}>1</option> */}
                 </select>
             </div>
 

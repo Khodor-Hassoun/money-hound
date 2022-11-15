@@ -29,6 +29,9 @@ const getProjects = async (req, res) => {
     where: {
       companyId: parseInt(id),
     },
+    include: {
+      Activity: true,
+    },
   });
   res.status(200).json(projects);
 };
