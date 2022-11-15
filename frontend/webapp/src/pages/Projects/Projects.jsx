@@ -29,6 +29,29 @@ function Projects() {
             console.log(res)
         })
     }, [])
+    // GET CUSTOMERS
+    useEffect(() => {
+        axios.get("http://localhost:3002/company/customers", {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log('---------CUSTOMERS----------')
+            console.log(res)
+            console.log('---------/CUSTOMERS----------')
+
+        })
+    }, [])
+
+    function addCustomer() {
+        axios.post("http://localhost:3002/company/customer", { id: company.id, ...customerData }, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res)
+        })
+    }
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
@@ -263,7 +286,7 @@ function Projects() {
                     </div>
                     <CustomerForm setCustomerData={setCustomerData} />
                     <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
-                        onClick={() => console.log(customerData)}
+                        onClick={() => { console.log(customerData); addCustomer() }}
                     >Add</button>
                 </div>
             </div>
