@@ -16,6 +16,7 @@ function Projects() {
     const [projects, setProjects] = useState([])
     const [customers, setCustomers] = useState([])
     const [employees, setEmployees] = useState([])
+    const [project, setProject] = useState([])
 
     function customerFormOpen() {
         setCustomerForm(bool => !bool)
@@ -30,7 +31,11 @@ function Projects() {
                 authorization: `Bearer ${user.token}`
             },
         }).then(res => {
+            console.log('----------PROJECTS DATA---------')
             console.log(res)
+            setProjects(res.data)
+            console.log('----------/PROJECTS DATA-----------')
+
         })
     }, [projectForm])
     // GET CUSTOMERS
@@ -104,10 +109,30 @@ function Projects() {
                 </header>
                 {/* CONTENT CONTAINER */}
                 <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
-                    <div className="p-4 bg-white shadow-lg rounded-2xl">
-                        <ProjectCard />
 
-                    </div>
+                    {
+                        Object.keys(projects).length === 0 ? <></>
+                            :
+                            projects.map(project => {
+                                return (
+                                    <div className="p-4 bg-white shadow-lg rounded-2xl">
+                                        <ProjectCard project={project} />
+                                    </div>
+
+                                )
+
+                            })
+                    }
+
+
+
+
+
+
+
+
+
+
                     {/* CARD */}
                     <div className="p-4 bg-white shadow-lg rounded-2xl">
                         {/* CARD TITLE AND MANAGER */}
@@ -119,7 +144,7 @@ function Projects() {
                         <div className="my-4">
                             {/* MONEY BAR */}
                             <div className="w-full bg-tea h-[40px]">
-                                <div className="w-[70%] bg-mint h-full">
+                                <div className="w-[40%] bg-mint h-full">
                                 </div>
                             </div>
                             {/* BUDGET */}
