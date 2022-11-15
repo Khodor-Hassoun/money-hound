@@ -1,10 +1,11 @@
 import { useState } from "react"
 import Navbar from "../../components/Navbar"
 import CustomerForm from "../../components/CustomerForm"
+import NewProjectForm from "../../components/NewProjectForm"
 
 function Projects() {
-    const [customerForm, setCustomerForm] = useState(true)
-    const [projectForm, setProjectForm] = useState(false)
+    const [customerForm, setCustomerForm] = useState(false)
+    const [projectForm, setProjectForm] = useState(true)
     const [customerData, setCustomerData] = useState({})
     const [newProjectData, setNewProjectData] = useState({})
     const [projects, setProjects] = useState([])
@@ -32,13 +33,14 @@ function Projects() {
                         </button>
                         {/* BUTTON */}
                         <button
-                            className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer">
+                            className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer"
+                            onClick={addProjectFomrOpen}>
                             ADD PROJECT
                         </button>
                     </div>
                 </header>
                 {/* CONTENT CONTAINER */}
-                <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
                     {/* CARD */}
                     <div className="p-4 bg-white shadow-lg rounded-2xl">
                         {/* CARD TITLE AND MANAGER */}
@@ -252,15 +254,15 @@ function Projects() {
                     >Add</button>
                 </div>
             </div>
-            <div className={`${customerForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                <div className="bg-offWhite flex flex-col py-6 px-6 w-1/4">
+            <div className={`${projectForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                <div className="bg-offWhite flex flex-col py-10 px-6">
                     <div className="flex p-2">
                         <span className="text-2xl cursor-pointer" onClick={addProjectFomrOpen}>&#10005;</span>
                         <div className="w-full">
-                            <h2 className="flex justify-center text-2xl">Employee information</h2>
+                            <h2 className="flex justify-center text-2xl">New Project information</h2>
                         </div>
                     </div>
-                    <CustomerForm setNewProjectData={setNewProjectData} />
+                    <NewProjectForm setNewProjectData={setNewProjectData} />
                     <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
                         onClick={() => console.log(newProjectData)}
                     >Add</button>
