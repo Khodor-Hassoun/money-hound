@@ -1,9 +1,13 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Navbar from "../../components/Navbar"
 import CustomerForm from "../../components/CustomerForm"
 import NewProjectForm from "../../components/NewProjectForm"
+import axios from "axios"
+import { useSelector } from "react-redux"
 
 function Projects() {
+    const company = useSelector(state => state.company)
+    const user = useSelector(state => state.user)
     const [customerForm, setCustomerForm] = useState(false)
     const [projectForm, setProjectForm] = useState(true)
     const [customerData, setCustomerData] = useState({})
@@ -16,6 +20,15 @@ function Projects() {
     function addProjectFomrOpen() {
         setProjectForm(bool => !bool)
     }
+    useEffect(() => {
+        axios.get("http://localhost:3002/project/", {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res)
+        })
+    }, [])
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />

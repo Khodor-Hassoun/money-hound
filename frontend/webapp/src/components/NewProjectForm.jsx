@@ -56,7 +56,6 @@ function NewProjectForm({ setNewProjectData }) {
                     <input
                         type="number"
                         id="budget"
-                        placeholder="123 st."
                         className="border-black border-solid border rounded py-2 px-1 h-full"
                         ref={budgetRef}
                         onClick={dataChange}
