@@ -22,6 +22,8 @@ const {
 const {
   addExpense,
   getExpenses,
+  addRevenue,
+  getRevenues,
 } = require("../controllers/finances.controller");
 // Router
 const { Router } = require("express");
@@ -33,7 +35,9 @@ router.get("/customers", authMiddleware, ownerMiddleware, getCustomers);
 
 // Money route
 router.post("/expense", authMiddleware, ownerMiddleware, addExpense);
+router.post("/revenue", authMiddleware, ownerMiddleware, addRevenue);
 router.get("/expenses", authMiddleware, ownerMiddleware, getExpenses);
+router.get("/revenues", authMiddleware, ownerMiddleware, getRevenues);
 
 // Employee routes
 router.post("/employee", authMiddleware, ownerMiddleware, addEmployee);
