@@ -10,12 +10,18 @@ const addActivity = async (req, res) => {
   let endDate = new Date(end_date);
   //   res.json({ endDate, objective, projectId });
   //   return;
+  const project = await prisma.project.findUnique({
+    where: {
+      id: parseInt(projectId),
+    },
+  });
   const activity = await prisma.activity.create({
     data: {
       objective: objective,
       money: parseInt(money),
       end_date: endDate,
       projectId: parseInt(projectId),
+      project_phase: parseInt(project.project_phase_id),
     },
   });
   if (!activity.id) return res.json({ message: "whoops" });
