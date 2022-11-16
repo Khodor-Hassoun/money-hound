@@ -27,4 +27,13 @@ const addExpense = async (req, res) => {
   });
   res.status(200).json({ expense, company });
 };
-module.exports = { addRevenue, addExpense };
+const getExpenses = async (req, res) => {
+  const { id } = req.company;
+  const expenses = await prisma.expense.findMany({
+    where: {
+      companyId: parseInt(id),
+    },
+  });
+  res.json(expenses);
+};
+module.exports = { addRevenue, addExpense, getExpenses };
