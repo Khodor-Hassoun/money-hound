@@ -7,7 +7,6 @@ import { useSelector } from "react-redux"
 import ProjectCard from "../../components/ProjectCard"
 import ProjectDetails from "../../components/ProjectDetails"
 import ProjectActivityDetails from "../../components/ProjectActivityDetails"
-import Test from "../test"
 
 function Projects() {
     const company = useSelector(state => state.company)
@@ -20,12 +19,16 @@ function Projects() {
     const [customers, setCustomers] = useState([])
     const [employees, setEmployees] = useState([])
     const [project, setProject] = useState({})
+    const [projectDetailsForm, setProjectDetailsForm] = useState(false)
 
     function customerFormOpen() {
         setCustomerForm(bool => !bool)
     }
     function addProjectFomrOpen() {
         setProjectForm(bool => !bool)
+    }
+    function projectDetailsOpen() {
+        setProjectDetailsForm(bool => !bool)
     }
     // GET PROJECTS
     useEffect(() => {
@@ -120,7 +123,7 @@ function Projects() {
                             :
                             projects.map(project => {
                                 return (
-                                    <div className="p-4 bg-white shadow-lg rounded-2xl">
+                                    <div className="p-4 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); projectDetailsOpen() }}>
                                         <ProjectCard project={project} />
                                     </div>
 
@@ -129,31 +132,6 @@ function Projects() {
                             })
                     }
 
-                    {/* CARD */}
-                    {/* <div className="p-4 bg-white shadow-lg rounded-2xl">
-                        <div className="flex flex-col mb-3">
-                            <h2 className="text-xl font-bold">Project Name</h2>
-                            <span>Project manager: John Smith</span>
-                        </div>
-                        <div className="my-4">
-                            <div className="w-full bg-tea h-[40px]">
-                                <div className="w-[70%] bg-mint h-full">
-                                </div>
-                            </div>
-                            <div className="flex justify-between w-full">
-                                <p>Budget: 1000$</p>
-                                <p>Money Spent: 7000$</p>
-                            </div>
-                        </div>
-                        <div className="py-2 space-y-2">
-                            <p className="font-bold">Recent activity:</p>
-                            <ul className="list-disc list-inside space-y-1">
-                                <li>Activity</li>
-                                <li>Activity</li>
-                                <li>Activity</li>
-                            </ul>
-                        </div>
-                    </div> */}
                 </div>
             </section >
             <div className={`${customerForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
@@ -187,39 +165,37 @@ function Projects() {
 
 
             {/* POPUP FOR PROJECT ACTIVITY */}
-            <div className="z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0">
+            <div className={`${projectDetailsForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
                 {/* CONTAINER FOR ALL */}
                 <div className="flex w-9/12 h-5/6 justify-between items-start max-h-[900px]">
                     {/* CONTAINER FOR ACTIVITIES */}
                     <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
                         {/* HEADER */}
                         <div className="flex items-center mb-16">
-                            <span className="text-2xl cursor-pointer">&#10005;</span>
+                            <span className="text-2xl cursor-pointer" onClick={projectDetailsOpen}>&#10005;</span>
                             <h2 className="text-2xl flex-grow flex justify-center">Project Name</h2>
                         </div>
                         {/* ACTIVITY CARDS */}
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
-                        <ProjectActivityDetails />
+                        {
+                            project.hasOwnProperty('Activity') ?
+                                project.Activity.map((activity) => {
+                                    return <ProjectActivityDetails activity={activity} />
+                                }) : ""
+                        }
+                        {/* <ProjectActivityDetails /> */}
+
                     </div>
                     {/* CONTAINER FOR PROJECT */}
 
 
                     <div className="flex flex-col bg-beau px-6 pb-10 pt-4 w-3/12 justify-between h-full ">
                         <h2 className="text-2xl">Details</h2>
-                        <ProjectDetails />
+                        {
+                            Object.keys(project).length !== 0 ?
+                                <ProjectDetails project={project} setProject={setProject} />
+                                :
+                                ""
+                        }
                         <div className="flex flex-col space-y-2 w-full">
                             <button
                                 className="bg-venetian text-white w-full h-full py-1 rounded-md cursor-pointer">
