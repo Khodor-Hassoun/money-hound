@@ -18,6 +18,8 @@ const {
   addEmployee,
   updateEmployee,
 } = require("../controllers/employee.controller");
+
+const { addExpense } = require("../controllers/finances.controller");
 // Router
 const { Router } = require("express");
 const router = Router();
@@ -37,4 +39,6 @@ router.get("/:companyId", authMiddleware, ownerMiddleware, getCompany);
 router.put("/", authMiddleware, ownerMiddleware, updateCompany);
 // router.delete("/", authMiddleware, ownerMiddleware, deleteCompany);
 
+// Money route
+router.post("/expense", authMiddleware, ownerMiddleware, addExpense);
 module.exports = router;
