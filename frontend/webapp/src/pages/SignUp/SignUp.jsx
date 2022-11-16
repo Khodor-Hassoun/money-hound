@@ -8,6 +8,7 @@ import UserInfoForm from "../../components/UserInfoForm";
 import CompanyInfoForm from "../../components/CompanyInfoForm";
 import { setUser, gettoken } from "../../redux/user";
 import { setCompany } from "../../redux/company";
+import { FaArrowLeft } from "react-icons/fa"
 
 
 function SignUp() {
@@ -81,37 +82,38 @@ function SignUp() {
             {/* USER INFO SECTION */}
             <div className={`flex ${showModal ? "hidden pointer-events-none" : ""}`}>
                 {/* FORM CONTAINER */}
-                <div className=" w-1/2 h-1/2">
+                <div className=" md:w-1/2 md:h-1/2 w-full h-full">
                     {/* FORM CONTENT */}
-                    <div className="bg-offWhite flex flex-col py-10 px-6">
+                    <div className="bg-offWhite flex flex-col pb-8 pt-4 px-6">
                         {/* FORM HEADER */}
-                        <div className="flex p-2">
+                        <div className="flex py-2">
                             <span className="text-2xl"><Link to="/">&#10005;</Link></span>
                             <div className="w-full">
                                 <h2 className="flex justify-center text-2xl">Personal information</h2>
                             </div>
                         </div>
-                        {/* FORM CONTEENT */}
                         <UserInfoForm />
-                        {/* FORM BUTTON */}
                         <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => setShowModal(true)} >NEXT</button>
                     </div>
                 </div>
                 <div>
-                    <img src={placeholder} alt='placeholder' className="w-full h-full bg-cover" />
+                    <img src={placeholder} alt='placeholder' className="w-full h-full bg-cover hidden md:flex" />
                 </div>
             </div>
             {/* COMPANY INFO SECTION */}
             <div className={`flex ${showModal ? "" : "hidden pointer-events-none"}`} >
-                <div className="w-[24px] h-[24px] py-10 px-6 relative left-12 z-10">
+                <div className="w-[24px] h-[24px] py-10 px-6 relative left-12 z-10 hidden md:inline-block">
                     <div className="bg-arrow w-[24px] h-[24px] cursor-pointer" onClick={() => setShowModal(false)} />
                 </div>
                 <div className="">
-                    <img src={placeholder2} alt='placeholder' className="w-full h-full bg-cover max-w-lg object-cover" />
+                    <img src={placeholder2} alt='placeholder' className="md:w-full md:h-full md:bg-cover md:max-w-lg lg:object-cover hidden md:inline-block " />
                 </div>
-                <div className="w-1/2 h-1/2">
-                    <div className="bg-offWhite flex flex-col py-10 px-6">
-                        <div className="flex p-2">
+                <div className="md:w-1/2 md:h-1/2 w-full h-full">
+                    <div className="bg-offWhite flex flex-col pb-8 pt-4 px-6">
+                        <div className="flex py-2 items-center">
+                            <div className="w-[24px] h-[24px] cursor-pointer flex items-end md:hidden" onClick={() => setShowModal(false)} >
+                                <FaArrowLeft size={24} />
+                            </div>
                             <div className="w-full">
                                 <h2 className="flex justify-center text-2xl">Company information</h2>
                             </div>

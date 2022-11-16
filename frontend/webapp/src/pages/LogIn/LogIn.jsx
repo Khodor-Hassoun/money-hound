@@ -48,7 +48,7 @@ function LogIn() {
   return (
     <section className="bg-ming w-screen h-screen flex justify-center items-center">
       {/* CARD DIV */}
-      <div className="bg-offWhite flex flex-col py-10 w-[500px] px-12 items-center">
+      <div className="bg-offWhite flex flex-col py-10 w-[400px] px-6 items-center">
         <div className="h-24 w-full">
           <img src={money} alt="Logo" className="h-full w-full" />
         </div>

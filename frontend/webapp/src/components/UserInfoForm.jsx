@@ -16,7 +16,7 @@ function UserInfoForm({ popupMode = false, closePopup }) {
         <>
             <div className="flex flex-col">
                 {/* LABELS AND INPUTS */}
-                <div className="flex p-2 w-full justify-between">
+                <div className="flex py-2 w-full justify-between">
                     {/* FIRST NAME LAST NAME */}
                     <div className="flex flex-col mr-0.5 w-[48%]">
                         <label htmlFor="firstname">Firstname</label>
@@ -28,12 +28,12 @@ function UserInfoForm({ popupMode = false, closePopup }) {
                     </div>
                 </div>
                 {/* EMAIL */}
-                <div className="flex flex-col p-2">
+                <div className="flex flex-col py-2">
                     <label htmlFor="email">Email</label>
                     <input type="text" id="email" placeholder="john@outlook.com" name="email" onChange={userChange} className="border-black border-solid border rounded py-2 px-1"></input>
                 </div>
                 {/* PASSWORD */}
-                <div className="flex flex-col p-2">
+                <div className="flex flex-col py-2">
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" onChange={userChange} className="border-black border-solid border rounded py-2 px-1"></input>
                 </div>
