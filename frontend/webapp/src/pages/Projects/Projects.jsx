@@ -164,7 +164,7 @@ function Projects() {
             {/* POPUP FOR PROJECT ACTIVITY */}
             <div className={`${projectDetailsForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
                 {/* CONTAINER FOR ALL */}
-                <div className="flex w-9/12 h-5/6 justify-between items-start max-h-[900px]">
+                <div className="flex xl:w-9/12 xl:h-[90%] h-full w-full justify-between items-start max-h-[900px]">
                     {/* CONTAINER FOR ACTIVITIES */}
                     <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
                         {/* HEADER */}
@@ -179,11 +179,9 @@ function Projects() {
                                     return <ProjectActivityDetails activity={activity} />
                                 }) : ""
                         }
-                        {/* <ProjectActivityDetails /> */}
-
                     </div>
                     {/* CONTAINER FOR PROJECT */}
-                    <div className="flex flex-col bg-beau px-6 pb-10 pt-4 w-3/12 justify-between h-full ">
+                    <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
                         <h2 className="text-2xl">Details</h2>
                         {
                             Object.keys(project).length !== 0 ?

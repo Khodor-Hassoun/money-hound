@@ -10,7 +10,7 @@ function ProjectActivityDetails({ activity }) {
             <div className="w-[20px] h-full" style={lightbarColor}></div>
             <div className="px-4 py-2 flex flex-col justify-around flex-grow ">
                 <h2 className="text-xl">{activity.objective}</h2>
-                <div className="flex w-6/12 space-x-6">
+                <div className="flex space-x-6">
                     <span>{`Start date: ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`}</span>
                     <span>{`End date: ${endDate.getDate()}/${endDate.getMonth() + 1}/${endDate.getFullYear()}`}</span>
                     <span>{`Cost: ${activity.money}`}</span>
