@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 import ProjectCard from "../../components/ProjectCard"
 import ProjectDetails from "../../components/ProjectDetails"
 import ProjectActivityDetails from "../../components/ProjectActivityDetails"
+import Test from "../test"
 
 function Projects() {
     const company = useSelector(state => state.company)
@@ -114,7 +115,7 @@ function Projects() {
                     {/* <ProjectDetails /> */}
                     {/* <ProjectActivityDetails /> */}
 
-                    {/* {
+                    {
                         Object.keys(projects).length === 0 ? <></>
                             :
                             projects.map(project => {
@@ -126,7 +127,7 @@ function Projects() {
                                 )
 
                             })
-                    } */}
+                    }
 
                     {/* CARD */}
                     {/* <div className="p-4 bg-white shadow-lg rounded-2xl">
@@ -183,10 +184,54 @@ function Projects() {
                     >Add</button>
                 </div>
             </div>
-            <div className="z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0">
-                <div className="w-11/12">
-                    <ProjectActivityDetails />
 
+
+            {/* POPUP FOR PROJECT ACTIVITY */}
+            <div className="z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0">
+                {/* CONTAINER FOR ALL */}
+                <div className="flex w-9/12 h-5/6 justify-between items-start max-h-[900px]">
+                    {/* CONTAINER FOR ACTIVITIES */}
+                    <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
+                        {/* HEADER */}
+                        <div className="flex items-center mb-16">
+                            <span className="text-2xl cursor-pointer">&#10005;</span>
+                            <h2 className="text-2xl flex-grow flex justify-center">Project Name</h2>
+                        </div>
+                        {/* ACTIVITY CARDS */}
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                        <ProjectActivityDetails />
+                    </div>
+                    {/* CONTAINER FOR PROJECT */}
+
+
+                    <div className="flex flex-col bg-beau px-6 pb-10 pt-4 w-3/12 justify-between h-full ">
+                        <h2 className="text-2xl">Details</h2>
+                        <ProjectDetails />
+                        <div className="flex flex-col space-y-2 w-full">
+                            <button
+                                className="bg-venetian text-white w-full h-full py-1 rounded-md cursor-pointer">
+                                DELETE
+                            </button>
+                            <button
+                                className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer">
+                                SELL
+                            </button>
+
+                        </div>
+                    </div>
                 </div>
 
             </div>
