@@ -187,7 +187,7 @@ function Projects() {
                         <h2 className="text-2xl">Details</h2>
                         {
                             Object.keys(project).length !== 0 ?
-                                <ProjectDetails project={project} setProject={setProject} />
+                                <ProjectDetails project={project} setProject={setProject} employees={employees} />
                                 :
                                 ""
                         }

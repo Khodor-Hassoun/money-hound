@@ -4,7 +4,6 @@ import LogIn from "./pages/LogIn/LogIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Employees from "./pages/Employees/Employees";
 import Companies from "./pages/Companies/Companies";
-import Navbar from "./components/Navbar";
 import Projects from "./pages/Projects/Projects";
 import Insights from "./pages/Insights/Insights";
 

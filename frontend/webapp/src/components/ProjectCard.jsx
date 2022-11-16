@@ -1,8 +1,8 @@
 function ProjectCard({ project }) {
 
     const percentstr = (Math.floor((project.money_spent / project.budget) * 100) + '%').toString()
-    const activities = project.Activity
     const percent = Math.floor((project.money_spent / project.budget) * 100)
+    const deadline = new Date(project.deadline)
     // style={{ height: "calc(100vh - 8rem)" }}
 
     return (
@@ -11,6 +11,10 @@ function ProjectCard({ project }) {
             <div className="flex flex-col mb-3">
                 <h2 className="text-xl font-bold">{project.project_name}</h2>
                 <span>{`Project Manager: ${project.manager.user.firstname} ${project.manager.user.lastname}`}</span>
+                <div className="flex justify-between">
+                    <span>{`Customer: ${project.customerId}`}</span>
+                    <span>{`Deadline: ${deadline.getDate()}/${deadline.getMonth() + 1}/${deadline.getFullYear()}`}</span>
+                </div>
             </div>
             {/* MONEY BAR, BUDGET, SPENT */}
             <div className="my-4">

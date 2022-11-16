@@ -39,11 +39,11 @@ function Navbar() {
                 className="h-screen w-1/6 lg:w-1/5 bg-ming text-white flex flex-col justify-between m-0 mr-4 py-4">
                 {/* LOGO NAME AND OPTIONS */}
                 <div
-                    className="flex flex-col xl:flex-row xl:items-center px-2 space-y-2 xl:justify-between">
+                    className="flex flex-col xl:flex-row xl:items-center px-2 space-y-2 lg:space-y-0 xl:justify-between">
                     <div
-                        className="h-[60px] w-[60px] bg-white flex justify-center items-center rounded-xl">
+                        className="h-[50px] w-[50px] bg-white flex justify-center items-center rounded-xl">
                         <div
-                            className="h-[50px] w-[50px] rounded-xl">
+                            className="h-[35px] w-[35px] rounded-xl">
                             <img
                                 src={logo}
                                 alt="logo"
@@ -52,7 +52,7 @@ function Navbar() {
                         </div>
                     </div>
                     <h2
-                        className="text-xl lg:text-2xl">
+                        className="text-lg lg:text-lg">
                         Company Name
                     </h2>
                     <img
@@ -72,7 +72,7 @@ function Navbar() {
                                     <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
                                         {/* Lightbar */}
                                         <div className="h-full bg-tangerine w-[12px]" />
-                                        <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-xl">Employees</p>
+                                        <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg">Employees</p>
                                     </div>
                                 ) : (
                                     <div
@@ -81,7 +81,7 @@ function Navbar() {
                                             className="h-full bg-white w-[12px]"
                                         />
                                         <p
-                                            className="text-white w-full ml-2 lg:ml-6 lg:text-xl">Employees
+                                            className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Employees
                                         </p>
                                     </div>
                                 )
@@ -95,7 +95,7 @@ function Navbar() {
                                     <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
                                         {/* Lightbar */}
                                         <div className="h-full bg-tangerine w-[12px]" />
-                                        <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-xl">Projects</p>
+                                        <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-lg">Projects</p>
                                     </div>
                                 ) : (
                                     <div
@@ -104,7 +104,7 @@ function Navbar() {
                                             className="h-full bg-white w-[12px]"
                                         />
                                         <p
-                                            className="text-white w-full ml-2 lg:ml-8 lg:text-xl">Projects
+                                            className="text-white w-full ml-2 lg:ml-8 lg:text-lg">Projects
                                         </p>
                                     </div>
                                 )
@@ -118,7 +118,7 @@ function Navbar() {
                                     <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
                                         {/* Lightbar */}
                                         <div className="h-full bg-tangerine w-[12px]" />
-                                        <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-xl">Insights</p>
+                                        <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-lg">Insights</p>
                                     </div>
                                 ) : (
                                     <div
@@ -127,7 +127,7 @@ function Navbar() {
                                             className="h-full bg-white w-[12px]"
                                         />
                                         <p
-                                            className="text-white w-full ml-2 lg:ml-8 lg:text-xl">Insights
+                                            className="text-white w-full ml-2 lg:ml-8 lg:text-lg">Insights
                                         </p>
                                     </div>
                                 )
@@ -140,7 +140,7 @@ function Navbar() {
                     <div
                         className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center">
                         <h2
-                            className="text-xl lg:text-2xl"
+                            className="text-xl lg:text-xl"
                         >Khodor Hassoun
                         </h2>
                         <img
