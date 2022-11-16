@@ -115,9 +115,6 @@ function Projects() {
                 </header>
                 {/* CONTENT CONTAINER */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
-                    {/* <ProjectDetails /> */}
-                    {/* <ProjectActivityDetails /> */}
-
                     {
                         Object.keys(projects).length === 0 ? <></>
                             :
@@ -186,8 +183,6 @@ function Projects() {
 
                     </div>
                     {/* CONTAINER FOR PROJECT */}
-
-
                     <div className="flex flex-col bg-beau px-6 pb-10 pt-4 w-3/12 justify-between h-full ">
                         <h2 className="text-2xl">Details</h2>
                         {

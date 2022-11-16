@@ -6,6 +6,7 @@ import Employees from "./pages/Employees/Employees";
 import Companies from "./pages/Companies/Companies";
 import Navbar from "./components/Navbar";
 import Projects from "./pages/Projects/Projects";
+import Insights from "./pages/Insights/Insights";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/companies" element={<Companies />}></Route>
         <Route path="/employees" element={<Employees />}></Route>
         <Route path="/projects" element={<Projects />}></Route>
+        <Route path="/insights" element={<Insights />}></Route>
         <Route path="/login" element={<LogIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
       </Routes>

@@ -111,6 +111,29 @@ function Navbar() {
                             }}
                         </NavLink>
                     </div>
+                    <div>
+                        <NavLink to={'/insights'}>
+                            {({ isActive }) => {
+                                return isActive ? (
+                                    <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
+                                        {/* Lightbar */}
+                                        <div className="h-full bg-tangerine w-[12px]" />
+                                        <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-xl">Insights</p>
+                                    </div>
+                                ) : (
+                                    <div
+                                        className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                        <div
+                                            className="h-full bg-white w-[12px]"
+                                        />
+                                        <p
+                                            className="text-white w-full ml-2 lg:ml-8 lg:text-xl">Insights
+                                        </p>
+                                    </div>
+                                )
+                            }}
+                        </NavLink>
+                    </div>
                 </div>
                 <div
                     className="flex flex-col px-2">

@@ -67,7 +67,7 @@ function Employees() {
         <section className="flex bg-offWhite pr-4">
             <Navbar />
             {/* EMPLOYEE CONTENT */}
-            <section className="flex-grow">
+            <section className="flex-grow max-h-screen overflow-auto">
                 {/* HEADER SECTION TITLE NAME SEARCH BAR BUTTON */}
                 <header className="flex items-center justify-between w-full my-6">
                     <h2 className="text-4xl font-bold">Employees</h2>
@@ -88,7 +88,7 @@ function Employees() {
                 </header>
 
                 {/* TABLE HERE */}
-                <table className="table-auto w-full border border-black [&>odd]:bg-beau">
+                <table className="table-auto w-full border border-black [&>odd]:bg-beau max-h-[800px] overflow-auto">
                     <thead className="bg-ming text-white [&>*]:border [&>*]:border-black">
                         <tr className="[&>*]:border [&>*]:border-black">
                             <th className="justify-items-start">Name</th>
@@ -113,6 +113,7 @@ function Employees() {
                                 )
                             })
                         }
+
                     </tbody>
 
                 </table>
