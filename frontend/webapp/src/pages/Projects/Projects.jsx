@@ -131,79 +131,97 @@ function Projects() {
 
                 </div>
             </section >
-            <div className={`${customerForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                <div className="bg-offWhite flex flex-col py-6 px-6 w-1/4">
-                    <div className="flex p-2">
-                        <span className="text-2xl cursor-pointer" onClick={customerFormOpen}>&#10005;</span>
-                        <div className="w-full">
-                            <h2 className="flex justify-center text-2xl">Employee information</h2>
+            {/* ADD CUSTOMER FORM */}
+            {
+                customerForm ?
+                    <div className={`${customerForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                        <div className="bg-offWhite flex flex-col py-6 px-6 w-1/4">
+                            <div className="flex p-2">
+                                <span className="text-2xl cursor-pointer" onClick={customerFormOpen}>&#10005;</span>
+                                <div className="w-full">
+                                    <h2 className="flex justify-center text-2xl">Employee information</h2>
+                                </div>
+                            </div>
+                            <CustomerForm setCustomerData={setCustomerData} />
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
+                                onClick={() => { console.log(customerData); addCustomer() }}
+                            >Add</button>
                         </div>
                     </div>
-                    <CustomerForm setCustomerData={setCustomerData} />
-                    <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
-                        onClick={() => { console.log(customerData); addCustomer() }}
-                    >Add</button>
-                </div>
-            </div>
-            <div className={`${projectForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                <div className="bg-offWhite flex flex-col py-10 px-6">
-                    <div className="flex p-2">
-                        <span className="text-2xl cursor-pointer" onClick={() => { addProjectFomrOpen(); setNewProjectData({}) }}>&#10005;</span>
-                        <div className="w-full">
-                            <h2 className="flex justify-center text-2xl">New Project information</h2>
+                    :
+                    <></>
+            }
+            {/* ADD PROJECT */}
+            {
+                projectForm ?
+                    <div className={`${projectForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                        <div className="bg-offWhite flex flex-col py-10 px-6">
+                            <div className="flex p-2">
+                                <span className="text-2xl cursor-pointer" onClick={() => { addProjectFomrOpen(); setNewProjectData({}) }}>&#10005;</span>
+                                <div className="w-full">
+                                    <h2 className="flex justify-center text-2xl">New Project information</h2>
+                                </div>
+                            </div>
+                            <NewProjectForm setNewProjectData={setNewProjectData} customers={customers} employees={employees} />
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
+                                onClick={() => { console.log(newProjectData, customers, employees); addProject() }}
+                            >Add</button>
                         </div>
                     </div>
-                    <NewProjectForm setNewProjectData={setNewProjectData} customers={customers} employees={employees} />
-                    <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
-                        onClick={() => { console.log(newProjectData, customers, employees); addProject() }}
-                    >Add</button>
-                </div>
-            </div>
+                    :
+                    <></>
+            }
 
 
             {/* POPUP FOR PROJECT ACTIVITY */}
-            <div className={`${projectDetailsForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                {/* CONTAINER FOR ALL */}
-                <div className="flex xl:w-9/12 xl:h-[90%] h-full w-full justify-between items-start max-h-[900px]">
-                    {/* CONTAINER FOR ACTIVITIES */}
-                    <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
-                        {/* HEADER */}
-                        <div className="flex items-center mb-16">
-                            <span className="text-2xl cursor-pointer" onClick={projectDetailsOpen}>&#10005;</span>
-                            <h2 className="text-2xl flex-grow flex justify-center">{project.project_name}</h2>
-                        </div>
-                        {/* ACTIVITY CARDS */}
-                        {
-                            project.hasOwnProperty('Activity') ?
-                                project.Activity.map((activity, index) => {
-                                    return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} />
-                                }) : ""
-                        }
-                    </div>
-                    {/* CONTAINER FOR PROJECT */}
-                    <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
-                        <h2 className="text-2xl">Details</h2>
-                        {
-                            Object.keys(project).length !== 0 ?
-                                <ProjectDetails project={project} setProject={setProject} employees={employees} />
-                                :
-                                ""
-                        }
-                        <div className="flex flex-col space-y-2 w-full">
-                            <button
-                                className="bg-venetian text-white w-full h-full py-1 rounded-md cursor-pointer">
-                                DELETE
-                            </button>
-                            <button
-                                className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer">
-                                SELL
-                            </button>
+            {
+                projectDetailsForm ?
+                    <div className={`${projectDetailsForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : ""}`}>
+                        {/* CONTAINER FOR ALL */}
+                        <div className="flex xl:w-9/12 xl:h-[90%] h-full w-full justify-between items-start max-h-[900px]">
+                            {/* CONTAINER FOR ACTIVITIES */}
+                            <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
+                                {/* HEADER */}
+                                <div className="flex items-center mb-16">
+                                    <span className="text-2xl cursor-pointer" onClick={projectDetailsOpen}>&#10005;</span>
+                                    <h2 className="text-2xl flex-grow flex justify-center">{project.project_name}</h2>
+                                </div>
+                                {/* ACTIVITY CARDS */}
+                                {
+                                    project.hasOwnProperty('Activity') ?
+                                        project.Activity.map((activity, index) => {
+                                            return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} />
+                                        }) : ""
+                                }
+                            </div>
+                            {/* CONTAINER FOR PROJECT */}
+                            <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
+                                <h2 className="text-2xl">Details</h2>
+                                {
+                                    Object.keys(project).length !== 0 ?
+                                        <ProjectDetails project={project} setProject={setProject} employees={employees} />
+                                        :
+                                        ""
+                                }
+                                <div className="flex flex-col space-y-2 w-full">
+                                    <button
+                                        className="bg-venetian text-white w-full h-full py-1 rounded-md cursor-pointer">
+                                        DELETE
+                                    </button>
+                                    <button
+                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer">
+                                        SELL
+                                    </button>
 
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-            </div>
+                    </div>
+                    :
+                    <></>
+
+            }
 
         </section >
     )
