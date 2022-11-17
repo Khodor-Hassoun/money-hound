@@ -62,7 +62,7 @@ function SaleInfoForm({ project, projectSaleDetails }) {
                 </table>
                 {/* PRICING */}
                 <div className="flex flex-col">
-                    <p>{projectSaleDetails.price}</p>
+                    <p>{`Price: ${projectSaleDetails.price}`}</p>
                     <p>{`VAT: ${projectSaleDetails.vat}`}</p>
                     <p>{`Net Price: ${projectSaleDetails.payment}`}</p>
                 </div>

@@ -7,6 +7,11 @@ const getRevenues = async (req, res) => {
     where: {
       companyId: parseInt(id),
     },
+    include: {
+      project: true,
+      company: true,
+      customer: true,
+    },
   });
   res.json(revenues);
 };
@@ -26,6 +31,14 @@ const addRevenue = async (req, res) => {
       payment: parseInt(payment),
       companyId: parseInt(id),
       // payment_date: dueDate,
+    },
+  });
+  const project = await prisma.project.update({
+    where: {
+      id: parseInt(projectId),
+    },
+    data: {
+      end_date: new Date(),
     },
   });
   if (!revenue.id) res.json({ message: "Error" });

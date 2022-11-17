@@ -30,11 +30,11 @@ function SaleInfoDetails({ setProjectSaleDetails }) {
             </div>
             <div className="flex flex-col py-2">
                 <label htmlFor="pretax">Price</label>
-                <input type="number" id="pretax" name="pretax" ref={priceRef} onChange={paymentChange} className="border-black border-solid border rounded py-1 px-1"></input>
+                <input type="number" id="pretax" name="pretax" ref={priceRef} defaultValue={0} onChange={paymentChange} className="border-black border-solid border rounded py-1 px-1"></input>
             </div>
             <div className="flex flex-col py-2">
                 <label htmlFor="tax">VAT (%) </label>
-                <input type="number" id="date" name="tax" ref={vatRef} max={100} onChange={() => { paymentChange(); console.log(payment) }} className="border-black border-solid border rounded py-1 px-1"></input>
+                <input type="number" id="date" name="tax" ref={vatRef} max={100} defaultValue={0} onChange={() => { paymentChange(); console.log(payment) }} className="border-black border-solid border rounded py-1 px-1"></input>
             </div>
             <div className="flex flex-col py-2">
                 <label htmlFor="payment">Net Price:</label>

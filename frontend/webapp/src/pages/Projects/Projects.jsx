@@ -50,7 +50,7 @@ function Projects() {
             console.log('----------/PROJECTS DATA-----------')
 
         })
-    }, [projectForm])
+    }, [projectForm, projectSaleForm])
     // GET CUSTOMERS
     useEffect(() => {
         axios.get("http://localhost:3002/company/customers", {
