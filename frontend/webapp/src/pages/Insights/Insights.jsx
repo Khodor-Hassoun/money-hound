@@ -66,7 +66,8 @@ function Insights() {
         for (let project of sortedRevenues) {
             project.payment_date = new Date(project.payment_date)
         }
-        console.log(sortedRevenues[0].payment_date)
+        sortedRevenues.sort((a, b) => a.payment_date - b.payment_date);
+        console.log(sortedRevenues)
     }
 
 
