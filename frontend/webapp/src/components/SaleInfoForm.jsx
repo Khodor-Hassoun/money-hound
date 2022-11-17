@@ -1,8 +1,14 @@
 import { useSelector } from "react-redux"
 import logo from "../resources/images/Your-Logo-here.png"
-function SaleInfoForm({ project }) {
+function SaleInfoForm({ project, projectSaleDetails }) {
     const company = useSelector(state => state.company)
     let date = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+    let dueDate
+    if (projectSaleDetails.payment_date) {
+        dueDate = new Date(projectSaleDetails.payment_date).toJSON().slice(0, 10).replace(/-/g, '/')
+    } else {
+        dueDate = new Date().toJSON().slice(0, 10).replace(/-/g, '/')
+    }
     return (
         <div className="w-2/3 h-[100%] bg-white overflow-auto">
             {/* CONTENT CONTAINER */}
@@ -34,7 +40,7 @@ function SaleInfoForm({ project }) {
                 <div>
                     <p>{project.customer.customer_name}</p>
                     <p>Date issued at: {date}</p>
-                    <p>Payment for: {date}</p>
+                    <p>Payment for: {dueDate}</p>
 
                 </div>
                 {/* PRODUCT DETAILS */}
@@ -49,16 +55,16 @@ function SaleInfoForm({ project }) {
                     <tbody className=" [&>*]:border [&>*]:border-black [&>odd]:bg-beau odd:bg-beau">
                         <tr className={`[&>*]:border [&>*]:border-black [&>*]:p-1`}>
                             <td>{project.project_name}</td>
-                            <td>Des</td>
-                            <td>Price</td>
+                            <td>{projectSaleDetails.description}</td>
+                            <td>{projectSaleDetails.price}</td>
                         </tr>
                     </tbody>
                 </table>
                 {/* PRICING */}
                 <div className="flex flex-col">
-                    <p>Price</p>
-                    <p>VAT: 12%</p>
-                    <p>Net Price:</p>
+                    <p>{projectSaleDetails.price}</p>
+                    <p>{`VAT: ${projectSaleDetails.vat}`}</p>
+                    <p>{`Net Price: ${projectSaleDetails.payment}`}</p>
                 </div>
             </div>
         </div>

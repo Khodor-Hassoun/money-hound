@@ -23,6 +23,7 @@ function Projects() {
     const [project, setProject] = useState({})
     const [projectDetailsForm, setProjectDetailsForm] = useState(false)
     const [projectSaleForm, setProjectSaleForm] = useState(false)
+    const [projectSaleDetails, setProjectSaleDetails] = useState({})
 
     function customerFormOpen() {
         setCustomerForm(bool => !bool)
@@ -245,13 +246,13 @@ function Projects() {
                                 </div>
                                 <div className="flex justify-center h-full w-full">
 
-                                    <SaleInfoForm project={project} />
+                                    <SaleInfoForm project={project} projectSaleDetails={projectSaleDetails} />
                                 </div>
                             </div>
                             {/* CONTAINER FOR OPTIONS */}
                             <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
                                 <h2 className="text-2xl">Details</h2>
-                                <SaleInfoDetails />
+                                <SaleInfoDetails setProjectSaleDetails={setProjectSaleDetails} />
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
                                         className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { projectSaleFormOpen() }}>
