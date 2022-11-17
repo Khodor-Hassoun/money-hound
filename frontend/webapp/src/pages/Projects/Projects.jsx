@@ -100,6 +100,21 @@ function Projects() {
             addProjectFomrOpen()
         })
     }
+    // SELL PROJECT
+    function sellProject() {
+        axios.post("http://localhost:3002/company/revenue", {
+            projectId: project.id,
+            customer_email: project.customer.customer_email,
+            payment: projectSaleDetails.payment,
+            payment_date: projectSaleDetails.payment_date
+        }, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res)
+        })
+    }
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
@@ -255,7 +270,7 @@ function Projects() {
                                 <SaleInfoDetails setProjectSaleDetails={setProjectSaleDetails} />
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
-                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { projectSaleFormOpen() }}>
+                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { sellProject(); projectSaleFormOpen() }}>
                                         SEND
                                     </button>
                                 </div>

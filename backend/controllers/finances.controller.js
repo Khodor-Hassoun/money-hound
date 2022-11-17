@@ -11,14 +11,21 @@ const getRevenues = async (req, res) => {
   res.json(revenues);
 };
 const addRevenue = async (req, res) => {
-  const { projectId, customer_email, payment } = req.body;
+  const { projectId, customer_email, payment, payment_date } = req.body;
   const { id } = req.company;
+  let dueDate;
+  if (!payment_date) {
+    dueDate = new Date();
+  } else {
+    dueDate = new Date(payment_date);
+  }
   const revenue = await prisma.revenue.create({
     data: {
       projectId: parseInt(projectId),
       customer_email: customer_email,
       payment: parseInt(payment),
       companyId: parseInt(id),
+      // payment_date: dueDate,
     },
   });
   if (!revenue.id) res.json({ message: "Error" });
@@ -32,7 +39,7 @@ const addRevenue = async (req, res) => {
       },
     },
   });
-  res.json(revenue, company);
+  res.json({ revenue, company });
 };
 const addExpense = async (req, res) => {
   const { bill_name, price } = req.body;

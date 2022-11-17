@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 
 function SaleInfoDetails({ setProjectSaleDetails }) {
-    const [pretax, setPretax] = useState(0)
-    const [vat, setVat] = useState(0)
     const [payment, setPayment] = useState(0)
     const [date, setDate] = useState(new Date())
     const [description, setDescription] = useState('')
@@ -10,6 +8,9 @@ function SaleInfoDetails({ setProjectSaleDetails }) {
     const priceRef = useRef()
 
     function paymentChange() {
+        if (vatRef.current.value > 100) {
+            vatRef.current.value = 100
+        }
         setPayment(((parseInt(vatRef.current.value) / 100) * parseInt(priceRef.current.value)) + parseInt(priceRef.current.value))
     }
     useEffect(() => {
@@ -33,7 +34,7 @@ function SaleInfoDetails({ setProjectSaleDetails }) {
             </div>
             <div className="flex flex-col py-2">
                 <label htmlFor="tax">VAT (%) </label>
-                <input type="number" id="date" name="tax" ref={vatRef} onChange={() => { paymentChange(); console.log(payment) }} className="border-black border-solid border rounded py-1 px-1"></input>
+                <input type="number" id="date" name="tax" ref={vatRef} max={100} onChange={() => { paymentChange(); console.log(payment) }} className="border-black border-solid border rounded py-1 px-1"></input>
             </div>
             <div className="flex flex-col py-2">
                 <label htmlFor="payment">Net Price:</label>
