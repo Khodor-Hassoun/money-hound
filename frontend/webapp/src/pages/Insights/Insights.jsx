@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { LineChart, Line, ResponsiveContainer } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import Navbar from "../../components/Navbar";
 
 function Insights() {
@@ -40,8 +40,6 @@ function Insights() {
                 authorization: `Bearer ${user.token}`
             },
         }).then(res => {
-            console.log(res.data)
-            // setEmployees(res.data.employees)
             setEmployees(res.data.employees)
         })
     }, [])
@@ -49,8 +47,35 @@ function Insights() {
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
-            <button onClick={() => { console.log(expenses); console.log(revenues) }}>Press heeeeeeeeeeeeee</button>
-        </section>
+            <section className="flex-grow max-h-screen overflow-auto">
+                <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-6">
+                    <h2 className="text-4xl font-bold">Insights</h2>
+                </header>
+                <div className="flex h-full w-full">
+                    <ResponsiveContainer width="100%" height="30%">
+                        <LineChart
+                            width={500}
+                            height={300}
+                            data={revenues}
+                            margin={{
+                                top: 5,
+                                right: 30,
+                                left: 20,
+                                bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="payment_date" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Line type="monotone" dataKey="payment" stroke="#8884d8" activeDot={{ r: 8 }} />
+                            {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
+                        </LineChart>
+                    </ResponsiveContainer>
+                </div>
+            </section>
+        </section >
 
     )
 }
