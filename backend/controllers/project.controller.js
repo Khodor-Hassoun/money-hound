@@ -48,6 +48,7 @@ const getProjects = async (req, res) => {
         },
       },
       project_phase: true,
+      customer: true,
     },
   });
   res.status(200).json(projects);

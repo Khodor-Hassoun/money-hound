@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 import ProjectCard from "../../components/ProjectCard"
 import ProjectDetails from "../../components/ProjectDetails"
 import ProjectActivityDetails from "../../components/ProjectActivityDetails"
+import SaleInfo from "../../components/SaleInfo"
 
 function Projects() {
     const company = useSelector(state => state.company)
@@ -238,10 +239,13 @@ function Projects() {
                             <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
                                 {/* HEADER */}
                                 <div className="flex items-center mb-16">
-                                    <span className="text-2xl cursor-pointer" onClick={projectSaleFormOpen}>&#10005;</span>
+                                    <span className="text-2xl cursor-pointer" onClick={() => { projectSaleFormOpen(); projectDetailsOpen() }}>&#10005;</span>
                                     <h2 className="text-2xl flex-grow flex justify-center">{project.project_name}</h2>
                                 </div>
+                                <div className="flex justify-center h-full w-full">
 
+                                    <SaleInfo project={project} />
+                                </div>
                             </div>
                             {/* CONTAINER FOR OPTIONS */}
                             <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
@@ -250,7 +254,7 @@ function Projects() {
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
                                         className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { projectSaleFormOpen() }}>
-                                        SELL
+                                        SEND
                                     </button>
                                 </div>
                             </div>
