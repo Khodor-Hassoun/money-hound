@@ -63,11 +63,11 @@ function Insights() {
     function dateSort() {
         sortedRevenues = revenues
         console.log(sortedRevenues)
-        for (let project of sortedRevenues) {
+        for (let project of revenues) {
             project.payment_date = new Date(project.payment_date)
         }
-        sortedRevenues.sort((a, b) => a.payment_date - b.payment_date);
-        console.log(sortedRevenues)
+        revenues.sort((a, b) => a.payment_date - b.payment_date);
+        console.log(revenues)
     }
 
 
@@ -80,30 +80,35 @@ function Insights() {
             <section className="flex-grow max-h-screen overflow-auto">
                 <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-6">
                     <h2 className="text-4xl font-bold">Insights</h2>
-                    <button onClick={dateSort}>Pressssssssss</button>
+                    <button onClick={logData}>Pressssssssss</button>
                 </header>
                 <div className="flex h-full w-full">
-                    <ResponsiveContainer width="100%" height="30%">
-                        <LineChart
-                            width={500}
-                            height={300}
-                            data={revenues}
-                            margin={{
-                                top: 5,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="customer.customer_name" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Line type="monotone" dataKey="payment" stroke="#8884d8" activeDot={{ r: 8 }} />
-                            {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
-                        </LineChart>
-                    </ResponsiveContainer>
+                    {
+                        revenues.length !== 0 ?
+                            < ResponsiveContainer width="100%" height="30%">
+                                <LineChart
+                                    width={500}
+                                    height={300}
+                                    data={revenues}
+                                    margin={{
+                                        top: 5,
+                                        right: 30,
+                                        left: 20,
+                                        bottom: 5,
+                                    }}
+                                >
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="payment_date" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Line type="monotone" dataKey="payment" stroke="#8884d8" activeDot={{ r: 8 }} />
+                                    {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
+                                </LineChart>
+                            </ResponsiveContainer>
+                            :
+                            <></>
+                    }
                 </div>
             </section>
         </section >

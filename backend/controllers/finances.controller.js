@@ -7,6 +7,11 @@ const getRevenues = async (req, res) => {
     where: {
       companyId: parseInt(id),
     },
+    orderBy: [
+      {
+        payment_date: "asc",
+      },
+    ],
     include: {
       company: true,
       customer: true,
@@ -98,6 +103,11 @@ const getExpenses = async (req, res) => {
     where: {
       companyId: parseInt(id),
     },
+    orderBy: [
+      {
+        date: "asc",
+      },
+    ],
   });
   res.json(expenses);
 };
