@@ -170,13 +170,13 @@ function Projects() {
                         {/* HEADER */}
                         <div className="flex items-center mb-16">
                             <span className="text-2xl cursor-pointer" onClick={projectDetailsOpen}>&#10005;</span>
-                            <h2 className="text-2xl flex-grow flex justify-center">Project Name</h2>
+                            <h2 className="text-2xl flex-grow flex justify-center">{project.project_name}</h2>
                         </div>
                         {/* ACTIVITY CARDS */}
                         {
                             project.hasOwnProperty('Activity') ?
-                                project.Activity.map((activity) => {
-                                    return <ProjectActivityDetails activity={activity} />
+                                project.Activity.map((activity, index) => {
+                                    return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} />
                                 }) : ""
                         }
                     </div>
