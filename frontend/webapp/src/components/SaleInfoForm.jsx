@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import logo from "../resources/images/Your-Logo-here.png"
-function SaleInfo({ project }) {
+function SaleInfoForm({ project }) {
     const company = useSelector(state => state.company)
     let date = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
     return (
@@ -32,7 +32,7 @@ function SaleInfo({ project }) {
                 </div>
                 {/* CUSTOMER DETAILS */}
                 <div>
-                    <p>{project.customer.name}</p>
+                    <p>{project.customer.customer_name}</p>
                     <p>Date issued at: {date}</p>
                     <p>Payment for: {date}</p>
 
@@ -64,4 +64,4 @@ function SaleInfo({ project }) {
         </div>
     )
 }
-export default SaleInfo
+export default SaleInfoForm

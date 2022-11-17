@@ -7,7 +7,8 @@ import { useSelector } from "react-redux"
 import ProjectCard from "../../components/ProjectCard"
 import ProjectDetails from "../../components/ProjectDetails"
 import ProjectActivityDetails from "../../components/ProjectActivityDetails"
-import SaleInfo from "../../components/SaleInfo"
+import SaleInfoForm from "../../components/SaleInfoForm"
+import SaleInfoDetails from "../../components/SaleInfoDetails"
 
 function Projects() {
     const company = useSelector(state => state.company)
@@ -244,13 +245,13 @@ function Projects() {
                                 </div>
                                 <div className="flex justify-center h-full w-full">
 
-                                    <SaleInfo project={project} />
+                                    <SaleInfoForm project={project} />
                                 </div>
                             </div>
                             {/* CONTAINER FOR OPTIONS */}
                             <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
                                 <h2 className="text-2xl">Details</h2>
-
+                                <SaleInfoDetails />
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
                                         className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { projectSaleFormOpen() }}>
