@@ -8,9 +8,22 @@ const getRevenues = async (req, res) => {
       companyId: parseInt(id),
     },
     include: {
-      project: true,
       company: true,
       customer: true,
+      project: {
+        include: {
+          team: {
+            include: {
+              user: true,
+            },
+          },
+          manager: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
     },
   });
   res.json(revenues);

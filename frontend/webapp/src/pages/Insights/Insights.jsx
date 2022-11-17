@@ -9,6 +9,8 @@ function Insights() {
     const [revenues, setRevenues] = useState([])
     const [expenses, setExpenses] = useState([])
     const [employees, setEmployees] = useState([])
+    let sortedRevenues = []
+    let sortedExpenses = []
     // GET REVENUES
     useEffect(() => {
         axios.get("http://localhost:3002/company/revenues", {
@@ -44,12 +46,40 @@ function Insights() {
         })
     }, [])
     // ADD C
+    function logData() {
+        console.log('------------PROJECT----------')
+        console.log(revenues)
+        console.log('-----------/PROJECT----------')
+        console.log('------------EXPENSES----------')
+        console.log(expenses)
+        console.log('-----------/EXPENSES----------')
+        console.log('------------EMPLOYEES----------')
+        console.log(employees)
+        console.log('-----------/EMPLOYEES----------')
+
+
+    }
+
+    function dateSort() {
+        sortedRevenues = revenues
+        console.log(sortedRevenues)
+        for (let project of sortedRevenues) {
+            project.payment_date = new Date(project.payment_date)
+        }
+        console.log(sortedRevenues[0].payment_date)
+    }
+
+
+
+
+
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
             <section className="flex-grow max-h-screen overflow-auto">
                 <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-6">
                     <h2 className="text-4xl font-bold">Insights</h2>
+                    <button onClick={dateSort}>Pressssssssss</button>
                 </header>
                 <div className="flex h-full w-full">
                     <ResponsiveContainer width="100%" height="30%">
@@ -65,7 +95,7 @@ function Insights() {
                             }}
                         >
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="payment_date" />
+                            <XAxis dataKey="customer.customer_name" />
                             <YAxis />
                             <Tooltip />
                             <Legend />
