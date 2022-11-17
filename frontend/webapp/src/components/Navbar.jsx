@@ -5,10 +5,13 @@ import CompanyInfoForm from "./CompanyInfoForm"
 import { useState } from "react"
 import { MdSpaceDashboard } from "react-icons/md"
 import { Link, NavLink } from "react-router-dom"
+import { useSelector } from "react-redux"
 function Navbar() {
     const [userForm, setUserForm] = useState(false)
     const [companyForm, setCompanyForm] = useState(false)
     const [image, setImage] = useState(null)
+    const user = useSelector(state => state.user)
+    const company = useSelector(state => state.company)
 
     const onImageChange = (event) => {
         if (event.target.files && event.target.files[0]) {
@@ -39,7 +42,7 @@ function Navbar() {
                 className="h-screen w-1/6 lg:w-1/5 bg-ming text-white flex flex-col justify-between m-0 mr-4 py-4">
                 {/* LOGO NAME AND OPTIONS */}
                 <div
-                    className="flex flex-col xl:flex-row xl:items-center px-2 space-y-2 lg:space-y-0 xl:justify-between">
+                    className="flex flex-col xl:flex-row xl:items-center px-2 space-y-3 lg:space-y-0 xl:justify-between">
                     <div
                         className="h-[50px] w-[50px] bg-white flex justify-center items-center rounded-xl">
                         <div
@@ -53,41 +56,52 @@ function Navbar() {
                     </div>
                     <h2
                         className="text-lg lg:text-lg">
-                        Company Name
+                        {company.name}
                     </h2>
-                    <img
-                        src={dots}
-                        className="cursor-pointer max-w-[24px]"
-                        alt="options"
-                        onClick={companyFormOpen}
-                    />
+                    {
+                        user.user_type === 1 ?
+                            <img
+                                src={dots}
+                                className="cursor-pointer max-w-[24px]"
+                                alt="options"
+                                onClick={companyFormOpen}
+                            />
+                            :
+                            <></>
+                    }
                 </div>
                 {/* LINKS */}
                 <div
                     className="space-y-6">
-                    <div>
-                        <NavLink to={'/employees'}>
-                            {({ isActive }) => {
-                                return isActive ? (
-                                    <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
-                                        {/* Lightbar */}
-                                        <div className="h-full bg-tangerine w-[12px]" />
-                                        <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg">Employees</p>
-                                    </div>
-                                ) : (
-                                    <div
-                                        className="flex h-[50px] items-center bg-ming hover:brightness-110">
-                                        <div
-                                            className="h-full bg-white w-[12px]"
-                                        />
-                                        <p
-                                            className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Employees
-                                        </p>
-                                    </div>
-                                )
-                            }}
-                        </NavLink>
-                    </div>
+                    {
+                        user.user_type === 1 ?
+                            <div>
+                                <NavLink to={'/employees'}>
+                                    {({ isActive }) => {
+                                        return isActive ? (
+                                            <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
+                                                {/* Lightbar */}
+                                                <div className="h-full bg-tangerine w-[12px]" />
+                                                <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg">Employees</p>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                                <div
+                                                    className="h-full bg-white w-[12px]"
+                                                />
+                                                <p
+                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Employees
+                                                </p>
+                                            </div>
+                                        )
+                                    }}
+                                </NavLink>
+                            </div>
+                            :
+                            <></>
+                    }
+
                     <div>
                         <NavLink to={'/projects'}>
                             {({ isActive }) => {
@@ -111,29 +125,34 @@ function Navbar() {
                             }}
                         </NavLink>
                     </div>
-                    <div>
-                        <NavLink to={'/insights'}>
-                            {({ isActive }) => {
-                                return isActive ? (
-                                    <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
-                                        {/* Lightbar */}
-                                        <div className="h-full bg-tangerine w-[12px]" />
-                                        <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-lg">Insights</p>
-                                    </div>
-                                ) : (
-                                    <div
-                                        className="flex h-[50px] items-center bg-ming hover:brightness-110">
-                                        <div
-                                            className="h-full bg-white w-[12px]"
-                                        />
-                                        <p
-                                            className="text-white w-full ml-2 lg:ml-8 lg:text-lg">Insights
-                                        </p>
-                                    </div>
-                                )
-                            }}
-                        </NavLink>
-                    </div>
+                    {
+                        user.user_type === 1 ?
+                            <div>
+                                <NavLink to={'/insights'}>
+                                    {({ isActive }) => {
+                                        return isActive ? (
+                                            <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
+                                                {/* Lightbar */}
+                                                <div className="h-full bg-tangerine w-[12px]" />
+                                                <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-lg">Insights</p>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                                <div
+                                                    className="h-full bg-white w-[12px]"
+                                                />
+                                                <p
+                                                    className="text-white w-full ml-2 lg:ml-8 lg:text-lg">Insights
+                                                </p>
+                                            </div>
+                                        )
+                                    }}
+                                </NavLink>
+                            </div>
+                            :
+                            <></>
+                    }
                 </div>
                 <div
                     className="flex flex-col px-2">
@@ -141,7 +160,7 @@ function Navbar() {
                         className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center">
                         <h2
                             className="text-xl lg:text-xl"
-                        >Khodor Hassoun
+                        >{`${user.firstname} ${user.lastname}`}
                         </h2>
                         <img
                             src={dots}

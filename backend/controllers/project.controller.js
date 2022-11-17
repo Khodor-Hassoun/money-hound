@@ -42,6 +42,11 @@ const getProjects = async (req, res) => {
           user: true,
         },
       },
+      team: {
+        include: {
+          user: true,
+        },
+      },
     },
   });
   res.status(200).json(projects);
@@ -66,6 +71,7 @@ const updateProject = async (req, res) => {
   const { project_id } = req.body;
   let { project_name, managerId, budget, deadline } = req.body;
   let { project_phase, end_date } = req.body;
+  let { team } = req.body;
   const user = req.user;
 
   if (!project_id) {
@@ -83,6 +89,7 @@ const updateProject = async (req, res) => {
           user: true,
         },
       },
+      team: true,
     },
   });
   //   res.json(projectDet);
@@ -94,6 +101,7 @@ const updateProject = async (req, res) => {
   deadline = deadline ? deadline : projectDet.deadline;
   project_phase = project_phase ? project_phase : projectDet.project_phase_id;
   end_date = end_date ? end_date : projectDet.end_date;
+  team = team ? team : projectDet.team;
 
   let customerDeadline = new Date(deadline);
   let endDate = new Date(end_date);
@@ -108,6 +116,7 @@ const updateProject = async (req, res) => {
         project_name: project_name,
         deadline: customerDeadline,
         budget: parseInt(budget),
+        team: team,
       },
     });
     res.status(200).json(project);

@@ -4,6 +4,13 @@ function ProjectDetails({ project, setProject, employees }) {
     const user = useSelector(state => state.user)
     const percentstr = (Math.floor((project.money_spent / project.budget) * 100) + '%').toString()
     const percent = Math.floor((project.money_spent / project.budget) * 100)
+    const teamIds = []
+    if (project.team.length !== 0) {
+        for (const member of project.team) {
+            teamIds.push(member.employeeId)
+        }
+    }
+
     return (
         <div className="flex flex-col">
             {/* PROJECT MANAGER */}
@@ -64,8 +71,14 @@ function ProjectDetails({ project, setProject, employees }) {
                             <select className="border-black border-solid border rounded py-1 px-1" name="team" id="team" multiple>
                                 <option selected value={project.manager.employeeId}>{`${project.manager.user.firstname} ${project.manager.user.lastname}`}</option>
                                 {
+                                    project.team.map(member => (
+                                        <option value={member.employeeId}>{`${member.user.firstname} ${member.user.lastname}`}</option>
+                                    ))
+                                }
+                                {
                                     employees.map(employee => (
-                                        employee.employeeId !== project.manager.employeeId ?
+                                        employee.employeeId !== project.manager.employeeId && (!teamIds.includes(employee.employeeId)) ?
+
                                             <option value={employee.employeeId}>{`${employee.user.firstname} ${employee.user.lastname}`}</option>
                                             :
                                             <></>
