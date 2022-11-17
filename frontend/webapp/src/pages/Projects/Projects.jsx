@@ -145,9 +145,12 @@ function Projects() {
                             :
                             projects.map(project => {
                                 return (
-                                    <div className="p-4 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); projectDetailsOpen() }}>
-                                        <ProjectCard project={project} />
-                                    </div>
+                                    project.end_date === null ?
+                                        <div className="p-4 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); projectDetailsOpen() }}>
+                                            <ProjectCard project={project} />
+                                        </div>
+                                        :
+                                        <></>
 
                                 )
 
