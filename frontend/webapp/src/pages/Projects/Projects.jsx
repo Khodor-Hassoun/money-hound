@@ -20,6 +20,7 @@ function Projects() {
     const [employees, setEmployees] = useState([])
     const [project, setProject] = useState({})
     const [projectDetailsForm, setProjectDetailsForm] = useState(false)
+    const [projectSaleForm, setProjectSaleForm] = useState(false)
 
     function customerFormOpen() {
         setCustomerForm(bool => !bool)
@@ -29,6 +30,9 @@ function Projects() {
     }
     function projectDetailsOpen() {
         setProjectDetailsForm(bool => !bool)
+    }
+    function projectSaleFormOpen() {
+        setProjectSaleForm(bool => !bool)
     }
     // GET PROJECTS
     useEffect(() => {
@@ -78,6 +82,8 @@ function Projects() {
             },
         }).then(res => {
             console.log(res)
+            customerFormOpen()
+
         })
     }
     // ADD PROJECT
@@ -88,6 +94,7 @@ function Projects() {
             },
         }).then(res => {
             console.log(res)
+            addProjectFomrOpen()
         })
     }
     return (
@@ -209,10 +216,9 @@ function Projects() {
                                         DELETE
                                     </button>
                                     <button
-                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer">
+                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { projectDetailsOpen(); projectSaleFormOpen() }}>
                                         SELL
                                     </button>
-
                                 </div>
                             </div>
                         </div>
@@ -221,6 +227,38 @@ function Projects() {
                     :
                     <></>
 
+            }
+            {/* POPUP FOR SALE */}
+            {
+                projectSaleForm ?
+                    <div className={`${projectSaleForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : ""}`}>
+                        {/* CONTAINER FOR ALL */}
+                        <div className="flex xl:w-9/12 xl:h-[90%] h-full w-full justify-between items-start max-h-[900px]">
+                            {/* CONTAINER FOR EMAIL FORM */}
+                            <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
+                                {/* HEADER */}
+                                <div className="flex items-center mb-16">
+                                    <span className="text-2xl cursor-pointer" onClick={projectSaleFormOpen}>&#10005;</span>
+                                    <h2 className="text-2xl flex-grow flex justify-center">{project.project_name}</h2>
+                                </div>
+
+                            </div>
+                            {/* CONTAINER FOR OPTIONS */}
+                            <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
+                                <h2 className="text-2xl">Details</h2>
+
+                                <div className="flex flex-col space-y-2 w-full">
+                                    <button
+                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { projectSaleFormOpen() }}>
+                                        SELL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    :
+                    <></>
             }
 
         </section >
