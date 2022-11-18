@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer } from "recharts";
 import Navbar from "../../components/Navbar";
 
 function Insights() {
@@ -123,15 +123,15 @@ function Insights() {
                     <button onClick={logData} className="bg-tangerine p-2">Pressssssssss</button>
                 </header>
                 <div className="flex h-full w-full">
-                    < ResponsiveContainer width="100%" height="30%">
+                    {/* < ResponsiveContainer width="100%" height="30%">
                         <LineChart
                             width={500}
                             height={300}
                             data={revenues}
                             margin={{
                                 top: 5,
-                                // right: 30,
-                                // left: 20,
+                                right: 30,
+                                left: 20,
                                 bottom: 5,
                             }}
                         >
@@ -141,10 +141,47 @@ function Insights() {
                             <Tooltip />
                             <Legend />
                             <Line type="monotone" dataKey="payment" stroke="#8884d8" activeDot={{ r: 8 }} />
-                            {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
                         </LineChart>
-                    </ResponsiveContainer>
+                    </ResponsiveContainer> */}
+                    {/* FIRST ROW */}
+                    <div className="flex w-full h-[20%]">
+                        {/* REVENUE BY MONTH BAR CHART */}
+                        <div className="flex flex-col w-[48%]">
+                            <h3 className="flex justify-center mb-2">Revenue</h3>
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart width={150} height={"100%"} data={revenues}>
+                                    <XAxis dataKey="payment_date" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    {/* <Legend /> */}
+                                    <Bar dataKey="payment" fill="#026A75" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                        {/* EXPENSES BY MONTH BAR CHART */}
+                        <div className="flex flex-col h-full w-[48%] justify-between">
+                            <h3 className="flex justify-center mb-2">Expenses</h3>
+                            <ResponsiveContainer width="100%" height="100%" >
+                                <BarChart width={150} height={150} data={expenses}>
+                                    <XAxis dataKey="payment_date" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    {/* <Legend /> */}
+                                    <Bar dataKey="payment" fill="#C8DAE4" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
 
+                    {/* <ResponsiveContainer width="50%" height="30%">
+                        <BarChart width={150} height={40} data={expenses}>
+                            <XAxis dataKey="payment_date" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="payment" fill="#C8DAE4" />
+                        </BarChart>
+                    </ResponsiveContainer> */}
                 </div>
             </section>
         </section >
