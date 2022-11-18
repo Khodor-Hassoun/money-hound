@@ -37,6 +37,7 @@ function Projects() {
     }
     function projectSaleFormOpen() {
         setProjectSaleForm(bool => !bool)
+        setProjectDetailsForm(bool => !bool)
     }
     // GET PROJECTS
     useEffect(() => {
@@ -51,7 +52,7 @@ function Projects() {
             console.log('----------/PROJECTS DATA-----------')
 
         })
-    }, [projectForm, projectSaleForm, projectForm])
+    }, [projectForm, projectSaleForm, projectDetailsForm])
     // GET CUSTOMERS
     useEffect(() => {
         axios.get("http://localhost:3002/company/customers", {
@@ -109,7 +110,6 @@ function Projects() {
         }).then(res => {
             console.log(res)
             setProject(updatedProjectData)
-            addProjectFomrOpen()
         })
     }
     // 
@@ -126,6 +126,8 @@ function Projects() {
             },
         }).then(res => {
             console.log(res)
+            projectSaleFormOpen()
+            projectDetailsOpen()
         })
     }
     return (
@@ -250,7 +252,7 @@ function Projects() {
                                         DELETE
                                     </button>
                                     <button
-                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { projectDetailsOpen(); projectSaleFormOpen() }}>
+                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { projectSaleFormOpen(); }}>
                                         SELL
                                     </button>
                                 </div>
@@ -286,7 +288,7 @@ function Projects() {
                                 <SaleInfoDetails setProjectSaleDetails={setProjectSaleDetails} />
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
-                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { sellProject(); projectSaleFormOpen() }}>
+                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { sellProject() }}>
                                         SEND
                                     </button>
                                 </div>
