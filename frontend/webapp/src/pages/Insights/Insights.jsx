@@ -33,6 +33,7 @@ function Insights() {
                 project.payment_date = `${project.payment_date.getMonth() + 1}/${project.payment_date.getFullYear()}`
             }
             // APPEND PAYMENTS ON THE SAME MONTH
+            const byMonthArr = []
             const byMonthObj = {}
             for (let project of unsortedRev) {
                 if (`${project.payment_date}` in byMonthObj) {
@@ -40,11 +41,13 @@ function Insights() {
                 } else {
                     byMonthObj[project.payment_date] = 0
                     byMonthObj[project.payment_date] += parseInt(project.payment)
-                    // byMonthObj.payments = project.payment
+                    byMonthArr.push()
                 }
             }
-
-            setRevenues(byMonthObj)
+            for (let entry of Object.entries(byMonthObj)) {
+                byMonthArr.push({ payment_date: entry[0], payment: entry[1] })
+            }
+            setRevenues(byMonthArr)
         }).catch(e => {
             console.log(e)
         })
