@@ -8,6 +8,7 @@ import { Link, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import { setUser } from "../redux/user"
+import { setCompany } from "../redux/company"
 function Navbar() {
     const user = useSelector(state => state.user)
     const company = useSelector(state => state.company)
@@ -53,6 +54,20 @@ function Navbar() {
                 console.log(res)
                 const updatedUserValid = res.data
                 dispatch(setUser({ ...user, ...updatedUserValid }))
+                userFormOpen()
+            }).catch(e => {
+                console.log(e)
+            })
+    }
+    function updatedCompanyReq() {
+        axios.put("http://localhost:3002/company/", { ...company, ...updatedCompany }, headers)
+            .then(res => {
+                console.log(res)
+                const updatedCompanyValid = res.data
+                dispatch(setCompany({ ...company, ...updatedCompanyValid }))
+                companyFormOpen()
+            }).catch(e => {
+                console.log(e)
             })
     }
     return (
@@ -225,8 +240,8 @@ function Navbar() {
                                     <h2 className="flex justify-center text-2xl">Company information</h2>
                                 </div>
                             </div>
-                            <CompanyInfoForm setUpdatedCompany={setUpdatedCompany} />
-                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >UPDATE</button>
+                            <CompanyInfoForm setUpdatedCompany={setUpdatedCompany} updatedCompany={updatedCompany} />
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={updatedCompanyReq}>UPDATE</button>
                         </div>
                     </div>
                     :
