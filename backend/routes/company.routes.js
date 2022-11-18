@@ -1,6 +1,7 @@
 // Middlewares
 const authMiddleware = require("../middlewares/auth.middleware");
 const ownerMiddleware = require("../middlewares/owner.middleware");
+const payEmployees = require("../middlewares/payroll.middleware");
 
 // Controllers
 const {
@@ -34,7 +35,13 @@ router.post("/customer", authMiddleware, ownerMiddleware, addCustomer);
 router.get("/customers", authMiddleware, ownerMiddleware, getCustomers);
 
 // Money route
-router.post("/expense", authMiddleware, ownerMiddleware, addExpense);
+router.post(
+  "/expense",
+  authMiddleware,
+  ownerMiddleware,
+  payEmployees,
+  addExpense
+);
 router.post("/revenue", authMiddleware, ownerMiddleware, addRevenue);
 router.get("/expenses", authMiddleware, ownerMiddleware, getExpenses);
 router.get("/revenues", authMiddleware, ownerMiddleware, getRevenues);

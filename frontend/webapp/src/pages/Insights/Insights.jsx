@@ -122,7 +122,7 @@ function Insights() {
                     <h2 className="text-4xl font-bold">Insights</h2>
                     <button onClick={logData} className="bg-tangerine p-2">Pressssssssss</button>
                 </header>
-                <div className="flex h-full w-full">
+                <div className="flex flex-col h-full w-full">
                     {/* < ResponsiveContainer width="100%" height="30%">
                         <LineChart
                             width={500}
@@ -172,16 +172,10 @@ function Insights() {
                             </ResponsiveContainer>
                         </div>
                     </div>
+                    {/* SECOND ROW */}
+                    <div className="flex w-full h-[20%]">
 
-                    {/* <ResponsiveContainer width="50%" height="30%">
-                        <BarChart width={150} height={40} data={expenses}>
-                            <XAxis dataKey="payment_date" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey="payment" fill="#C8DAE4" />
-                        </BarChart>
-                    </ResponsiveContainer> */}
+                    </div>
                 </div>
             </section>
         </section >
