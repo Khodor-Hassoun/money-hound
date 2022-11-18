@@ -81,7 +81,7 @@ const getProject = async (req, res) => {
       customer: true,
     },
   });
-  res.status(200).json(project);
+  res.status(200).json(projects);
 };
 const updateProject = async (req, res) => {
   const { id } = req.body;

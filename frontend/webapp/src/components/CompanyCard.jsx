@@ -21,7 +21,12 @@ function CompanyCard({ value }) {
             dispatch(setCompany({ ...value }))
             dispatch(setUser({ ...user, user_type: res.data.user.user_type }))
             console.log(res.data)
-            navigate('/employees')
+            if (res.data.user.user_type == 1) {
+                navigate('/employees')
+            }
+            if (res.data.user.user_type == 3) {
+                navigate('/manager/projects')
+            }
         })
     }
 

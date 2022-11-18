@@ -54,7 +54,7 @@ const updateUser = async (req, res) => {
       lastname: lastname,
       email: email,
       password: encryptedpassword,
-      user_type: 1,
+      // user_type: 1,
     },
   });
   res.json(updatedUser);
