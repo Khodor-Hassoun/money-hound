@@ -9,8 +9,13 @@ function Insights() {
     const [revenues, setRevenues] = useState([])
     const [expenses, setExpenses] = useState([])
     const [employees, setEmployees] = useState([])
-    let sortedRevenues = []
-    let sortedExpenses = []
+    const [data, setData] = useState([])
+    const headers = {
+        headers: {
+            authorization: `Bearer ${user.token}`
+        }
+    }
+
     // GET REVENUES
     useEffect(() => {
         axios.get("http://localhost:3002/company/revenues", {
@@ -18,22 +23,38 @@ function Insights() {
                 authorization: `Bearer ${user.token}`
             },
         }).then(res => {
-            setRevenues(res.data)
+            const unsortedRev = res.data
+            for (let project of unsortedRev) {
+                project.payment_date = new Date(project.payment_date)
+            }
+            unsortedRev.sort((a, b) => a.payment_date - b.payment_date);
+            for (let project of unsortedRev) {
+                project.payment_date = `${project.payment_date.getMonth() + 1}/${project.payment_date.getFullYear()}`
+            }
+            setRevenues(unsortedRev)
+            setData({ ...data, revenues })
         }).catch(e => {
             console.log(e)
         })
     }, [])
     // GET EXPENSES
     useEffect(() => {
-        axios.get("http://localhost:3002/company/expenses", {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            setExpenses(res.data)
-        }).catch(e => {
-            console.log(e)
-        })
+        axios.get("http://localhost:3002/company/expenses", headers).
+            then(res => {
+                console.log(res)
+                const unsortedRev = res.data
+                for (let project of unsortedRev) {
+                    project.payment_date = new Date(project.payment_date)
+                }
+                unsortedRev.sort((a, b) => a.payment_date - b.payment_date);
+                for (let project of unsortedRev) {
+                    project.payment_date = `${project.payment_date.getMonth() + 1}/${project.payment_date.getFullYear()}`
+                }
+                setExpenses(unsortedRev)
+                setData({ ...data, expenses })
+            }).catch(e => {
+                console.log(e)
+            })
     }, [])
     // GET EMPLOYEES TO GET THEIR PAY
     useEffect(() => {
@@ -60,15 +81,6 @@ function Insights() {
 
     }
 
-    function dateSort() {
-        sortedRevenues = revenues
-        console.log(sortedRevenues)
-        for (let project of revenues) {
-            project.payment_date = new Date(project.payment_date)
-        }
-        revenues.sort((a, b) => a.payment_date - b.payment_date);
-        console.log(revenues)
-    }
 
 
 
@@ -80,7 +92,7 @@ function Insights() {
             <section className="flex-grow max-h-screen overflow-auto">
                 <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-6">
                     <h2 className="text-4xl font-bold">Insights</h2>
-                    <button onClick={logData}>Pressssssssss</button>
+                    {/* <button onClick={console.log(data)} className="bg-tangerine p-2">Pressssssssss</button> */}
                 </header>
                 <div className="flex h-full w-full">
                     {
@@ -92,8 +104,8 @@ function Insights() {
                                     data={revenues}
                                     margin={{
                                         top: 5,
-                                        right: 30,
-                                        left: 20,
+                                        // right: 30,
+                                        // left: 20,
                                         bottom: 5,
                                     }}
                                 >
