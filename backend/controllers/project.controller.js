@@ -16,7 +16,7 @@ const addProject = async (req, res) => {
       customerId: customer_email,
       companyId: id,
       deadline: customerDeadline,
-      budget: budget,
+      budget: parseInt(budget),
       managerId: parseInt(managerId),
       project_phase_id: 1,
     },

@@ -50,7 +50,7 @@ function Projects() {
             console.log('----------/PROJECTS DATA-----------')
 
         })
-    }, [projectForm, projectSaleForm])
+    }, [projectForm, projectSaleForm, projectForm])
     // GET CUSTOMERS
     useEffect(() => {
         axios.get("http://localhost:3002/company/customers", {
@@ -190,9 +190,9 @@ function Projects() {
                                     <h2 className="flex justify-center text-2xl">New Project information</h2>
                                 </div>
                             </div>
-                            <NewProjectForm setNewProjectData={setNewProjectData} customers={customers} employees={employees} />
+                            <NewProjectForm setNewProjectData={setNewProjectData} customers={customers} employees={employees} newProjectData={newProjectData} />
                             <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
-                                onClick={() => { console.log(newProjectData, customers, employees); addProject() }}
+                                onClick={() => { addProject() }}
                             >Add</button>
                         </div>
                     </div>

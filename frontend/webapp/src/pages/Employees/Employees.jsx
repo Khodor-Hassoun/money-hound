@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar"
 import { FaSearch } from "react-icons/fa"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import AddEmployeeForm from "../../components/AddEmployeeForm"
 import TableRow from "../../components/TableRow"
 import { useSelector } from "react-redux"
@@ -17,6 +17,8 @@ function Employees() {
     const [newEmployee, setNewEmployee] = useState({})
     const [employeeData, setEmployeeData] = useState({})
     const [update, setUpdate] = useState(false)
+    const [sortByName, setSortByName] = useState({})
+    const sortRef = useRef()
 
     function addEmployeeForm() {
         setAddEmployee((empForm) => !empForm)
@@ -50,7 +52,24 @@ function Employees() {
             showEmployeeForm()
         })
     }
-
+    // function nameSort() {
+    //     let originalEmployees = employees
+    //     setSortByName(String(sortRef.current.value))
+    //     if (String(sortByName).trim().length !== '') {
+    //         for (let employee of employees) {
+    //             let firstname = String(employee.user.firstname)
+    //             let lastname = String(employee.user.lastname)
+    //             let sortedEmps = []
+    //             if (firstname.includes(sortByName) || lastname.includes(sortByName)) {
+    //                 sortedEmps.push(employee)
+    //             }
+    //             setEmployees(sortedEmps)
+    //         }
+    //     } else {
+    //         setEmployees(originalEmployees)
+    //     }
+    // }
+    // GET EMPLOYEES
     useEffect(() => {
         axios.get("http://localhost:3002/company/employees", {
             headers: {
@@ -77,10 +96,10 @@ function Employees() {
                     {/* SEARCH AND ADD BUTTON */}
                     <div className="flex items-center h-[30px] space-x-2">
                         {/* SEARCH BAR */}
-                        <input type="text" placeholder="search..." className="rounded-md w-3/5 bg-offWhite flex-grow border-2 px-1 border-black" />
+                        {/* <input type="text" placeholder="search..." defaultValue={''} name="sort" ref={sortRef} className="rounded-md w-3/5 bg-offWhite flex-grow border-2 px-1 border-black" />
                         <div className="h-full w-3 flex items-center relative right-7">
                             <FaSearch size={100} />
-                        </div>
+                        </div> */}
                         {/* BUTTON */}
                         <button
                             className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer" onClick={addEmployeeForm}>
