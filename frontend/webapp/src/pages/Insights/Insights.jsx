@@ -57,15 +57,29 @@ function Insights() {
         axios.get("http://localhost:3002/company/expenses", headers).
             then(res => {
                 const unsortedRev = res.data
+                // console.log(res.data)
                 for (let project of unsortedRev) {
-                    project.payment_date = new Date(project.payment_date)
+                    project.payment_date = new Date(project.date)
                 }
                 unsortedRev.sort((a, b) => a.payment_date - b.payment_date);
                 for (let project of unsortedRev) {
                     project.payment_date = `${project.payment_date.getMonth() + 1}/${project.payment_date.getFullYear()}`
                 }
-
-                setExpenses(unsortedRev)
+                const byMonthArr = []
+                const byMonthObj = {}
+                for (let project of unsortedRev) {
+                    if (`${project.payment_date}` in byMonthObj) {
+                        byMonthObj[project.payment_date] += parseInt(project.price)
+                    } else {
+                        byMonthObj[project.payment_date] = 0
+                        byMonthObj[project.payment_date] += parseInt(project.price)
+                        byMonthArr.push()
+                    }
+                }
+                for (let entry of Object.entries(byMonthObj)) {
+                    byMonthArr.push({ payment_date: entry[0], payment: entry[1] })
+                }
+                setExpenses(byMonthArr)
             }).catch(e => {
                 console.log(e)
             })
@@ -85,9 +99,9 @@ function Insights() {
         console.log('------------PROJECT----------')
         console.log(revenues)
         console.log('-----------/PROJECT----------')
-        // console.log('------------EXPENSES----------')
-        // console.log(expenses)
-        // console.log('-----------/EXPENSES----------')
+        console.log('------------EXPENSES----------')
+        console.log(expenses)
+        console.log('-----------/EXPENSES----------')
         // console.log('------------EMPLOYEES----------')
         // console.log(employees)
         // console.log('-----------/EMPLOYEES----------')
@@ -109,32 +123,28 @@ function Insights() {
                     <button onClick={logData} className="bg-tangerine p-2">Pressssssssss</button>
                 </header>
                 <div className="flex h-full w-full">
-                    {
-                        revenues.length !== 0 ?
-                            < ResponsiveContainer width="100%" height="30%">
-                                <LineChart
-                                    width={500}
-                                    height={300}
-                                    data={revenues}
-                                    margin={{
-                                        top: 5,
-                                        // right: 30,
-                                        // left: 20,
-                                        bottom: 5,
-                                    }}
-                                >
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="payment_date" />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Legend />
-                                    <Line type="monotone" dataKey="payment" stroke="#8884d8" activeDot={{ r: 8 }} />
-                                    {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
-                                </LineChart>
-                            </ResponsiveContainer>
-                            :
-                            <></>
-                    }
+                    < ResponsiveContainer width="100%" height="30%">
+                        <LineChart
+                            width={500}
+                            height={300}
+                            data={revenues}
+                            margin={{
+                                top: 5,
+                                // right: 30,
+                                // left: 20,
+                                bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="payment_date" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Line type="monotone" dataKey="payment" stroke="#8884d8" activeDot={{ r: 8 }} />
+                            {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
+                        </LineChart>
+                    </ResponsiveContainer>
+
                 </div>
             </section>
         </section >
