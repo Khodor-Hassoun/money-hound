@@ -4,7 +4,7 @@ import UserInfoForm from "./UserInfoForm"
 import CompanyInfoForm from "./CompanyInfoForm"
 import { useState } from "react"
 import { MdSpaceDashboard } from "react-icons/md"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import { setUser } from "../redux/user"
@@ -18,6 +18,7 @@ function Navbar() {
     const [image, setImage] = useState(null)
     const [updatedUser, setUpdatedUser] = useState({})
     const [updatedCompany, setUpdatedCompany] = useState({})
+    const navigate = useNavigate()
 
     const headers = {
         headers: {
@@ -69,6 +70,11 @@ function Navbar() {
             }).catch(e => {
                 console.log(e)
             })
+    }
+    function signOut() {
+        dispatch(setCompany({}))
+        dispatch(setUser({}))
+        navigate('/')
     }
     return (
         <>
@@ -205,6 +211,7 @@ function Navbar() {
                     </div>
                     <button
                         className="bg-tangerine text-white my-4 lg:p-2 lg:rounded-xl w-full cursor-pointer p-1 rounded-xl"
+                        onClick={signOut}
                     >SIGN OUT
                     </button>
                 </div>
