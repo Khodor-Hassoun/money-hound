@@ -46,7 +46,7 @@ function Employees() {
                 authorization: `Bearer ${user.token}`
             },
         }).then(res => {
-            console.log(res)
+            console.log(res.data)
             showEmployeeForm()
         })
     }
@@ -143,7 +143,7 @@ function Employees() {
                         <div className={`${showEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
                             <div className="bg-offWhite flex flex-col py-10 px-6">
                                 <div className="flex p-2">
-                                    <span className="text-2xl" onClick={() => { setEmployeeData({}); updateEmployee() }}>&#10005;</span>
+                                    <span className="text-2xl" onClick={() => { showEmployeeForm() }}>&#10005;</span>
                                     <div className="w-full">
                                         <h2 className="flex justify-center text-2xl">Employee information</h2>
                                     </div>
