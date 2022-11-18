@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer } from "recharts";
+import {
+    PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer, LabelList
+} from "recharts";
 import Navbar from "../../components/Navbar";
 
 function Insights() {
@@ -112,7 +114,7 @@ function Insights() {
         console.log(revenues)
         console.log('-----------/PROJECT----------')
         console.log('------------EXPENSES----------')
-        console.log(monExpenses)
+        console.log(typeExpenses)
         console.log('-----------/EXPENSES----------')
         // console.log('------------EMPLOYEES----------')
         // console.log(employees)
@@ -120,8 +122,18 @@ function Insights() {
 
 
     }
+    // const RADIAN = Math.PI / 180;
+    // const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+    //     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    //     const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    //     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-
+    //     return (
+    //         <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+    //             {`${(percent * 100).toFixed(0)}%`}
+    //         </text>
+    //     );
+    // };
 
 
 
@@ -134,7 +146,7 @@ function Insights() {
                     <h2 className="text-4xl font-bold">Insights</h2>
                     <button onClick={logData} className="bg-tangerine p-2">Pressssssssss</button>
                 </header>
-                <div className="flex flex-col h-full w-full">
+                <div className="flex flex-col h-full w-full space-y-10">
                     {/* < ResponsiveContainer width="100%" height="30%">
                         <LineChart
                             width={500}
@@ -158,7 +170,7 @@ function Insights() {
                     {/* FIRST ROW */}
                     <div className="flex w-full h-[20%]">
                         {/* REVENUE BY MONTH BAR CHART */}
-                        <div className="flex flex-col w-[48%]">
+                        <div className="flex flex-col w-[48%] bg-white rounded-lg shadow-2xl">
                             <h3 className="flex justify-center mb-2">Revenue</h3>
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart width={150} height={"100%"} data={revenues}>
@@ -171,7 +183,7 @@ function Insights() {
                             </ResponsiveContainer>
                         </div>
                         {/* EXPENSES BY MONTH BAR CHART */}
-                        <div className="flex flex-col h-full w-[48%] justify-between">
+                        <div className="flex flex-col h-full w-[48%] justify-between bg-white rounded-lg shadow-2xl">
                             <h3 className="flex justify-center mb-2">Expenses</h3>
                             <ResponsiveContainer width="100%" height="100%" >
                                 <BarChart width={150} height={150} data={monExpenses}>
@@ -185,8 +197,30 @@ function Insights() {
                         </div>
                     </div>
                     {/* SECOND ROW */}
-                    <div className="flex w-full h-[20%]">
+                    <div className="flex w-full h-[50%]">
+                        <div className="flex flex-col h-full w-[40%] bg-white shadow-xl">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart width={200} height={100}>
+                                    <Pie
+                                        data={typeExpenses}
+                                        cx="50%"
+                                        cy="50%"
+                                        labelLine={false}
+                                        // label={renderCustomizedLabel}
+                                        outerRadius={160}
+                                        fill="#026A75"
+                                        dataKey="payment"
+                                        nameKey='bill_name'
+                                    >
+                                        <LabelList dataKey='bill_name' />
+                                        {typeExpenses.map((entry, index) => (
+                                            <Cell key={`cell-${entry}`} />
+                                        ))}
+                                    </Pie>
 
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
                 </div>
             </section>
