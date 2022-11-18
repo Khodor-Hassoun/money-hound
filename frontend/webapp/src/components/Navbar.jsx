@@ -5,16 +5,24 @@ import CompanyInfoForm from "./CompanyInfoForm"
 import { useState } from "react"
 import { MdSpaceDashboard } from "react-icons/md"
 import { Link, NavLink } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import axios from "axios"
+import { setUser } from "../redux/user"
 function Navbar() {
+    const user = useSelector(state => state.user)
+    const company = useSelector(state => state.company)
+    const dispatch = useDispatch()
     const [userForm, setUserForm] = useState(false)
     const [companyForm, setCompanyForm] = useState(false)
     const [image, setImage] = useState(null)
     const [updatedUser, setUpdatedUser] = useState({})
     const [updatedCompany, setUpdatedCompany] = useState({})
-    const user = useSelector(state => state.user)
-    const company = useSelector(state => state.company)
 
+    const headers = {
+        headers: {
+            authorization: `Bearer ${user.token}`
+        }
+    }
     const onImageChange = (event) => {
         if (event.target.files && event.target.files[0]) {
             setImage(URL.createObjectURL(event.target.files[0]));
@@ -32,11 +40,20 @@ function Navbar() {
             };
         });
     };
+
     function userFormOpen() {
         setUserForm((userForm) => !userForm)
     }
     function companyFormOpen() {
         setCompanyForm((companyForm) => !companyForm)
+    }
+    function updatedUserReq() {
+        axios.put("http://localhost:3002/user/", { ...user, ...updatedUser }, headers)
+            .then(res => {
+                console.log(res)
+                const updatedUserValid = res.data
+                dispatch(setUser({ ...user, ...updatedUserValid }))
+            })
     }
     return (
         <>
@@ -190,8 +207,8 @@ function Navbar() {
                                     <h2 className="flex justify-center text-2xl">Personal information</h2>
                                 </div>
                             </div>
-                            <UserInfoForm setUpdatedUser={setUpdatedUser} />
-                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => console.log(updatedUser)}>UPDATE</button>
+                            <UserInfoForm setUpdatedUser={setUpdatedUser} updatedUser={updatedUser} />
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={updatedUserReq}>UPDATE</button>
                         </div>
                     </div>
                     :
