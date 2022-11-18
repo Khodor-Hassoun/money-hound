@@ -7,13 +7,6 @@ function AddEmployeeForm({ setNewEmployee, newEmployee }) {
   const jobPositionRef = useRef("");
   const payrollRef = useRef("");
   function employeeDetails(e) {
-    // setNewEmployee({
-    //   firstname: firstnameRef.current.value,
-    //   lastname: lastnameRef.current.value,
-    //   email: companyEmailRef.current.value,
-    //   wage: payrollRef.current.value,
-    //   job_position: jobPositionRef.current.value
-    // })
     setNewEmployee({ ...newEmployee, [e.target.name]: e.target.value })
   }
   return (

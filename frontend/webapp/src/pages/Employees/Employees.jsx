@@ -47,6 +47,7 @@ function Employees() {
             },
         }).then(res => {
             console.log(res)
+            showEmployeeForm()
         })
     }
 
@@ -62,7 +63,7 @@ function Employees() {
             setEmployeesCount(res.data.count)
         })
 
-    }, ["", addEmployee, update])
+    }, ["", addEmployee, showEmployee])
 
     return (
         <section className="flex bg-offWhite pr-4">
@@ -130,7 +131,7 @@ function Employees() {
                                     </div>
                                 </div>
                                 <AddEmployeeForm setNewEmployee={setNewEmployee} newEmployee={newEmployee} />
-                                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => { console.log(newEmployee); addEmployeeRequest() }} >NEXT</button>
+                                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => { console.log(newEmployee); addEmployeeRequest() }} >ADD</button>
                             </div>
                         </div>
                         :
@@ -142,7 +143,7 @@ function Employees() {
                         <div className={`${showEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
                             <div className="bg-offWhite flex flex-col py-10 px-6">
                                 <div className="flex p-2">
-                                    <span className="text-2xl" onClick={() => { showEmployeeForm(); setEmployeeData({}); updateEmployee() }}>&#10005;</span>
+                                    <span className="text-2xl" onClick={() => { setEmployeeData({}); updateEmployee() }}>&#10005;</span>
                                     <div className="w-full">
                                         <h2 className="flex justify-center text-2xl">Employee information</h2>
                                     </div>
