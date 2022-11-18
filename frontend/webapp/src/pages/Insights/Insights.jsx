@@ -24,6 +24,7 @@ function Insights() {
             },
         }).then(res => {
             const unsortedRev = res.data
+            // console.log(res.data)
             for (let project of unsortedRev) {
                 project.payment_date = new Date(project.payment_date)
             }
@@ -31,8 +32,19 @@ function Insights() {
             for (let project of unsortedRev) {
                 project.payment_date = `${project.payment_date.getMonth() + 1}/${project.payment_date.getFullYear()}`
             }
-            setRevenues(unsortedRev)
-            setData({ ...data, revenues })
+            // APPEND PAYMENTS ON THE SAME MONTH
+            const byMonthObj = {}
+            for (let project of unsortedRev) {
+                if (`${project.payment_date}` in byMonthObj) {
+                    byMonthObj[project.payment_date] += parseInt(project.payment)
+                } else {
+                    byMonthObj[project.payment_date] = 0
+                    byMonthObj[project.payment_date] += parseInt(project.payment)
+                    // byMonthObj.payments = project.payment
+                }
+            }
+
+            setRevenues(byMonthObj)
         }).catch(e => {
             console.log(e)
         })
@@ -41,7 +53,6 @@ function Insights() {
     useEffect(() => {
         axios.get("http://localhost:3002/company/expenses", headers).
             then(res => {
-                console.log(res)
                 const unsortedRev = res.data
                 for (let project of unsortedRev) {
                     project.payment_date = new Date(project.payment_date)
@@ -50,8 +61,8 @@ function Insights() {
                 for (let project of unsortedRev) {
                     project.payment_date = `${project.payment_date.getMonth() + 1}/${project.payment_date.getFullYear()}`
                 }
+
                 setExpenses(unsortedRev)
-                setData({ ...data, expenses })
             }).catch(e => {
                 console.log(e)
             })
@@ -71,12 +82,12 @@ function Insights() {
         console.log('------------PROJECT----------')
         console.log(revenues)
         console.log('-----------/PROJECT----------')
-        console.log('------------EXPENSES----------')
-        console.log(expenses)
-        console.log('-----------/EXPENSES----------')
-        console.log('------------EMPLOYEES----------')
-        console.log(employees)
-        console.log('-----------/EMPLOYEES----------')
+        // console.log('------------EXPENSES----------')
+        // console.log(expenses)
+        // console.log('-----------/EXPENSES----------')
+        // console.log('------------EMPLOYEES----------')
+        // console.log(employees)
+        // console.log('-----------/EMPLOYEES----------')
 
 
     }
@@ -92,7 +103,7 @@ function Insights() {
             <section className="flex-grow max-h-screen overflow-auto">
                 <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-6">
                     <h2 className="text-4xl font-bold">Insights</h2>
-                    {/* <button onClick={console.log(data)} className="bg-tangerine p-2">Pressssssssss</button> */}
+                    <button onClick={logData} className="bg-tangerine p-2">Pressssssssss</button>
                 </header>
                 <div className="flex h-full w-full">
                     {
