@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 
-function ProjectDetails({ project, setProject, employees }) {
+function ProjectDetails({ project, setProject, employees, setupdatedProjectData }) {
     const user = useSelector(state => state.user)
     const percentstr = (Math.floor((project.money_spent / project.budget) * 100) + '%').toString()
     const percent = Math.floor((project.money_spent / project.budget) * 100)
@@ -10,7 +10,9 @@ function ProjectDetails({ project, setProject, employees }) {
             teamIds.push(member.employeeId)
         }
     }
-
+    function dataChange(e) {
+        setupdatedProjectData({ ...project, [e.target.name]: e.target.value })
+    }
     return (
         <div className="flex flex-col">
             {/* PROJECT MANAGER */}
@@ -20,7 +22,7 @@ function ProjectDetails({ project, setProject, employees }) {
                         <div className="flex flex-col py-2">
                             <label htmlFor="manager">Project Manger</label>
                             {/* <input type="text" id="manager" placeholder={project.manager.user.firstname} name="email" className="border-black border-solid border rounded py-2 px-1"></input> */}
-                            <select className="border-black border-solid border rounded py-1 px-1" name="managerId" id="manager">
+                            <select className="border-black border-solid border rounded py-1 px-1" name="managerId" id="manager" onChange={dataChange}>
                                 <option selected value={project.manager.employeeId}>{`${project.manager.user.firstname} ${project.manager.user.lastname}`}</option>
                                 {
                                     employees.map(employee => (
@@ -34,15 +36,15 @@ function ProjectDetails({ project, setProject, employees }) {
                         </div>
                         <div className="flex flex-col py-2">
                             <label htmlFor="email">Project Name</label>
-                            <input type="text" id="email" placeholder={project.project_name} name="project_name" className="border-black border-solid border rounded py-1 px-1"></input>
+                            <input type="text" id="email" defaultValue={project.project_name} name="project_name" onChange={dataChange} className="border-black border-solid border rounded py-1 px-1"></input>
                         </div>
                         <div className="flex flex-col py-2">
                             <label htmlFor="date">Deadline</label>
-                            <input type="date" id="date" placeholder={project.deadline} name="deadline" className="border-black border-solid border rounded py-1 px-1"></input>
+                            <input type="date" id="date" defaultValue={project.deadline} name="deadline" onChange={dataChange} className="border-black border-solid border rounded py-1 px-1"></input>
                         </div>
                         <div className="flex flex-col pt-2">
                             <label htmlFor="budget">Budget</label>
-                            <input type="number" id="email" placeholder={project.budget} name='budget' className="border-black border-solid border rounded py-1 px-1"></input>
+                            <input type="number" id="email" defaultValue={project.budget} name='budget' onChange={dataChange} className="border-black border-solid border rounded py-1 px-1"></input>
                         </div>
                     </>
                     :

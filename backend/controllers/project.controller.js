@@ -70,19 +70,19 @@ const getProject = async (req, res) => {
   res.status(200).json(project);
 };
 const updateProject = async (req, res) => {
-  const { project_id } = req.body;
+  const { id } = req.body;
   let { project_name, managerId, budget, deadline } = req.body;
   let { project_phase, end_date } = req.body;
   let { team } = req.body;
   const user = req.user;
 
-  if (!project_id) {
+  if (!id) {
     return res.status(405).json({ message: "no project id" });
   }
   //   Get the company of the project
   const projectDet = await prisma.project.findUnique({
     where: {
-      id: project_id,
+      id: parseInt(id),
     },
     include: {
       company: true,
@@ -111,14 +111,13 @@ const updateProject = async (req, res) => {
   if (parseInt(projectDet.company.ownerId) === parseInt(user.id)) {
     const project = await prisma.project.update({
       where: {
-        id: parseInt(project_id),
+        id: parseInt(id),
       },
       data: {
         managerId: parseInt(managerId),
         project_name: project_name,
         deadline: customerDeadline,
         budget: parseInt(budget),
-        team: team,
       },
     });
     res.status(200).json(project);
@@ -130,7 +129,7 @@ const updateProject = async (req, res) => {
 
   const project = await prisma.project.update({
     where: {
-      id: parseInt(project_id),
+      id: parseInt(id),
     },
     data: {
       project_phase_id: project_phase,

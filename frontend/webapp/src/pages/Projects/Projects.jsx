@@ -24,6 +24,7 @@ function Projects() {
     const [projectDetailsForm, setProjectDetailsForm] = useState(false)
     const [projectSaleForm, setProjectSaleForm] = useState(false)
     const [projectSaleDetails, setProjectSaleDetails] = useState({})
+    const [updatedProjectData, setupdatedProjectData] = useState({})
 
     function customerFormOpen() {
         setCustomerForm(bool => !bool)
@@ -100,6 +101,18 @@ function Projects() {
             addProjectFomrOpen()
         })
     }
+    function updateProject() {
+        axios.put("http://localhost:3002/project/", updatedProjectData, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res)
+            setProject(updatedProjectData)
+            addProjectFomrOpen()
+        })
+    }
+    // 
     // SELL PROJECT
     function sellProject() {
         axios.post("http://localhost:3002/company/revenue", {
@@ -223,11 +236,11 @@ function Projects() {
                                 }
                             </div>
                             {/* CONTAINER FOR PROJECT */}
-                            <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
+                            <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full" onClick={updateProject}>
                                 <h2 className="text-2xl">Details</h2>
                                 {
                                     Object.keys(project).length !== 0 ?
-                                        <ProjectDetails project={project} setProject={setProject} employees={employees} />
+                                        <ProjectDetails project={project} setProject={setProject} employees={employees} setupdatedProjectData={setupdatedProjectData} />
                                         :
                                         ""
                                 }
