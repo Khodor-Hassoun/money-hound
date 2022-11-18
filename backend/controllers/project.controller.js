@@ -54,17 +54,31 @@ const getProjects = async (req, res) => {
   res.status(200).json(projects);
 };
 const getProject = async (req, res) => {
-  const { id } = req.params;
-  const project = await prisma.project.findUnique({
+  const { managerId } = req.params;
+  const projects = await prisma.project.findMany({
     where: {
-      id: parseInt(id),
+      managerId: parseInt(managerId),
     },
     include: {
-      team: true,
-      Activity: true,
-      Revenue: true,
-      manager: true,
-      company: true,
+      Activity: {
+        orderBy: [
+          {
+            start_date: "desc",
+          },
+        ],
+      },
+      manager: {
+        include: {
+          user: true,
+        },
+      },
+      team: {
+        include: {
+          user: true,
+        },
+      },
+      project_phase: true,
+      customer: true,
     },
   });
   res.status(200).json(project);

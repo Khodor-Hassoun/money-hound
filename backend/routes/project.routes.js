@@ -13,7 +13,7 @@ const router = Router();
 
 router.post("/", authMiddleware, ownerMiddleware, addProject);
 router.get("/", authMiddleware, ownerMiddleware, getProjects);
-router.get("/:id", authMiddleware, getProject);
+router.get("/:managerId", authMiddleware, getProject);
 router.put("/", authMiddleware, updateProject);
 
 router.post("/:id/add", authMiddleware, addActivity);
