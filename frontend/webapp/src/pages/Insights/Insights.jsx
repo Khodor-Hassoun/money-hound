@@ -134,26 +134,6 @@ function Insights() {
                     <button onClick={logData} className="bg-tangerine p-2">Pressssssssss</button>
                 </header>
                 <div className="flex flex-col h-full w-full space-y-10">
-                    {/* < ResponsiveContainer width="100%" height="30%">
-                        <LineChart
-                            width={500}
-                            height={300}
-                            data={revenues}
-                            margin={{
-                                top: 5,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="payment_date" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Line type="monotone" dataKey="payment" stroke="#8884d8" activeDot={{ r: 8 }} />
-                        </LineChart>
-                    </ResponsiveContainer> */}
                     {/* FIRST ROW */}
                     <div className="flex w-full h-[30%] justify-between">
                         {/* REVENUE BY MONTH BAR CHART */}
@@ -184,8 +164,8 @@ function Insights() {
                         </div>
                     </div>
                     {/* SECOND ROW */}
-                    <div className="flex w-full h-[50%]">
-                        <div className="flex flex-col h-full w-[30%] bg-beau rounded-xl  shadow-2xl">
+                    <div className="flex w-full h-[50%] justify-between">
+                        <div className="flex flex-col h-full w-[30%] bg-beau rounded-xl  shadow-2xl text-xs">
                             <ResponsiveContainer width="100%" height="100%">
                                 <PieChart width={400} height={400}>
                                     <Pie
@@ -207,7 +187,7 @@ function Insights() {
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
-                        <div className="flex flex-col h-full flex-grow bg-white rounded-xl shadow-2xl">
+                        <div className="flex flex-col h-full w-[66%] bg-white rounded-xl shadow-2xl">
                             <ResponsiveContainer width="100%" height="100%">
                                 <ScatterChart width={730} height={250}
                                     margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>

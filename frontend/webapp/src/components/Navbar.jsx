@@ -10,6 +10,8 @@ function Navbar() {
     const [userForm, setUserForm] = useState(false)
     const [companyForm, setCompanyForm] = useState(false)
     const [image, setImage] = useState(null)
+    const [updatedUser, setUpdatedUser] = useState({})
+    const [updatedCompany, setUpdatedCompany] = useState({})
     const user = useSelector(state => state.user)
     const company = useSelector(state => state.company)
 
@@ -43,7 +45,7 @@ function Navbar() {
                 {/* LOGO NAME AND OPTIONS */}
                 <div
                     className="flex flex-col xl:flex-row xl:items-center px-2 space-y-3 lg:space-y-0 xl:justify-between">
-                    <div
+                    {/* <div
                         className="h-[50px] w-[50px] bg-white flex justify-center items-center rounded-xl">
                         <div
                             className="h-[35px] w-[35px] rounded-xl">
@@ -53,7 +55,7 @@ function Navbar() {
                                 className="h-full w-full rounded-xl"
                             />
                         </div>
-                    </div>
+                    </div> */}
                     <h2
                         className="text-lg lg:text-lg">
                         {company.name}
@@ -178,31 +180,41 @@ function Navbar() {
 
 
             {/* USERINFO POPUP */}
-            <div className={`${userForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                <div className="bg-offWhite flex flex-col py-10 px-6">
-                    <div className="flex p-2">
-                        <span className="text-2xl" onClick={userFormOpen}>&#10005;</span>
-                        <div className="w-full">
-                            <h2 className="flex justify-center text-2xl">Personal information</h2>
+            {
+                userForm ?
+                    <div className={`${userForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                        <div className="bg-offWhite flex flex-col py-10 px-6">
+                            <div className="flex p-2">
+                                <span className="text-2xl cursor-pointer" onClick={userFormOpen}>&#10005;</span>
+                                <div className="w-full">
+                                    <h2 className="flex justify-center text-2xl">Personal information</h2>
+                                </div>
+                            </div>
+                            <UserInfoForm setUpdatedUser={setUpdatedUser} />
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => console.log(updatedUser)}>UPDATE</button>
                         </div>
                     </div>
-                    <UserInfoForm />
-                    <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >UPDATE</button>
-                </div>
-            </div>
+                    :
+                    <></>
+            }
             {/* COMPANY POPUP */}
-            <div className={`${companyForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                <div className="bg-offWhite flex flex-col py-10 px-6">
-                    <div className="flex p-2">
-                        <span className="text-2xl" onClick={companyFormOpen}>&#10005;</span>
-                        <div className="w-full">
-                            <h2 className="flex justify-center text-2xl">Company information</h2>
+            {
+                companyForm ?
+                    <div className={`${companyForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                        <div className="bg-offWhite flex flex-col py-10 px-6">
+                            <div className="flex p-2">
+                                <span className="text-2xl cursor-pointer" onClick={companyFormOpen}>&#10005;</span>
+                                <div className="w-full">
+                                    <h2 className="flex justify-center text-2xl">Company information</h2>
+                                </div>
+                            </div>
+                            <CompanyInfoForm setUpdatedCompany={setUpdatedCompany} />
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" >UPDATE</button>
                         </div>
                     </div>
-                    <CompanyInfoForm />
-                    <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full">UPDATE</button>
-                </div>
-            </div>
+                    :
+                    <></>
+            }
         </>
     )
 }
