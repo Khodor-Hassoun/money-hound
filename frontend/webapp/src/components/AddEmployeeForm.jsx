@@ -1,19 +1,20 @@
 import { useRef } from "react";
 
-function AddEmployeeForm({ setNewEmployee }) {
+function AddEmployeeForm({ setNewEmployee, newEmployee }) {
   const firstnameRef = useRef("");
   const lastnameRef = useRef("");
   const companyEmailRef = useRef("");
   const jobPositionRef = useRef("");
   const payrollRef = useRef("");
-  function employeeDetails() {
-    setNewEmployee({
-      firstname: firstnameRef.current.value,
-      lastname: lastnameRef.current.value,
-      email: companyEmailRef.current.value,
-      wage: payrollRef.current.value,
-      job_position: jobPositionRef.current.value
-    })
+  function employeeDetails(e) {
+    // setNewEmployee({
+    //   firstname: firstnameRef.current.value,
+    //   lastname: lastnameRef.current.value,
+    //   email: companyEmailRef.current.value,
+    //   wage: payrollRef.current.value,
+    //   job_position: jobPositionRef.current.value
+    // })
+    setNewEmployee({ ...newEmployee, [e.target.name]: e.target.value })
   }
   return (
     <>
@@ -24,11 +25,11 @@ function AddEmployeeForm({ setNewEmployee }) {
           {/* FIRST NAME LAST NAME */}
           <div className="flex flex-col mr-0.5 w-[48%]">
             <label htmlFor="firstname">Firstname</label>
-            <input type="text" id="firstname" placeholder="John" ref={firstnameRef} onChange={employeeDetails} className="border-black border-solid border rounded py-2 px-1"></input>
+            <input type="text" id="firstname" name="firstname" ref={firstnameRef} onChange={employeeDetails} className="border-black border-solid border rounded py-2 px-1"></input>
           </div>
           <div className="flex flex-col w-[48%]">
             <label htmlFor="lastname">lastname</label>
-            <input type="text" id="lastname" placeholder="Doe" ref={lastnameRef} onChange={employeeDetails} className="border-black border-solid border rounded py-2 px-1"></input>
+            <input type="text" id="lastname" name="lastname" ref={lastnameRef} onChange={employeeDetails} className="border-black border-solid border rounded py-2 px-1"></input>
           </div>
         </div>
         {/* EMAIL */}
@@ -37,7 +38,7 @@ function AddEmployeeForm({ setNewEmployee }) {
           <input
             type="text"
             id="companyemail"
-            placeholder="name@domain.com"
+            name="email"
             className="border-black border-solid border rounded py-2 px-1"
             ref={companyEmailRef}
             onChange={employeeDetails}
@@ -51,7 +52,7 @@ function AddEmployeeForm({ setNewEmployee }) {
             <input
               type="text"
               id="address"
-              placeholder="123 st."
+              name="job_position"
               className="border-black border-solid border rounded py-2 px-1"
               ref={jobPositionRef}
               onChange={employeeDetails}
@@ -62,7 +63,7 @@ function AddEmployeeForm({ setNewEmployee }) {
             <input
               type="text"
               id="phone"
-              placeholder="01455678"
+              name="wage"
               className="border-black border-solid border rounded py-2 px-1"
               ref={payrollRef}
               onChange={employeeDetails}

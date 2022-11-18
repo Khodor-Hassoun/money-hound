@@ -34,6 +34,7 @@ function Employees() {
             },
         }).then(res => {
             console.log(res)
+            addEmployeeForm()
         })
     }
     function employeeInfo(employee) {
@@ -117,18 +118,25 @@ function Employees() {
                     </tbody>
 
                 </table>
-                <div className={`${addEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                    <div className="bg-offWhite flex flex-col py-10 px-6">
-                        <div className="flex p-2">
-                            <span className="text-2xl cursor-pointer" onClick={addEmployeeForm}>&#10005;</span>
-                            <div className="w-full">
-                                <h2 className="flex justify-center text-2xl">Employee information</h2>
+                {/* ADD EMPLOYEE POPUP */}
+                {
+                    addEmployee ?
+                        <div className={`${addEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                            <div className="bg-offWhite flex flex-col py-10 px-6">
+                                <div className="flex p-2">
+                                    <span className="text-2xl cursor-pointer" onClick={addEmployeeForm}>&#10005;</span>
+                                    <div className="w-full">
+                                        <h2 className="flex justify-center text-2xl">Employee information</h2>
+                                    </div>
+                                </div>
+                                <AddEmployeeForm setNewEmployee={setNewEmployee} newEmployee={newEmployee} />
+                                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => { console.log(newEmployee); addEmployeeRequest() }} >NEXT</button>
                             </div>
                         </div>
-                        <AddEmployeeForm setNewEmployee={setNewEmployee} />
-                        <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => { console.log(newEmployee); addEmployeeRequest() }} >NEXT</button>
-                    </div>
-                </div>
+                        :
+                        <></>
+
+                }
                 {
                     showEmployee ?
                         <div className={`${showEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
