@@ -7,9 +7,9 @@ import Navbar from "../../components/Navbar";
 function Insights() {
     const user = useSelector(state => state.user)
     const [revenues, setRevenues] = useState([])
-    const [expenses, setExpenses] = useState([])
+    const [monExpenses, setMonExpenses] = useState([])
+    const [typeExpenses, setTypeExpenses] = useState([])
     const [employees, setEmployees] = useState([])
-    const [data, setData] = useState([])
     const headers = {
         headers: {
             authorization: `Bearer ${user.token}`
@@ -18,46 +18,43 @@ function Insights() {
 
     // GET REVENUES
     useEffect(() => {
-        axios.get("http://localhost:3002/company/revenues", {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            const unsortedRev = res.data
-            // console.log(res.data)
-            for (let project of unsortedRev) {
-                project.payment_date = new Date(project.payment_date)
-            }
-            unsortedRev.sort((a, b) => a.payment_date - b.payment_date);
-            for (let project of unsortedRev) {
-                project.payment_date = `${project.payment_date.getMonth() + 1}/${project.payment_date.getFullYear()}`
-            }
-            // APPEND PAYMENTS ON THE SAME MONTH
-            const byMonthArr = []
-            const byMonthObj = {}
-            for (let project of unsortedRev) {
-                if (`${project.payment_date}` in byMonthObj) {
-                    byMonthObj[project.payment_date] += parseInt(project.payment)
-                } else {
-                    byMonthObj[project.payment_date] = 0
-                    byMonthObj[project.payment_date] += parseInt(project.payment)
-                    byMonthArr.push()
+        axios.get("http://localhost:3002/company/revenues", headers)
+            .then(res => {
+                const unsortedRev = res.data
+                // console.log(res.data)
+                for (let project of unsortedRev) {
+                    project.payment_date = new Date(project.payment_date)
                 }
-            }
-            for (let entry of Object.entries(byMonthObj)) {
-                byMonthArr.push({ payment_date: entry[0], payment: entry[1] })
-            }
-            setRevenues(byMonthArr)
-        }).catch(e => {
-            console.log(e)
-        })
+                unsortedRev.sort((a, b) => a.payment_date - b.payment_date);
+                for (let project of unsortedRev) {
+                    project.payment_date = `${project.payment_date.getMonth() + 1}/${project.payment_date.getFullYear()}`
+                }
+                // APPEND PAYMENTS ON THE SAME MONTH
+                const byMonthArr = []
+                const byMonthObj = {}
+                for (let project of unsortedRev) {
+                    if (`${project.payment_date}` in byMonthObj) {
+                        byMonthObj[project.payment_date] += parseInt(project.payment)
+                    } else {
+                        byMonthObj[project.payment_date] = 0
+                        byMonthObj[project.payment_date] += parseInt(project.payment)
+                        byMonthArr.push()
+                    }
+                }
+                for (let entry of Object.entries(byMonthObj)) {
+                    byMonthArr.push({ payment_date: entry[0], payment: entry[1] })
+                }
+                setRevenues(byMonthArr)
+            }).catch(e => {
+                console.log(e)
+            })
     }, [])
     // GET EXPENSES
     useEffect(() => {
         axios.get("http://localhost:3002/company/expenses", headers).
             then(res => {
                 const unsortedRev = res.data
-                // console.log(res.data)
+                console.log(res.data)
                 for (let project of unsortedRev) {
                     project.payment_date = new Date(project.date)
                 }
@@ -67,19 +64,34 @@ function Insights() {
                 }
                 const byMonthArr = []
                 const byMonthObj = {}
+                const byBillNameObj = {}
+                const byBillNameArr = []
+
                 for (let project of unsortedRev) {
+                    // SORT EXPENSES BY MONTH
                     if (`${project.payment_date}` in byMonthObj) {
                         byMonthObj[project.payment_date] += parseInt(project.price)
                     } else {
                         byMonthObj[project.payment_date] = 0
                         byMonthObj[project.payment_date] += parseInt(project.price)
-                        byMonthArr.push()
+                    }
+                    // SORT EXPENSE BY BILL NAME
+                    if (`${project.bill_name}` in byBillNameObj) {
+                        byBillNameObj[project.bill_name] += parseInt(project.price)
+                    } else {
+                        byBillNameObj[project.bill_name] = 0
+                        byBillNameObj[project.bill_name] += parseInt(project.price)
                     }
                 }
+
                 for (let entry of Object.entries(byMonthObj)) {
                     byMonthArr.push({ payment_date: entry[0], payment: entry[1] })
                 }
-                setExpenses(byMonthArr)
+                for (let entry of Object.entries(byBillNameObj)) {
+                    byBillNameArr.push({ bill_name: entry[0], payment: entry[1] })
+                }
+                setMonExpenses(byMonthArr)
+                setTypeExpenses(byBillNameArr)
             }).catch(e => {
                 console.log(e)
             })
@@ -100,7 +112,7 @@ function Insights() {
         console.log(revenues)
         console.log('-----------/PROJECT----------')
         console.log('------------EXPENSES----------')
-        console.log(expenses)
+        console.log(monExpenses)
         console.log('-----------/EXPENSES----------')
         // console.log('------------EMPLOYEES----------')
         // console.log(employees)
@@ -162,7 +174,7 @@ function Insights() {
                         <div className="flex flex-col h-full w-[48%] justify-between">
                             <h3 className="flex justify-center mb-2">Expenses</h3>
                             <ResponsiveContainer width="100%" height="100%" >
-                                <BarChart width={150} height={150} data={expenses}>
+                                <BarChart width={150} height={150} data={monExpenses}>
                                     <XAxis dataKey="payment_date" />
                                     <YAxis />
                                     <Tooltip />
