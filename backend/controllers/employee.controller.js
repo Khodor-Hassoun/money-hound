@@ -139,6 +139,19 @@ const updateEmployee = async (req, res) => {
 };
 const deleteEmployee = async (req, res) => {
   const { id } = req.body;
+  const delEmployee = await prisma.employee.update({
+    where: {
+      employeeId: parseInt(id),
+    },
+    data: {
+      Project: {
+        set: [],
+      },
+      ProjectId: {
+        set: [],
+      },
+    },
+  });
   const employee = await prisma.employee.findFirst({
     where: {
       employeeId: parseInt(id),
@@ -152,16 +165,8 @@ const deleteEmployee = async (req, res) => {
       ProjectId: true,
     },
   });
-  // Remove employee from projects first
-  // const employeeProjects = await prisma.employee.findMany({
-  //   where: {
-  //     managerId: employee.employeeId,
-  //     team: {
-  //       employeeId: employee.employeeId,
-  //     },
-  //   },
-  // });
-  res.json(employee);
+  // res.json(employee);
+  // res.json({ delEmployee, employee });
 };
 module.exports = {
   addEmployee,
