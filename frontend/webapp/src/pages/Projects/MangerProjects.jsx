@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar"
 import ProjectCard from "../../components/ProjectCard"
 import ProjectDetails from "../../components/ProjectDetails"
 import ProjectActivityDetails from "../../components/ProjectActivityDetails"
+import AddActivityForm from "../../components/AddActivityForm"
 function ManagerProject() {
     const user = useSelector(state => state.user)
     const company = useSelector(state => state.company)
@@ -12,8 +13,13 @@ function ManagerProject() {
     const [project, setProject] = useState({})
     const [projectDetailsForm, setProjectDetailsForm] = useState(false)
     const [employees, setEmployees] = useState([])
+    const [addActivityPopUp, setAddActivityPopUp] = useState(true)
+    const [activityDetails, setActivityDetails] = useState({})
     function projectDetailsOpen() {
         setProjectDetailsForm(bool => !bool)
+    }
+    function addActivityPopUpOpen() {
+        setAddActivityPopUp(bool => !bool)
     }
     useEffect(() => {
         axios.get(`http://localhost:3002/project/${user.id}`, {
@@ -109,6 +115,23 @@ function ManagerProject() {
                     :
                     <></>
 
+            }
+            {
+                addActivityPopUp ?
+                    <div className="z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0">
+                        <div className="bg-offWhite flex flex-col py-10 px-6">
+                            <div className="flex p-2">
+                                <span className="text-2xl cursor-pointer" onClick={addActivityPopUpOpen}>&#10005;</span>
+                                <div className="w-full">
+                                    <h2 className="flex justify-center text-2xl">Activity information</h2>
+                                </div>
+                            </div>
+                            <AddActivityForm setActivityDetails={setActivityDetails} activityDetails={activityDetails} />
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => console.log(activityDetails)} >SET</button>
+                        </div>
+                    </div>
+                    :
+                    <></>
             }
         </section >
     )

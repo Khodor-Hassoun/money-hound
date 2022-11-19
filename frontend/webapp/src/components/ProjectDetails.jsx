@@ -51,7 +51,7 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData 
                     <>
                         <div className="flex flex-col py-2">
                             <label htmlFor="phase">Project Phase</label>
-                            <select name="project_phase_id" className="border-black border-solid border rounded py-1 px-1">
+                            <select name="project_phase_id" onChange={dataChange} className="border-black border-solid border rounded py-1 px-1">
                                 {
                                     project.project_phase_id === 1 ? <option selected value={1}>Planning</option> : <option value={1}>Planning</option>
                                 }
@@ -63,14 +63,14 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData 
                                 }
                             </select>
                         </div>
-                        <div className="flex flex-col py-2">
+                        {/* <div className="flex flex-col py-2">
                             <label htmlFor="date">End Date</label>
-                            <input type="date" id="date" placeholder={project.end_date} name="end_date" className="border-black border-solid border rounded py-1 px-1"></input>
-                        </div>
+                            <input type="date" id="date" placeholder={project.end_date} name="end_date" onChange={dataChange} className="border-black border-solid border rounded py-1 px-1"></input>
+                        </div> */}
                         <div className="py-2 flex flex-col">
-                            <label htmlFor="team">Team</label>
+                            {/* <label htmlFor="team">Team</label> */}
                             {/* <input type="text" id="manager" placeholder={project.manager.user.firstname} name="email" className="border-black border-solid border rounded py-2 px-1"></input> */}
-                            <select className="border-black border-solid border rounded py-1 px-1" name="team" id="team" multiple>
+                            {/* <select className="border-black border-solid border rounded py-1 px-1" name="team" id="team" multiple>
                                 <option selected value={project.manager.employeeId}>{`${project.manager.user.firstname} ${project.manager.user.lastname}`}</option>
                                 {
                                     project.team.map(member => (
@@ -86,7 +86,7 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData 
                                             <></>
                                     ))
                                 }
-                            </select>
+                            </select> */}
                         </div>
                     </>
             }
