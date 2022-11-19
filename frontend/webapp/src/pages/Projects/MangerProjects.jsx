@@ -21,6 +21,7 @@ function ManagerProject() {
     function addActivityPopUpOpen() {
         setAddActivityPopUp(bool => !bool)
     }
+    // GET MANAGER PROJECTS
     useEffect(() => {
         axios.get(`http://localhost:3002/project/${user.id}`, {
             headers: {
@@ -46,6 +47,15 @@ function ManagerProject() {
             setEmployees(res.data.employees)
         })
     }, [])
+    function addActivity() {
+        axios.post(`http://localhost:3002/project/${project.id}/add`, activityDetails, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res)
+        })
+    }
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
@@ -104,6 +114,7 @@ function ManagerProject() {
                                 }
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
+                                        onClick={addActivityPopUpOpen}
                                         className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" >
                                         ADD
                                     </button>
@@ -127,7 +138,7 @@ function ManagerProject() {
                                 </div>
                             </div>
                             <AddActivityForm setActivityDetails={setActivityDetails} activityDetails={activityDetails} />
-                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => console.log(activityDetails)} >SET</button>
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={addActivity} >SET</button>
                         </div>
                     </div>
                     :
