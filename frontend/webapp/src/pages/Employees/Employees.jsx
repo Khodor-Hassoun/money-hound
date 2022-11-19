@@ -18,6 +18,7 @@ function Employees() {
     const [employeeData, setEmployeeData] = useState({})
     const [update, setUpdate] = useState(false)
     const [sortByName, setSortByName] = useState({})
+    const [deleteRefresh, setDeleteRefresh] = useState(false)
     const sortRef = useRef()
 
     function addEmployeeForm() {
@@ -47,6 +48,17 @@ function Employees() {
             headers: {
                 authorization: `Bearer ${user.token}`
             },
+        }).then(res => {
+            console.log(res.data)
+            showEmployeeForm()
+        })
+    }
+    function deleteEmployee() {
+        axios.delete(`http://localhost:3002/company/employee`, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+            data: employeeData
         }).then(res => {
             console.log(res.data)
             showEmployeeForm()
@@ -82,7 +94,7 @@ function Employees() {
             setEmployeesCount(res.data.count)
         })
 
-    }, ["", addEmployee, showEmployee])
+    }, ["", addEmployee, showEmployee, deleteRefresh])
 
     return (
         <section className="flex bg-offWhite pr-4">
@@ -168,10 +180,19 @@ function Employees() {
                                     </div>
                                 </div>
                                 <EmployeeDataForm employee={employeeData} updateEmployee={setEmployeeData} />
-                                <div className="px-2 w-full flex justify-between space-x-2">
-                                    <button className="bg-duke text-white my-4 rounded-lg  w-2/5 py-2" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>Update</button>
-                                    <button className="bg-venetian text-white my-4 rounded-lg w-2/5 py-2">Delete</button>
-                                </div>
+                                {
+                                    employeeData.ProjectId.length === 0 ?
+                                        <div className="px-2 w-full flex justify-between space-x-2">
+                                            <button className="bg-duke text-white my-4 rounded-lg  w-2/5 py-2" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>Update</button>
+                                            <button className="bg-venetian text-white my-4 rounded-lg w-2/5 py-2" onClick={deleteEmployee}>Delete</button>
+                                        </div>
+                                        :
+                                        <div className="px-2 w-full flex justify-center space-x-2">
+                                            <button className="bg-duke text-white my-4 rounded-lg  w-2/5 py-2" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>Update</button>
+
+                                        </div>
+                                }
+
                             </div>
                         </div>
                         :

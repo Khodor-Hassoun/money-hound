@@ -12,10 +12,14 @@ const getEmployees = async (req, res) => {
     where: {
       companyId: parseInt(companyId),
       Project: {
-        companyId: parseInt(companyId),
+        every: {
+          companyId: parseInt(companyId),
+        },
       },
       ProjectId: {
-        companyId: parseInt(companyId),
+        every: {
+          companyId: parseInt(companyId),
+        },
       },
     },
     include: {
