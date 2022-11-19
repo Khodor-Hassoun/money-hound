@@ -13,7 +13,8 @@ function ManagerProject() {
     const [project, setProject] = useState({})
     const [projectDetailsForm, setProjectDetailsForm] = useState(false)
     const [employees, setEmployees] = useState([])
-    const [addActivityPopUp, setAddActivityPopUp] = useState(true)
+    const [activityChange, setActivityChange] = useState(false)
+    const [addActivityPopUp, setAddActivityPopUp] = useState(false)
     const [activityDetails, setActivityDetails] = useState({})
     function projectDetailsOpen() {
         setProjectDetailsForm(bool => !bool)

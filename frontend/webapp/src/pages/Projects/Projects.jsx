@@ -182,7 +182,7 @@ function Projects() {
                             <div className="flex p-2">
                                 <span className="text-2xl cursor-pointer" onClick={customerFormOpen}>&#10005;</span>
                                 <div className="w-full">
-                                    <h2 className="flex justify-center text-2xl">Employee information</h2>
+                                    <h2 className="flex justify-center text-2xl">Customer information</h2>
                                 </div>
                             </div>
                             <CustomerForm setCustomerData={setCustomerData} />

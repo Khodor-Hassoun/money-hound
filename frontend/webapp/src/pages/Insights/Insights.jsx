@@ -131,16 +131,15 @@ function Insights() {
             <section className="flex-grow max-h-screen overflow-auto">
                 <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-6">
                     <h2 className="text-4xl font-bold">Insights</h2>
-                    <button onClick={logData} className="bg-tangerine p-2">Pressssssssss</button>
                 </header>
                 <div className="flex flex-col h-full w-full space-y-10">
                     {/* FIRST ROW */}
                     <div className="flex w-full h-[30%] justify-between">
                         {/* REVENUE BY MONTH BAR CHART */}
-                        <div className="flex flex-col w-[48%] h-full bg-white rounded-lg shadow-2xl">
+                        <div className="flex flex-col w-[48%] items-center h-full bg-white rounded-lg shadow-2xl">
                             <h3 className="flex justify-center mb-2">Revenue</h3>
-                            <ResponsiveContainer width="100%" height="100%">
-                                <BarChart width={150} height={"100%"} data={revenues}>
+                            <ResponsiveContainer width="80%" height="100%">
+                                <BarChart width={50} height={"100%"} data={revenues}>
                                     <XAxis dataKey="payment_date" />
                                     <YAxis />
                                     <Tooltip />
@@ -150,9 +149,9 @@ function Insights() {
                             </ResponsiveContainer>
                         </div>
                         {/* EXPENSES BY MONTH BAR CHART */}
-                        <div className="flex flex-col h-full w-[48%] justify-between bg-white rounded-lg shadow-2xl">
+                        <div className="flex flex-col h-full w-[48%] justify-between items-center bg-white rounded-lg shadow-2xl">
                             <h3 className="flex justify-center mb-2">Expenses</h3>
-                            <ResponsiveContainer width="100%" height="100%" >
+                            <ResponsiveContainer width="80%" height="100%" >
                                 <BarChart width={150} height={150} data={monExpenses}>
                                     <XAxis dataKey="payment_date" />
                                     <YAxis />
@@ -164,7 +163,7 @@ function Insights() {
                         </div>
                     </div>
                     {/* SECOND ROW */}
-                    <div className="flex w-full h-[50%] justify-between">
+                    <div className="flex w-full h-[50%] justify-between items-center">
                         <div className="flex flex-col h-full w-[30%] bg-beau rounded-xl  shadow-2xl text-xs">
                             <ResponsiveContainer width="100%" height="100%">
                                 <PieChart width={400} height={400}>
@@ -187,8 +186,8 @@ function Insights() {
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
-                        <div className="flex flex-col h-full w-[66%] bg-white rounded-xl shadow-2xl">
-                            <ResponsiveContainer width="100%" height="100%">
+                        <div className="flex flex-col justify-center items-center h-full w-[66%] bg-white rounded-xl shadow-2xl">
+                            <ResponsiveContainer width="80%" height="100%">
                                 <ScatterChart width={730} height={250}
                                     margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
                                     <CartesianGrid strokeDasharray="3 3" />

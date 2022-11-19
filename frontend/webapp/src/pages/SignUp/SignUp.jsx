@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import placeholder from "../../resources/images/christin-hume-Hcfwew744z4-unsplash111.jpg"
@@ -15,6 +15,9 @@ function SignUp() {
     const [showModal, setShowModal] = useState(false)
     const state = useSelector((state) => state)
     const user = useSelector((state) => state.user)
+    const [updatedUser, setUpdatedUser] = useState({})
+    const [updatedCompany, setUpdatedCompany] = useState({})
+    const navigate = useNavigate()
     // console.log(user)
     const company = useSelector((state) => state.company)
     const dispatch = useDispatch()
@@ -32,7 +35,7 @@ function SignUp() {
         }
         // console.log(data)
         axios
-            .post("http://localhost:3002/auth/signup", data)
+            .post("http://localhost:3002/auth/signup", { ...updatedCompany, ...updatedUser, company_email: updatedCompany.email })
             .then((res) => {
                 console.log(res);
 
@@ -43,6 +46,7 @@ function SignUp() {
                     email: res.data.user.email,
                     id: parseInt(res.data.user.id),
                     // password: res.data.user.password,
+                    password: updatedUser.password,
                     user_type: 1
                 }))
 
@@ -54,28 +58,22 @@ function SignUp() {
                     address: res.data.company.address,
                     phone: res.data.company.phone
                 }))
-            }).then(() => {
-                axios.post("http://localhost:3002/auth/login", {
-                    email: user.email,
-                    password: user.password,
-                }).then(res => {
-                    console.log("------------------------Sign IN---------------------")
-                    console.log(res)
-                    dispatch(gettoken({
-                        token: res.data.token
-                    }))
-                    console.log("------------------------/Sign IN---------------------")
-
-                }).catch(e => {
-                    console.log("------------------------Sign IN---------------------")
-                    console.log(e)
-                    console.log("------------------------/Sign IN---------------------")
-
-                })
-            }).catch(e => {
+                navigate('/')
+            })
+            .catch(e => {
                 console.log(e)
             });
 
+    }
+    function signIn() {
+        axios.post("http://localhost:3002/auth/login", user).then(res => {
+            console.log(res)
+            dispatch(gettoken({
+                token: res.data.token
+            }))
+        }).catch(e => {
+            console.log(e)
+        })
     }
     return (
         <section className="bg-ming w-screen h-screen flex justify-center items-center">
@@ -92,7 +90,7 @@ function SignUp() {
                                 <h2 className="flex justify-center text-2xl">Personal information</h2>
                             </div>
                         </div>
-                        <UserInfoForm />
+                        <UserInfoForm setUpdatedUser={setUpdatedUser} updatedUser={updatedUser} />
                         <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => setShowModal(true)} >NEXT</button>
                     </div>
                 </div>
@@ -118,7 +116,7 @@ function SignUp() {
                                 <h2 className="flex justify-center text-2xl">Company information</h2>
                             </div>
                         </div>
-                        <CompanyInfoForm />
+                        <CompanyInfoForm setUpdatedCompany={setUpdatedCompany} updatedCompany={updatedCompany} />
                         <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => logData()}>Register</button>
                     </div>
                 </div>
