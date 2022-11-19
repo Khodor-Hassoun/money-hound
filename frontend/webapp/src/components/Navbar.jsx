@@ -116,6 +116,34 @@ function Navbar() {
                     {
                         user.user_type === 1 ?
                             <div>
+                                <NavLink to={'/company'}>
+                                    {({ isActive }) => {
+                                        return isActive ? (
+                                            <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
+                                                {/* Lightbar */}
+                                                <div className="h-full bg-tangerine w-[12px]" />
+                                                <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg">Company</p>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                                <div
+                                                    className="h-full bg-white w-[12px]"
+                                                />
+                                                <p
+                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Company
+                                                </p>
+                                            </div>
+                                        )
+                                    }}
+                                </NavLink>
+                            </div>
+                            :
+                            <></>
+                    }
+                    {
+                        user.user_type === 1 ?
+                            <div>
                                 <NavLink to={'/employees'}>
                                     {({ isActive }) => {
                                         return isActive ? (
@@ -220,6 +248,7 @@ function Navbar() {
                             <></>
                     }
                 </div>
+                {/* NAVBAR FOOTER */}
                 <div
                     className="flex flex-col px-2">
                     <div
