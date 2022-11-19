@@ -55,9 +55,15 @@ const getProjects = async (req, res) => {
 };
 const getProject = async (req, res) => {
   const { managerId } = req.params;
+  console.log(managerId);
+  const employee = await prisma.employee.findFirst({
+    where: {
+      userId: parseInt(managerId),
+    },
+  });
   const projects = await prisma.project.findMany({
     where: {
-      managerId: parseInt(managerId),
+      managerId: parseInt(employee.employeeId),
     },
     include: {
       Activity: {

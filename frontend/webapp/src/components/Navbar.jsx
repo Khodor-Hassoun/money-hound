@@ -95,7 +95,7 @@ function Navbar() {
                         </div>
                     </div> */}
                     <h2
-                        className="text-lg lg:text-lg">
+                        className="text-xl lg:text-xl">
                         {company.name}
                     </h2>
                     {
@@ -141,30 +141,56 @@ function Navbar() {
                             :
                             <></>
                     }
-
-                    <div>
-                        <NavLink to={'/projects'}>
-                            {({ isActive }) => {
-                                return isActive ? (
-                                    <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
-                                        {/* Lightbar */}
-                                        <div className="h-full bg-tangerine w-[12px]" />
-                                        <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-lg">Projects</p>
-                                    </div>
-                                ) : (
-                                    <div
-                                        className="flex h-[50px] items-center bg-ming hover:brightness-110">
-                                        <div
-                                            className="h-full bg-white w-[12px]"
-                                        />
-                                        <p
-                                            className="text-white w-full ml-2 lg:ml-8 lg:text-lg">Projects
-                                        </p>
-                                    </div>
-                                )
-                            }}
-                        </NavLink>
-                    </div>
+                    {
+                        user.user_type === 1 ?
+                            <div>
+                                <NavLink to={'/projects'}>
+                                    {({ isActive }) => {
+                                        return isActive ? (
+                                            <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
+                                                {/* Lightbar */}
+                                                <div className="h-full bg-tangerine w-[12px]" />
+                                                <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-lg">Projects</p>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                                <div
+                                                    className="h-full bg-white w-[12px]"
+                                                />
+                                                <p
+                                                    className="text-white w-full ml-2 lg:ml-8 lg:text-lg">Projects
+                                                </p>
+                                            </div>
+                                        )
+                                    }}
+                                </NavLink>
+                            </div>
+                            :
+                            <div>
+                                <NavLink to={'/manager/projects'}>
+                                    {({ isActive }) => {
+                                        return isActive ? (
+                                            <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
+                                                {/* Lightbar */}
+                                                <div className="h-full bg-tangerine w-[12px]" />
+                                                <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-lg">Projects</p>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                                <div
+                                                    className="h-full bg-white w-[12px]"
+                                                />
+                                                <p
+                                                    className="text-white w-full ml-2 lg:ml-8 lg:text-lg">Projects
+                                                </p>
+                                            </div>
+                                        )
+                                    }}
+                                </NavLink>
+                            </div>
+                    }
                     {
                         user.user_type === 1 ?
                             <div>
