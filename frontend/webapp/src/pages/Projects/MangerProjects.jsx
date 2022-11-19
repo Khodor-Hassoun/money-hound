@@ -7,6 +7,7 @@ import ProjectDetails from "../../components/ProjectDetails"
 import ProjectActivityDetails from "../../components/ProjectActivityDetails"
 function ManagerProject() {
     const user = useSelector(state => state.user)
+    const company = useSelector(state => state.company)
     const [projects, setProjects] = useState({})
     const [project, setProject] = useState({})
     const [projectDetailsForm, setProjectDetailsForm] = useState(false)
@@ -27,7 +28,18 @@ function ManagerProject() {
 
         })
     }, [])
-
+    // GET EMPLOYEES
+    useEffect(() => {
+        axios.get(`http://localhost:3002/company/manager/${company.id}`, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res.data)
+            // setEmployees(res.data.employees)
+            setEmployees(res.data.employees)
+        })
+    }, [])
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />

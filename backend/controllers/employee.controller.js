@@ -20,6 +20,19 @@ const getEmployees = async (req, res) => {
   const count = employees.length;
   res.status(200).json({ employees, count: count });
 };
+const getEmployeesManager = async (req, res) => {
+  const { companyId } = req.params;
+  const employees = await prisma.employee.findMany({
+    where: {
+      companyId: parseInt(companyId),
+    },
+    include: {
+      user: true,
+      Project: true,
+    },
+  });
+  res.status(200).json(employees);
+};
 const addEmployee = async (req, res) => {
   const { companyId, firstname, lastname, email, wage, job_position } =
     req.body;
@@ -125,4 +138,10 @@ const updateEmployee = async (req, res) => {
   res.status(200).json(updatedEmployee);
 };
 const deleteEmployee = async (req, res) => {};
-module.exports = { addEmployee, getEmployees, updateEmployee, deleteEmployee };
+module.exports = {
+  addEmployee,
+  getEmployees,
+  updateEmployee,
+  deleteEmployee,
+  getEmployeesManager,
+};

@@ -18,6 +18,7 @@ const {
   getEmployees,
   addEmployee,
   updateEmployee,
+  getEmployeesManager,
 } = require("../controllers/employee.controller");
 
 const {
@@ -50,6 +51,7 @@ router.get("/revenues", authMiddleware, ownerMiddleware, getRevenues);
 router.post("/employee", authMiddleware, ownerMiddleware, addEmployee);
 router.put("/employee/:id", authMiddleware, ownerMiddleware, updateEmployee);
 router.get("/employees", authMiddleware, ownerMiddleware, getEmployees);
+router.get("/manager/:companyId", authMiddleware, getEmployeesManager);
 
 // Company routes
 router.get("/user/:ownerId", authMiddleware, ownerMiddleware, getUserCompanies);
