@@ -5,10 +5,6 @@ import { setUser } from "../redux/user"
 function UserInfoForm({ setUpdatedUser, updatedUser }) {
     const user = useSelector((state) => state.user)
     const dispatch = useDispatch()
-    const firstnameRef = useRef('')
-    const lastnameRef = useRef("")
-    const emailRef = useRef("")
-    const passwordRef = useRef("")
     function userChange(e) {
         // dispatch(setUser({ ...user, [e.target.name]: e.target.value }))
         setUpdatedUser({ ...updatedUser, [e.target.name]: e.target.value })

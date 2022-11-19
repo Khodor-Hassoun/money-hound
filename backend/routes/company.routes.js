@@ -19,6 +19,7 @@ const {
   addEmployee,
   updateEmployee,
   getEmployeesManager,
+  deleteEmployee,
 } = require("../controllers/employee.controller");
 
 const {
@@ -52,6 +53,7 @@ router.post("/employee", authMiddleware, ownerMiddleware, addEmployee);
 router.put("/employee/:id", authMiddleware, ownerMiddleware, updateEmployee);
 router.get("/employees", authMiddleware, ownerMiddleware, getEmployees);
 router.get("/manager/:companyId", authMiddleware, getEmployeesManager);
+router.delete("/employee", authMiddleware, ownerMiddleware, deleteEmployee);
 
 // Company routes
 router.get("/user/:ownerId", authMiddleware, ownerMiddleware, getUserCompanies);

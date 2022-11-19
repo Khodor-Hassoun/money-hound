@@ -1,4 +1,5 @@
 import money from "../../resources/images/moneyhound.jpg";
+import moneyNew from "../../resources/images/Money_Hound_cropped.png"
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -48,9 +49,9 @@ function LogIn() {
   return (
     <section className="bg-ming w-screen h-screen flex justify-center items-center">
       {/* CARD DIV */}
-      <div className="bg-offWhite flex flex-col py-10 w-[400px] px-6 items-center">
-        <div className="h-24 w-full">
-          <img src={money} alt="Logo" className="h-full w-full" />
+      <div className="bg-offWhite flex flex-col pb-10 w-[400px] px-6 items-center">
+        <div className="w-1/2 h-1/2">
+          <img src={moneyNew} alt="Logo" className="h-full w-full" />
         </div>
         {/* EMAIL LABEL AND INPUT */}
         <div className="flex flex-col p-2 w-full">
