@@ -16,7 +16,7 @@ const addProject = async (req, res) => {
       customerId: customer_email,
       companyId: id,
       deadline: customerDeadline,
-      budget: budget,
+      budget: parseInt(budget),
       managerId: parseInt(managerId),
       project_phase_id: 1,
     },
@@ -29,38 +29,80 @@ const getProjects = async (req, res) => {
     where: {
       companyId: parseInt(id),
     },
+    include: {
+      Activity: {
+        orderBy: [
+          {
+            start_date: "desc",
+          },
+        ],
+      },
+      manager: {
+        include: {
+          user: true,
+        },
+      },
+      team: {
+        include: {
+          user: true,
+        },
+      },
+      project_phase: true,
+      customer: true,
+    },
   });
   res.status(200).json(projects);
 };
 const getProject = async (req, res) => {
-  const { id } = req.params;
-  const project = await prisma.project.findUnique({
+  const { managerId } = req.params;
+  console.log(managerId);
+  const employee = await prisma.employee.findFirst({
     where: {
-      id: parseInt(id),
-    },
-    include: {
-      team: true,
-      Activity: true,
-      Revenue: true,
-      manager: true,
-      company: true,
+      userId: parseInt(managerId),
     },
   });
-  res.status(200).json(project);
+  const projects = await prisma.project.findMany({
+    where: {
+      managerId: parseInt(employee.employeeId),
+    },
+    include: {
+      Activity: {
+        orderBy: [
+          {
+            start_date: "desc",
+          },
+        ],
+      },
+      manager: {
+        include: {
+          user: true,
+        },
+      },
+      team: {
+        include: {
+          user: true,
+        },
+      },
+      project_phase: true,
+      customer: true,
+    },
+  });
+  res.status(200).json(projects);
 };
 const updateProject = async (req, res) => {
-  const { project_id } = req.body;
+  const { id } = req.body;
   let { project_name, managerId, budget, deadline } = req.body;
   let { project_phase, end_date } = req.body;
+  let { team } = req.body;
   const user = req.user;
 
-  if (!project_id) {
-    return res.json({ message: "no project id" });
+  if (!id) {
+    return res.status(405).json({ message: "no project id" });
   }
   //   Get the company of the project
   const projectDet = await prisma.project.findUnique({
     where: {
-      id: project_id,
+      id: parseInt(id),
     },
     include: {
       company: true,
@@ -69,6 +111,7 @@ const updateProject = async (req, res) => {
           user: true,
         },
       },
+      team: true,
     },
   });
   //   res.json(projectDet);
@@ -80,6 +123,7 @@ const updateProject = async (req, res) => {
   deadline = deadline ? deadline : projectDet.deadline;
   project_phase = project_phase ? project_phase : projectDet.project_phase_id;
   end_date = end_date ? end_date : projectDet.end_date;
+  team = team ? team : projectDet.team;
 
   let customerDeadline = new Date(deadline);
   let endDate = new Date(end_date);
@@ -87,7 +131,7 @@ const updateProject = async (req, res) => {
   if (parseInt(projectDet.company.ownerId) === parseInt(user.id)) {
     const project = await prisma.project.update({
       where: {
-        id: parseInt(project_id),
+        id: parseInt(id),
       },
       data: {
         managerId: parseInt(managerId),
@@ -105,7 +149,7 @@ const updateProject = async (req, res) => {
 
   const project = await prisma.project.update({
     where: {
-      id: parseInt(project_id),
+      id: parseInt(id),
     },
     data: {
       project_phase_id: project_phase,

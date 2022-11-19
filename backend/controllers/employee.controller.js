@@ -7,14 +7,31 @@ const bcrypt = require("bcrypt");
 // to add an employee. they either already exist in the database or they do not. If they exist we only add them to employee table
 // If not create a new account for them and send their details along the password in an email
 const getEmployees = async (req, res) => {
-  const { companyId } = req.body;
+  const companyId = req.company.id;
   const employees = await prisma.employee.findMany({
     where: {
       companyId: parseInt(companyId),
     },
+    include: {
+      user: true,
+      Project: true,
+    },
   });
   const count = employees.length;
   res.status(200).json({ employees, count: count });
+};
+const getEmployeesManager = async (req, res) => {
+  const { companyId } = req.params;
+  const employees = await prisma.employee.findMany({
+    where: {
+      companyId: parseInt(companyId),
+    },
+    include: {
+      user: true,
+      Project: true,
+    },
+  });
+  res.status(200).json(employees);
 };
 const addEmployee = async (req, res) => {
   const { companyId, firstname, lastname, email, wage, job_position } =
@@ -84,13 +101,13 @@ const addEmployee = async (req, res) => {
     data: {
       companyId: parseInt(companyId),
       userId: parseInt(user.id),
-      wage: wage,
+      wage: parseInt(wage),
       job_position: job_position,
     },
   });
-  if (employee) {
-    registerEmail(user.email, password);
-  }
+  // if (employee) {
+  //   registerEmail(user.email, password);
+  // }
   res.status(200).json({
     message: "User created succesfully",
     user: user,
@@ -114,11 +131,42 @@ const updateEmployee = async (req, res) => {
       employeeId: parseInt(employeeId),
     },
     data: {
-      wage: wage,
+      wage: parseInt(wage),
       job_position: job_position,
     },
   });
   res.status(200).json(updatedEmployee);
 };
-const deleteEmployee = async (req, res) => {};
-module.exports = { addEmployee, getEmployees, updateEmployee, deleteEmployee };
+const deleteEmployee = async (req, res) => {
+  const { id } = req.body;
+  const employee = await prisma.employee.findFirst({
+    where: {
+      employeeId: parseInt(id),
+    },
+    include: {
+      Project: {
+        include: {
+          team: true,
+        },
+      },
+      ProjectId: true,
+    },
+  });
+  // Remove employee from projects first
+  // const employeeProjects = await prisma.employee.findMany({
+  //   where: {
+  //     managerId: employee.employeeId,
+  //     team: {
+  //       employeeId: employee.employeeId,
+  //     },
+  //   },
+  // });
+  res.json(employee);
+};
+module.exports = {
+  addEmployee,
+  getEmployees,
+  updateEmployee,
+  deleteEmployee,
+  getEmployeesManager,
+};

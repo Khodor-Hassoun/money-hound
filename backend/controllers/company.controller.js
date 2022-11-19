@@ -66,10 +66,10 @@ const updateCompany = async (req, res) => {
     data: {
       name: name,
       email: company_email,
-      phone: phone,
+      phone: parseInt(phone),
       logo: logo,
       address: address,
-      capital: capital,
+      capital: parseInt(capital),
     },
   });
   res.status(200).json(updatedCompany);

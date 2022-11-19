@@ -32,7 +32,7 @@ const addCustomer = async (req, res) => {
   res.status(200).json(customer);
 };
 const getCustomers = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.company;
   const customers = await prisma.customer.findMany({
     where: {
       companyId: parseInt(id),
