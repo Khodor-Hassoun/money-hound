@@ -1,4 +1,5 @@
-function ProjectActivityDetails({ activity, index, bottom }) {
+
+function ProjectActivityDetails({ activity, index, bottom, project }) {
     const startDate = new Date(activity.start_date)
     const endDate = new Date(activity.end_date)
     let lightbarColor
@@ -16,7 +17,7 @@ function ProjectActivityDetails({ activity, index, bottom }) {
         <div className="flex bg-white border-b border-black h-[90px]" style={styles}>
             <div className="w-[20px] h-full" style={lightbarColor}></div>
             <div className="px-4 py-2 flex flex-col justify-around flex-grow ">
-                <h2 className="text-xl">{activity.objective}</h2>
+                <h2 className="text-xl">{project.Activity[index].objective}</h2>
                 <div className="flex space-x-6">
                     <span>{`Start date: ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`}</span>
                     <span>{`End date: ${endDate.getDate()}/${endDate.getMonth() + 1}/${endDate.getFullYear()}`}</span>

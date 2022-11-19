@@ -16,11 +16,15 @@ function ManagerProject() {
     const [activityChange, setActivityChange] = useState(false)
     const [addActivityPopUp, setAddActivityPopUp] = useState(false)
     const [activityDetails, setActivityDetails] = useState({})
+    const [activities, setActivities] = useState([])
     function projectDetailsOpen() {
         setProjectDetailsForm(bool => !bool)
     }
     function addActivityPopUpOpen() {
         setAddActivityPopUp(bool => !bool)
+    }
+    function activityAddition() {
+        setActivityChange(bool => !bool)
     }
     // GET MANAGER PROJECTS
     useEffect(() => {
@@ -35,7 +39,7 @@ function ManagerProject() {
             console.log('----------/PROJECTS DATA-----------')
 
         })
-    }, [addActivityPopUp])
+    }, [addActivityPopUp, activityChange])
     // GET EMPLOYEES
     useEffect(() => {
         axios.get(`http://localhost:3002/company/manager/${company.id}`, {
@@ -47,13 +51,15 @@ function ManagerProject() {
             setEmployees(res.data.employees)
         })
     }, [])
+
     function addActivity() {
         axios.post(`http://localhost:3002/project/${project.id}/add`, activityDetails, {
             headers: {
                 authorization: `Bearer ${user.token}`
             },
         }).then(res => {
-            console.log(res)
+            console.log(res.data)
+            setProject(res.data)
             addActivityPopUpOpen()
         })
     }
@@ -71,7 +77,7 @@ function ManagerProject() {
                             projects.map(project => {
                                 return (
                                     project.end_date === null ?
-                                        <div className="p-4 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); projectDetailsOpen() }}>
+                                        <div className="p-4 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); projectDetailsOpen(); }}>
                                             <ProjectCard project={project} />
                                         </div>
                                         :
@@ -98,11 +104,27 @@ function ManagerProject() {
                                 </div>
                                 {/* ACTIVITY CARDS */}
                                 {
-                                    project.hasOwnProperty('Activity') ?
-                                        project.Activity.map((activity, index) => {
-                                            return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} />
-                                        }) : ""
+                                    addActivityPopUp ?
+                                        project.hasOwnProperty('Activity') ?
+                                            project.Activity.map((activity, index) => {
+
+                                                return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} project={project} />
+                                            }) : <></>
+                                        :
+                                        project.hasOwnProperty('Activity') ?
+                                            project.Activity.map((activity, index) => {
+
+                                                return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} project={project} />
+                                            }) : <></>
                                 }
+                                {/* {
+                                    activities.length !== 0 ?
+                                        activities.map((activity, index) => {
+                                            return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} project={project} />
+                                        })
+                                        :
+                                        <></>
+                                } */}
                             </div>
                             {/* CONTAINER FOR PROJECT */}
                             <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full" >
@@ -139,7 +161,7 @@ function ManagerProject() {
                                 </div>
                             </div>
                             <AddActivityForm setActivityDetails={setActivityDetails} activityDetails={activityDetails} />
-                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={addActivity} >SET</button>
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => { addActivity() }} >SET</button>
                         </div>
                     </div>
                     :
