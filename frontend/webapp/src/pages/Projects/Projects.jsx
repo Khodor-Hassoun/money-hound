@@ -161,7 +161,7 @@ function Projects() {
                             projects.map(project => {
                                 return (
                                     project.end_date === null ?
-                                        <div className="p-4 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); projectDetailsOpen() }}>
+                                        <div className="p-4 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); setupdatedProjectData(project); projectDetailsOpen() }}>
                                             <ProjectCard project={project} />
                                         </div>
                                         :
@@ -238,18 +238,19 @@ function Projects() {
                                 }
                             </div>
                             {/* CONTAINER FOR PROJECT */}
-                            <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full" onClick={updateProject}>
+                            <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full" onClick={() => { console.log(updatedProjectData) }}>
                                 <h2 className="text-2xl">Details</h2>
                                 {
                                     Object.keys(project).length !== 0 ?
-                                        <ProjectDetails project={project} setProject={setProject} employees={employees} setupdatedProjectData={setupdatedProjectData} />
+                                        <ProjectDetails project={project} setProject={setProject} employees={employees} setupdatedProjectData={setupdatedProjectData} updatedProjectData={updatedProjectData} />
                                         :
                                         ""
                                 }
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
-                                        className="bg-venetian text-white w-full h-full py-1 rounded-md cursor-pointer">
-                                        DELETE
+                                        className="bg-duke text-white w-full h-full py-1 rounded-md cursor-pointer"
+                                        onClick={updateProject}>
+                                        UPDATE
                                     </button>
                                     <button
                                         className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { projectSaleFormOpen(); }}>

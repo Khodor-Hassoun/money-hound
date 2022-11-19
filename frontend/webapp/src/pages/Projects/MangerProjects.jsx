@@ -34,7 +34,7 @@ function ManagerProject() {
             console.log('----------/PROJECTS DATA-----------')
 
         })
-    }, [])
+    }, [addActivityPopUp])
     // GET EMPLOYEES
     useEffect(() => {
         axios.get(`http://localhost:3002/company/manager/${company.id}`, {
@@ -43,7 +43,6 @@ function ManagerProject() {
             },
         }).then(res => {
             console.log(res.data)
-            // setEmployees(res.data.employees)
             setEmployees(res.data.employees)
         })
     }, [])
@@ -54,6 +53,7 @@ function ManagerProject() {
             },
         }).then(res => {
             console.log(res)
+            addActivityPopUpOpen()
         })
     }
     return (

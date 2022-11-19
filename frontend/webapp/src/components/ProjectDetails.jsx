@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 
-function ProjectDetails({ project, setProject, employees, setupdatedProjectData }) {
+function ProjectDetails({ project, setProject, employees, setupdatedProjectData, updatedProjectData }) {
     const user = useSelector(state => state.user)
     const percentstr = (Math.floor((project.money_spent / project.budget) * 100) + '%').toString()
     const percent = Math.floor((project.money_spent / project.budget) * 100)
@@ -11,7 +11,7 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData 
         }
     }
     function dataChange(e) {
-        setupdatedProjectData({ ...project, [e.target.name]: e.target.value })
+        setupdatedProjectData({ ...updatedProjectData, [e.target.name]: e.target.value })
     }
     return (
         <div className="flex flex-col">
