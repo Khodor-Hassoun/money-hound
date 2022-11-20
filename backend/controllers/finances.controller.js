@@ -74,6 +74,7 @@ const addRevenue = async (req, res) => {
 };
 const addExpense = async (req, res) => {
   const { bill_name, price } = req.body;
+  console.log(req.body);
   const { id } = req.company;
   if (!bill_name || !price) res.json({ message: "Incomplete data" });
 

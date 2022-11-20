@@ -42,8 +42,10 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
     }
     options.push(...existingTeam, ...employeesArr)
     useEffect(() => {
-        setSelectedOptions(existingTeam)
-        setPhaseOption({ value: project.project_phase_id, label: project.project_phase.type })
+        if (user.user_type === 3) {
+            setSelectedOptions(existingTeam)
+            setPhaseOption({ value: project.project_phase_id, label: project.project_phase.type })
+        }
     }, ['', project])
 
     return (
@@ -93,10 +95,6 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                                 htmlFor='project_phase'
                             />
                         </div>
-                        {/* <div className="flex flex-col py-2">
-                            <label htmlFor="date">End Date</label>
-                            <input type="date" id="date" placeholder={project.end_date} name="end_date" onChange={dataChange} className="border-black border-solid border rounded py-1 px-1"></input>
-                        </div> */}
                         <div className="py-2 flex flex-col">
                             <label htmlFor="team">Team</label>
                             <Select
@@ -106,6 +104,7 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                                 value={selectedOptions}
                                 onChange={handleSelect}
                                 options={options}
+                                className=""
                             />
                         </div>
                     </>

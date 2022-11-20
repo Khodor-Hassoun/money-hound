@@ -163,7 +163,13 @@ const updateProject = async (req, res) => {
     data: {
       project_phase_id: parseInt(project_phase),
       // team: {
-      //   update: newteam,
+      //   update:{
+      //     data:{
+      //       employeeId:{
+
+      //       }
+      //     }
+      //   }
       // },
     },
     include: {
