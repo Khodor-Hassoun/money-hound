@@ -93,9 +93,11 @@ const updateProject = async (req, res) => {
   const { id } = req.body;
   let { project_name, managerId, budget, deadline } = req.body;
   let { project_phase, end_date } = req.body;
-  let { team } = req.body;
+  let { newteam } = req.body;
   const user = req.user;
-
+  console.log(newteam);
+  // res.json(newteam);
+  // return;
   if (!id) {
     return res.status(405).json({ message: "no project id" });
   }
@@ -117,13 +119,20 @@ const updateProject = async (req, res) => {
   //   res.json(projectDet);
   //   return;
   //   validate data
+  if (newteam) {
+    const employeeIdArr = [];
+    for (let empDetail of newteam) {
+      employeeIdArr.push({ employeeId: parseInt(empDetail.value) });
+    }
+    newteam = employeeIdArr;
+  }
   project_name = project_name ? project_name : projectDet.project_name;
   managerId = managerId ? managerId : projectDet.managerId;
   budget = budget ? budget : projectDet.budget;
   deadline = deadline ? deadline : projectDet.deadline;
   project_phase = project_phase ? project_phase : projectDet.project_phase_id;
   end_date = end_date ? end_date : projectDet.end_date;
-  team = team ? team : projectDet.team;
+  newteam = newteam ? newteam : projectDet.team;
 
   let customerDeadline = new Date(deadline);
   let endDate = new Date(end_date);
@@ -152,8 +161,31 @@ const updateProject = async (req, res) => {
       id: parseInt(id),
     },
     data: {
-      project_phase_id: project_phase,
-      end_date: endDate,
+      project_phase_id: parseInt(project_phase),
+      // team: {
+      //   update: newteam,
+      // },
+    },
+    include: {
+      Activity: {
+        orderBy: [
+          {
+            start_date: "desc",
+          },
+        ],
+      },
+      manager: {
+        include: {
+          user: true,
+        },
+      },
+      team: {
+        include: {
+          user: true,
+        },
+      },
+      project_phase: true,
+      customer: true,
     },
   });
   res.json(project);

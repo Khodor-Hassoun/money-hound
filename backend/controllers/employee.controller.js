@@ -39,7 +39,7 @@ const getEmployeesManager = async (req, res) => {
     },
     include: {
       user: true,
-      Project: true,
+      // Project: true,
     },
   });
   res.status(200).json(employees);

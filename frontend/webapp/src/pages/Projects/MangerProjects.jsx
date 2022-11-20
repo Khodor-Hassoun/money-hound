@@ -17,6 +17,9 @@ function ManagerProject() {
     const [addActivityPopUp, setAddActivityPopUp] = useState(false)
     const [activityDetails, setActivityDetails] = useState({})
     const [activities, setActivities] = useState([])
+    const [updatedProjectData, setupdatedProjectData] = useState({})
+    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [phaseOption, setPhaseOption] = useState()
     function projectDetailsOpen() {
         setProjectDetailsForm(bool => !bool)
     }
@@ -47,8 +50,11 @@ function ManagerProject() {
                 authorization: `Bearer ${user.token}`
             },
         }).then(res => {
+            console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
             console.log(res.data)
-            setEmployees(res.data.employees)
+            console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+
+            setEmployees(res.data)
         })
     }, [])
 
@@ -61,6 +67,16 @@ function ManagerProject() {
             console.log(res.data)
             setProject(res.data)
             addActivityPopUpOpen()
+        })
+    }
+    function updateProject() {
+        axios.put("http://localhost:3002/project/", { ...updatedProjectData, newteam: selectedOptions, project_phase: phaseOption.value }, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res)
+            setProject(res.data)
         })
     }
     return (
@@ -77,7 +93,7 @@ function ManagerProject() {
                             projects.map(project => {
                                 return (
                                     project.end_date === null ?
-                                        <div className="p-4 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); projectDetailsOpen(); }}>
+                                        <div className="p-4 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); setupdatedProjectData(project); projectDetailsOpen(); }}>
                                             <ProjectCard project={project} />
                                         </div>
                                         :
@@ -131,11 +147,18 @@ function ManagerProject() {
                                 <h2 className="text-2xl">Details</h2>
                                 {
                                     Object.keys(project).length !== 0 ?
-                                        <ProjectDetails project={project} setProject={setProject} employees={employees} />
+                                        <ProjectDetails
+                                            project={project} setProject={setProject} employees={employees} setupdatedProjectData={setupdatedProjectData} updatedProjectData={updatedProjectData}
+                                            setSelectedOptions={setSelectedOptions} selectedOptions={selectedOptions} phaseOption={phaseOption} setPhaseOption={setPhaseOption} />
                                         :
                                         ""
                                 }
                                 <div className="flex flex-col space-y-2 w-full">
+                                    <button
+                                        className="bg-duke text-white w-full h-full py-1 rounded-md cursor-pointer"
+                                        onClick={updateProject}>
+                                        UPDATE
+                                    </button>
                                     <button
                                         onClick={addActivityPopUpOpen}
                                         className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" >
