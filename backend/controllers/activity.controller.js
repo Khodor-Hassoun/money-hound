@@ -35,6 +35,13 @@ const addActivity = async (req, res) => {
       },
     },
   });
+  const addExpense = await prisma.expense.create({
+    data: {
+      bill_name: "Project Expense",
+      companyId: parseInt(updatedProject.companyId),
+      price: parseInt(money),
+    },
+  });
   const newProject = await prisma.project.findFirst({
     where: {
       id: parseInt(projectId),

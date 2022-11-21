@@ -289,13 +289,15 @@ function Insights() {
 
                     </div>
                     <div className="w-[50%]">
-                        <LineChart width={500} height={200} data={revExp}>
+                        <BarChart width={300} height={400} data={revExp}>
                             <CartesianGrid />
                             <Tooltip />
                             <XAxis dataKey={'date'} />
-                            <Line dataKey={'revenue'} stroke='#026A75' />
-                            <Line dataKey={'expense'} stroke='#C1121F' />
-                        </LineChart>
+                            <YAxis />
+                            <Legend />
+                            <Bar dataKey={'revenue'} fill='#026A75' barSize={20} />
+                            <Bar dataKey={'expense'} fill='#C1121F' barSize={20} />
+                        </BarChart>
 
                     </div>
                     {/* FIRST ROW */}
