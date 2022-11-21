@@ -48,7 +48,7 @@ const addRevenue = async (req, res) => {
       customer_email: customer_email,
       payment: parseInt(payment),
       companyId: parseInt(id),
-      // payment_date: dueDate,
+      payment_date: dueDate,
     },
   });
   const project = await prisma.project.update({
@@ -74,7 +74,6 @@ const addRevenue = async (req, res) => {
 };
 const addExpense = async (req, res) => {
   const { bill_name, price } = req.body;
-  console.log(req.body);
   const { id } = req.company;
   if (!bill_name || !price) res.json({ message: "Incomplete data" });
 
