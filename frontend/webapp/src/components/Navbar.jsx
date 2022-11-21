@@ -18,6 +18,7 @@ function Navbar() {
     const [image, setImage] = useState(null)
     const [updatedUser, setUpdatedUser] = useState({})
     const [updatedCompany, setUpdatedCompany] = useState({})
+    const [newLogo, setNewLogo] = useState()
     const navigate = useNavigate()
 
     const headers = {
@@ -42,6 +43,20 @@ function Navbar() {
             };
         });
     };
+    function imageTo64(e) {
+        const file = e.target.files[0]
+        const reader = new FileReader()
+
+        reader.addEventListener('load', () => {
+            console.log(reader.result)
+            // thumbDiv.src= `${reader.result}`
+            let image64 = reader.result
+            setNewLogo(image64)
+        })
+
+        reader.readAsDataURL(file)
+
+    }
 
     function userFormOpen() {
         setUserForm((userForm) => !userForm)
@@ -61,7 +76,7 @@ function Navbar() {
             })
     }
     function updatedCompanyReq() {
-        axios.put("http://localhost:3002/company/", { ...company, ...updatedCompany }, headers)
+        axios.put("http://localhost:3002/company/", { ...company, ...updatedCompany, logo: newLogo }, headers)
             .then(res => {
                 console.log(res)
                 const updatedCompanyValid = res.data
@@ -83,7 +98,7 @@ function Navbar() {
                 {/* LOGO NAME AND OPTIONS */}
                 <div
                     className="flex flex-col xl:flex-row xl:items-center px-2 space-y-3 lg:space-y-0 xl:justify-between">
-                    {/* <div
+                    <div
                         className="h-[50px] w-[50px] bg-white flex justify-center items-center rounded-xl">
                         <div
                             className="h-[35px] w-[35px] rounded-xl">
@@ -93,7 +108,7 @@ function Navbar() {
                                 className="h-full w-full rounded-xl"
                             />
                         </div>
-                    </div> */}
+                    </div>
                     <h2
                         className="text-xl lg:text-xl">
                         {company.name}
@@ -299,8 +314,12 @@ function Navbar() {
                             <div className="flex p-2">
                                 <span className="text-2xl cursor-pointer" onClick={companyFormOpen}>&#10005;</span>
                                 <div className="w-full">
-                                    <h2 className="flex justify-center text-2xl">Company information</h2>
+                                    <h2 className="flex justify-center text-2xl" onClick={() => console.log(newLogo)}>Company information</h2>
                                 </div>
+                            </div>
+                            <div className="self-center">
+                                <input type="file" name="logo" id="logo" onChange={imageTo64} />
+
                             </div>
                             <CompanyInfoForm setUpdatedCompany={setUpdatedCompany} updatedCompany={updatedCompany} />
                             <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={updatedCompanyReq}>UPDATE</button>

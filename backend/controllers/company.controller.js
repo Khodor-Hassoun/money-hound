@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const saveImage = require("../helpers/save_images");
 
 const getUserCompanies = async (req, res) => {
   const { id } = req.user;
