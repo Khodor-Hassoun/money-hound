@@ -17,6 +17,7 @@ function Insights() {
     const [customersRevenue, setCustomersRevenue] = useState([])
     const [employeesWage, setEmployeesWage] = useState([])
     const [totalMonthly, setTotalMonthly] = useState([])
+    const [revExp, setRevExp] = useState([])
     const headers = {
         headers: {
             authorization: `Bearer ${user.token}`
@@ -85,13 +86,74 @@ function Insights() {
                     }
                 }
                 for (let entry of Object.entries(byMonthObj)) {
-                    byMonthArr.push({ payment_date: entry[0], payment: entry[1] })
+                    byMonthArr.push({ payment_date: entry[0], expense: entry[1] })
                 }
                 for (let entry of Object.entries(byBillNameObj)) {
-                    byBillNameArr.push({ bill_name: entry[0], payment: entry[1] })
+                    byBillNameArr.push({ bill_name: entry[0], expense: entry[1] })
                 }
                 setMonExpenses(byMonthArr)
                 setTypeExpenses(byBillNameArr)
+                console.log(...byMonthArr)
+
+
+
+                const unsortedRev = res.data.revenues
+                // console.log(res.data)
+                for (let project of unsortedRev) {
+                    project.payment_date = new Date(project.payment_date)
+                }
+                // unsortedRev.sort((a, b) => a.payment_date - b.payment_date);
+                for (let project of unsortedRev) {
+                    project.payment_date = `${project.payment_date.getMonth() + 1}/${project.payment_date.getFullYear()}`
+                }
+                // APPEND PAYMENTS ON THE SAME MONTH
+                const byMonthRevArr = []
+                const byMonthRevObj = {}
+                const byCustomerObj = {}
+                const byCustomerArr = []
+                for (let project of unsortedRev) {
+                    if (`${project.payment_date}` in byMonthRevObj) {
+                        byMonthRevObj[project.payment_date] += parseInt(project.payment)
+                    } else {
+                        byMonthRevObj[project.payment_date] = 0
+                        byMonthRevObj[project.payment_date] += parseInt(project.payment)
+                    }
+                    if (`${project.customer.customer_name}` in byCustomerObj) {
+                        byCustomerObj[project.customer.customer_name] += parseInt(project.payment)
+                    } else {
+                        byCustomerObj[project.customer.customer_name] = 0
+                        byCustomerObj[project.customer.customer_name] += parseInt(project.payment)
+                    }
+                }
+                for (let entry of Object.entries(byMonthRevObj)) {
+                    byMonthRevArr.push({ payment_date: entry[0], revenue: entry[1] })
+                }
+                for (let entry of Object.entries(byCustomerObj)) {
+                    byCustomerArr.push({ customer: entry[0], revenue: entry[1] })
+                }
+                console.log(byMonthRevArr)
+                setRevenues(byMonthRevArr)
+
+                const unfilteredCombinedArr = [...byMonthRevArr, ...byMonthArr]
+                console.log(unfilteredCombinedArr)
+
+                const combinedArr = []
+                for (let revenue of byMonthRevArr) {
+                    for (let expense of byMonthArr) {
+                        if (expense.payment_date === revenue.payment_date) {
+                            if (expense.expense && revenue.revenue) {
+                                combinedArr.push({ date: expense.payment_date, revenue: revenue.revenue, expense: expense.expense })
+                            }
+                            if (!expense.expense && revenue.revenue) {
+                                combinedArr.push({ date: expense.payment_date, revenue: revenue.revenue })
+                            }
+                        }
+                    }
+                }
+                // console.log('-----------------------')
+                console.log(combinedArr)
+                setRevExp(combinedArr)
+
             }).catch(e => {
                 console.log(e)
             })
@@ -156,12 +218,12 @@ function Insights() {
             const byJobPositionArr = []
             for (let employee of empArr) {
                 if (`${employee.job_position}` in byJobPositionObj) {
-                    byJobPositionObj[employee.job_position] += parseInt(employee.wage)
+                    byJobPositionObj[`${employee.job_position}`] += parseInt(employee.wage)
                     byJobPositionObj[`${employee.job_position} count`] += 1
                 } else {
-                    byJobPositionObj[employee.job_position] = 0
+                    byJobPositionObj[`${employee.job_position}`] = 0
                     byJobPositionObj[`${employee.job_position} count`] = 0
-                    byJobPositionObj[employee.job_position] += parseInt(employee.wage)
+                    byJobPositionObj[`${employee.job_position}`] += parseInt(employee.wage)
                     byJobPositionObj[`${employee.job_position} count`] += 1
                 }
             }
@@ -198,7 +260,7 @@ function Insights() {
                                 <YAxis />
                                 <XAxis dataKey={'payment_date'} />
                                 <Tooltip />
-                                <Line dataKey={"payment"} />
+                                <Line dataKey={"revenue"} />
                             </LineChart>
 
                         </ResponsiveContainer>
@@ -211,19 +273,29 @@ function Insights() {
                                 <Label value={'Company expense types'} offset={0} position="insideTop" />
                                 <YAxis />
                                 <Tooltip />
-                                <Bar dataKey={'payment'} fill="#C1121F" />
+                                <Bar dataKey={'expense'} fill="#C1121F" />
                             </BarChart>
 
                         </ResponsiveContainer>
                     </div>
                     <div className="w-[50%]">
-                        <ScatterChart width={600} height={100}>
+                        <ScatterChart width={800} height={300}>
                             <CartesianGrid strokeDasharray='3 3' />
                             <XAxis dataKey='job_position' />
                             <YAxis dataKey={'average'} />
                             <Tooltip />
                             <Scatter data={employeesWage} />
                         </ScatterChart>
+
+                    </div>
+                    <div className="w-[50%]">
+                        <LineChart width={500} height={200} data={revExp}>
+                            <CartesianGrid />
+                            <Tooltip />
+                            <XAxis dataKey={'date'} />
+                            <Line dataKey={'revenue'} stroke='#026A75' />
+                            <Line dataKey={'expense'} stroke='#C1121F' />
+                        </LineChart>
 
                     </div>
                     {/* FIRST ROW */}
