@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
-    PieChart, Pie, Cell, Scatter, ScatterChart, ZAxis, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer, LabelList
+    PieChart, Pie, Cell, Scatter, ScatterChart, ZAxis, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer, LabelList, Label
 } from "recharts";
 import Navbar from "../../components/Navbar";
 
@@ -178,16 +178,6 @@ function Insights() {
 
 
     function logData() {
-        // console.log('------------PROJECT----------')
-        // console.log(revenues)
-        // console.log('-----------/PROJECT----------')
-        // console.log('------------EXPENSES----------')
-        // console.log(monExpenses)
-        // console.log('-----------/EXPENSES----------')
-        console.log('------------EMPLOYEES----------')
-        console.log(employeesWage)
-        console.log('-----------/EMPLOYEES----------')
-
 
     }
 
@@ -200,9 +190,34 @@ function Insights() {
                     <h2 className="text-4xl font-bold">Insights</h2>
                 </header>
                 <div className="flex flex-col h-full w-full space-y-10">
+                    <div className="w-full h-[200px]">
+                        <ResponsiveContainer width='90%' height='90%'>
+                            <LineChart width={100} height={'100%'} data={revenues}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <YAxis />
+                                <XAxis dataKey={'payment_date'} />
+                                <Tooltip />
+                                <Line dataKey={"payment"} />
+                            </LineChart>
+
+                        </ResponsiveContainer>
+                    </div>
+                    <div className="w-[50%] h-[300px]">
+                        <ResponsiveContainer width='90%' height='100%'>
+                            <BarChart data={typeExpenses} margin={{ top: 15, right: 30, left: 20, bottom: 5 }}>
+                                <XAxis dataKey={'bill_name'} >
+                                </XAxis>
+                                <Label value={'Company expense types'} offset={0} position="insideTop" />
+                                <YAxis />
+                                <Tooltip />
+                                <Bar dataKey={'payment'} fill="#C1121F" />
+                            </BarChart>
+
+                        </ResponsiveContainer>
+                    </div>
                     {/* FIRST ROW */}
-                    <div className="flex w-full h-[30%] justify-between">
-                        {/* REVENUE BY MONTH BAR CHART */}
+                    {/* <div className="flex w-full h-[30%] justify-between">
+                        
                         <div className="flex flex-col w-[48%] items-center h-full bg-white rounded-lg shadow-2xl">
                             <h3 className="flex justify-center mb-2">Revenue</h3>
                             <ResponsiveContainer width="80%" height="100%">
@@ -210,12 +225,12 @@ function Insights() {
                                     <XAxis dataKey="payment_date" />
                                     <YAxis />
                                     <Tooltip />
-                                    {/* <Legend /> */}
+                                    
                                     <Bar dataKey="payment" fill="#026A75" />
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
-                        {/* EXPENSES BY MONTH BAR CHART */}
+                        
                         <div className="flex flex-col h-full w-[48%] justify-between items-center bg-white rounded-lg shadow-2xl">
                             <h3 className="flex justify-center mb-2">Expenses</h3>
                             <ResponsiveContainer width="80%" height="100%" >
@@ -223,14 +238,13 @@ function Insights() {
                                     <XAxis dataKey="payment_date" />
                                     <YAxis />
                                     <Tooltip />
-                                    {/* <Legend /> */}
                                     <Bar dataKey="payment" fill="#C8DAE4" />
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
-                    </div>
+                    </div> */}
                     {/* SECOND ROW */}
-                    <div className="flex w-full h-[50%] justify-between items-center">
+                    {/* <div className="flex w-full h-[50%] justify-between items-center">
                         <div className="flex flex-col h-full w-[30%] bg-beau rounded-xl  shadow-2xl text-xs">
                             <ResponsiveContainer width="100%" height="100%">
                                 <PieChart width={400} height={400}>
@@ -268,7 +282,7 @@ function Insights() {
                             </ResponsiveContainer>
 
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section>
         </section >
