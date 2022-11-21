@@ -26,23 +26,7 @@ function Navbar() {
             authorization: `Bearer ${user.token}`
         }
     }
-    const onImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            setImage(URL.createObjectURL(event.target.files[0]));
-        }
-    }
-    const convertToBase64 = (image) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(image);
-            fileReader.onload = () => {
-                resolve(fileReader.result);
-            };
-            fileReader.onerror = (error) => {
-                reject(error);
-            };
-        });
-    };
+
     function imageTo64(e) {
         const file = e.target.files[0]
         const reader = new FileReader()

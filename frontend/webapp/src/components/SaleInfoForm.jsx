@@ -28,7 +28,8 @@ function SaleInfoForm({ project, projectSaleDetails }) {
                         <div
                             className="h-[45px] w-[45px] rounded-xl">
                             <img
-                                src={logo}
+                                src={require(`${company.logo}`).default}
+                                // src="C:\Users\khodor\Code\money-hound\frontend\webapp\public\logo512.png"
                                 alt="logo"
                                 className="h-full w-full rounded-xl"
                             />
