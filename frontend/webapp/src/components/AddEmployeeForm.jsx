@@ -52,7 +52,7 @@ function AddEmployeeForm({ setNewEmployee, newEmployee }) {
             ></input>
           </div>
           <div className="flex flex-col w-[48%]">
-            <label htmlFor="payroll">Payroll</label>
+            <label htmlFor="payroll">Salary</label>
             <input
               type="text"
               id="phone"

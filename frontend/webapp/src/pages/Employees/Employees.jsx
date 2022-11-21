@@ -127,7 +127,7 @@ function Employees() {
                             <th className="justify-items-start">Name</th>
                             <th>Email</th>
                             <th>Job position</th>
-                            <th>Payroll</th>
+                            <th>Salary</th>
                         </tr>
                     </thead>
                     <tbody className=" [&>*]:border [&>*]:border-black [&>odd]:bg-beau odd:bg-beau">

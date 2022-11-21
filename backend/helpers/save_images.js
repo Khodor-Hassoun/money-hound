@@ -2,7 +2,7 @@ const fs = require("fs");
 
 function saveImage(baseImage) {
   /*path of the folder where your project is saved. (In my case i got it from config file, root path of project).*/
-  const uploadPath = `C:/Users/khodor/Code/money-hound/backend`;
+  const uploadPath = `C:/Users/khodor/Code/money-hound/frontend/webapp/src`;
   //path of folder where you want to save the image.
   const localPath = `${uploadPath}/uploads/images/`;
   //Find extension of file

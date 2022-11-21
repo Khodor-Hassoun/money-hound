@@ -109,6 +109,34 @@ const getExpenses = async (req, res) => {
       },
     ],
   });
-  res.json(expenses);
+  const revenues = await prisma.revenue.findMany({
+    where: {
+      companyId: parseInt(id),
+    },
+    orderBy: [
+      {
+        payment_date: "asc",
+      },
+    ],
+    include: {
+      company: true,
+      customer: true,
+      project: {
+        include: {
+          team: {
+            include: {
+              user: true,
+            },
+          },
+          manager: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
+    },
+  });
+  res.json({ expenses, revenues });
 };
 module.exports = { addRevenue, addExpense, getExpenses, getRevenues };

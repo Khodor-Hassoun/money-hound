@@ -52,6 +52,7 @@ function LogIn() {
       <div className="bg-offWhite flex flex-col pb-10 w-[400px] px-6 items-center">
         <div className="w-1/2 h-1/2">
           <img src={moneyNew} alt="Logo" className="h-full w-full" />
+          {/* <img src={require('C:/Users/khodor/Code/money-hound/backend/uploads/images/Photo_1666982147461_832.png')} alt="Logo" className="h-full w-full" /> */}
         </div>
         {/* EMAIL LABEL AND INPUT */}
         <div className="flex flex-col p-2 w-full">

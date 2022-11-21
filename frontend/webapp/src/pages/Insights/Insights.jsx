@@ -53,8 +53,9 @@ function Insights() {
     useEffect(() => {
         axios.get("http://localhost:3002/company/expenses", headers).
             then(res => {
+                console.log(res.data)
                 setExpenses(res.data)
-                const unGroupedArr = res.data
+                const unGroupedArr = res.data.expenses
                 // GET DATES AS AS DATE OBJECTS 
                 for (let expense of unGroupedArr) {
                     expense.payment_date = new Date(expense.date)
@@ -155,12 +156,12 @@ function Insights() {
             const byJobPositionArr = []
             for (let employee of empArr) {
                 if (`${employee.job_position}` in byJobPositionObj) {
-                    byJobPositionObj[employee.job_position] = parseInt(employee.wage)
+                    byJobPositionObj[employee.job_position] += parseInt(employee.wage)
                     byJobPositionObj[`${employee.job_position} count`] += 1
                 } else {
                     byJobPositionObj[employee.job_position] = 0
                     byJobPositionObj[`${employee.job_position} count`] = 0
-                    byJobPositionObj[employee.job_position] = parseInt(employee.wage)
+                    byJobPositionObj[employee.job_position] += parseInt(employee.wage)
                     byJobPositionObj[`${employee.job_position} count`] += 1
                 }
             }
@@ -214,6 +215,16 @@ function Insights() {
                             </BarChart>
 
                         </ResponsiveContainer>
+                    </div>
+                    <div className="w-[50%]">
+                        <ScatterChart width={600} height={100}>
+                            <CartesianGrid strokeDasharray='3 3' />
+                            <XAxis dataKey='job_position' />
+                            <YAxis dataKey={'average'} />
+                            <Tooltip />
+                            <Scatter data={employeesWage} />
+                        </ScatterChart>
+
                     </div>
                     {/* FIRST ROW */}
                     {/* <div className="flex w-full h-[30%] justify-between">
