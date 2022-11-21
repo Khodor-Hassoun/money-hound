@@ -9,6 +9,7 @@ import Navbar from "../../components/Navbar";
 function Insights() {
     const user = useSelector(state => state.user)
     const [revenues, setRevenues] = useState([])
+    const [dailyRev, setDailyRev] = useState([])
     const [expenses, setExpenses] = useState([])
     const [employees, setEmployees] = useState([])
     const [monExpenses, setMonExpenses] = useState([])
@@ -91,6 +92,7 @@ function Insights() {
                 for (let entry of Object.entries(byBillNameObj)) {
                     byBillNameArr.push({ bill_name: entry[0], expense: entry[1] })
                 }
+                console.log(byBillNameArr)
                 setMonExpenses(byMonthArr)
                 setTypeExpenses(byBillNameArr)
                 console.log(...byMonthArr)
@@ -174,6 +176,8 @@ function Insights() {
                 for (let project of unsortedRev) {
                     project.payment_date = `${project.payment_date.getMonth() + 1}/${project.payment_date.getFullYear()}`
                 }
+                setDailyRev(unsortedRev)
+                console.log()
                 // APPEND PAYMENTS ON THE SAME MONTH
                 const byMonthArr = []
                 const byMonthObj = {}
@@ -255,7 +259,7 @@ function Insights() {
                 <div className="flex flex-col h-full w-full space-y-10">
                     <div className="w-full h-[200px]">
                         <ResponsiveContainer width='90%' height='90%'>
-                            <LineChart width={100} height={'100%'} data={revenues}>
+                            <LineChart width={100} height={100} data={revenues}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <YAxis />
                                 <XAxis dataKey={'payment_date'} />
@@ -289,8 +293,8 @@ function Insights() {
 
                     </div>
                     <div className="w-[50%]">
-                        <BarChart width={300} height={400} data={revExp}>
-                            <CartesianGrid />
+                        <BarChart width={600} height={400} data={revExp}>
+                            <CartesianGrid strokeDasharray='3 3' />
                             <Tooltip />
                             <XAxis dataKey={'date'} />
                             <YAxis />
@@ -299,6 +303,28 @@ function Insights() {
                             <Bar dataKey={'expense'} fill='#C1121F' barSize={20} />
                         </BarChart>
 
+                    </div>
+                    <div>
+                        <BarChart data={typeExpenses}
+                            width={600} height={400}
+                            margin={{ top: 15, right: 30, left: 20, bottom: 5 }}>
+                            <XAxis dataKey={'bill_name'} >
+                            </XAxis>
+                            <Label value={'Company expense types'} offset={0} position="insideTop" />
+                            <YAxis />
+                            <Tooltip />
+                            <Bar dataKey={'expense'} fill="#C1121F" />
+                        </BarChart>
+                    </div>
+                    <div>
+                        <LineChart width={500} height={300} data={dailyRev}>
+                            <CartesianGrid strokeDasharray='2' />
+                            <XAxis dataKey='project.project_name' />
+                            <YAxis />
+                            <ZAxis dataKey='customer.customer_name' />
+                            <Tooltip />
+                            <Line dataKey={'payment'} />
+                        </LineChart>
                     </div>
                     {/* FIRST ROW */}
                     {/* <div className="flex w-full h-[30%] justify-between">
