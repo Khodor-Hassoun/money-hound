@@ -141,13 +141,13 @@ function Projects() {
                     <div className="flex items-center h-[30px] space-x-2">
                         {/* SEARCH BAR */}
                         <button
-                            className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer"
+                            className="bg-tangerine text-white font-bold w-[200px] h-full py-1 rounded-md cursor-pointer"
                             onClick={customerFormOpen}>
                             ADD CUSTOMER
                         </button>
                         {/* BUTTON */}
                         <button
-                            className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer"
+                            className="bg-tangerine text-white w-[200px] font-bold h-full py-1 rounded-md cursor-pointer"
                             onClick={addProjectFomrOpen}>
                             ADD PROJECT
                         </button>
@@ -178,11 +178,11 @@ function Projects() {
             {
                 customerForm ?
                     <div className={`${customerForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                        <div className="bg-offWhite flex flex-col py-6 px-6 w-1/4">
-                            <div className="flex p-2">
-                                <span className="text-2xl cursor-pointer" onClick={customerFormOpen}>&#10005;</span>
+                        <div className="bg-offWhite flex flex-col pb-10 pt-6 px-6 rounded-md w-[400px]">
+                            <div className="flex p-2 mb-2">
+                                <span className="text-2xl cursor-pointer font-semibold" onClick={customerFormOpen}>&#10005;</span>
                                 <div className="w-full">
-                                    <h2 className="flex justify-center text-2xl">Customer information</h2>
+                                    <h2 className="flex justify-center text-2xl font-semibold">Customer information</h2>
                                 </div>
                             </div>
                             <CustomerForm setCustomerData={setCustomerData} />
@@ -198,11 +198,11 @@ function Projects() {
             {
                 projectForm ?
                     <div className={`${projectForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                        <div className="bg-offWhite flex flex-col py-10 px-6">
-                            <div className="flex p-2">
-                                <span className="text-2xl cursor-pointer" onClick={() => { addProjectFomrOpen(); setNewProjectData({}) }}>&#10005;</span>
+                        <div className="bg-offWhite flex flex-col pb-10 pt-6 px-6 rounded-md">
+                            <div className="flex p-2 mb-2">
+                                <span className="text-2xl cursor-pointer font-semibold" onClick={() => { addProjectFomrOpen(); setNewProjectData({}) }}>&#10005;</span>
                                 <div className="w-full">
-                                    <h2 className="flex justify-center text-2xl">New Project information</h2>
+                                    <h2 className="flex justify-center text-2xl font-semibold">New Project information</h2>
                                 </div>
                             </div>
                             <NewProjectForm setNewProjectData={setNewProjectData} customers={customers} employees={employees} newProjectData={newProjectData} />
@@ -221,14 +221,22 @@ function Projects() {
                 projectDetailsForm ?
                     <div className={`${projectDetailsForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : ""}`}>
                         {/* CONTAINER FOR ALL */}
-                        <div className="flex xl:w-9/12 xl:h-[90%] h-full w-full justify-between items-start max-h-[900px]">
+                        <div className="flex xl:w-9/12 xl:h-[90%] h-full w-full justify-between items-start max-h-[900px] ">
                             {/* CONTAINER FOR ACTIVITIES */}
-                            <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
+                            <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto rounded-l-md">
                                 {/* HEADER */}
                                 <div className="flex items-center mb-16">
-                                    <span className="text-2xl cursor-pointer" onClick={projectDetailsOpen}>&#10005;</span>
-                                    <h2 className="text-2xl flex-grow flex justify-center">{project.project_name}</h2>
+                                    <span className="text-2xl cursor-pointer font-semibold" onClick={projectDetailsOpen}>&#10005;</span>
+                                    <h2 className="text-2xl flex-grow flex justify-center font-semibold">{project.project_name}</h2>
                                 </div>
+                                {
+                                    project.Activity.length === 0 ?
+                                        <div className="">
+                                            <h1 className=" text-xl font-semibold">No activities yet</h1>
+                                        </div>
+                                        :
+                                        <></>
+                                }
                                 {/* ACTIVITY CARDS */}
                                 {
                                     project.hasOwnProperty('Activity') ?
@@ -238,8 +246,8 @@ function Projects() {
                                 }
                             </div>
                             {/* CONTAINER FOR PROJECT */}
-                            <div className="flex flex-col bg-ming px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full text-white" onClick={() => { console.log(updatedProjectData) }}>
-                                <h2 className="text-2xl">Details</h2>
+                            <div className="flex flex-col bg-ming px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full rounded-r-md" onClick={() => { console.log(updatedProjectData) }}>
+                                <h2 className="text-2xl font-semibold text-white">Details</h2>
                                 {
                                     Object.keys(project).length !== 0 ?
                                         <ProjectDetails project={project} setProject={setProject} employees={employees} setupdatedProjectData={setupdatedProjectData} updatedProjectData={updatedProjectData} />
@@ -275,8 +283,8 @@ function Projects() {
                             <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
                                 {/* HEADER */}
                                 <div className="flex items-center mb-16">
-                                    <span className="text-2xl cursor-pointer" onClick={() => { projectSaleFormOpen(); projectDetailsOpen() }}>&#10005;</span>
-                                    <h2 className="text-2xl flex-grow flex justify-center">{project.project_name}</h2>
+                                    <span className="text-2xl cursor-pointer font-semibold" onClick={() => { projectSaleFormOpen(); projectDetailsOpen() }}>&#10005;</span>
+                                    <h2 className="text-2xl flex-grow flex justify-center font-semibold">{project.project_name}</h2>
                                 </div>
                                 <div className="flex justify-center h-full w-full">
 
@@ -284,12 +292,12 @@ function Projects() {
                                 </div>
                             </div>
                             {/* CONTAINER FOR OPTIONS */}
-                            <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
-                                <h2 className="text-2xl">Details</h2>
+                            <div className="flex flex-col bg-ming px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
+                                <h2 className="text-2xl font-semibold text-white">Details</h2>
                                 <SaleInfoDetails setProjectSaleDetails={setProjectSaleDetails} />
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
-                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { sellProject() }}>
+                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer font-bold" onClick={() => { sellProject() }}>
                                         SEND
                                     </button>
                                 </div>

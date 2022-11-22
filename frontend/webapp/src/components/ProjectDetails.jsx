@@ -55,7 +55,7 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                 user.user_type === 1 ?
                     <>
                         <div className="flex flex-col py-2">
-                            <label htmlFor="manager">Project Manger</label>
+                            <label htmlFor="manager" className="text-white font-semibold">Project Manger</label>
                             {/* <input type="text" id="manager" placeholder={project.manager.user.firstname} name="email" className="border-black border-solid border rounded py-2 px-1"></input> */}
                             <select className="border-black border-solid border rounded py-1 px-1" name="managerId" id="manager" onChange={dataChange}>
                                 <option selected value={project.manager.employeeId}>{`${project.manager.user.firstname} ${project.manager.user.lastname}`}</option>
@@ -70,22 +70,22 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                             </select>
                         </div>
                         <div className="flex flex-col py-2">
-                            <label htmlFor="email" className=" font-semibold">Project Name</label>
+                            <label htmlFor="email" className="text-white font-semibold">Project Name</label>
                             <input type="text" id="email" defaultValue={project.project_name} name="project_name" onChange={dataChange} className="border-black border-solid border rounded py-1 px-1"></input>
                         </div>
                         <div className="flex flex-col py-2">
-                            <label htmlFor="date">Deadline</label>
+                            <label htmlFor="date" className="text-white font-semibold">Deadline</label>
                             <input type="date" id="date" defaultValue={project.deadline} name="deadline" onChange={dataChange} className="border-black border-solid border rounded py-1 px-1"></input>
                         </div>
                         <div className="flex flex-col pt-2">
-                            <label htmlFor="budget">Budget</label>
+                            <label htmlFor="budget" className="text-white font-semibold">Budget</label>
                             <input type="number" id="email" defaultValue={project.budget} name='budget' onChange={dataChange} className="border-black border-solid border rounded py-1 px-1"></input>
                         </div>
                     </>
                     :
                     <>
                         <div className="flex flex-col py-2">
-                            <label htmlFor="phase">Project Phase</label>
+                            <label htmlFor="phase" className="text-white font-semibold">Project Phase</label>
                             <Select
                                 name="project_phase"
                                 defaultValue={phaseOption}
@@ -97,7 +97,7 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                             />
                         </div>
                         <div className="py-2 flex flex-col">
-                            <label htmlFor="team">Team</label>
+                            <label htmlFor="team" className="text-white font-semibold">Team</label>
                             <Select
                                 // defaultValue={existingTeam}
                                 isMulti
@@ -111,7 +111,7 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                     </>
             }
 
-            <div className="pt-4">
+            <div className="pt-4 text-white">
                 <div className="w-full bg-tea h-[30px] rounded" >
                     {
                         percent > 100 ?
@@ -123,8 +123,12 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                     }
                 </div>
                 <div className="flex flex-col" onClick={() => { console.log(phaseOption) }}>
-                    <p>{`Budget: ${project.budget}`}</p>
-                    <p>{`Spent: ${project.money_spent}`}</p>
+                    <p>
+                        <span className="font-semibold">Budget: </span>{project.budget}
+                    </p>
+                    <p>
+                        <span className="font-semibold">Money spent: </span>{project.money_spent}
+                    </p>
 
                 </div>
             </div>

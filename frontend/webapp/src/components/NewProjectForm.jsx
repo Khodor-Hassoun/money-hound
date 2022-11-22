@@ -18,8 +18,8 @@ function NewProjectForm({ setNewProjectData, customers, employees, newProjectDat
     }
     return (
         <div className="flex flex-col">
-            <div className="flex flex-col p-2">
-                <label htmlFor="companyemail">Project Name</label>
+            <div className="flex flex-col py-2">
+                <label htmlFor="companyemail" className="font-semibold">Project Name</label>
                 <input
                     type="text"
                     id="project_name"
@@ -30,8 +30,8 @@ function NewProjectForm({ setNewProjectData, customers, employees, newProjectDat
                     onChange={dataChange}
                 ></input>
             </div>
-            <div className="flex flex-col p-2">
-                <label htmlFor="email">Customers</label>
+            <div className="flex flex-col py-2">
+                <label htmlFor="email" className="font-semibold">Customers</label>
                 <select className="border-black border-solid border rounded py-2 px-1" id="email" name="customer_email" ref={emailRef} onChange={dataChange}>
                     <option value={''} disabled selected hidden>Customers</option>
                     {
@@ -41,8 +41,8 @@ function NewProjectForm({ setNewProjectData, customers, employees, newProjectDat
                     }
                 </select>
             </div>
-            <div className="flex flex-col p-2">
-                <label htmlFor="manager">Project Manager</label>
+            <div className="flex flex-col py-2">
+                <label htmlFor="manager" className="font-semibold">Project Manager</label>
                 <select className="border-black border-solid border rounded py-2 px-1" name="managerId" id="manager" ref={managerIdRef} onChange={dataChange}>
                     <option value={''} disabled selected hidden>Employees</option>
                     {
@@ -53,10 +53,10 @@ function NewProjectForm({ setNewProjectData, customers, employees, newProjectDat
                 </select>
             </div>
 
-            <div className="flex p-2 w-full justify-between">
+            <div className="flex py-2 w-full justify-between">
                 {/* FIRST NAME LAST NAME */}
                 <div className="flex flex-col mr-0.5 w-[48%]">
-                    <label htmlFor="budget">Budget</label>
+                    <label htmlFor="budget" className="font-semibold">Budget</label>
                     <input
                         type="number"
                         id="budget"
@@ -67,7 +67,7 @@ function NewProjectForm({ setNewProjectData, customers, employees, newProjectDat
                     ></input>
                 </div>
                 <div className="flex flex-col w-[48%]">
-                    <label htmlFor="date">Due Date</label>
+                    <label htmlFor="date" className="font-semibold">Due Date</label>
                     <input
                         type="date"
                         id="date"

@@ -8,7 +8,7 @@ function EmployeeDataForm({ employee, updateEmployee }) {
     if (Object.keys(employee) !== 0) {
         return (
             <div className="flex flex-col">
-                <h2 className="p-2 text-xl">{`${employee.user.firstname} ${employee.user.lastname}`}</h2>
+                <h2 className="p-2 text-xl" onClick={() => { console.log(employee) }}>{`${employee.user.firstname} ${employee.user.lastname}`}</h2>
                 <span className="p-2">{`Joined: ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}</span>
                 <div className="flex flex-col">
                     {/* <p>Project:</p> */}
