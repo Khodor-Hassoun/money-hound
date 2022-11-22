@@ -225,25 +225,43 @@ function Projects() {
                             {/* CONTAINER FOR ACTIVITIES */}
                             <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto rounded-l-md">
                                 {/* HEADER */}
-                                <div className="flex items-center mb-16">
+                                <div className="flex items-center mb-8">
                                     <span className="text-2xl cursor-pointer font-semibold" onClick={projectDetailsOpen}>&#10005;</span>
                                     <h2 className="text-2xl flex-grow flex justify-center font-semibold">{project.project_name}</h2>
                                 </div>
-                                {
-                                    project.Activity.length === 0 ?
-                                        <div className="">
-                                            <h1 className=" text-xl font-semibold">No activities yet</h1>
-                                        </div>
-                                        :
-                                        <></>
-                                }
-                                {/* ACTIVITY CARDS */}
-                                {
-                                    project.hasOwnProperty('Activity') ?
-                                        project.Activity.map((activity, index) => {
-                                            return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} />
-                                        }) : ""
-                                }
+                                <div className="w-full bg-offWhite h-[30px] flex justify-end space-x-4 mb-8">
+                                    <div className="flex items-center space-x-1">
+                                        <div className="bg-beau w-[20px] h-[8px] rounded-full" />
+                                        <p className="text-beau">Planning</p>
+                                    </div>
+                                    <div className="flex items-center space-x-1">
+                                        <div className="bg-duneGold w-[20px] h-[8px] rounded-full" />
+                                        <p className="text-duneGold">Execution</p>
+                                    </div>
+                                    <div className="flex items-center space-x-1">
+                                        <div className="bg-mint w-[20px] h-[8px] rounded-full" />
+                                        <p className="text-mint">Finalization</p>
+                                    </div>
+                                </div>
+
+                                <div className=" space-y-5">
+                                    {
+                                        project.Activity.length === 0 ?
+                                            <div className="">
+                                                <h1 className=" text-xl font-semibold">No activities yet</h1>
+                                            </div>
+                                            :
+                                            <></>
+                                    }
+                                    {/* ACTIVITY CARDS */}
+                                    {
+                                        project.hasOwnProperty('Activity') ?
+                                            project.Activity.map((activity, index) => {
+                                                return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} />
+                                            }) : ""
+                                    }
+
+                                </div>
                             </div>
                             {/* CONTAINER FOR PROJECT */}
                             <div className="flex flex-col bg-ming px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full rounded-r-md" onClick={() => { console.log(updatedProjectData) }}>

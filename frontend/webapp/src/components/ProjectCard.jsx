@@ -14,11 +14,12 @@ function ProjectCard({ project }) {
                 <span>{`Project Manager: ${project.manager.user.firstname} ${project.manager.user.lastname}`}</span>
                 <div className="flex justify-between">
                     <span>{`Customer: ${project.customerId}`}</span>
-                    <span>{`Deadline: ${deadline.getDate()}/${deadline.getMonth() + 1}/${deadline.getFullYear()}`}</span>
+                    <span>{`Started: ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`}</span>
+
                 </div>
                 <div className="flex justify-between">
                     <span>{`Phase: ${project.project_phase.type}`}</span>
-                    <span>{`Started: ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`}</span>
+                    <span>{`Deadline: ${deadline.getDate()}/${deadline.getMonth() + 1}/${deadline.getFullYear()}`}</span>
                 </div>
             </div>
             {/* MONEY BAR, BUDGET, SPENT */}
