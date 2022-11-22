@@ -19,6 +19,12 @@ function Insights() {
     const [employeesWage, setEmployeesWage] = useState([])
     const [totalMonthly, setTotalMonthly] = useState([])
     const [revExp, setRevExp] = useState([])
+    const [todaysMonth, setTodaysMonth] = useState(() => {
+        const today = new Date()
+        const month = today.toLocaleString('default', { month: 'long' });
+        const year = today.getFullYear()
+        return `${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`
+    })
     const headers = {
         headers: {
             authorization: `Bearer ${user.token}`
@@ -71,6 +77,7 @@ function Insights() {
                 const byMonthArr = []
                 const byBillNameArr = []
                 for (let expense of unGroupedArr) {
+                    let currentDate = new Date()
                     // PUT PRICES IN OBJECT INRESPECT TO MONTH
                     if (`${expense.payment_date}` in byMonthObj) {
                         byMonthObj[expense.payment_date] += parseInt(expense.price)
@@ -78,13 +85,21 @@ function Insights() {
                         byMonthObj[expense.payment_date] = 0
                         byMonthObj[expense.payment_date] += parseInt(expense.price)
                     }
-                    // GET PRICES IN OBJECT IN RESPECT TO BILL NAME
+                    // GET PRICES IN OBJECT IN RESPECT TO BILL NAME BY MONTH
                     if (`${expense.bill_name}` in byBillNameObj) {
-                        byBillNameObj[expense.bill_name] += parseInt(expense.price)
+                        if (expense.payment_date === `${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`) {
+                            byBillNameObj[expense.bill_name] += parseInt(expense.price)
+
+                        }
                     } else {
-                        byBillNameObj[expense.bill_name] = 0
-                        byBillNameObj[expense.bill_name] += parseInt(expense.price)
+                        if (expense.payment_date === `${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`) {
+
+                            byBillNameObj[expense.bill_name] = 0
+                            byBillNameObj[expense.bill_name] += parseInt(expense.price)
+                        }
                     }
+
+                    // GET 
                 }
                 for (let entry of Object.entries(byMonthObj)) {
                     byMonthArr.push({ payment_date: entry[0], expense: entry[1] })
@@ -252,147 +267,80 @@ function Insights() {
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
-            <section className="flex-grow max-h-screen overflow-auto">
-                <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-6">
+            <section className="flex-grow max-h-screen overflow-auto p-4">
+                <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-12">
                     <h2 className="text-4xl font-bold">Insights</h2>
                 </header>
-                <div className="flex flex-col h-full w-full space-y-10">
-                    <div className="w-full h-[200px]">
-                        <ResponsiveContainer width='90%' height='90%'>
-                            <LineChart width={100} height={100} data={revenues}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <YAxis />
-                                <XAxis dataKey={'payment_date'} />
+                <div className="flex flex-col h-full w-full space-y-28 items-center">
+                    {/* AVERAGE REVENUE AND EXPENSES BARCHART */}
+                    <div className="w-[90%] h-[350px] flex flex-col items-center">
+                        <h2 className="text-2xl font-semibold">Company Revenue and Expenses by Months</h2>
+                        <ResponsiveContainer width='100%' height={300}>
+                            <BarChart data={revExp}>
+                                <CartesianGrid strokeDasharray='2 2' />
                                 <Tooltip />
-                                <Line dataKey={"revenue"} />
-                            </LineChart>
-
+                                <XAxis dataKey={'date'} name='Date' >
+                                </XAxis>
+                                <YAxis />
+                                <Legend verticalAlign="top" align="right" height={36} />
+                                <Tooltip />
+                                <Bar dataKey={'revenue'} fill='#026A75' barSize={40} />
+                                <Bar dataKey={'expense'} fill='#C1121F' barSize={40} />
+                            </BarChart>
                         </ResponsiveContainer>
                     </div>
-                    <div className="w-[50%] h-[300px]">
-                        <ResponsiveContainer width='90%' height='100%'>
-                            <BarChart data={typeExpenses} margin={{ top: 15, right: 30, left: 20, bottom: 5 }}>
+
+                    {/* EMPLOYEE AVERAGE */}
+                    <div className="w-[90%] h-[350px] flex flex-col items-center">
+                        <h2 className="mb-5 text-2xl font-semibold">Average Employee Salaries by Job Position</h2>
+                        <ResponsiveContainer width='100%' height={300}>
+                            <ScatterChart>
+                                <CartesianGrid strokeDasharray='1 1' />
+                                <XAxis dataKey='job_position' />
+                                <YAxis dataKey={'average'} />
+                                <Tooltip />
+                                <Scatter data={employeesWage} fill='#026A75' />
+                            </ScatterChart>
+                        </ResponsiveContainer>
+                    </div>
+
+                    {/* MONTHLY EXPESES */}
+                    <div className="w-[90%] h-[330px] flex flex-col items-center">
+                        <h2 className="mb-5 text-2xl font-semibold">Expense types of <span>
+                            {todaysMonth}
+                        </span></h2>
+                        <ResponsiveContainer width='100%' height={300}>
+                            <BarChart data={typeExpenses}>
+                                <CartesianGrid strokeDasharray='1 1' />
                                 <XAxis dataKey={'bill_name'} >
                                 </XAxis>
-                                <Label value={'Company expense types'} offset={0} position="insideTop" />
+                                {/* <Label value={'Company expense types'} offset={0} position="insideTop" /> */}
                                 <YAxis />
                                 <Tooltip />
-                                <Bar dataKey={'expense'} fill="#C1121F" />
+                                <Bar dataKey={'expense'} fill="#C1121F" barSize={40} />
                             </BarChart>
-
                         </ResponsiveContainer>
                     </div>
-                    <div className="w-[50%]">
-                        <ScatterChart width={800} height={300}>
-                            <CartesianGrid strokeDasharray='3 3' />
-                            <XAxis dataKey='job_position' />
-                            <YAxis dataKey={'average'} />
-                            <Tooltip />
-                            <Scatter data={employeesWage} />
-                        </ScatterChart>
 
+                    {/* MONTHLY PROJECT REVENUE */}
+                    <div className="w-[90%] h-[330px] flex flex-col items-center">
+                        <h2 className="mb-5 text-2xl font-semibold">Projects Sold during <span>
+                            {todaysMonth}
+                        </span></h2>
+                        <ResponsiveContainer width='100%' height={300}>
+                            <LineChart width={500} height={300} data={dailyRev}>
+                                <CartesianGrid strokeDasharray='2' />
+                                <XAxis dataKey='project.project_name' />
+                                <YAxis />
+                                <ZAxis dataKey='customer.customer_name' />
+                                <Tooltip />
+                                <Line dataKey={'payment'} />
+                            </LineChart>
+                        </ResponsiveContainer>
                     </div>
-                    <div className="w-[50%]">
-                        <BarChart width={600} height={400} data={revExp}>
-                            <CartesianGrid strokeDasharray='3 3' />
-                            <Tooltip />
-                            <XAxis dataKey={'date'} />
-                            <YAxis />
-                            <Legend />
-                            <Bar dataKey={'revenue'} fill='#026A75' barSize={20} />
-                            <Bar dataKey={'expense'} fill='#C1121F' barSize={20} />
-                        </BarChart>
 
-                    </div>
-                    <div>
-                        <BarChart data={typeExpenses}
-                            width={600} height={400}
-                            margin={{ top: 15, right: 30, left: 20, bottom: 5 }}>
-                            <XAxis dataKey={'bill_name'} >
-                            </XAxis>
-                            <Label value={'Company expense types'} offset={0} position="insideTop" />
-                            <YAxis />
-                            <Tooltip />
-                            <Bar dataKey={'expense'} fill="#C1121F" />
-                        </BarChart>
-                    </div>
-                    <div>
-                        <LineChart width={500} height={300} data={dailyRev}>
-                            <CartesianGrid strokeDasharray='2' />
-                            <XAxis dataKey='project.project_name' />
-                            <YAxis />
-                            <ZAxis dataKey='customer.customer_name' />
-                            <Tooltip />
-                            <Line dataKey={'payment'} />
-                        </LineChart>
-                    </div>
                     {/* FIRST ROW */}
                     {/* <div className="flex w-full h-[30%] justify-between">
-                        
-                        <div className="flex flex-col w-[48%] items-center h-full bg-white rounded-lg shadow-2xl">
-                            <h3 className="flex justify-center mb-2">Revenue</h3>
-                            <ResponsiveContainer width="80%" height="100%">
-                                <BarChart width={50} height={"100%"} data={revenues}>
-                                    <XAxis dataKey="payment_date" />
-                                    <YAxis />
-                                    <Tooltip />
-                                    
-                                    <Bar dataKey="payment" fill="#026A75" />
-                                </BarChart>
-                            </ResponsiveContainer>
-                        </div>
-                        
-                        <div className="flex flex-col h-full w-[48%] justify-between items-center bg-white rounded-lg shadow-2xl">
-                            <h3 className="flex justify-center mb-2">Expenses</h3>
-                            <ResponsiveContainer width="80%" height="100%" >
-                                <BarChart width={150} height={150} data={monExpenses}>
-                                    <XAxis dataKey="payment_date" />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Bar dataKey="payment" fill="#C8DAE4" />
-                                </BarChart>
-                            </ResponsiveContainer>
-                        </div>
-                    </div> */}
-                    {/* SECOND ROW */}
-                    {/* <div className="flex w-full h-[50%] justify-between items-center">
-                        <div className="flex flex-col h-full w-[30%] bg-beau rounded-xl  shadow-2xl text-xs">
-                            <ResponsiveContainer width="100%" height="100%">
-                                <PieChart width={400} height={400}>
-                                    <Pie
-                                        data={customersRevenue}
-                                        cx="50%"
-                                        cy="50%"
-                                        labelLine={false}
-                                        outerRadius={160}
-                                        fill="#026A75"
-                                        dataKey="payment"
-                                        nameKey='customer'
-                                    >
-                                        <LabelList dataKey='customer' />
-                                        {typeExpenses.map((entry, index) => (
-                                            <Cell key={`cell-${entry}`} />
-                                        ))}
-                                    </Pie>
-
-                                </PieChart>
-                            </ResponsiveContainer>
-                        </div>
-                        <div className="flex flex-col justify-center items-center h-full w-[66%] bg-white rounded-xl shadow-2xl">
-                            <ResponsiveContainer width="80%" height="100%">
-                                <ScatterChart width={730} height={250}
-                                    margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="job_position" name="job position" unit="" />
-                                    <YAxis dataKey="wage" name="wage" unit="$" />
-                                    <ZAxis dataKey="user.firstname" range={[64, 144]} name="Firstname" />
-                                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                                    <Legend />
-                                    <Scatter name="Wages by Job Position" data={employeesWage} fill="#8884d8" />
-                                </ScatterChart>
-                            </ResponsiveContainer>
-
-                        </div>
                     </div> */}
                 </div>
             </section>

@@ -280,7 +280,7 @@ function Projects() {
                         {/* CONTAINER FOR ALL */}
                         <div className="flex xl:w-9/12 xl:h-[90%] h-full w-full justify-between items-start max-h-[900px]">
                             {/* CONTAINER FOR EMAIL FORM */}
-                            <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
+                            <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto rounded-l-md">
                                 {/* HEADER */}
                                 <div className="flex items-center mb-16">
                                     <span className="text-2xl cursor-pointer font-semibold" onClick={() => { projectSaleFormOpen(); projectDetailsOpen() }}>&#10005;</span>
@@ -292,7 +292,7 @@ function Projects() {
                                 </div>
                             </div>
                             {/* CONTAINER FOR OPTIONS */}
-                            <div className="flex flex-col bg-ming px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full ">
+                            <div className="flex flex-col bg-ming px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full rounded-r-md">
                                 <h2 className="text-2xl font-semibold text-white">Details</h2>
                                 <SaleInfoDetails setProjectSaleDetails={setProjectSaleDetails} />
                                 <div className="flex flex-col space-y-2 w-full">
