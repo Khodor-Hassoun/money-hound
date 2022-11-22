@@ -108,11 +108,11 @@ function ManagerProject() {
             </section >
             {
                 projectDetailsForm ?
-                    <div className={`${projectDetailsForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : ""}`}>
+                    <div className={`${projectDetailsForm ? "z-20 w-screen h-screen flex justify-center items-center rounded fixed bg-opacity-50 bg-black inset-0" : ""}`}>
                         {/* CONTAINER FOR ALL */}
                         <div className="flex xl:w-9/12 xl:h-[90%] h-full w-full justify-between items-start max-h-[900px]">
                             {/* CONTAINER FOR ACTIVITIES */}
-                            <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto">
+                            <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto rounded">
                                 {/* HEADER */}
                                 <div className="flex items-center mb-16">
                                     <span className="text-2xl cursor-pointer" onClick={projectDetailsOpen}>&#10005;</span>

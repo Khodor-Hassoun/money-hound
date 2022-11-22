@@ -12,7 +12,7 @@ function LogIn() {
   const navigate = useNavigate()
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
-
+  const logo = require('C:/Users/khodor/Code/money-hound/frontend/webapp/src/uploads/images/Photo_1669070297505_737.png')
   function userChange(e) {
     dispatch(setUser({ ...user, [e.target.name]: e.target.value }))
   }
@@ -51,8 +51,9 @@ function LogIn() {
       {/* CARD DIV */}
       <div className="bg-offWhite flex flex-col pb-10 w-[400px] px-6 items-center">
         <div className="w-1/2 h-1/2">
-          <img src={moneyNew} alt="Logo" className="h-full w-full" />
-          {/* <img src={require('C:/Users/khodor/Code/money-hound/backend/uploads/images/Photo_1666982147461_832.png')} alt="Logo" className="h-full w-full" /> */}
+          {/* <img src={moneyNew} alt="Logo" className="h-full w-full" /> */}
+          {/* <img src='logo' alt="Logo" className="h-full w-full" /> */}
+          <img alt="Logo" className="h-full w-full" src={logo} />
         </div>
         {/* EMAIL LABEL AND INPUT */}
         <div className="flex flex-col p-2 w-full">

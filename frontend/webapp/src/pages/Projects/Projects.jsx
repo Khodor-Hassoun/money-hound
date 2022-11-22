@@ -133,8 +133,8 @@ function Projects() {
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
-            <section className="flex-grow max-h-screen overflow-auto">
-                <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-6">
+            <section className="flex-grow max-h-screen overflow-auto p-4">
+                <header className="flex flex-col md:flex-row space-y-3 items-start md:justify-between w-full my-12">
                     <h2 className="text-4xl font-bold">Projects</h2>
 
                     {/* SEARCH AND ADD BUTTON */}
@@ -154,14 +154,14 @@ function Projects() {
                     </div>
                 </header>
                 {/* CONTENT CONTAINER */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 xl:gap-8 gap-4 lg:gap-3">
                     {
                         Object.keys(projects).length === 0 ? <></>
                             :
                             projects.map(project => {
                                 return (
                                     project.end_date === null ?
-                                        <div className="p-4 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); setupdatedProjectData(project); projectDetailsOpen() }}>
+                                        <div className="p-8 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); setupdatedProjectData(project); projectDetailsOpen() }}>
                                             <ProjectCard project={project} />
                                         </div>
                                         :
@@ -238,7 +238,7 @@ function Projects() {
                                 }
                             </div>
                             {/* CONTAINER FOR PROJECT */}
-                            <div className="flex flex-col bg-beau px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full" onClick={() => { console.log(updatedProjectData) }}>
+                            <div className="flex flex-col bg-ming px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full text-white" onClick={() => { console.log(updatedProjectData) }}>
                                 <h2 className="text-2xl">Details</h2>
                                 {
                                     Object.keys(project).length !== 0 ?
@@ -248,12 +248,12 @@ function Projects() {
                                 }
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
-                                        className="bg-duke text-white w-full h-full py-1 rounded-md cursor-pointer"
+                                        className=" bg-none border-2 text-tangerine border-tangerine font-bold w-full h-full py-1 rounded-md cursor-pointer"
                                         onClick={updateProject}>
                                         UPDATE
                                     </button>
                                     <button
-                                        className="bg-tangerine text-white w-full h-full py-1 rounded-md cursor-pointer" onClick={() => { projectSaleFormOpen(); }}>
+                                        className="bg-tangerine text-white w-full h-full py-1 font-bold rounded-md cursor-pointer" onClick={() => { projectSaleFormOpen(); }}>
                                         SELL
                                     </button>
                                 </div>

@@ -24,13 +24,13 @@ function ProjectCard({ project }) {
             {/* MONEY BAR, BUDGET, SPENT */}
             <div className="my-4">
                 {/* MONEY BAR */}
-                <div className="w-full bg-tea h-[40px]">
+                <div className="w-full bg-tea h-[30px] rounded">
                     {
                         percent > 100 ?
-                            <div className={`bg-venetian h-full w-full`}>
+                            <div className={`bg-venetian h-full w-full rounded`}>
                             </div>
                             :
-                            <div className={`bg-mint h-full`} style={{ width: `${percentstr}` }}>
+                            <div className={`bg-mint h-full rounded`} style={{ width: `${percentstr}` }}>
                             </div>
                     }
                     {/* <div className={`bg-mint h-full`} style={{ width: `${percent}` }}>

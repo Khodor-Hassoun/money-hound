@@ -70,7 +70,7 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                             </select>
                         </div>
                         <div className="flex flex-col py-2">
-                            <label htmlFor="email">Project Name</label>
+                            <label htmlFor="email" className=" font-semibold">Project Name</label>
                             <input type="text" id="email" defaultValue={project.project_name} name="project_name" onChange={dataChange} className="border-black border-solid border rounded py-1 px-1"></input>
                         </div>
                         <div className="flex flex-col py-2">
@@ -93,6 +93,7 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                                 onChange={handlePhase}
                                 options={phaseOptions}
                                 htmlFor='project_phase'
+                                className="rounded"
                             />
                         </div>
                         <div className="py-2 flex flex-col">
@@ -104,20 +105,20 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                                 value={selectedOptions}
                                 onChange={handleSelect}
                                 options={options}
-                                className=""
+                                className="rounded"
                             />
                         </div>
                     </>
             }
 
             <div className="pt-4">
-                <div className="w-full bg-tea h-[40px]" >
+                <div className="w-full bg-tea h-[30px] rounded" >
                     {
                         percent > 100 ?
-                            <div className={`bg-venetian h-full w-full`}>
+                            <div className={`bg-venetian h-full w-full rounded`}>
                             </div>
                             :
-                            <div className={`bg-mint h-full`} style={{ width: `${percentstr}` }}>
+                            <div className={`bg-mint h-full rounded`} style={{ width: `${percentstr}` }}>
                             </div>
                     }
                 </div>
