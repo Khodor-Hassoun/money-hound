@@ -32,7 +32,7 @@ function CompanyCard({ value }) {
 
     return (
         <>
-            <div className="bg-beau rounded-xl flex w-1/3 items-center space-x-5 p-2 shadow-xl hover:p-3 hover:shadow-2xl" onClick={companyRequest}>
+            <div className="bg-beau rounded-xl flex w-full items-center space-x-5 p-2 shadow-xl hover:p-3 hover:shadow-2xl" onClick={companyRequest}>
                 <div>
                     {/* <div className="h-[60px] w-[60px] bg-white flex justify-center items-center rounded-xl">
                         <div className="h-[50px] w-[50px] rounded-xl">

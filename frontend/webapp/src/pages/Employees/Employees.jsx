@@ -114,7 +114,7 @@ function Employees() {
                         </div> */}
                         {/* BUTTON */}
                         <button
-                            className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer" onClick={addEmployeeForm}>
+                            className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer font-bold" onClick={addEmployeeForm}>
                             ADD
                         </button>
                     </div>
@@ -154,15 +154,15 @@ function Employees() {
                 {
                     addEmployee ?
                         <div className={`${addEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                            <div className="bg-offWhite flex flex-col py-10 px-6">
-                                <div className="flex p-2">
-                                    <span className="text-2xl cursor-pointer" onClick={addEmployeeForm}>&#10005;</span>
+                            <div className="bg-offWhite flex flex-col pb-10 pt-6 px-6 rounded-md">
+                                <div className="flex p-2 mb-2">
+                                    <span className="text-2xl cursor-pointer font-semibold" onClick={addEmployeeForm}>&#10005;</span>
                                     <div className="w-full">
-                                        <h2 className="flex justify-center text-2xl">Employee information</h2>
+                                        <h2 className="flex justify-center text-2xl font-semibold">Employee information</h2>
                                     </div>
                                 </div>
                                 <AddEmployeeForm setNewEmployee={setNewEmployee} newEmployee={newEmployee} />
-                                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={() => { console.log(newEmployee); addEmployeeRequest() }} >ADD</button>
+                                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={() => { console.log(newEmployee); addEmployeeRequest() }} >ADD</button>
                             </div>
                         </div>
                         :
@@ -172,11 +172,11 @@ function Employees() {
                 {
                     showEmployee ?
                         <div className={`${showEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                            <div className="bg-offWhite flex flex-col py-10 px-6">
-                                <div className="flex p-2">
-                                    <span className="text-2xl" onClick={() => { showEmployeeForm() }}>&#10005;</span>
+                            <div className="bg-offWhite flex flex-col pb-10 pt-6 px-6 rounded-md">
+                                <div className="flex p-2 mb-2">
+                                    <span className="text-2xl font-semibold cursor-pointer" onClick={() => { showEmployeeForm() }}>&#10005;</span>
                                     <div className="w-full">
-                                        <h2 className="flex justify-center text-2xl">Employee information</h2>
+                                        <h2 className="flex justify-center text-2xl font-semibold">Employee information</h2>
                                     </div>
                                 </div>
                                 <EmployeeDataForm employee={employeeData} updateEmployee={setEmployeeData} />

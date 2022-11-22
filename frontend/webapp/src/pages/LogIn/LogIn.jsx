@@ -49,15 +49,15 @@ function LogIn() {
   return (
     <section className="bg-ming w-screen h-screen flex justify-center items-center">
       {/* CARD DIV */}
-      <div className="bg-offWhite flex flex-col pb-10 w-[400px] px-6 items-center">
+      <div className="bg-offWhite flex flex-col pb-10 w-[400px] px-6 items-center rounded-md">
         <div className="w-1/2 h-1/2">
-          {/* <img src={moneyNew} alt="Logo" className="h-full w-full" /> */}
+          <img src={moneyNew} alt="Logo" className="h-full w-full" />
           {/* <img src='logo' alt="Logo" className="h-full w-full" /> */}
-          <img alt="Logo" className="h-full w-full" src={logo} />
+          {/* <img alt="Logo" className="h-full w-full" src={logo} /> */}
         </div>
         {/* EMAIL LABEL AND INPUT */}
-        <div className="flex flex-col p-2 w-full">
-          <label htmlFor="email">Email</label>
+        <div className="flex flex-col py-2 w-full">
+          <label htmlFor="email" className="font-semibold">Email</label>
           <input
             type="text"
             placeholder="Email"
@@ -68,8 +68,8 @@ function LogIn() {
           ></input>
         </div>
         {/* PASSWORD LABEL AND INPUT */}
-        <div className="flex flex-col p-2 w-full">
-          <label htmlFor="password">Password</label>
+        <div className="flex flex-col py-2 w-full">
+          <label htmlFor="password" className="font-semibold">Password</label>
           <input
             type="password"
             placeholder="password"
@@ -82,7 +82,7 @@ function LogIn() {
         </div>
         {/* BUTTON */}
         <button
-          className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
+          className="bg-tangerine text-white my-4 py-2 rounded-full w-full font-bold"
           onClick={() => {
             request();
           }}

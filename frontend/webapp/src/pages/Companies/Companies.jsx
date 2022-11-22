@@ -22,10 +22,15 @@ function Companies() {
     }, [])
 
     return (
-        <section className="bg-ming flex flex-col justify-center items-center h-screen w-screen space-y-3">
-            {
-                companies.map((value, index) => <CompanyCard value={value} />)
-            }
+        <section className="bg-ming flex flex-col items-center h-screen w-screen">
+            <h1 className="text-white text-4xl font-bold mt-10">Select Company:</h1>
+            <div className="w-1/3 flex-grow justify-center flex flex-col space-y-4">
+                {
+                    companies.map((value, index) => <CompanyCard value={value} />)
+                }
+            </div>
+
+
 
         </section>
     )

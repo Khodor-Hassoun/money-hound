@@ -11,7 +11,7 @@ function EmployeeDataForm({ employee, updateEmployee }) {
                 <h2 className="p-2 text-xl">{`${employee.user.firstname} ${employee.user.lastname}`}</h2>
                 <span className="p-2">{`Joined: ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}</span>
                 <div className="flex flex-col">
-                    <p>Project:</p>
+                    {/* <p>Project:</p> */}
                     {/* {
                         employee.project.length === 0 ?
                             <></>
@@ -34,7 +34,7 @@ function EmployeeDataForm({ employee, updateEmployee }) {
                         <input type="text" id="name" defaultValue={employee.job_position} name="job_position" onChange={dataChange} className="border-black border-solid border rounded py-2 px-1"></input>
                     </div>
                     <div className="flex flex-col w-[48%]">
-                        <label htmlFor="capital">Wage</label>
+                        <label htmlFor="capital">Salary</label>
                         <input type="text" id="capital" defaultValue={employee.wage} name="wage" onChange={dataChange} className="border-black border-solid border rounded py-2 px-1"></input>
                     </div>
                 </div>
