@@ -87,7 +87,7 @@ function Navbar() {
                         <div
                             className="h-[35px] w-[35px] rounded-xl">
                             <img
-                                src={logo}
+                                src={`uploads/1234.jpg`}
                                 alt="logo"
                                 className="h-full w-full rounded-xl"
                             />
@@ -300,10 +300,10 @@ function Navbar() {
                                     <h2 className="flex justify-center text-2xl font-semibold" onClick={() => console.log(newLogo)}>Company information</h2>
                                 </div>
                             </div>
-                            {/* <div className="self-center">
+                            <div className="self-center">
                                 <input type="file" name="logo" id="logo" onChange={imageTo64} />
 
-                            </div> */}
+                            </div>
                             <CompanyInfoForm setUpdatedCompany={setUpdatedCompany} updatedCompany={updatedCompany} />
                             <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={updatedCompanyReq}>UPDATE</button>
                         </div>

@@ -126,6 +126,8 @@ const updateProject = async (req, res) => {
     }
     newteam = employeeIdArr;
   }
+  // res.json(newteam);
+  // return;
   project_name = project_name ? project_name : projectDet.project_name;
   managerId = managerId ? managerId : projectDet.managerId;
   budget = budget ? budget : projectDet.budget;
@@ -162,15 +164,9 @@ const updateProject = async (req, res) => {
     },
     data: {
       project_phase_id: parseInt(project_phase),
-      // team: {
-      //   update:{
-      //     data:{
-      //       employeeId:{
-
-      //       }
-      //     }
-      //   }
-      // },
+      team: {
+        connect: newteam,
+      },
     },
     include: {
       Activity: {
