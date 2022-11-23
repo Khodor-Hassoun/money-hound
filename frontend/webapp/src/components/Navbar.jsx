@@ -112,7 +112,7 @@ function Navbar() {
                                 //     alt="options"
                                 //     onClick={companyFormOpen}
                                 // />
-                                <div onClick={companyFormOpen}>
+                                <div onClick={companyFormOpen} className='cursor-pointer'>
                                     <BiEdit size={16} style={{ color: 'white' }} />
                                 </div>
                                 :
@@ -267,7 +267,7 @@ function Navbar() {
                             className="text-xl lg:text-xl"
                         >{`${user.firstname} ${user.lastname}`}
                         </h2>
-                        <div onClick={userFormOpen}>
+                        <div onClick={userFormOpen} className='cursor-pointer'>
                             <BiEdit size={16} style={{ color: 'white' }} />
                         </div>
                         {/* <img

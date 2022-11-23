@@ -273,7 +273,7 @@ function Insights() {
                 </header>
                 <div className="flex flex-col h-full w-full space-y-28 items-center">
                     {/* AVERAGE REVENUE AND EXPENSES BARCHART */}
-                    <div className="w-[90%] h-[350px] flex flex-col items-center">
+                    <div className="w-[90%] h-[350px] flex flex-col items-center text-md">
                         <h2 className="text-2xl font-semibold">Company Revenue and Expenses by Months</h2>
                         <ResponsiveContainer width='100%' height={300}>
                             <BarChart data={revExp}>
@@ -291,7 +291,7 @@ function Insights() {
                     </div>
 
                     {/* EMPLOYEE AVERAGE */}
-                    <div className="w-[90%] h-[350px] flex flex-col items-center">
+                    <div className="w-[90%] h-[350px] flex flex-col items-center text-sm">
                         <h2 className="mb-5 text-2xl font-semibold">Average Employee Salaries by Job Position</h2>
                         <ResponsiveContainer width='100%' height={300}>
                             <ScatterChart>
@@ -305,7 +305,7 @@ function Insights() {
                     </div>
 
                     {/* MONTHLY EXPESES */}
-                    <div className="w-[90%] h-[330px] flex flex-col items-center">
+                    <div className="w-[90%] h-[330px] flex flex-col items-center text-sm">
                         <h2 className="mb-5 text-2xl font-semibold">Expense types of <span>
                             {todaysMonth}
                         </span></h2>
@@ -323,7 +323,7 @@ function Insights() {
                     </div>
 
                     {/* MONTHLY PROJECT REVENUE */}
-                    <div className="w-[90%] h-[330px] flex flex-col items-center">
+                    <div className="w-[90%] h-[330px] flex flex-col items-center text-sm">
                         <h2 className="mb-5 text-2xl font-semibold">Projects Sold during <span>
                             {todaysMonth}
                         </span></h2>

@@ -231,14 +231,20 @@ function Projects() {
                                     <h2 className="text-2xl flex-grow flex justify-center font-semibold">{project.project_name}</h2>
                                 </div>
                                 <div className="w-full bg-offWhite h-[30px] flex justify-end space-x-4 mb-8">
-                                    <ActivityPhaseLegend />
+                                    {
+                                        project.Activity.length !== 0 ?
+                                            <ActivityPhaseLegend />
+                                            :
+                                            <></>
+
+                                    }
                                 </div>
 
                                 <div className=" space-y-5">
                                     {
                                         project.Activity.length === 0 ?
                                             <div className="">
-                                                <h1 className=" text-xl font-semibold">No activities yet</h1>
+                                                <h1 className=" text-xl font-semibold">No Activities Yet</h1>
                                             </div>
                                             :
                                             <></>

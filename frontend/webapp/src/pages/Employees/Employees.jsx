@@ -182,13 +182,13 @@ function Employees() {
                                 <EmployeeDataForm employee={employeeData} updateEmployee={setEmployeeData} />
                                 {
                                     employeeData.ProjectId.length === 0 ?
-                                        <div className="px-2 w-full flex justify-between space-x-2">
-                                            <button className="bg-tea text-white my-4 rounded-lg  w-2/5 py-2" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>Update</button>
-                                            <button className="bg-venetian text-white my-4 rounded-lg w-2/5 py-2" onClick={deleteEmployee}>Delete</button>
+                                        <div className="p-2 w-full flex flex-col justify-between space-y-4 my-4">
+                                            <button className="bg-ming text-white  rounded-lg py-2 font-bold" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>UPDATE</button>
+                                            <button className="bg-venetian text-white rounded-lg py-2 font-bold" onClick={deleteEmployee}>DELETE</button>
                                         </div>
                                         :
-                                        <div className="px-2 w-full flex justify-center space-x-2">
-                                            <button className="bg-ming text-white my-4 rounded-lg  w-2/5 py-2" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>Update</button>
+                                        <div className="p-2 w-full flex justify-center space-x-2 my-4">
+                                            <button className="bg-ming text-white my-4 w-full rounded-lg py-2 font-bold" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>UPDATE</button>
 
                                         </div>
                                 }
