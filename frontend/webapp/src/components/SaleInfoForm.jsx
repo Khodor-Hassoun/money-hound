@@ -20,29 +20,24 @@ function SaleInfoForm({ project, projectSaleDetails }) {
                 {/* COMPANY DETAILS */}
                 <div className="flex justify-between">
                     {/* COMPANY DETAILS */}
-                    <div className="flex flex-col space-y-1 text-white">
+                    <div className="flex flex-col space-y-1 text-black">
                         <h2 className="text-xl font-semibold">{company.name}</h2>
                         <p>{company.email}</p>
                         <p>Address: {company.address}</p>
                         <p>Phone: {company.phone}</p>
                     </div>
                     {/* COMPANY LOGO */}
-                    {/* <div
+                    <div
                         className="h-[50px] w-[50px] bg-white flex justify-center items-center rounded-xl mr-10">
                         <div
                             className="h-[45px] w-[45px] rounded-xl">
                             <img
-                                src={logo}
+                                src={company.logo}
                                 alt="logo"
                                 className="h-full w-full rounded-xl"
                             />
                         </div>
-                    </div> */}
-                    {/* <img
-                        src={company.logo}
-                        alt="logo"
-                        className="h-full w-full rounded-xl"
-                    /> */}
+                    </div>
 
                 </div>
                 {/* CUSTOMER DETAILS */}

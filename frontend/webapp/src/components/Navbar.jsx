@@ -18,8 +18,8 @@ function Navbar() {
     const [image, setImage] = useState(null)
     const [updatedUser, setUpdatedUser] = useState({})
     const [updatedCompany, setUpdatedCompany] = useState({})
-    const [newLogo, setNewLogo] = useState()
-    const [logoPath, setLogoPath] = useState('')
+    const [newLogo, setNewLogo] = useState(company.logo)
+
     const navigate = useNavigate()
     const publicImagesFolder = 'http://localhost:3002/images/images/'
     const headers = {
@@ -66,6 +66,7 @@ function Navbar() {
                 console.log(res)
                 const updatedCompanyValid = res.data
                 dispatch(setCompany({ ...company, ...updatedCompanyValid, logo: publicImagesFolder + res.data.logo }))
+                setNewLogo(publicImagesFolder + res.data.logo)
                 companyFormOpen()
             }).catch(e => {
                 console.log(e)
@@ -82,11 +83,11 @@ function Navbar() {
                 className="h-screen w-1/6 lg:w-1/5 bg-ming text-white flex flex-col justify-between m-0 mr-4 py-4">
                 {/* LOGO NAME AND OPTIONS */}
                 <div
-                    className="flex flex-col xl:flex-row xl:items-center px-2 space-y-3 lg:space-y-0 xl:justify-between mb-16">
+                    className="flex flex-col xl:items-start px-2 space-y-3 lg:space-y-3 xl:justify-between mb-16">
                     <div
-                        className="h-[50px] w-[50px] bg-white flex justify-center items-center rounded-xl">
+                        className="h-[60px] w-[60px] bg-white flex justify-center items-center rounded-xl">
                         <div
-                            className="h-[50px] w-[50px] rounded-xl">
+                            className="h-[60px] w-[60px] rounded-xl">
                             <img
                                 src={company.logo}
                                 alt="logo"
@@ -94,21 +95,24 @@ function Navbar() {
                             />
                         </div>
                     </div>
-                    <h2
-                        className="text-xl lg:text-xl">
-                        {company.name}
-                    </h2>
-                    {
-                        user.user_type === 1 ?
-                            <img
-                                src={dots}
-                                className="cursor-pointer max-w-[24px]"
-                                alt="options"
-                                onClick={companyFormOpen}
-                            />
-                            :
-                            <></>
-                    }
+                    <div className="flex justify-between w-full">
+                        <h2
+                            className="text-xl lg:text-xl">
+                            {company.name}
+                        </h2>
+                        {
+                            user.user_type === 1 ?
+                                <img
+                                    src={dots}
+                                    className="cursor-pointer max-w-[24px]"
+                                    alt="options"
+                                    onClick={companyFormOpen}
+                                />
+                                :
+                                <></>
+                        }
+
+                    </div>
                 </div>
                 {/* LINKS */}
                 <div
@@ -302,7 +306,10 @@ function Navbar() {
                                 </div>
                             </div>
                             <div className="self-center">
-                                <input type="file" name="logo" id="logo" onChange={imageTo64} />
+                                <input type="file" name="logo" id="logo" onChange={imageTo64} hidden />
+                                <label htmlFor="logo" className="">
+                                    <img src={newLogo} alt='logo' className="w-[140px] h-[140px] border rounded-full border-black"></img>
+                                </label>
 
                             </div>
                             <CompanyInfoForm setUpdatedCompany={setUpdatedCompany} updatedCompany={updatedCompany} />
