@@ -10,7 +10,7 @@ function ProjectCard({ project }) {
         <>
             {/* CARD TITLE AND MANAGER */}
             <div className="flex flex-col mb-3 space-y-2">
-                <h2 className="text-xl font-bold">{project.project_name}</h2>
+                <h2 className="text-xl font-bold">{project.project_name.toUpperCase()}</h2>
                 <span>{`Project Manager: ${project.manager.user.firstname} ${project.manager.user.lastname}`}</span>
                 <div className="flex justify-between">
                     <span>{`Customer: ${project.customerId}`}</span>

@@ -117,7 +117,7 @@ function ManagerProject() {
                                 {/* HEADER */}
                                 <div className="flex items-center mb-8">
                                     <span className="text-2xl cursor-pointer font-semibold" onClick={projectDetailsOpen}>&#10005;</span>
-                                    <h2 className="text-2xl flex-grow flex justify-center font-semibold">{project.project_name}</h2>
+                                    <h2 className="text-2xl flex-grow flex justify-center font-semibold">{project.project_name.toUpperCase()}</h2>
                                 </div>
 
                                 <div className="w-full bg-offWhite h-[30px] flex justify-end space-x-4 mb-8">

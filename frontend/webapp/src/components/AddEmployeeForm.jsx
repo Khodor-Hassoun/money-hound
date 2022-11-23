@@ -17,11 +17,11 @@ function AddEmployeeForm({ setNewEmployee, newEmployee }) {
         <div className="flex py-2 w-full justify-between">
           {/* FIRST NAME LAST NAME */}
           <div className="flex flex-col mr-0.5 w-[48%]">
-            <label htmlFor="firstname" className="font-semibold">Firstname</label>
+            <label htmlFor="firstname" className="font-semibold">First Name</label>
             <input type="text" id="firstname" name="firstname" ref={firstnameRef} onChange={employeeDetails} className="border-black border-solid border rounded py-2"></input>
           </div>
           <div className="flex flex-col w-[48%]">
-            <label htmlFor="lastname" className="font-semibold">lastname</label>
+            <label htmlFor="lastname" className="font-semibold">Last Name</label>
             <input type="text" id="lastname" name="lastname" ref={lastnameRef} onChange={employeeDetails} className="border-black border-solid border rounded py-2"></input>
           </div>
         </div>
