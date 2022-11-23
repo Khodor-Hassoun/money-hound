@@ -30,7 +30,7 @@ function Companies() {
 
                 <div className="w-full">
 
-                    <h1 className="text-xl font-bold mt-10 mb-6 px-6">Please Select a Company</h1>
+                    <h1 className="text-lg font-bold mt-10 mb-6 px-6">Please Select a Company</h1>
                     <div className="w-full flex-grow justify-center px-6 flex flex-col bg-offWhite overflow-auto divide-y-2 divide-gray-400">
                         {
                             companies.map((value, index) => <CompanyCard value={value} />)

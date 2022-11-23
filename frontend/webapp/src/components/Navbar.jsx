@@ -66,7 +66,7 @@ function Navbar() {
             })
     }
     function updatedCompanyReq() {
-        axios.put("http://localhost:3002/company/", { ...company, ...updatedCompany }, headers)
+        axios.put("http://localhost:3002/company/", { ...company, ...updatedCompany, logo: updatedCompany.logo }, headers)
             .then(res => {
                 console.log(res)
                 const updatedCompanyValid = res.data
@@ -107,12 +107,6 @@ function Navbar() {
                         </h2>
                         {
                             user.user_type === 1 ?
-                                // <img
-                                //     src={dots}
-                                //     className="cursor-pointer max-w-[24px]"
-                                //     alt="options"
-                                //     onClick={companyFormOpen}
-                                // />
                                 <div onClick={companyFormOpen} className='cursor-pointer'>
                                     <BiEdit size={16} style={{ color: 'white' }} />
                                 </div>
@@ -125,7 +119,7 @@ function Navbar() {
                 {/* LINKS */}
                 <div
                     className="space-y-6 flex-grow">
-                    {
+                    {/* {
                         user.user_type === 1 ?
                             <div>
                                 <NavLink to={'/company'}>
@@ -151,7 +145,7 @@ function Navbar() {
                             </div>
                             :
                             <></>
-                    }
+                    } */}
                     {
                         user.user_type === 1 ?
                             <div>

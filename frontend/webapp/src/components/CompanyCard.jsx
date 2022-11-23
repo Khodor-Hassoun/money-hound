@@ -47,7 +47,7 @@ function CompanyCard({ value }) {
                         </div>
                     </div>
                     <div className="flex flex-col justify-between">
-                        <h2 className="text-xl font-semibold">{value.name.toUpperCase()}</h2>
+                        <h2 className="text-lg font-semibold">{value.name.toUpperCase()}</h2>
                     </div>
 
                 </div>

@@ -338,7 +338,7 @@ function Insights() {
                             </LineChart>
                         </ResponsiveContainer>
                     </div> */}
-                    <div className="w-[90%] h-[330px] flex flex-col items-center text-sm">
+                    <div className="w-[90%] h-[330px] flex flex-col items-center text-sm mb-10">
                         <h2 className="mb-5 text-2xl font-semibold">Projects Sold during <span>
                             {todaysMonth}
                         </span></h2>

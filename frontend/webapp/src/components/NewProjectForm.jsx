@@ -1,4 +1,5 @@
 import { useRef } from "react"
+import Select from "react-select"
 
 function NewProjectForm({ setNewProjectData, customers, employees, newProjectData }) {
     const emailRef = useRef()
@@ -31,7 +32,7 @@ function NewProjectForm({ setNewProjectData, customers, employees, newProjectDat
                 ></input>
             </div>
             <div className="flex flex-col py-2">
-                <label htmlFor="email" className="font-semibold">Customers</label>
+                <label htmlFor="email" className="font-semibold">Customer</label>
                 <select className="border-black border-solid border rounded py-2 px-1" id="email" name="customer_email" ref={emailRef} onChange={dataChange}>
                     <option value={''} disabled selected hidden>Customers</option>
                     {
@@ -41,6 +42,18 @@ function NewProjectForm({ setNewProjectData, customers, employees, newProjectDat
                     }
                 </select>
             </div>
+
+            {/* <div className="flex flex-col py-2">
+                <label htmlFor="email" className="font-semibold">Customer</label>
+                <Select
+                    className="border-black border-solid border rounded"
+
+                />
+            </div> */}
+
+
+
+
             <div className="flex flex-col py-2">
                 <label htmlFor="manager" className="font-semibold">Project Manager</label>
                 <select className="border-black border-solid border rounded py-2 px-1" name="managerId" id="manager" ref={managerIdRef} onChange={dataChange}>

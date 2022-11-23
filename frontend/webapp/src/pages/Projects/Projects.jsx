@@ -187,9 +187,9 @@ function Projects() {
                                 </div>
                             </div>
                             <CustomerForm setCustomerData={setCustomerData} />
-                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold"
                                 onClick={() => { console.log(customerData); addCustomer() }}
-                            >Add</button>
+                            >ADD</button>
                         </div>
                     </div>
                     :
@@ -203,13 +203,13 @@ function Projects() {
                             <div className="flex p-2 mb-2">
                                 <span className="text-2xl cursor-pointer font-semibold" onClick={() => { addProjectFomrOpen(); setNewProjectData({}) }}>&#10005;</span>
                                 <div className="w-full">
-                                    <h2 className="flex justify-center text-2xl font-semibold">New Project information</h2>
+                                    <h2 className="flex justify-center text-2xl font-semibold">Project Information</h2>
                                 </div>
                             </div>
                             <NewProjectForm setNewProjectData={setNewProjectData} customers={customers} employees={employees} newProjectData={newProjectData} />
-                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full"
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold"
                                 onClick={() => { addProject() }}
-                            >Add</button>
+                            >ADD</button>
                         </div>
                     </div>
                     :
