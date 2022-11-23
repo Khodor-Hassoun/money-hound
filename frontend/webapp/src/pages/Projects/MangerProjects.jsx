@@ -198,7 +198,7 @@ function ManagerProject() {
                                 </div>
                             </div>
                             <AddActivityForm setActivityDetails={setActivityDetails} activityDetails={activityDetails} />
-                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={() => { addActivity() }} >SET</button>
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={() => { addActivity() }} >ADD</button>
                         </div>
                     </div>
                     :

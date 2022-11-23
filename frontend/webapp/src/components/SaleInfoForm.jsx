@@ -28,13 +28,13 @@ function SaleInfoForm({ project, projectSaleDetails }) {
                     </div>
                     {/* COMPANY LOGO */}
                     <div
-                        className="h-[50px] w-[50px] bg-white flex justify-center items-center rounded-xl mr-10">
+                        className="h-[100px] w-[100px] bg-white flex justify-center items-center rounded-full mr-36">
                         <div
-                            className="h-[45px] w-[45px] rounded-xl">
+                            className="h-[100px] w-[100px] rounded-full">
                             <img
                                 src={company.logo}
                                 alt="logo"
-                                className="h-full w-full rounded-xl"
+                                className="h-full w-full rounded-full"
                             />
                         </div>
                     </div>

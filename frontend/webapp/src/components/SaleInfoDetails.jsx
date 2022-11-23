@@ -37,7 +37,7 @@ function SaleInfoDetails({ setProjectSaleDetails }) {
                 <input type="number" id="date" name="tax" ref={vatRef} max={100} defaultValue={0} onChange={() => { paymentChange(); console.log(payment) }} className="border-black border-solid border rounded py-1 px-1"></input>
             </div>
             <div className="flex flex-col py-2">
-                <label htmlFor="payment" className="text-white font-semibold">Net Price:</label>
+                <label htmlFor="payment" className="text-white font-semibold">Net Price</label>
                 <input type="number" id="payment" name="payment" value={payment} className="border-black border-solid border rounded py-1 px-1"></input>
             </div>
             <div className="flex flex-col py-2">

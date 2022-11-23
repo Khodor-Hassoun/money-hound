@@ -16,7 +16,7 @@ function CompanyInfoForm({ setUpdatedCompany, updatedCompany }) {
                 <div className="flex py-2 w-full justify-between">
                     {/* NAME */}
                     <div className="flex flex-col mr-0.5 w-[48%]">
-                        <label htmlFor="name" className="font-semibold">Company name</label>
+                        <label htmlFor="name" className="font-semibold">Company Name</label>
                         <input type="text" id="name" defaultValue={company.name} name="name" onChange={companyChange} className="border-black border-solid border rounded py-2 px-1"></input>
                     </div>
                     <div className="flex flex-col w-[48%]">

@@ -9,6 +9,10 @@ import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import { setUser } from "../redux/user"
 import { setCompany } from "../redux/company"
+import { VscAccount } from "react-icons/vsc";
+import { AiFillEdit } from "react-icons/ai";
+import { TiEdit } from "react-icons/ti";
+import { BiEdit } from "react-icons/bi";
 function Navbar() {
     const user = useSelector(state => state.user)
     const company = useSelector(state => state.company)
@@ -95,19 +99,22 @@ function Navbar() {
                             />
                         </div>
                     </div>
-                    <div className="flex justify-between w-full">
+                    <div className="flex justify-between w-full items-center">
                         <h2
                             className="text-xl lg:text-xl">
                             {company.name}
                         </h2>
                         {
                             user.user_type === 1 ?
-                                <img
-                                    src={dots}
-                                    className="cursor-pointer max-w-[24px]"
-                                    alt="options"
-                                    onClick={companyFormOpen}
-                                />
+                                // <img
+                                //     src={dots}
+                                //     className="cursor-pointer max-w-[24px]"
+                                //     alt="options"
+                                //     onClick={companyFormOpen}
+                                // />
+                                <div onClick={companyFormOpen}>
+                                    <BiEdit size={16} style={{ color: 'white' }} />
+                                </div>
                                 :
                                 <></>
                         }
@@ -260,12 +267,15 @@ function Navbar() {
                             className="text-xl lg:text-xl"
                         >{`${user.firstname} ${user.lastname}`}
                         </h2>
-                        <img
+                        <div onClick={userFormOpen}>
+                            <BiEdit size={16} style={{ color: 'white' }} />
+                        </div>
+                        {/* <img
                             src={dots}
                             className="cursor-pointer max-w-[24px]"
                             alt="options"
                             onClick={userFormOpen}
-                        />
+                        /> */}
                     </div>
                     <button
                         className="bg-tangerine text-white my-4 lg:p-2 lg:rounded-xl w-full cursor-pointer p-1 rounded-xl font-bold"
@@ -284,7 +294,7 @@ function Navbar() {
                             <div className="flex p-2 mb-2">
                                 <span className="text-2xl cursor-pointer font-semibold" onClick={userFormOpen}>&#10005;</span>
                                 <div className="w-full">
-                                    <h2 className="flex justify-center text-2xl font-semibold">Personal information</h2>
+                                    <h2 className="flex justify-center text-2xl font-semibold">Personal Information</h2>
                                 </div>
                             </div>
                             <UserInfoForm setUpdatedUser={setUpdatedUser} updatedUser={updatedUser} />
@@ -302,7 +312,7 @@ function Navbar() {
                             <div className="flex p-2 mb-2">
                                 <span className="text-2xl cursor-pointer font-semibold" onClick={companyFormOpen}>&#10005;</span>
                                 <div className="w-full">
-                                    <h2 className="flex justify-center text-2xl font-semibold" onClick={() => console.log(newLogo)}>Company information</h2>
+                                    <h2 className="flex justify-center text-2xl font-semibold" onClick={() => console.log(newLogo)}>Company Information</h2>
                                 </div>
                             </div>
                             <div className="self-center py-2">
