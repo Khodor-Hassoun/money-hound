@@ -11,7 +11,7 @@ function EmployeeDataForm({ employee, updateEmployee }) {
                 <h2 className="p-2 text-xl" onClick={() => { console.log(employee) }}>{`${employee.user.firstname} ${employee.user.lastname}`}</h2>
                 <span className="p-2">{`Joined: ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}</span>
                 <div className="flex flex-col p-2 w-[400px]">
-                    <p className="overflow-auto">
+                    <p className="py2">
                         <span className="font-semibold">Active Projects:</span><br />
                         <div className="space-x-1">
                             {

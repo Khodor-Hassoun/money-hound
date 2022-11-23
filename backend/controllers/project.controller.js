@@ -95,6 +95,7 @@ const updateProject = async (req, res) => {
   let { project_phase, end_date } = req.body;
   let { newteam } = req.body;
   const user = req.user;
+  const oldTeam = [];
   console.log(newteam);
   // res.json(newteam);
   // return;
@@ -116,6 +117,21 @@ const updateProject = async (req, res) => {
       team: true,
     },
   });
+  for (let teamMem of projectDet.team) {
+    oldTeam.push({ employeeId: teamMem.employeeId });
+  }
+  if (newteam) {
+    const projectTeam = await prisma.project.update({
+      where: {
+        id: parseInt(id),
+      },
+      data: {
+        team: {
+          disconnect: oldTeam,
+        },
+      },
+    });
+  }
   //   res.json(projectDet);
   //   return;
   //   validate data
@@ -164,6 +180,9 @@ const updateProject = async (req, res) => {
     },
     data: {
       project_phase_id: parseInt(project_phase),
+      team: {
+        deleteMany: projectDet.team,
+      },
       team: {
         connect: newteam,
       },

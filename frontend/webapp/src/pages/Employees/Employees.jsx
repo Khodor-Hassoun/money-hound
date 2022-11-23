@@ -6,6 +6,7 @@ import TableRow from "../../components/TableRow"
 import { useSelector } from "react-redux"
 import axios from "axios"
 import EmployeeDataForm from "../../components/EmployeeDataForm"
+import AddExpenseForm from "../../components/AddExpenseForm"
 
 function Employees() {
     const user = useSelector(state => state.user)
@@ -14,11 +15,13 @@ function Employees() {
     const [employeesCount, setEmployeesCount] = useState(0)
     const [addEmployee, setAddEmployee] = useState(false)
     const [showEmployee, setShowEmployee] = useState(false)
+    const [expenseForm, setExpenseForm] = useState(false)
     const [newEmployee, setNewEmployee] = useState({})
     const [employeeData, setEmployeeData] = useState({})
     const [update, setUpdate] = useState(false)
     const [sortByName, setSortByName] = useState({})
     const [deleteRefresh, setDeleteRefresh] = useState(false)
+    const [expense, setExpense] = useState({})
     const sortRef = useRef()
 
     function addEmployeeForm() {
@@ -29,6 +32,9 @@ function Employees() {
     }
     function showEmployeeForm() {
         setShowEmployee(bool => !bool)
+    }
+    function expenseFormOpen() {
+        setExpenseForm(bool => !bool)
     }
     function addEmployeeRequest() {
         axios.post("http://localhost:3002/company/employee", { companyId: company.id, ...newEmployee }, {
@@ -62,6 +68,15 @@ function Employees() {
         }).then(res => {
             console.log(res.data)
             showEmployeeForm()
+        })
+    }
+    function addExpense() {
+        axios.post("http://localhost:3002/company/expense", expense, {
+            headers: {
+                authorization: `Bearer ${user.token}`
+            },
+        }).then(res => {
+            console.log(res.data)
         })
     }
     // function nameSort() {
@@ -114,8 +129,12 @@ function Employees() {
                         </div> */}
                         {/* BUTTON */}
                         <button
+                            className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer font-bold" onClick={expenseFormOpen} >
+                            ADD EXPENSE
+                        </button>
+                        <button
                             className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer font-bold" onClick={addEmployeeForm}>
-                            ADD
+                            ADD EMPLOYEE
                         </button>
                     </div>
                 </header>
@@ -182,13 +201,13 @@ function Employees() {
                                 <EmployeeDataForm employee={employeeData} updateEmployee={setEmployeeData} />
                                 {
                                     employeeData.ProjectId.length === 0 ?
-                                        <div className="p-2 w-full flex flex-col justify-between space-y-4 my-4">
-                                            <button className="bg-ming text-white  rounded-lg py-2 font-bold" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>UPDATE</button>
-                                            <button className="bg-venetian text-white rounded-lg py-2 font-bold" onClick={deleteEmployee}>DELETE</button>
+                                        <div className="p-2 w-full flex flex-col justify-between space-y-4 my-2">
+                                            <button className="bg-ming text-white  rounded-full py-2 font-bold " onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>UPDATE</button>
+                                            <button className="bg-venetian text-white rounded-full py-2 font-bold" onClick={deleteEmployee}>DELETE</button>
                                         </div>
                                         :
-                                        <div className="p-2 w-full flex justify-center space-x-2 my-4">
-                                            <button className="bg-ming text-white my-4 w-full rounded-lg py-2 font-bold" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>UPDATE</button>
+                                        <div className="p-2 w-full flex justify-center space-x-2 my-2">
+                                            <button className="bg-ming text-white w-full rounded-full py-2 font-bold" onClick={() => { updateEmployeeRequest(employeeData.employeeId); }}>UPDATE</button>
 
                                         </div>
                                 }
@@ -197,6 +216,23 @@ function Employees() {
                         </div>
                         :
                         ""
+                }
+                {
+                    expenseForm ?
+                        <div className={`${expenseForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
+                            <div className="bg-offWhite flex flex-col pb-10 pt-6 px-6 rounded-md w-[400px]">
+                                <div className="flex p-2 mb-2">
+                                    <span className="text-2xl cursor-pointer font-semibold" onClick={expenseFormOpen}>&#10005;</span>
+                                    <div className="w-full">
+                                        <h2 className="flex justify-center text-2xl font-semibold">Expense Information</h2>
+                                    </div>
+                                </div>
+                                <AddExpenseForm expense={expense} setExpense={setExpense} />
+                                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={() => { addExpense(); expenseFormOpen() }} >ADD</button>
+                            </div>
+                        </div>
+                        :
+                        <></>
                 }
             </section>
         </section>

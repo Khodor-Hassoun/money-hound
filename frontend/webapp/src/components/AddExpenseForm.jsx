@@ -5,8 +5,8 @@ function AddExpenseForm({ setExpense, expense }) {
     }
     return (
         <div className="flex flex-col">
-            <div className="flex flex-col p-2 w-full">
-                <label htmlFor="email">Bill name</label>
+            <div className="flex flex-col py-2 w-full">
+                <label htmlFor="email" className="font-semibold">Bill name</label>
                 <input
                     type="text"
                     id="bill_name"
@@ -16,8 +16,8 @@ function AddExpenseForm({ setExpense, expense }) {
                 ></input>
             </div>
             {/* PASSWORD LABEL AND INPUT */}
-            <div className="flex flex-col p-2 w-full">
-                <label htmlFor="price">Price</label>
+            <div className="flex flex-col py-2 w-full">
+                <label htmlFor="price" className="font-semibold">Price</label>
                 <input
                     type="text"
                     id="price"

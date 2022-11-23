@@ -323,7 +323,7 @@ function Insights() {
                     </div>
 
                     {/* MONTHLY PROJECT REVENUE */}
-                    <div className="w-[90%] h-[330px] flex flex-col items-center text-sm">
+                    {/* <div className="w-[90%] h-[330px] flex flex-col items-center text-sm">
                         <h2 className="mb-5 text-2xl font-semibold">Projects Sold during <span>
                             {todaysMonth}
                         </span></h2>
@@ -336,6 +336,21 @@ function Insights() {
                                 <Tooltip />
                                 <Line dataKey={'payment'} />
                             </LineChart>
+                        </ResponsiveContainer>
+                    </div> */}
+                    <div className="w-[90%] h-[330px] flex flex-col items-center text-sm">
+                        <h2 className="mb-5 text-2xl font-semibold">Projects Sold during <span>
+                            {todaysMonth}
+                        </span></h2>
+                        <ResponsiveContainer width='100%' height={300}>
+                            <BarChart width={500} height={300} data={dailyRev}>
+                                <CartesianGrid strokeDasharray='2' />
+                                <XAxis dataKey='project.project_name' />
+                                <YAxis />
+                                <ZAxis dataKey='customer.customer_name' />
+                                <Tooltip />
+                                <Bar dataKey={'payment'} barSize={40} fill='#026A75' />
+                            </BarChart>
                         </ResponsiveContainer>
                     </div>
 

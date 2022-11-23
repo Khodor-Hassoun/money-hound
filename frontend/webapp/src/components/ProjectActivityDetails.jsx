@@ -19,7 +19,7 @@ function ProjectActivityDetails({ activity, index, bottom, project }) {
                 <div className="w-[10px] rounded-xl h-2/3 items-center ml-2" style={lightbarColor}></div>
             </div>
             <div className="px-4 py-2 flex flex-col justify-around flex-grow ">
-                <h2 className="text-xl font-semibold">{activity.objective}</h2>
+                <h2 className="text-xl font-semibold">{activity.objective.toUpperCase()}</h2>
                 <div className="flex space-x-6">
                     <span>{`Start date: ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`}</span>
                     <span>{`End date: ${endDate.getDate()}/${endDate.getMonth() + 1}/${endDate.getFullYear()}`}</span>

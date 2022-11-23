@@ -41,6 +41,7 @@ function Navbar() {
             // thumbDiv.src= `${reader.result}`
             let image64 = reader.result
             setNewLogo(image64)
+            setUpdatedCompany({ ...updatedCompany, logo: image64 })
         })
 
         reader.readAsDataURL(file)
@@ -65,7 +66,7 @@ function Navbar() {
             })
     }
     function updatedCompanyReq() {
-        axios.put("http://localhost:3002/company/", { ...company, ...updatedCompany, logo: newLogo }, headers)
+        axios.put("http://localhost:3002/company/", { ...company, ...updatedCompany }, headers)
             .then(res => {
                 console.log(res)
                 const updatedCompanyValid = res.data
@@ -124,7 +125,7 @@ function Navbar() {
                 {/* LINKS */}
                 <div
                     className="space-y-6 flex-grow">
-                    {/* {
+                    {
                         user.user_type === 1 ?
                             <div>
                                 <NavLink to={'/company'}>
@@ -150,7 +151,7 @@ function Navbar() {
                             </div>
                             :
                             <></>
-                    } */}
+                    }
                     {
                         user.user_type === 1 ?
                             <div>
