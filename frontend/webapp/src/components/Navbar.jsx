@@ -305,7 +305,7 @@ function Navbar() {
                                     <h2 className="flex justify-center text-2xl font-semibold" onClick={() => console.log(newLogo)}>Company information</h2>
                                 </div>
                             </div>
-                            <div className="self-center">
+                            <div className="self-center py-2">
                                 <input type="file" name="logo" id="logo" onChange={imageTo64} hidden />
                                 <label htmlFor="logo" className="">
                                     <img src={newLogo} alt='logo' className="w-[140px] h-[140px] border rounded-full border-black"></img>

@@ -31,22 +31,25 @@ function CompanyCard({ value }) {
         })
     }
 
+
     return (
         <>
-            <div className="bg-beau rounded-xl flex w-full items-center space-x-5 p-2 shadow-xl hover:p-3 hover:shadow-2xl" onClick={companyRequest}>
-                <div>
-                    <div className="h-[60px] w-[60px] bg-white flex justify-center items-center rounded-xl">
-                        <div className="h-[50px] w-[50px] rounded-xl">
-                            <label htmlFor="hidden-input">
+            <div className="flex justify-between items-center  p-3 bg-offWhite hover:brightness-90 hover:cursor-pointer" onClick={companyRequest}>
+                {/* COMPAMY DETAILS */}
+                <div className="flex items-center space-x-6">
+                    <div>
+                        <div className="h-[60px] w-[60px] bg-offWhite flex justify-center items-center rounded-xl">
+                            <div className="h-[60px] w-[60px] rounded-xl">
+
                                 <img src={value.logo ? publicImagesFolder + value.logo : logo} alt="logo" className="h-full w-full rounded-xl" />
-                                {/* <img src={logo} alt="logo" className="h-full w-full rounded-xl" /> */}
-                            </label>
-                            <input type="file" className="invisible" id="hidden-input" />
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="flex flex-col justify-between">
-                    <h2 className="text-2xl">{value.name}</h2>
+                    <div className="flex flex-col justify-between">
+                        <h2 className="text-xl font-semibold">{value.name.toUpperCase()}</h2>
+                    </div>
+
                 </div>
 
             </div>

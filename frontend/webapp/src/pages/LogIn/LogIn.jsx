@@ -72,7 +72,7 @@ function LogIn() {
           <label htmlFor="password" className="font-semibold">Password</label>
           <input
             type="password"
-            placeholder="password"
+            placeholder="Password"
             id="password"
             name="password"
             className="border-black border-solid border rounded py-2 px-1"
