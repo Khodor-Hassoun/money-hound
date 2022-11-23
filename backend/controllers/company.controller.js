@@ -40,7 +40,7 @@ const updateCompany = async (req, res) => {
   if (!capital) capital = company.capital;
   if (logo) {
     let image = saveImage(logo);
-    logo = `${image.localPath}${image.filename}`;
+    logo = `${image.filename}`;
   } else logo = company.logo;
   if (company_email) {
     const companyEmailTest = await prisma.company.findMany({

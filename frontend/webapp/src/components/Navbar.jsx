@@ -19,8 +19,9 @@ function Navbar() {
     const [updatedUser, setUpdatedUser] = useState({})
     const [updatedCompany, setUpdatedCompany] = useState({})
     const [newLogo, setNewLogo] = useState()
+    const [logoPath, setLogoPath] = useState('')
     const navigate = useNavigate()
-
+    const publicImagesFolder = 'http://localhost:3002/images/images/'
     const headers = {
         headers: {
             authorization: `Bearer ${user.token}`
@@ -64,7 +65,7 @@ function Navbar() {
             .then(res => {
                 console.log(res)
                 const updatedCompanyValid = res.data
-                dispatch(setCompany({ ...company, ...updatedCompanyValid }))
+                dispatch(setCompany({ ...company, ...updatedCompanyValid, logo: publicImagesFolder + res.data.logo }))
                 companyFormOpen()
             }).catch(e => {
                 console.log(e)
@@ -85,9 +86,9 @@ function Navbar() {
                     <div
                         className="h-[50px] w-[50px] bg-white flex justify-center items-center rounded-xl">
                         <div
-                            className="h-[35px] w-[35px] rounded-xl">
+                            className="h-[50px] w-[50px] rounded-xl">
                             <img
-                                src={`uploads/1234.jpg`}
+                                src={company.logo}
                                 alt="logo"
                                 className="h-full w-full rounded-xl"
                             />

@@ -9,6 +9,7 @@ import ProjectDetails from "../../components/ProjectDetails"
 import ProjectActivityDetails from "../../components/ProjectActivityDetails"
 import SaleInfoForm from "../../components/SaleInfoForm"
 import SaleInfoDetails from "../../components/SaleInfoDetails"
+import ActivityPhaseLegend from "../../components/ActivityPhaseLegend"
 
 function Projects() {
     const company = useSelector(state => state.company)
@@ -230,18 +231,7 @@ function Projects() {
                                     <h2 className="text-2xl flex-grow flex justify-center font-semibold">{project.project_name}</h2>
                                 </div>
                                 <div className="w-full bg-offWhite h-[30px] flex justify-end space-x-4 mb-8">
-                                    <div className="flex items-center space-x-1">
-                                        <div className="bg-beau w-[20px] h-[8px] rounded-full" />
-                                        <p className="text-beau">Planning</p>
-                                    </div>
-                                    <div className="flex items-center space-x-1">
-                                        <div className="bg-duneGold w-[20px] h-[8px] rounded-full" />
-                                        <p className="text-duneGold">Execution</p>
-                                    </div>
-                                    <div className="flex items-center space-x-1">
-                                        <div className="bg-mint w-[20px] h-[8px] rounded-full" />
-                                        <p className="text-mint">Finalization</p>
-                                    </div>
+                                    <ActivityPhaseLegend />
                                 </div>
 
                                 <div className=" space-y-5">
@@ -300,9 +290,12 @@ function Projects() {
                             {/* CONTAINER FOR EMAIL FORM */}
                             <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto rounded-l-md">
                                 {/* HEADER */}
-                                <div className="flex items-center mb-16">
+                                <div className="flex items-center mb-8">
                                     <span className="text-2xl cursor-pointer font-semibold" onClick={() => { projectSaleFormOpen(); projectDetailsOpen() }}>&#10005;</span>
                                     <h2 className="text-2xl flex-grow flex justify-center font-semibold">{project.project_name}</h2>
+                                </div>
+                                <div className="mb-8">
+                                    <h2 className="text-xl font-semibold">Invoice Preview:</h2>
                                 </div>
                                 <div className="flex justify-center h-full w-full">
 

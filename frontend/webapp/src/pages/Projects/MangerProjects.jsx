@@ -6,6 +6,7 @@ import ProjectCard from "../../components/ProjectCard"
 import ProjectDetails from "../../components/ProjectDetails"
 import ProjectActivityDetails from "../../components/ProjectActivityDetails"
 import AddActivityForm from "../../components/AddActivityForm"
+import ActivityPhaseLegend from "../../components/ActivityPhaseLegend"
 function ManagerProject() {
     const user = useSelector(state => state.user)
     const company = useSelector(state => state.company)
@@ -114,33 +115,38 @@ function ManagerProject() {
                             {/* CONTAINER FOR ACTIVITIES */}
                             <div className="flex flex-col flex-grow h-full bg-offWhite px-6 pb-10 pt-4 overflow-auto rounded-l-md">
                                 {/* HEADER */}
-                                <div className="flex items-center mb-16">
+                                <div className="flex items-center mb-8">
                                     <span className="text-2xl cursor-pointer font-semibold" onClick={projectDetailsOpen}>&#10005;</span>
                                     <h2 className="text-2xl flex-grow flex justify-center font-semibold">{project.project_name}</h2>
                                 </div>
+                                <div className="w-full bg-offWhite h-[30px] flex justify-end space-x-4 mb-8">
+                                    <ActivityPhaseLegend />
+                                </div>
                                 {/* ACTIVITY CARDS */}
-                                {
-                                    project.Activity.length === 0 ?
-                                        <div className="">
-                                            <h1 className=" text-xl font-semibold">No activities yet</h1>
-                                        </div>
-                                        :
-                                        <></>
-                                }
-                                {
-                                    addActivityPopUp ?
-                                        project.hasOwnProperty('Activity') ?
-                                            project.Activity.map((activity, index) => {
+                                <div className="space-y-5">
+                                    {
+                                        project.Activity.length === 0 ?
+                                            <div className="">
+                                                <h1 className=" text-xl font-semibold">No activities yet</h1>
+                                            </div>
+                                            :
+                                            <></>
+                                    }
+                                    {
+                                        addActivityPopUp ?
+                                            project.hasOwnProperty('Activity') ?
+                                                project.Activity.map((activity, index) => {
 
-                                                return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} project={project} />
-                                            }) : <></>
-                                        :
-                                        project.hasOwnProperty('Activity') ?
-                                            project.Activity.map((activity, index) => {
+                                                    return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} project={project} />
+                                                }) : <></>
+                                            :
+                                            project.hasOwnProperty('Activity') ?
+                                                project.Activity.map((activity, index) => {
 
-                                                return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} project={project} />
-                                            }) : <></>
-                                }
+                                                    return <ProjectActivityDetails activity={activity} index={index} top={0} bottom={project.Activity.length} project={project} />
+                                                }) : <></>
+                                    }
+                                </div>
                                 {/* {
                                     activities.length !== 0 ?
                                         activities.map((activity, index) => {

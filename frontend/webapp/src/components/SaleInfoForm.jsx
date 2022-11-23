@@ -14,14 +14,14 @@ function SaleInfoForm({ project, projectSaleDetails }) {
     }
 
     return (
-        <div className="w-2/3 h-[100%] bg-white overflow-auto shadow-md">
+        <div className="w-11/12 h-[100%] bg-white overflow-auto shadow-md">
             {/* CONTENT CONTAINER */}
-            <div className="px-4 py-6 space-y-10">
+            <div className="px-6 py-10 space-y-10">
                 {/* COMPANY DETAILS */}
                 <div className="flex justify-between">
                     {/* COMPANY DETAILS */}
-                    <div className="flex flex-col">
-                        <h2 className="">{company.name}</h2>
+                    <div className="flex flex-col space-y-1 text-white">
+                        <h2 className="text-xl font-semibold">{company.name}</h2>
                         <p>{company.email}</p>
                         <p>Address: {company.address}</p>
                         <p>Phone: {company.phone}</p>
@@ -46,8 +46,8 @@ function SaleInfoForm({ project, projectSaleDetails }) {
 
                 </div>
                 {/* CUSTOMER DETAILS */}
-                <div>
-                    <p>{project.customer.customer_name}</p>
+                <div className="space-y-1">
+                    <p className="font-semibold text-xl">{project.customer.customer_name}</p>
                     <p>Date issued at: {date}</p>
                     <p>Payment for: {dueDate}</p>
 
