@@ -176,7 +176,7 @@ function ManagerProject() {
                                 }
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
-                                        className="bg-none text-tangerine border-tangerine border-2 w-full h-full py-1 rounded-md cursor-pointer font-bold"
+                                        className="bg-none text-tangerine border-tangerine border-2 w-full h-full py-1 rounded-md cursor-pointer font-bold bg-ming hover:brightness-110"
                                         onClick={updateProject}>
                                         UPDATE
                                     </button>

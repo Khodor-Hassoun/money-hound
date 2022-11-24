@@ -273,7 +273,7 @@ function Navbar() {
                         /> */}
                     </div>
                     <button
-                        className="bg-tangerine text-white my-4 lg:p-2 lg:rounded-xl w-full cursor-pointer p-1 rounded-xl font-bold"
+                        className="bg-tangerine text-white my-4 lg:p-2 lg:rounded-xl w-full cursor-pointer p-1 rounded-xl font-bold hover:brightness-110"
                         onClick={signOut}
                     >SIGN OUT
                     </button>

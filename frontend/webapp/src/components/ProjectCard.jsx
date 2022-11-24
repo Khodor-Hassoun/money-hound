@@ -44,7 +44,7 @@ function ProjectCard({ project }) {
                 </div>
             </div>
             <div className="py-2 space-y-2">
-                <p className="font-bold">Recent activity:</p>
+                <p className="font-bold">Recent Activity:</p>
                 {
                     project.Activity.length === 0 ? <p>No Activities yet</p>
                         :

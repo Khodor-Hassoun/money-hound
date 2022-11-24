@@ -270,7 +270,7 @@ function Projects() {
                                 }
                                 <div className="flex flex-col space-y-2 w-full">
                                     <button
-                                        className=" bg-none border-2 text-tangerine border-tangerine font-bold w-full h-full py-1 rounded-md cursor-pointer"
+                                        className=" bg-none border-2 text-tangerine border-tangerine bg-ming font-bold w-full h-full py-1 rounded-md cursor-pointer hover:brightness-110"
                                         onClick={updateProject}>
                                         UPDATE
                                     </button>

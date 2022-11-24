@@ -82,7 +82,7 @@ function LogIn() {
         </div>
         {/* BUTTON */}
         <button
-          className="bg-tangerine text-white my-4 py-2 rounded-full w-full font-bold"
+          className="bg-tangerine text-white my-4 py-2 rounded-full w-full font-bold hover:brightness-110"
           onClick={() => {
             request();
           }}
