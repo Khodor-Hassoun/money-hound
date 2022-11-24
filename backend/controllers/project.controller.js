@@ -93,9 +93,12 @@ const updateProject = async (req, res) => {
   const { id } = req.body;
   let { project_name, managerId, budget, deadline } = req.body;
   let { project_phase, end_date } = req.body;
-  let { team } = req.body;
+  let { newteam } = req.body;
   const user = req.user;
-
+  const oldTeam = [];
+  console.log(newteam);
+  // res.json(newteam);
+  // return;
   if (!id) {
     return res.status(405).json({ message: "no project id" });
   }
@@ -114,16 +117,40 @@ const updateProject = async (req, res) => {
       team: true,
     },
   });
+  for (let teamMem of projectDet.team) {
+    oldTeam.push({ employeeId: teamMem.employeeId });
+  }
+  if (newteam) {
+    const projectTeam = await prisma.project.update({
+      where: {
+        id: parseInt(id),
+      },
+      data: {
+        team: {
+          disconnect: oldTeam,
+        },
+      },
+    });
+  }
   //   res.json(projectDet);
   //   return;
   //   validate data
+  if (newteam) {
+    const employeeIdArr = [];
+    for (let empDetail of newteam) {
+      employeeIdArr.push({ employeeId: parseInt(empDetail.value) });
+    }
+    newteam = employeeIdArr;
+  }
+  // res.json(newteam);
+  // return;
   project_name = project_name ? project_name : projectDet.project_name;
   managerId = managerId ? managerId : projectDet.managerId;
   budget = budget ? budget : projectDet.budget;
   deadline = deadline ? deadline : projectDet.deadline;
   project_phase = project_phase ? project_phase : projectDet.project_phase_id;
   end_date = end_date ? end_date : projectDet.end_date;
-  team = team ? team : projectDet.team;
+  newteam = newteam ? newteam : projectDet.team;
 
   let customerDeadline = new Date(deadline);
   let endDate = new Date(end_date);
@@ -152,8 +179,34 @@ const updateProject = async (req, res) => {
       id: parseInt(id),
     },
     data: {
-      project_phase_id: project_phase,
-      end_date: endDate,
+      project_phase_id: parseInt(project_phase),
+      team: {
+        deleteMany: projectDet.team,
+      },
+      team: {
+        connect: newteam,
+      },
+    },
+    include: {
+      Activity: {
+        orderBy: [
+          {
+            start_date: "desc",
+          },
+        ],
+      },
+      manager: {
+        include: {
+          user: true,
+        },
+      },
+      team: {
+        include: {
+          user: true,
+        },
+      },
+      project_phase: true,
+      customer: true,
     },
   });
   res.json(project);

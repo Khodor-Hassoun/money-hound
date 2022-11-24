@@ -35,6 +35,53 @@ const addActivity = async (req, res) => {
       },
     },
   });
-  res.json({ activity, updatedProject });
+  const addExpense = await prisma.expense.create({
+    data: {
+      bill_name: "Project Expense",
+      companyId: parseInt(updatedProject.companyId),
+      price: parseInt(money),
+    },
+  });
+  const newProject = await prisma.project.findFirst({
+    where: {
+      id: parseInt(projectId),
+    },
+    include: {
+      Activity: {
+        orderBy: [
+          {
+            start_date: "desc",
+          },
+        ],
+      },
+      manager: {
+        include: {
+          user: true,
+        },
+      },
+      team: {
+        include: {
+          user: true,
+        },
+      },
+      project_phase: true,
+      customer: true,
+    },
+  });
+  res.json(newProject);
 };
-module.exports = { addActivity };
+const getProjectActivities = async (req, res) => {
+  const { id } = req.params;
+  const activities = await prisma.activity.findMany({
+    where: {
+      projectId: parseInt(id),
+    },
+    orderBy: [
+      {
+        start_date: "desc",
+      },
+    ],
+  });
+  res.status(200).json(activities);
+};
+module.exports = { addActivity, getProjectActivities };

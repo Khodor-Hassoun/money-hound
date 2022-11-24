@@ -9,6 +9,10 @@ import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import { setUser } from "../redux/user"
 import { setCompany } from "../redux/company"
+import { VscAccount } from "react-icons/vsc";
+import { AiFillEdit } from "react-icons/ai";
+import { TiEdit } from "react-icons/ti";
+import { BiEdit } from "react-icons/bi";
 function Navbar() {
     const user = useSelector(state => state.user)
     const company = useSelector(state => state.company)
@@ -18,30 +22,31 @@ function Navbar() {
     const [image, setImage] = useState(null)
     const [updatedUser, setUpdatedUser] = useState({})
     const [updatedCompany, setUpdatedCompany] = useState({})
-    const navigate = useNavigate()
+    const [newLogo, setNewLogo] = useState(company.logo)
 
+    const navigate = useNavigate()
+    const publicImagesFolder = 'http://localhost:3002/images/images/'
     const headers = {
         headers: {
             authorization: `Bearer ${user.token}`
         }
     }
-    const onImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            setImage(URL.createObjectURL(event.target.files[0]));
-        }
+
+    function imageTo64(e) {
+        const file = e.target.files[0]
+        const reader = new FileReader()
+
+        reader.addEventListener('load', () => {
+            console.log(reader.result)
+            // thumbDiv.src= `${reader.result}`
+            let image64 = reader.result
+            setNewLogo(image64)
+            setUpdatedCompany({ ...updatedCompany, logo: image64 })
+        })
+
+        reader.readAsDataURL(file)
+
     }
-    const convertToBase64 = (image) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(image);
-            fileReader.onload = () => {
-                resolve(fileReader.result);
-            };
-            fileReader.onerror = (error) => {
-                reject(error);
-            };
-        });
-    };
 
     function userFormOpen() {
         setUserForm((userForm) => !userForm)
@@ -61,11 +66,12 @@ function Navbar() {
             })
     }
     function updatedCompanyReq() {
-        axios.put("http://localhost:3002/company/", { ...company, ...updatedCompany }, headers)
+        axios.put("http://localhost:3002/company/", { ...company, ...updatedCompany, logo: updatedCompany.logo }, headers)
             .then(res => {
                 console.log(res)
                 const updatedCompanyValid = res.data
-                dispatch(setCompany({ ...company, ...updatedCompanyValid }))
+                dispatch(setCompany({ ...company, ...updatedCompanyValid, logo: publicImagesFolder + res.data.logo }))
+                setNewLogo(publicImagesFolder + res.data.logo)
                 companyFormOpen()
             }).catch(e => {
                 console.log(e)
@@ -82,37 +88,64 @@ function Navbar() {
                 className="h-screen w-1/6 lg:w-1/5 bg-ming text-white flex flex-col justify-between m-0 mr-4 py-4">
                 {/* LOGO NAME AND OPTIONS */}
                 <div
-                    className="flex flex-col xl:flex-row xl:items-center px-2 space-y-3 lg:space-y-0 xl:justify-between">
-                    {/* <div
-                        className="h-[50px] w-[50px] bg-white flex justify-center items-center rounded-xl">
+                    className="flex flex-col xl:items-start px-2 space-y-3 lg:space-y-3 xl:justify-between mb-16">
+                    <div
+                        className="h-[60px] w-[60px] bg-white flex justify-center items-center rounded-xl">
                         <div
-                            className="h-[35px] w-[35px] rounded-xl">
+                            className="h-[60px] w-[60px] rounded-xl">
                             <img
-                                src={logo}
+                                src={company.logo}
                                 alt="logo"
                                 className="h-full w-full rounded-xl"
                             />
                         </div>
-                    </div> */}
-                    <h2
-                        className="text-xl lg:text-xl">
-                        {company.name}
-                    </h2>
-                    {
-                        user.user_type === 1 ?
-                            <img
-                                src={dots}
-                                className="cursor-pointer max-w-[24px]"
-                                alt="options"
-                                onClick={companyFormOpen}
-                            />
-                            :
-                            <></>
-                    }
+                    </div>
+                    <div className="flex justify-between w-full items-center">
+                        <h2
+                            className="text-xl lg:text-xl">
+                            {company.name}
+                        </h2>
+                        {
+                            user.user_type === 1 ?
+                                <div onClick={companyFormOpen} className='cursor-pointer'>
+                                    <BiEdit size={16} style={{ color: 'white' }} />
+                                </div>
+                                :
+                                <></>
+                        }
+
+                    </div>
                 </div>
                 {/* LINKS */}
                 <div
-                    className="space-y-6">
+                    className="space-y-6 flex-grow">
+                    {/* {
+                        user.user_type === 1 ?
+                            <div>
+                                <NavLink to={'/company'}>
+                                    {({ isActive }) => {
+                                        return isActive ? (
+                                            <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
+                                                <div className="h-full bg-tangerine w-[12px]" />
+                                                <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg font-bold">Company</p>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                                <div
+                                                    className="h-full bg-white w-[12px]"
+                                                />
+                                                <p
+                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Company
+                                                </p>
+                                            </div>
+                                        )
+                                    }}
+                                </NavLink>
+                            </div>
+                            :
+                            <></>
+                    } */}
                     {
                         user.user_type === 1 ?
                             <div>
@@ -122,7 +155,7 @@ function Navbar() {
                                             <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
                                                 {/* Lightbar */}
                                                 <div className="h-full bg-tangerine w-[12px]" />
-                                                <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg">Employees</p>
+                                                <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg font-bold">Employees</p>
                                             </div>
                                         ) : (
                                             <div
@@ -150,7 +183,7 @@ function Navbar() {
                                             <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
                                                 {/* Lightbar */}
                                                 <div className="h-full bg-tangerine w-[12px]" />
-                                                <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-lg">Projects</p>
+                                                <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg font-bold">Projects</p>
                                             </div>
                                         ) : (
                                             <div
@@ -159,7 +192,7 @@ function Navbar() {
                                                     className="h-full bg-white w-[12px]"
                                                 />
                                                 <p
-                                                    className="text-white w-full ml-2 lg:ml-8 lg:text-lg">Projects
+                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Projects
                                                 </p>
                                             </div>
                                         )
@@ -174,7 +207,7 @@ function Navbar() {
                                             <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
                                                 {/* Lightbar */}
                                                 <div className="h-full bg-tangerine w-[12px]" />
-                                                <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-lg">Projects</p>
+                                                <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg font-bold">Projects</p>
                                             </div>
                                         ) : (
                                             <div
@@ -183,7 +216,7 @@ function Navbar() {
                                                     className="h-full bg-white w-[12px]"
                                                 />
                                                 <p
-                                                    className="text-white w-full ml-2 lg:ml-8 lg:text-lg">Projects
+                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Projects
                                                 </p>
                                             </div>
                                         )
@@ -200,7 +233,7 @@ function Navbar() {
                                             <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
                                                 {/* Lightbar */}
                                                 <div className="h-full bg-tangerine w-[12px]" />
-                                                <p className="text-tangerine w-full ml-2 lg:ml-8 lg:text-lg">Insights</p>
+                                                <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg font-bold">Insights</p>
                                             </div>
                                         ) : (
                                             <div
@@ -209,7 +242,7 @@ function Navbar() {
                                                     className="h-full bg-white w-[12px]"
                                                 />
                                                 <p
-                                                    className="text-white w-full ml-2 lg:ml-8 lg:text-lg">Insights
+                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Insights
                                                 </p>
                                             </div>
                                         )
@@ -220,23 +253,27 @@ function Navbar() {
                             <></>
                     }
                 </div>
+                {/* NAVBAR FOOTER */}
                 <div
-                    className="flex flex-col px-2">
+                    className="flex flex-col px-7">
                     <div
                         className="flex flex-col lg:flex-row lg:justify-between items-start lg:items-center">
                         <h2
                             className="text-xl lg:text-xl"
                         >{`${user.firstname} ${user.lastname}`}
                         </h2>
-                        <img
+                        <div onClick={userFormOpen} className='cursor-pointer'>
+                            <BiEdit size={16} style={{ color: 'white' }} />
+                        </div>
+                        {/* <img
                             src={dots}
                             className="cursor-pointer max-w-[24px]"
                             alt="options"
                             onClick={userFormOpen}
-                        />
+                        /> */}
                     </div>
                     <button
-                        className="bg-tangerine text-white my-4 lg:p-2 lg:rounded-xl w-full cursor-pointer p-1 rounded-xl"
+                        className="bg-tangerine text-white my-4 lg:p-2 lg:rounded-xl w-full cursor-pointer p-1 rounded-xl font-bold hover:brightness-110"
                         onClick={signOut}
                     >SIGN OUT
                     </button>
@@ -248,15 +285,15 @@ function Navbar() {
             {
                 userForm ?
                     <div className={`${userForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                        <div className="bg-offWhite flex flex-col py-10 px-6">
-                            <div className="flex p-2">
-                                <span className="text-2xl cursor-pointer" onClick={userFormOpen}>&#10005;</span>
+                        <div className="bg-offWhite flex flex-col pb-10 pt-6 px-6 rounded-md">
+                            <div className="flex p-2 mb-2">
+                                <span className="text-2xl cursor-pointer font-semibold" onClick={userFormOpen}>&#10005;</span>
                                 <div className="w-full">
-                                    <h2 className="flex justify-center text-2xl">Personal information</h2>
+                                    <h2 className="flex justify-center text-2xl font-semibold">Personal Information</h2>
                                 </div>
                             </div>
                             <UserInfoForm setUpdatedUser={setUpdatedUser} updatedUser={updatedUser} />
-                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={updatedUserReq}>UPDATE</button>
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={updatedUserReq}>UPDATE</button>
                         </div>
                     </div>
                     :
@@ -266,15 +303,22 @@ function Navbar() {
             {
                 companyForm ?
                     <div className={`${companyForm ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
-                        <div className="bg-offWhite flex flex-col py-10 px-6">
-                            <div className="flex p-2">
-                                <span className="text-2xl cursor-pointer" onClick={companyFormOpen}>&#10005;</span>
+                        <div className="bg-offWhite flex flex-col pb-10 pt-6 px-6 rounded-md">
+                            <div className="flex p-2 mb-2">
+                                <span className="text-2xl cursor-pointer font-semibold" onClick={companyFormOpen}>&#10005;</span>
                                 <div className="w-full">
-                                    <h2 className="flex justify-center text-2xl">Company information</h2>
+                                    <h2 className="flex justify-center text-2xl font-semibold" onClick={() => console.log(newLogo)}>Company Information</h2>
                                 </div>
                             </div>
+                            <div className="self-center py-2">
+                                <input type="file" name="logo" id="logo" onChange={imageTo64} hidden />
+                                <label htmlFor="logo" className="">
+                                    <img src={newLogo} alt='logo' className="w-[140px] h-[140px] border rounded-full border-black"></img>
+                                </label>
+
+                            </div>
                             <CompanyInfoForm setUpdatedCompany={setUpdatedCompany} updatedCompany={updatedCompany} />
-                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full" onClick={updatedCompanyReq}>UPDATE</button>
+                            <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={updatedCompanyReq}>UPDATE</button>
                         </div>
                     </div>
                     :

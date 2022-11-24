@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import CompanyCard from "../../components/CompanyCard"
-
+import moneyNew from "../../resources/images/Money_Hound_cropped.png"
 
 
 function Companies() {
@@ -22,10 +22,26 @@ function Companies() {
     }, [])
 
     return (
-        <section className="bg-ming flex flex-col justify-center items-center h-screen w-screen space-y-3">
-            {
-                companies.map((value, index) => <CompanyCard value={value} />)
-            }
+        <section className="bg-ming flex flex-col items-center justify-center h-screen w-screen">
+            <div className="bg-offWhite flex flex-col pb-28 w-[450px] max-h-[700px] overflow-auto  rounded-md items-center">
+                <div className="w-[176px] h-[140px]">
+                    <img src={moneyNew} alt="Logo" className="h-full w-full" />
+                </div>
+
+                <div className="w-full">
+
+                    <h1 className="text-lg font-bold mt-10 mb-6 px-6">Please Select a Company</h1>
+                    <div className="w-full flex-grow justify-center px-6 flex flex-col bg-offWhite overflow-auto divide-y-2 divide-gray-400">
+                        {
+                            companies.map((value, index) => <CompanyCard value={value} />)
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+
+
 
         </section>
     )

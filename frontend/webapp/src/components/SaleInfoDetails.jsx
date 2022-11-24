@@ -25,23 +25,23 @@ function SaleInfoDetails({ setProjectSaleDetails }) {
     return (
         <div className="flex flex-col">
             <div className="flex flex-col py-2">
-                <label htmlFor="date">Due Date</label>
+                <label htmlFor="date" className="text-white font-semibold">Due Date</label>
                 <input type="date" id="date" name="payment_date" onChange={e => setDate(e.target.value)} className="border-black border-solid border rounded py-1 px-1"></input>
             </div>
             <div className="flex flex-col py-2">
-                <label htmlFor="pretax">Price</label>
+                <label htmlFor="pretax" className="text-white font-semibold">Price</label>
                 <input type="number" id="pretax" name="pretax" ref={priceRef} defaultValue={0} onChange={paymentChange} className="border-black border-solid border rounded py-1 px-1"></input>
             </div>
             <div className="flex flex-col py-2">
-                <label htmlFor="tax">VAT (%) </label>
+                <label htmlFor="tax" className="text-white font-semibold">VAT (%) </label>
                 <input type="number" id="date" name="tax" ref={vatRef} max={100} defaultValue={0} onChange={() => { paymentChange(); console.log(payment) }} className="border-black border-solid border rounded py-1 px-1"></input>
             </div>
             <div className="flex flex-col py-2">
-                <label htmlFor="payment">Net Price:</label>
+                <label htmlFor="payment" className="text-white font-semibold">Net Price</label>
                 <input type="number" id="payment" name="payment" value={payment} className="border-black border-solid border rounded py-1 px-1"></input>
             </div>
             <div className="flex flex-col py-2">
-                <label htmlFor="tax">Description</label>
+                <label htmlFor="tax" className="text-white font-semibold">Description</label>
                 <input type="text" id="description" name="description" onChange={e => setDescription(e.target.value)} className="border-black border-solid border rounded py-1 px-1"></input>
             </div>
         </div>

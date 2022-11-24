@@ -11,6 +11,7 @@ money.jpg
 # testing
 /coverage
 resources/
+uploads/
 sketches.txt
 # production
 /build

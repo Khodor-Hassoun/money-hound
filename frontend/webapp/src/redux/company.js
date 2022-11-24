@@ -8,6 +8,7 @@ export const companySlice = createSlice({
     phone: "",
     capital: "",
     address: "",
+    logo: "",
   },
   reducers: {
     setCompany: (state, action) => {
@@ -17,6 +18,7 @@ export const companySlice = createSlice({
       state.phone = parseInt(action.payload.phone);
       state.capital = parseInt(action.payload.capital);
       state.address = action.payload.address;
+      state.logo = action.payload.logo;
     },
   },
 });

@@ -40,7 +40,7 @@ model Company {
   name     String
   email    String
   address  String
-  phone    Int
+  phone    String
   owner    User       @relation(fields: [ownerId], references: [id])
   ownerId  Int
   logo     String?
@@ -117,27 +117,26 @@ model Project {
 }
 
 model Activity {
-  id            Int      @id @default(autoincrement())
-  project       Project  @relation(fields: [projectId], references: [id])
-  projectId     Int
-  objective     String
-  money         Int
-  start_date    DateTime @default(now())
-  end_date      DateTime
-  project_phase Int
+  id         Int      @id @default(autoincrement())
+  project    Project  @relation(fields: [projectId], references: [id])
+  projectId  Int
+  objective  String
+  money      Int
+  start_date DateTime @default(now())
+  end_date   DateTime
 
   @@map("activities")
 }
 
 model Revenue {
-  id             Int      @id @default(autoincrement())
+  id             Int      @id
   project        Project  @relation(fields: [projectId], references: [id])
   projectId      Int      @unique
   company        Company  @relation(fields: [companyId], references: [id])
   companyId      Int
   customer       Customer @relation(fields: [customer_email], references: [customer_email])
   customer_email String
-  payment_date   DateTime @default(now())
+  payment_date   DateTime
   payment        Int
 
   @@map("revenues")

@@ -10,27 +10,28 @@ function ProjectCard({ project }) {
         <>
             {/* CARD TITLE AND MANAGER */}
             <div className="flex flex-col mb-3 space-y-2">
-                <h2 className="text-xl font-bold">{project.project_name}</h2>
+                <h2 className="text-xl font-bold">{project.project_name.toUpperCase()}</h2>
                 <span>{`Project Manager: ${project.manager.user.firstname} ${project.manager.user.lastname}`}</span>
                 <div className="flex justify-between">
                     <span>{`Customer: ${project.customerId}`}</span>
-                    <span>{`Deadline: ${deadline.getDate()}/${deadline.getMonth() + 1}/${deadline.getFullYear()}`}</span>
+                    <span>{`Started: ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`}</span>
+
                 </div>
                 <div className="flex justify-between">
                     <span>{`Phase: ${project.project_phase.type}`}</span>
-                    <span>{`Started: ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`}</span>
+                    <span>{`Deadline: ${deadline.getDate()}/${deadline.getMonth() + 1}/${deadline.getFullYear()}`}</span>
                 </div>
             </div>
             {/* MONEY BAR, BUDGET, SPENT */}
             <div className="my-4">
                 {/* MONEY BAR */}
-                <div className="w-full bg-tea h-[40px]">
+                <div className="w-full bg-tea h-[30px] rounded">
                     {
                         percent > 100 ?
-                            <div className={`bg-venetian h-full w-full`}>
+                            <div className={`bg-venetian h-full w-full rounded`}>
                             </div>
                             :
-                            <div className={`bg-mint h-full`} style={{ width: `${percentstr}` }}>
+                            <div className={`bg-mint h-full rounded`} style={{ width: `${percentstr}` }}>
                             </div>
                     }
                     {/* <div className={`bg-mint h-full`} style={{ width: `${percent}` }}>
@@ -43,7 +44,7 @@ function ProjectCard({ project }) {
                 </div>
             </div>
             <div className="py-2 space-y-2">
-                <p className="font-bold">Recent activity:</p>
+                <p className="font-bold">Recent Activity:</p>
                 {
                     project.Activity.length === 0 ? <p>No Activities yet</p>
                         :

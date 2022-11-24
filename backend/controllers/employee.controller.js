@@ -11,10 +11,21 @@ const getEmployees = async (req, res) => {
   const employees = await prisma.employee.findMany({
     where: {
       companyId: parseInt(companyId),
+      Project: {
+        every: {
+          companyId: parseInt(companyId),
+        },
+      },
+      ProjectId: {
+        every: {
+          companyId: parseInt(companyId),
+        },
+      },
     },
     include: {
       user: true,
       Project: true,
+      ProjectId: true,
     },
   });
   const count = employees.length;
@@ -28,7 +39,7 @@ const getEmployeesManager = async (req, res) => {
     },
     include: {
       user: true,
-      Project: true,
+      // Project: true,
     },
   });
   res.status(200).json(employees);
@@ -138,30 +149,15 @@ const updateEmployee = async (req, res) => {
   res.status(200).json(updatedEmployee);
 };
 const deleteEmployee = async (req, res) => {
-  const { id } = req.body;
-  const employee = await prisma.employee.findFirst({
+  const { employeeId } = req.body;
+
+  const deleted = await prisma.employee.delete({
     where: {
-      employeeId: parseInt(id),
-    },
-    include: {
-      Project: {
-        include: {
-          team: true,
-        },
-      },
-      ProjectId: true,
+      employeeId: parseInt(employeeId),
     },
   });
-  // Remove employee from projects first
-  // const employeeProjects = await prisma.employee.findMany({
-  //   where: {
-  //     managerId: employee.employeeId,
-  //     team: {
-  //       employeeId: employee.employeeId,
-  //     },
-  //   },
-  // });
-  res.json(employee);
+  res.json(deleted);
+  // res.json({ delEmployee, employee });
 };
 module.exports = {
   addEmployee,
