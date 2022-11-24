@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 import axios from "axios"
 import Navbar from "../../components/Navbar"
 import ProjectCard from "../../components/ProjectCard"
@@ -66,6 +68,7 @@ function ManagerProject() {
             },
         }).then(res => {
             console.log(res.data)
+            addToFire()
             setProject(res.data)
             addActivityPopUpOpen()
         })
@@ -80,6 +83,24 @@ function ManagerProject() {
             setProject(res.data)
         })
     }
+
+    // FIREBASE
+    const addToFire = async (e) => {
+        try {
+            const docRef = await addDoc(collection(db, "activities"), {
+                activity: activityDetails,
+            });
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    }
+
+
+
+
+
+
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
