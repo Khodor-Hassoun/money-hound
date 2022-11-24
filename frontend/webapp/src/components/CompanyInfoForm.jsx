@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
-import { setCompany } from "../redux/company"
+import { useSelector } from 'react-redux'
+
 
 function CompanyInfoForm({ setUpdatedCompany, updatedCompany }) {
     const company = useSelector((state) => state.company)
-    const dispatch = useDispatch()
+
     function companyChange(e) {
-        // console.log({ [e.target.name]: e.target.value })
         setUpdatedCompany({ ...updatedCompany, [e.target.name]: e.target.value })
     }
+
     return (
         <>
             <div className="flex flex-col">

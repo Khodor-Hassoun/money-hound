@@ -1,10 +1,10 @@
-import { useRef } from "react"
-
 function EmployeeDataForm({ employee, updateEmployee }) {
     const date = new Date(employee.start_date)
+
     function dataChange(e) {
         updateEmployee({ ...employee, [e.target.name]: e.target.value })
     }
+
     if (Object.keys(employee) !== 0) {
         return (
             <div className="flex flex-col">
@@ -38,23 +38,8 @@ function EmployeeDataForm({ employee, updateEmployee }) {
                                     :
                                     <></>
                             }
-
                         </div>
-                        {/* CHECK IF THEY ARE A MANGER */}
                     </p>
-                    {/* <p>Project:</p> */}
-                    {/* {
-                        employee.project.length === 0 ?
-                            <></>
-                            :
-                            <>
-                                {
-                                    employee.project.map((project, indes) => (
-                                        <span>{`${project.project_name}, `}</span>
-                                    ))
-                                }
-                            </>
-                    } */}
 
                 </div>
                 {/* DATA */}

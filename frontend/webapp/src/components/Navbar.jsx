@@ -1,7 +1,7 @@
 import UserInfoForm from "./UserInfoForm"
 import CompanyInfoForm from "./CompanyInfoForm"
 import { useState } from "react"
-import { Link, NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import { setUser } from "../redux/user"
@@ -17,7 +17,6 @@ function Navbar() {
 
     const [userForm, setUserForm] = useState(false)
     const [companyForm, setCompanyForm] = useState(false)
-    const [image, setImage] = useState(null)
     const [updatedUser, setUpdatedUser] = useState({})
     const [updatedCompany, setUpdatedCompany] = useState({})
     const [newLogo, setNewLogo] = useState(publicImagesFolder + company.logo)
