@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import axios from "axios"
 import Navbar from "../../components/Navbar"
@@ -96,7 +96,20 @@ function ManagerProject() {
         }
     }
 
+    const fetchPost = async () => {
 
+        await getDocs(collection(db, "activities"))
+            .then((querySnapshot) => {
+                const newData = querySnapshot.docs
+                    .map((doc) => ({ ...doc.data(), id: doc.id }));
+                console.log(newData);
+            })
+
+    }
+
+    useEffect(() => {
+        fetchPost();
+    }, [])
 
 
 
