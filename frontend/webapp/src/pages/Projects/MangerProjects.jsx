@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
+import { db, requestForToken, onMessageListener } from "../../firebase";
 import axios from "axios"
 import Navbar from "../../components/Navbar"
 import ProjectCard from "../../components/ProjectCard"
@@ -9,6 +9,8 @@ import ProjectDetails from "../../components/ProjectDetails"
 import ProjectActivityDetails from "../../components/ProjectActivityDetails"
 import AddActivityForm from "../../components/AddActivityForm"
 import ActivityPhaseLegend from "../../components/ActivityPhaseLegend"
+import Notification from "../../components/Notification";
+
 function ManagerProject() {
     const user = useSelector(state => state.user)
     const company = useSelector(state => state.company)
@@ -23,6 +25,17 @@ function ManagerProject() {
     const [updatedProjectData, setupdatedProjectData] = useState({})
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [phaseOption, setPhaseOption] = useState()
+    const [isTokenFound, setTokenFound] = useState(false);
+
+
+    requestForToken(setTokenFound);
+    onMessageListener()
+        .then((payload) => {
+            //   setNotification({title: payload?.notification?.title, body: payload?.notification?.body});     
+            console.log(payload)
+        })
+        .catch((err) => console.log('failed: ', err));
+
     function projectDetailsOpen() {
         setProjectDetailsForm(bool => !bool)
     }
@@ -68,7 +81,7 @@ function ManagerProject() {
             },
         }).then(res => {
             console.log(res.data)
-            addToFire()
+            // addToFire(res.data)
             setProject(res.data)
             addActivityPopUpOpen()
         })
@@ -83,33 +96,37 @@ function ManagerProject() {
             setProject(res.data)
         })
     }
-
+    onMessageListener().then(payload => {
+        // setShow(true);
+        // setNotification({title: payload.notification.title, body: payload.notification.body})
+        console.log(payload);
+    }).catch(err => console.log('failed: ', err));
     // FIREBASE
-    const addToFire = async (e) => {
-        try {
-            const docRef = await addDoc(collection(db, "activities"), {
-                activity: activityDetails,
-            });
-            console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
-    }
+    // const addToFire = async (res) => {
+    //     try {
+    //         const docRef = await addDoc(collection(db, "activities"), {
+    //             activity: res.Activity[res.Activity.length - 1],
+    //         });
+    //         console.log("Document written with ID: ", docRef.id);
+    //     } catch (e) {
+    //         console.error("Error adding document: ", e);
+    //     }
+    // }
 
-    const fetchPost = async () => {
+    // const fetchPost = async () => {
 
-        await getDocs(collection(db, "activities"))
-            .then((querySnapshot) => {
-                const newData = querySnapshot.docs
-                    .map((doc) => ({ ...doc.data(), id: doc.id }));
-                console.log(newData);
-            })
+    //     await getDocs(collection(db, "activities"))
+    //         .then((querySnapshot) => {
+    //             const newData = querySnapshot.docs
+    //                 .map((doc) => ({ ...doc.data(), id: doc.id }));
+    //             console.log(newData);
+    //         })
 
-    }
+    // }
 
-    useEffect(() => {
-        fetchPost();
-    }, [])
+    // useEffect(() => {
+    //     fetchPost();
+    // }, [])
 
 
 
@@ -140,6 +157,7 @@ function ManagerProject() {
                     }
 
                 </div>
+                <Notification />
             </section >
             {
                 projectDetailsForm ?
