@@ -1,11 +1,9 @@
-import money from "../../resources/images/moneyhound.jpg";
 import moneyNew from "../../resources/images/Money_Hound_cropped.png"
-import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from 'react-redux'
 import { gettoken, setUser } from "../../redux/user"
-import Navbar from "../../components/Navbar";
+
 
 function LogIn() {
 
