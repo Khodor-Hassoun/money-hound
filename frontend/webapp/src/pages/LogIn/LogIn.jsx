@@ -16,7 +16,7 @@ function LogIn() {
   function userChange(e) {
     dispatch(setUser({ ...user, [e.target.name]: e.target.value }))
   }
-
+  console.log(process.env.REACT_APP_BASE_URL)
   function request() {
     axios
       .post("http://localhost:3002/auth/login", {
