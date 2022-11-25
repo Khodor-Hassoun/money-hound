@@ -58,8 +58,8 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(102).png) | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(103).png) |
 
-| Project Manger                                                                                | Company Owner                                                                               |
-| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Project Manger                                                                | Company Owner                                                                               |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(104).png) | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-59190a1074.gif) |
 
 | Insights                                                                                                                                                     
