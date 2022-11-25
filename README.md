@@ -29,14 +29,17 @@
 > This design was planned before on paper, then moved to Figma app for the fine details.
 > Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
-| Landing                                                                                | Home/Search                                                                               |
+| Landing                                                                                | User Companies                                                                               |
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| ![Landing](https://drive.google.com/file/d/1uqksbzDH7EdlfECuv9MXzn4Z0eZAu1z1/view?usp=share_link) | ![User companies](https://drive.google.com/file/d/1Mc1i9MiJe2EjCeIzTo2hDC5NP2a3sqqZ/view?usp=share_link) |
+| ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(88).png) | ![User companies](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(92).png) |
 
-| Admin Panel                                                                                | Artist's Albums                                                                               |
+| Admin Panel                                                                                | Employee table                                                                               |
 | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| ![Artists results](https://github.com/julescript/spotifyndr/blob/master/demo/Artists_Page.jpg) | ![Artist's Albums](https://github.com/julescript/spotifyndr/blob/master/demo/Albums_Page.jpg) |
+| ![Artists results](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(100).png) | ![Artist's Albums](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%202022-11-25%20220016.png) |
 
+| Project Details                                                                                | Sell project                                                                               |
+| ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| ![Artists results](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(98).png) | ![Artist's Albums](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(99).png) |
 <br><br>
 
 <img src="./readme/title4.svg"/>
@@ -51,11 +54,17 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Uing the above mentioned tecch stacks and the wireframes build with figma from the user sotries we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-| Landing                                                                                | Home/Search                                                                               |
+| Employee Page                                                                                | Projects Page                                                                               |
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| ![Landing](https://github.com/julescript/spotifyndr/blob/master/demo/Landing_Page.jpg) | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
+| ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(102).png) | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(103).png) |
 
-<br><br>
+| Project Manger                                                                                | Company Owner                                                                               |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(104).png) | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-59190a1074.gif) |
+
+| Insights                                                                                                                                                     
+ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-4812e6f131.gif) 
 <img src="./readme/title6.svg"/>
 
 > This is an example of how you may give instructions on setting up your project locally.
