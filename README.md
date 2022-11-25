@@ -60,11 +60,11 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 | Project Manger                                                                | Company Owner                                                                               |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(104).png) | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-59190a1074.gif) |
+|<img src="https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(104).png" width="450">  | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-59190a1074.gif) |
 
-| Insights                                                                                                                                                     
- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-4812e6f131.gif) 
+| Insights Page                                                                                | Insights gif                                                                               |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| <img src="https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(108).png" width="450"> | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-4812e6f131.gif) |
 <img src="./readme/title6.svg"/>
 
 > This is an example of how you may give instructions on setting up your project locally.
