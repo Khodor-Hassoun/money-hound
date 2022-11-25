@@ -13,6 +13,7 @@ money.jpg
 resources/
 uploads/
 sketches.txt
+.env
 # production
 /build
 
