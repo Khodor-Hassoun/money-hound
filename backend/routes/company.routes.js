@@ -10,10 +10,12 @@ const {
   updateCompany,
   deleteCompany,
 } = require("../controllers/company.controller");
+
 const {
   addCustomer,
   getCustomers,
 } = require("../controllers/customer.controller");
+
 const {
   getEmployees,
   addEmployee,
@@ -59,6 +61,5 @@ router.delete("/employee", authMiddleware, ownerMiddleware, deleteEmployee);
 router.get("/user/:ownerId", authMiddleware, ownerMiddleware, getUserCompanies);
 router.get("/:companyId", authMiddleware, ownerMiddleware, getCompany);
 router.put("/", authMiddleware, ownerMiddleware, updateCompany);
-// router.delete("/", authMiddleware, ownerMiddleware, deleteCompany);
 
 module.exports = router;

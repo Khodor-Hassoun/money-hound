@@ -15,7 +15,7 @@
 
 > Money Hound is an accounting and project management website that helps companies handle their employees, projects and finances 
 >
-> There are 3 user types. The owner who can add employees, create projects and moniter the companies finances. The project manager who can be responsible for multiple projects and are able to add employees to their team.
+> There are 2 user types. The owner who can add employees, create projects and moniter the companies finances. The project manager who can be responsible for multiple projects and is able to add colleagues to their team.
 
 ### User Stories
 
@@ -29,36 +29,42 @@
 > This design was planned before on paper, then moved to Figma app for the fine details.
 > Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
-| Landing                                                                                | Home/Search                                                                               |
+| Landing                                                                                | User Companies                                                                               |
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| ![Landing](https://github.com/julescript/spotifyndr/blob/master/demo/Landing_Page.jpg) | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
+| ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(88).png) | ![User companies](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(92).png) |
 
-| Artists results                                                                                | Artist's Albums                                                                               |
+| Admin Panel                                                                                | Employee table                                                                               |
 | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| ![Artists results](https://github.com/julescript/spotifyndr/blob/master/demo/Artists_Page.jpg) | ![Artist's Albums](https://github.com/julescript/spotifyndr/blob/master/demo/Albums_Page.jpg) |
+| ![Artists results](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(100).png) | ![Artist's Albums](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%202022-11-25%20220016.png) |
 
+| Project Details                                                                                | Sell project                                                                               |
+| ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| ![Artists results](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(98).png) | ![Artist's Albums](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(99).png) |
 <br><br>
 
 <img src="./readme/title4.svg"/>
 
 Here's a brief high-level overview of the tech stack the Well app uses:
 
-- This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
-- For persistent storage (database), the app uses the [Hive](https://hivedb.dev/) package which allows the app to create a custom storage schema and save it to a local database.
-- To send local push notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) package which supports Android, iOS, and macOS.
-  - 🚨 Currently, notifications aren't working on macOS. This is a known issue that we are working to resolve!
-- The app uses the font ["Work Sans"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
-
+- This project uses the [React library](https://reactjs.org/). React is a free, open-source JavaScript library. It works best to build user interfaces by combining sections of code (components) into full websites.
+- This project uses [Express](https://expressjs.com/). A minimal and flexible [Node.js](https://nodejs.org/en/about/) web application framework that provides a robust set of features for web and mobile applications. 
+- For persistent storage (database), the app uses the [MySQL](https://dev.mysql.com/doc/)  MySQL is an open-source relational database management system.
 <br><br>
 <img src="./readme/title5.svg"/>
 
 > Uing the above mentioned tecch stacks and the wireframes build with figma from the user sotries we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-| Landing                                                                                | Home/Search                                                                               |
+| Employee Page                                                                                | Projects Page                                                                               |
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| ![Landing](https://github.com/julescript/spotifyndr/blob/master/demo/Landing_Page.jpg) | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
+| ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(102).png) | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(103).png) |
 
-<br><br>
+| Project Manger                                                                | Company Owner                                                                               |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+|<img src="https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(104).png" width="450">  | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-59190a1074.gif) |
+
+| Insights Page                                                                                | Insights gif                                                                               |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| <img src="https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(108).png" width="450"> | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-4812e6f131.gif) |
 <img src="./readme/title6.svg"/>
 
 > This is an example of how you may give instructions on setting up your project locally.
@@ -77,16 +83,13 @@ This is an example of how to list things you need to use the software and how to
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/Khodor-Hassoun/money-hound.git
    ```
-3. Install NPM packages
+2. Install NPM  packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
-   ```
+

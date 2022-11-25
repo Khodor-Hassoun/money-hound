@@ -1,82 +1,76 @@
-import logo from "../resources/images/Your-Logo-here.png"
-import dots from "../resources/images/icons8-more-24.png"
 import UserInfoForm from "./UserInfoForm"
 import CompanyInfoForm from "./CompanyInfoForm"
 import { useState } from "react"
-import { MdSpaceDashboard } from "react-icons/md"
-import { Link, NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import { setUser } from "../redux/user"
 import { setCompany } from "../redux/company"
-import { VscAccount } from "react-icons/vsc";
-import { AiFillEdit } from "react-icons/ai";
-import { TiEdit } from "react-icons/ti";
 import { BiEdit } from "react-icons/bi";
 function Navbar() {
     const user = useSelector(state => state.user)
     const company = useSelector(state => state.company)
+    const headers = { headers: { authorization: `Bearer ${user.token}` } }
+    const publicImagesFolder = process.env.REACT_APP_PUBLIC_IMAGES
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const [userForm, setUserForm] = useState(false)
     const [companyForm, setCompanyForm] = useState(false)
-    const [image, setImage] = useState(null)
     const [updatedUser, setUpdatedUser] = useState({})
     const [updatedCompany, setUpdatedCompany] = useState({})
-    const [newLogo, setNewLogo] = useState(company.logo)
+    const [newLogo, setNewLogo] = useState(publicImagesFolder + company.logo)
 
-    const navigate = useNavigate()
-    const publicImagesFolder = 'http://localhost:3002/images/images/'
-    const headers = {
-        headers: {
-            authorization: `Bearer ${user.token}`
-        }
-    }
+
 
     function imageTo64(e) {
         const file = e.target.files[0]
         const reader = new FileReader()
-
         reader.addEventListener('load', () => {
             console.log(reader.result)
-            // thumbDiv.src= `${reader.result}`
             let image64 = reader.result
             setNewLogo(image64)
             setUpdatedCompany({ ...updatedCompany, logo: image64 })
         })
-
         reader.readAsDataURL(file)
-
     }
 
+    // FUNCTIONS TO OPEN MODALS
     function userFormOpen() {
         setUserForm((userForm) => !userForm)
     }
     function companyFormOpen() {
         setCompanyForm((companyForm) => !companyForm)
     }
+
     function updatedUserReq() {
-        axios.put("http://localhost:3002/user/", { ...user, ...updatedUser }, headers)
+        axios.put(`${process.env.REACT_APP_BASE_URL}user/`, { ...user, ...updatedUser }, headers)
             .then(res => {
-                console.log(res)
                 const updatedUserValid = res.data
-                dispatch(setUser({ ...user, ...updatedUserValid }))
+                const oldPassword = user.password
+                dispatch(setUser({ ...user, ...updatedUserValid, password: updatedUser.password ? updatedUser.password : oldPassword }))
                 userFormOpen()
             }).catch(e => {
                 console.log(e)
             })
     }
+
     function updatedCompanyReq() {
-        axios.put("http://localhost:3002/company/", { ...company, ...updatedCompany, logo: updatedCompany.logo }, headers)
+        axios.put(`${process.env.REACT_APP_BASE_URL}company/`, {
+            ...company,
+            ...updatedCompany,
+            logo: updatedCompany.logo ? updatedCompany.logo : ''
+        }, headers)
             .then(res => {
-                console.log(res)
                 const updatedCompanyValid = res.data
-                dispatch(setCompany({ ...company, ...updatedCompanyValid, logo: publicImagesFolder + res.data.logo }))
+                dispatch(setCompany({ ...company, ...updatedCompanyValid, logo: res.data.logo }))
                 setNewLogo(publicImagesFolder + res.data.logo)
                 companyFormOpen()
             }).catch(e => {
                 console.log(e)
             })
     }
+
     function signOut() {
         dispatch(setCompany({}))
         dispatch(setUser({}))
@@ -94,7 +88,7 @@ function Navbar() {
                         <div
                             className="h-[60px] w-[60px] rounded-xl">
                             <img
-                                src={company.logo}
+                                src={publicImagesFolder + company.logo}
                                 alt="logo"
                                 className="h-full w-full rounded-xl"
                             />
@@ -119,33 +113,6 @@ function Navbar() {
                 {/* LINKS */}
                 <div
                     className="space-y-6 flex-grow">
-                    {/* {
-                        user.user_type === 1 ?
-                            <div>
-                                <NavLink to={'/company'}>
-                                    {({ isActive }) => {
-                                        return isActive ? (
-                                            <div className="flex h-[50px] items-center bg-ming brightness-110 scale-y-110">
-                                                <div className="h-full bg-tangerine w-[12px]" />
-                                                <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg font-bold">Company</p>
-                                            </div>
-                                        ) : (
-                                            <div
-                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
-                                                <div
-                                                    className="h-full bg-white w-[12px]"
-                                                />
-                                                <p
-                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Company
-                                                </p>
-                                            </div>
-                                        )
-                                    }}
-                                </NavLink>
-                            </div>
-                            :
-                            <></>
-                    } */}
                     {
                         user.user_type === 1 ?
                             <div>
@@ -157,17 +124,15 @@ function Navbar() {
                                                 <div className="h-full bg-tangerine w-[12px]" />
                                                 <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg font-bold">Employees</p>
                                             </div>
-                                        ) : (
-                                            <div
-                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
-                                                <div
-                                                    className="h-full bg-white w-[12px]"
-                                                />
-                                                <p
-                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Employees
-                                                </p>
-                                            </div>
                                         )
+                                            :
+                                            (
+                                                <div
+                                                    className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                                    <div className="h-full bg-white w-[12px]" />
+                                                    <p className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Employees</p>
+                                                </div>
+                                            )
                                     }}
                                 </NavLink>
                             </div>
@@ -185,17 +150,14 @@ function Navbar() {
                                                 <div className="h-full bg-tangerine w-[12px]" />
                                                 <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg font-bold">Projects</p>
                                             </div>
-                                        ) : (
-                                            <div
-                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
-                                                <div
-                                                    className="h-full bg-white w-[12px]"
-                                                />
-                                                <p
-                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Projects
-                                                </p>
-                                            </div>
                                         )
+                                            :
+                                            (
+                                                <div className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                                    <div className="h-full bg-white w-[12px]" />
+                                                    <p className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Projects</p>
+                                                </div>
+                                            )
                                     }}
                                 </NavLink>
                             </div>
@@ -209,17 +171,16 @@ function Navbar() {
                                                 <div className="h-full bg-tangerine w-[12px]" />
                                                 <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg font-bold">Projects</p>
                                             </div>
-                                        ) : (
-                                            <div
-                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
-                                                <div
-                                                    className="h-full bg-white w-[12px]"
-                                                />
-                                                <p
-                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Projects
-                                                </p>
-                                            </div>
                                         )
+                                            :
+                                            (
+                                                <div
+                                                    className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                                    <div className="h-full bg-white w-[12px]"
+                                                    />
+                                                    <p className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Projects</p>
+                                                </div>
+                                            )
                                     }}
                                 </NavLink>
                             </div>
@@ -235,17 +196,14 @@ function Navbar() {
                                                 <div className="h-full bg-tangerine w-[12px]" />
                                                 <p className="text-tangerine w-full ml-2 lg:ml-6 lg:text-lg font-bold">Insights</p>
                                             </div>
-                                        ) : (
-                                            <div
-                                                className="flex h-[50px] items-center bg-ming hover:brightness-110">
-                                                <div
-                                                    className="h-full bg-white w-[12px]"
-                                                />
-                                                <p
-                                                    className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Insights
-                                                </p>
-                                            </div>
                                         )
+                                            :
+                                            (
+                                                <div className="flex h-[50px] items-center bg-ming hover:brightness-110">
+                                                    <div className="h-full bg-white w-[12px]" />
+                                                    <p className="text-white w-full ml-2 lg:ml-6 lg:text-lg">Insights</p>
+                                                </div>
+                                            )
                                     }}
                                 </NavLink>
                             </div>
@@ -265,12 +223,6 @@ function Navbar() {
                         <div onClick={userFormOpen} className='cursor-pointer'>
                             <BiEdit size={16} style={{ color: 'white' }} />
                         </div>
-                        {/* <img
-                            src={dots}
-                            className="cursor-pointer max-w-[24px]"
-                            alt="options"
-                            onClick={userFormOpen}
-                        /> */}
                     </div>
                     <button
                         className="bg-tangerine text-white my-4 lg:p-2 lg:rounded-xl w-full cursor-pointer p-1 rounded-xl font-bold hover:brightness-110"

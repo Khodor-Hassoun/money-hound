@@ -8,8 +8,6 @@ const addActivity = async (req, res) => {
   if (!objective || !money || !end_date)
     return res.json({ message: "Incomplete data" });
   let endDate = new Date(end_date);
-  //   res.json({ endDate, objective, projectId });
-  //   return;
   const project = await prisma.project.findUnique({
     where: {
       id: parseInt(projectId),
@@ -70,6 +68,7 @@ const addActivity = async (req, res) => {
   });
   res.json(newProject);
 };
+
 const getProjectActivities = async (req, res) => {
   const { id } = req.params;
   const activities = await prisma.activity.findMany({
@@ -84,4 +83,5 @@ const getProjectActivities = async (req, res) => {
   });
   res.status(200).json(activities);
 };
+
 module.exports = { addActivity, getProjectActivities };

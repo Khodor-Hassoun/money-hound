@@ -11,6 +11,7 @@ const getUser = async (req, res) => {
   });
   res.status(200).json(user);
 };
+
 const updateUser = async (req, res) => {
   const { id } = req.user;
   let { email, password, firstname, lastname } = req.body;
@@ -54,11 +55,11 @@ const updateUser = async (req, res) => {
       lastname: lastname,
       email: email,
       password: encryptedpassword,
-      // user_type: 1,
     },
   });
   res.json(updatedUser);
 };
+
 const getCompanies = async (req, res) => {
   const { id } = req.user;
   const options = [];
@@ -94,6 +95,7 @@ const getCompanies = async (req, res) => {
   });
   res.status(200).json(companies);
 };
+
 const selectCompany = async (req, res) => {
   const { companyId } = req.body;
   const { id } = req.user;

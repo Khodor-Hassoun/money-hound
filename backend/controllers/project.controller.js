@@ -97,8 +97,7 @@ const updateProject = async (req, res) => {
   const user = req.user;
   const oldTeam = [];
   console.log(newteam);
-  // res.json(newteam);
-  // return;
+
   if (!id) {
     return res.status(405).json({ message: "no project id" });
   }
@@ -132,8 +131,7 @@ const updateProject = async (req, res) => {
       },
     });
   }
-  //   res.json(projectDet);
-  //   return;
+
   //   validate data
   if (newteam) {
     const employeeIdArr = [];
@@ -142,8 +140,7 @@ const updateProject = async (req, res) => {
     }
     newteam = employeeIdArr;
   }
-  // res.json(newteam);
-  // return;
+
   project_name = project_name ? project_name : projectDet.project_name;
   managerId = managerId ? managerId : projectDet.managerId;
   budget = budget ? budget : projectDet.budget;

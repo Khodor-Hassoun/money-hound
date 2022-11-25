@@ -14,6 +14,10 @@ import ActivityPhaseLegend from "../../components/ActivityPhaseLegend"
 function Projects() {
     const company = useSelector(state => state.company)
     const user = useSelector(state => state.user)
+    const headers = { headers: { authorization: `Bearer ${user.token}` } }
+
+
+
     const [customerForm, setCustomerForm] = useState(false)
     const [projectForm, setProjectForm] = useState(false)
     const [customerData, setCustomerData] = useState({})
@@ -42,95 +46,63 @@ function Projects() {
     }
     // GET PROJECTS
     useEffect(() => {
-        axios.get("http://localhost:3002/project/", {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log('----------PROJECTS DATA---------')
-            console.log(res)
-            setProjects(res.data)
-            console.log('----------/PROJECTS DATA-----------')
-
-        })
+        axios.get(`${process.env.REACT_APP_BASE_URL}project/`, headers)
+            .then(res => {
+                setProjects(res.data)
+            })
     }, [projectForm, projectSaleForm, projectDetailsForm])
+
     // GET CUSTOMERS
     useEffect(() => {
-        axios.get("http://localhost:3002/company/customers", {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log('---------CUSTOMERS----------')
-            console.log(res)
-            setCustomers(res.data)
-            console.log('---------/CUSTOMERS----------')
-
-        })
+        axios.get(`${process.env.REACT_APP_BASE_URL}company/customers`, headers)
+            .then(res => {
+                setCustomers(res.data)
+            })
     }, [customerForm])
+
     // GET EMPLOYEES
     useEffect(() => {
-        axios.get("http://localhost:3002/company/employees", {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log(res.data)
-            // setEmployees(res.data.employees)
-            setEmployees(res.data.employees)
-        })
+        axios.get(`${process.env.REACT_APP_BASE_URL}company/employees`, headers)
+            .then(res => {
+                setEmployees(res.data.employees)
+            })
     }, [])
+
     // ADD CUSTOMER
     function addCustomer() {
-        axios.post("http://localhost:3002/company/customer", { id: company.id, ...customerData }, {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log(res)
-            customerFormOpen()
-
-        })
+        axios.post(`${process.env.REACT_APP_BASE_URL}company/customer`, { id: company.id, ...customerData }, headers)
+            .then(res => {
+                customerFormOpen()
+            })
     }
     // ADD PROJECT
     function addProject() {
-        axios.post("http://localhost:3002/project/", newProjectData, {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log(res)
-            addProjectFomrOpen()
-        })
+        axios.post(`${process.env.REACT_APP_BASE_URL}project/`, newProjectData, headers)
+            .then(res => {
+                addProjectFomrOpen()
+            })
     }
+
     function updateProject() {
-        axios.put("http://localhost:3002/project/", updatedProjectData, {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log(res)
-            setProject(updatedProjectData)
-        })
+        axios.put(`${process.env.REACT_APP_BASE_URL}project/`, updatedProjectData, headers)
+            .then(res => {
+                setProject(updatedProjectData)
+            })
     }
-    // 
     // SELL PROJECT
     function sellProject() {
-        axios.post("http://localhost:3002/company/revenue", {
+        axios.post(`${process.env.REACT_APP_BASE_URL}company/revenue`, {
             projectId: project.id,
             customer_email: project.customer.customer_email,
             payment: projectSaleDetails.payment,
             payment_date: projectSaleDetails.payment_date
-        }, {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log(res)
-            projectSaleFormOpen()
-            projectDetailsOpen()
-        })
+        }, headers)
+            .then(res => {
+                projectSaleFormOpen()
+                projectDetailsOpen()
+            })
     }
+
     return (
         <section className="flex bg-offWhite pr-4">
             <Navbar />
@@ -140,7 +112,6 @@ function Projects() {
 
                     {/* SEARCH AND ADD BUTTON */}
                     <div className="flex items-center h-[30px] space-x-2">
-                        {/* SEARCH BAR */}
                         <button
                             className="bg-tangerine text-white font-bold w-[200px] h-full py-1 rounded-md cursor-pointer"
                             onClick={customerFormOpen}>
@@ -162,7 +133,8 @@ function Projects() {
                             projects.map(project => {
                                 return (
                                     project.end_date === null ?
-                                        <div className="p-8 bg-white shadow-lg rounded-2xl" onClick={() => { setProject(project); setupdatedProjectData(project); projectDetailsOpen() }}>
+                                        <div className="p-8 bg-white shadow-lg rounded-2xl"
+                                            onClick={() => { setProject(project); setupdatedProjectData(project); projectDetailsOpen() }}>
                                             <ProjectCard project={project} />
                                         </div>
                                         :
@@ -188,7 +160,7 @@ function Projects() {
                             </div>
                             <CustomerForm setCustomerData={setCustomerData} />
                             <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold"
-                                onClick={() => { console.log(customerData); addCustomer() }}
+                                onClick={addCustomer}
                             >ADD</button>
                         </div>
                     </div>
@@ -260,11 +232,11 @@ function Projects() {
                                 </div>
                             </div>
                             {/* CONTAINER FOR PROJECT */}
-                            <div className="flex flex-col bg-ming px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full rounded-r-md" onClick={() => { console.log(updatedProjectData) }}>
+                            <div className="flex flex-col bg-ming px-6 pb-10 pt-4 xl:w-3/12 w-1/3 justify-between h-full rounded-r-md" >
                                 <h2 className="text-2xl font-semibold text-white">Details</h2>
                                 {
                                     Object.keys(project).length !== 0 ?
-                                        <ProjectDetails project={project} setProject={setProject} employees={employees} setupdatedProjectData={setupdatedProjectData} updatedProjectData={updatedProjectData} />
+                                        <ProjectDetails project={project} employees={employees} setupdatedProjectData={setupdatedProjectData} updatedProjectData={updatedProjectData} />
                                         :
                                         ""
                                 }

@@ -12,6 +12,5 @@ router.get("/companies", authMiddleware, getCompanies);
 router.post("/companies", authMiddleware, selectCompany);
 router.get("/:id", authMiddleware, getUser);
 router.put("/", authMiddleware, updateUser);
-// router.delete("/", authMiddleware, deleteUser);
 
 module.exports = router;

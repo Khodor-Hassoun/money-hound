@@ -72,6 +72,7 @@ const addRevenue = async (req, res) => {
   });
   res.json({ revenue, company });
 };
+
 const addExpense = async (req, res) => {
   const { bill_name, price } = req.body;
   const { id } = req.company;
@@ -97,6 +98,7 @@ const addExpense = async (req, res) => {
   });
   res.status(200).json({ expense, company });
 };
+
 const getExpenses = async (req, res) => {
   const { id } = req.company;
   const expenses = await prisma.expense.findMany({
@@ -139,4 +141,5 @@ const getExpenses = async (req, res) => {
   });
   res.json({ expenses, revenues });
 };
+
 module.exports = { addRevenue, addExpense, getExpenses, getRevenues };

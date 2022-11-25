@@ -12,6 +12,7 @@ money.jpg
 /coverage
 resources/
 uploads/
+.env
 sketches.txt
 .env
 # production

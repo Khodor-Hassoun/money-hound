@@ -76,7 +76,6 @@ model Employee {
   company      Company   @relation(fields: [companyId], references: [id])
   ProjectId    Project[] @relation("ManagerId")
   Project      Project[] @relation("TeamMembers")
-  // @@id([companyId, userId])
 
   @@map("employees")
 }

@@ -11,6 +11,8 @@ import AddExpenseForm from "../../components/AddExpenseForm"
 function Employees() {
     const user = useSelector(state => state.user)
     const company = useSelector((state) => state.company)
+    const headers = { headers: { authorization: `Bearer ${user.token}` } }
+
     const [employees, setEmployees] = useState([])
     const [employeesCount, setEmployeesCount] = useState(0)
     const [addEmployee, setAddEmployee] = useState(false)
@@ -18,17 +20,11 @@ function Employees() {
     const [expenseForm, setExpenseForm] = useState(false)
     const [newEmployee, setNewEmployee] = useState({})
     const [employeeData, setEmployeeData] = useState({})
-    const [update, setUpdate] = useState(false)
-    const [sortByName, setSortByName] = useState({})
     const [deleteRefresh, setDeleteRefresh] = useState(false)
     const [expense, setExpense] = useState({})
-    const sortRef = useRef()
 
     function addEmployeeForm() {
         setAddEmployee((empForm) => !empForm)
-    }
-    function updateEmployee() {
-        setUpdate(bool => !bool)
     }
     function showEmployeeForm() {
         setShowEmployee(bool => !bool)
@@ -36,78 +32,47 @@ function Employees() {
     function expenseFormOpen() {
         setExpenseForm(bool => !bool)
     }
+
+
     function addEmployeeRequest() {
-        axios.post("http://localhost:3002/company/employee", { companyId: company.id, ...newEmployee }, {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log(res)
-            addEmployeeForm()
-        })
-    }
-    function employeeInfo(employee) {
-        setEmployeeData(employee)
+        axios.post(`${process.env.REACT_APP_BASE_URL}company/employee`, {
+            companyId: company.id,
+            ...newEmployee
+        }, headers)
+            .then(res => {
+                addEmployeeForm()
+            })
     }
     function updateEmployeeRequest(id) {
-        axios.put(`http://localhost:3002/company/employee/${id}`, employeeData, {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log(res.data)
-            showEmployeeForm()
-        })
+        axios.put(`${process.env.REACT_APP_BASE_URL}company/employee/${id}`, employeeData, headers)
+            .then(res => {
+                showEmployeeForm()
+            })
     }
     function deleteEmployee() {
-        axios.delete(`http://localhost:3002/company/employee`, {
+        axios.delete(`${process.env.REACT_APP_BASE_URL}company/employee`, {
             headers: {
                 authorization: `Bearer ${user.token}`
             },
             data: employeeData
         }).then(res => {
-            console.log(res.data)
             showEmployeeForm()
         })
     }
     function addExpense() {
-        axios.post("http://localhost:3002/company/expense", expense, {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log(res.data)
-        })
+        axios.post("http://localhost:3002/company/expense", expense, headers)
+            .then(res => {
+                expenseFormOpen()
+            })
     }
-    // function nameSort() {
-    //     let originalEmployees = employees
-    //     setSortByName(String(sortRef.current.value))
-    //     if (String(sortByName).trim().length !== '') {
-    //         for (let employee of employees) {
-    //             let firstname = String(employee.user.firstname)
-    //             let lastname = String(employee.user.lastname)
-    //             let sortedEmps = []
-    //             if (firstname.includes(sortByName) || lastname.includes(sortByName)) {
-    //                 sortedEmps.push(employee)
-    //             }
-    //             setEmployees(sortedEmps)
-    //         }
-    //     } else {
-    //         setEmployees(originalEmployees)
-    //     }
-    // }
+
     // GET EMPLOYEES
     useEffect(() => {
-        axios.get("http://localhost:3002/company/employees", {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            console.log(res.data)
-            // setEmployees(res.data.employees)
-            setEmployees(res.data.employees)
-            setEmployeesCount(res.data.count)
-        })
+        axios.get(`${process.env.REACT_APP_BASE_URL}company/employees`, headers)
+            .then(res => {
+                setEmployees(res.data.employees)
+                setEmployeesCount(res.data.count)
+            })
 
     }, ["", addEmployee, showEmployee, deleteRefresh])
 
@@ -120,13 +85,9 @@ function Employees() {
                 <header className="flex items-center justify-between w-full my-12">
                     <h2 className="text-4xl font-bold">Employees</h2>
 
-                    {/* SEARCH AND ADD BUTTON */}
+                    {/* ADD BUTTONS */}
                     <div className="flex items-center h-[30px] space-x-2">
-                        {/* SEARCH BAR */}
-                        {/* <input type="text" placeholder="search..." defaultValue={''} name="sort" ref={sortRef} className="rounded-md w-3/5 bg-offWhite flex-grow border-2 px-1 border-black" />
-                        <div className="h-full w-3 flex items-center relative right-7">
-                            <FaSearch size={100} />
-                        </div> */}
+
                         {/* BUTTON */}
                         <button
                             className="bg-tangerine text-white w-[200px] h-full py-1 rounded-md cursor-pointer font-bold" onClick={expenseFormOpen} >
@@ -159,7 +120,8 @@ function Employees() {
                                     background = 'bg-beau'
                                 }
                                 return (
-                                    <tr className={`[&>*]:border [&>*]:border-black [&>*]:p-1 hover:scale-y-125 hover:bg-cyan-50 cursor-pointer ${background}`} onClick={() => { setEmployeeData(employee); showEmployeeForm() }}>
+                                    <tr className={`[&>*]:border [&>*]:border-black [&>*]:p-1 hover:scale-y-125 hover:bg-cyan-50 cursor-pointer ${background}`}
+                                        onClick={() => { setEmployeeData(employee); showEmployeeForm() }}>
                                         <TableRow employee={employee} />
                                     </tr>
                                 )
@@ -181,7 +143,7 @@ function Employees() {
                                     </div>
                                 </div>
                                 <AddEmployeeForm setNewEmployee={setNewEmployee} newEmployee={newEmployee} />
-                                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={() => { console.log(newEmployee); addEmployeeRequest() }} >ADD</button>
+                                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={addEmployeeRequest} >ADD</button>
                             </div>
                         </div>
                         :
@@ -193,7 +155,7 @@ function Employees() {
                         <div className={`${showEmployee ? "z-20 w-screen h-screen flex justify-center items-center fixed bg-opacity-50 bg-black inset-0" : "hidden pointer-events-none"}`}>
                             <div className="bg-offWhite flex flex-col pb-10 pt-6 px-6 rounded-md">
                                 <div className="flex p-2 mb-2">
-                                    <span className="text-2xl font-semibold cursor-pointer" onClick={() => { showEmployeeForm() }}>&#10005;</span>
+                                    <span className="text-2xl font-semibold cursor-pointer" onClick={showEmployeeForm}>&#10005;</span>
                                     <div className="w-full">
                                         <h2 className="flex justify-center text-2xl font-semibold">Employee information</h2>
                                     </div>
@@ -228,7 +190,7 @@ function Employees() {
                                     </div>
                                 </div>
                                 <AddExpenseForm expense={expense} setExpense={setExpense} />
-                                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={() => { addExpense(); expenseFormOpen() }} >ADD</button>
+                                <button className="bg-tangerine text-white my-4 p-2 rounded-full w-full font-bold" onClick={addExpense} >ADD</button>
                             </div>
                         </div>
                         :

@@ -1,8 +1,7 @@
 import { useSelector } from "react-redux"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Select from "react-select"
-// import Select from "react-select"
-function ProjectDetails({ project, setProject, employees, setupdatedProjectData, updatedProjectData, setSelectedOptions, selectedOptions, phaseOption, setPhaseOption }) {
+function ProjectDetails({ project, employees, setupdatedProjectData, updatedProjectData, setSelectedOptions, selectedOptions, phaseOption, setPhaseOption }) {
     const user = useSelector(state => state.user)
 
     const percentstr = (Math.floor((project.money_spent / project.budget) * 100) + '%').toString()
@@ -19,7 +18,6 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
     function dataChange(e) {
         setupdatedProjectData({ ...updatedProjectData, [e.target.name]: e.target.value })
     }
-    // const [selectedOptions, setSelectedOptions] = useState(existingTeam);
 
     function handleSelect(data) {
         setSelectedOptions(data);
@@ -56,7 +54,6 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                     <>
                         <div className="flex flex-col py-2">
                             <label htmlFor="manager" className="text-white font-semibold">Project Manger</label>
-                            {/* <input type="text" id="manager" placeholder={project.manager.user.firstname} name="email" className="border-black border-solid border rounded py-2 px-1"></input> */}
                             <select className="border-black border-solid border rounded py-1 px-1" name="managerId" id="manager" onChange={dataChange}>
                                 <option selected value={project.manager.employeeId}>{`${project.manager.user.firstname} ${project.manager.user.lastname}`}</option>
                                 {
@@ -122,7 +119,7 @@ function ProjectDetails({ project, setProject, employees, setupdatedProjectData,
                             </div>
                     }
                 </div>
-                <div className="flex flex-col" onClick={() => { console.log(phaseOption) }}>
+                <div className="flex flex-col">
                     <p>
                         <span className="font-semibold">Budget: </span>{project.budget}
                     </p>
