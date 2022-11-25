@@ -12,18 +12,11 @@ const authMiddleware = async (req, res, next) => {
         id: decoded.userId,
       },
     });
-    console.log(
-      "---------------------AUTHMIDDLEWARE------------------------------"
-    );
-    console.log(decoded);
-    console.log(
-      "--------------------/AUTHMIDDLEWARE------------------------------"
-    );
 
     req.user = user;
     next();
   } catch (err) {
-    return res.status(401).json({ message: "Unauthorized22222222222" });
+    return res.status(401).json({ message: "Unauthorized" });
   }
 };
 module.exports = authMiddleware;
