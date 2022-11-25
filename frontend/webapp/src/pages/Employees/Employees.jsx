@@ -12,7 +12,6 @@ function Employees() {
     const user = useSelector(state => state.user)
     const company = useSelector((state) => state.company)
     const headers = { headers: { authorization: `Bearer ${user.token}` } }
-    const publicImagesFolder = process.env.REACT_APP_PUBLIC_IMAGES
 
     const [employees, setEmployees] = useState([])
     const [employeesCount, setEmployeesCount] = useState(0)
@@ -21,16 +20,11 @@ function Employees() {
     const [expenseForm, setExpenseForm] = useState(false)
     const [newEmployee, setNewEmployee] = useState({})
     const [employeeData, setEmployeeData] = useState({})
-    const [update, setUpdate] = useState(false)
-    const [sortByName, setSortByName] = useState({})
     const [deleteRefresh, setDeleteRefresh] = useState(false)
     const [expense, setExpense] = useState({})
 
     function addEmployeeForm() {
         setAddEmployee((empForm) => !empForm)
-    }
-    function updateEmployee() {
-        setUpdate(bool => !bool)
     }
     function showEmployeeForm() {
         setShowEmployee(bool => !bool)
@@ -38,9 +32,7 @@ function Employees() {
     function expenseFormOpen() {
         setExpenseForm(bool => !bool)
     }
-    function employeeInfo(employee) {
-        setEmployeeData(employee)
-    }
+
 
     function addEmployeeRequest() {
         axios.post(`${process.env.REACT_APP_BASE_URL}company/employee`, {

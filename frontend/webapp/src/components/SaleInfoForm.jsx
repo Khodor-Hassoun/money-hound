@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"
-import logo from "../resources/images/Your-Logo-here.png"
+
 function SaleInfoForm({ project, projectSaleDetails }) {
+
     const company = useSelector(state => state.company)
-    const [companyLogo, setCompanyLogo] = useState()
-    // const logo = require(company.logo).default
+    const publicImagesFolder = process.env.REACT_APP_PUBLIC_IMAGES
     let date = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
     let dueDate
     if (projectSaleDetails.payment_date) {
@@ -32,7 +31,7 @@ function SaleInfoForm({ project, projectSaleDetails }) {
                         <div
                             className="h-[100px] w-[100px] rounded-full">
                             <img
-                                src={company.logo}
+                                src={publicImagesFolder + company.logo}
                                 alt="logo"
                                 className="h-full w-full rounded-full"
                             />
