@@ -46,7 +46,6 @@ const updateCompany = async (req, res) => {
     const companyEmailTest = await prisma.company.findMany({
       where: {
         email: {
-          // not: company.email,
           equals: company_email,
         },
         id: {
@@ -75,5 +74,6 @@ const updateCompany = async (req, res) => {
   });
   res.status(200).json(updatedCompany);
 };
+
 const deleteCompany = async (req, res) => {};
 module.exports = { getUserCompanies, getCompany, updateCompany, deleteCompany };

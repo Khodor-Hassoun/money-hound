@@ -9,13 +9,10 @@ const signUp = async (req, res) => {
   const { name, company_email, address, phone, capital } = req.body;
   let { logo } = req.body;
   let encryptedpassword;
+
   if (!firstname || !lastname || !name || !address || !phone || !capital)
     return res.status(400).json({ message: "Incomplete data" });
 
-  //   const deleteCompanies = await prisma.company.deleteMany({});
-  //   const deleteUsers = await prisma.user.deleteMany({});
-  //   res.json({ deleteCompanies, deleteUsers });
-  //   return;
   //   Check logo
   if (logo) {
     let image = saveImage(logo);
@@ -57,7 +54,6 @@ const signUp = async (req, res) => {
       user_type: 1,
     },
   });
-  console.log(user);
   const company = await prisma.company.create({
     data: {
       name: name,
@@ -69,7 +65,6 @@ const signUp = async (req, res) => {
       logo: logo,
     },
   });
-  console.log(company);
   res.json({ user, company });
 };
 
@@ -87,7 +82,6 @@ const logIn = async (req, res) => {
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
     expiresIn: "100000000h",
   });
-  // res.redirect
   res.status(200).json({ user, token });
 };
 

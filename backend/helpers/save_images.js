@@ -28,7 +28,6 @@ function saveImage(baseImage) {
   }
   fs.writeFileSync(localPath + filename, base64Data, "base64");
   return { filename, localPath };
-  // return filename;
 }
 
 module.exports = saveImage;

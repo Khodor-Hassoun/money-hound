@@ -31,6 +31,7 @@ const addCustomer = async (req, res) => {
   });
   res.status(200).json(customer);
 };
+
 const getCustomers = async (req, res) => {
   const { id } = req.company;
   const customers = await prisma.customer.findMany({
@@ -40,4 +41,5 @@ const getCustomers = async (req, res) => {
   });
   res.status(200).json(customers);
 };
+
 module.exports = { addCustomer, getCustomers };

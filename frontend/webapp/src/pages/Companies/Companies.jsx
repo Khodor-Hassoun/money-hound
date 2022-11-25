@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
 import CompanyCard from "../../components/CompanyCard"
 import moneyNew from "../../resources/images/Money_Hound_cropped.png"
 
@@ -9,14 +8,10 @@ import moneyNew from "../../resources/images/Money_Hound_cropped.png"
 function Companies() {
     const user = useSelector((state) => state.user)
     const [companies, setCompanies] = useState([])
-    const navigate = useNavigate()
+    const headers = { headers: { authorization: `Bearer ${user.token}` } }
+
     useEffect(() => {
-        axios.get("http://localhost:3002/user/companies", {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            }
-        }).then(res => {
-            console.log(res.data)
+        axios.get(`${process.env.REACT_APP_BASE_URL}user/companies`, headers).then(res => {
             setCompanies(res.data)
         })
     }, [])

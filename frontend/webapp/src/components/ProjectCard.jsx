@@ -4,7 +4,6 @@ function ProjectCard({ project }) {
     const percent = Math.floor((project.money_spent / project.budget) * 100)
     const deadline = new Date(project.deadline)
     const startDate = new Date(project.start_date)
-    // style={{ height: "calc(100vh - 8rem)" }}
 
     return (
         <>
@@ -34,8 +33,6 @@ function ProjectCard({ project }) {
                             <div className={`bg-mint h-full rounded`} style={{ width: `${percentstr}` }}>
                             </div>
                     }
-                    {/* <div className={`bg-mint h-full`} style={{ width: `${percent}` }}>
-                    </div> */}
                 </div>
                 {/* BUDGET */}
                 <div className="flex justify-between w-full">
