@@ -1,7 +1,9 @@
 function AddActivityForm({ setActivityDetails, activityDetails }) {
+
     function dataChange(e) {
         setActivityDetails({ ...activityDetails, [e.target.name]: e.target.value })
     }
+
     return (
         <div className="flex flex-col">
             <div className="flex flex-col py-2">

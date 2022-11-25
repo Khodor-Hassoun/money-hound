@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
-    PieChart, Pie, Cell, Scatter, ScatterChart, ZAxis, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer, LabelList, Label
+    Scatter, ScatterChart, ZAxis, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer
 } from "recharts";
 import Navbar from "../../components/Navbar";
 
@@ -11,13 +11,10 @@ function Insights() {
     const [revenues, setRevenues] = useState([])
     const [dailyRev, setDailyRev] = useState([])
     const [expenses, setExpenses] = useState([])
-    const [employees, setEmployees] = useState([])
     const [monExpenses, setMonExpenses] = useState([])
     const [typeExpenses, setTypeExpenses] = useState([])
-    const [monRevenue, setMonRevenue] = useState([])
     const [customersRevenue, setCustomersRevenue] = useState([])
     const [employeesWage, setEmployeesWage] = useState([])
-    const [totalMonthly, setTotalMonthly] = useState([])
     const [revExp, setRevExp] = useState([])
     const [todaysMonth, setTodaysMonth] = useState(() => {
         const today = new Date()
@@ -25,41 +22,11 @@ function Insights() {
         const year = today.getFullYear()
         return `${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`
     })
-    const headers = {
-        headers: {
-            authorization: `Bearer ${user.token}`
-        }
-    }
-    // GET REVENUES EXPENSES EMPLOYEES
-    useEffect(() => {
-        axios.get("http://localhost:3002/company/revenues", headers)
-            .then(res => {
-                // console.log(res.data)
-                setRevenues(res.data)
-            }).catch(e => {
-                console.log(e)
-            })
-        axios.get("http://localhost:3002/company/expenses", headers).
-            then(res => {
-                setExpenses(res.data)
-                // console.log(res.data)
-            }).catch(e => {
-                console.log(e)
-            })
-        axios.get("http://localhost:3002/company/employees", {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
+    const headers = { headers: { authorization: `Bearer ${user.token}` } }
 
-            setEmployees(res.data.employees)
-            // console.log(res.data.employees)
-
-        })
-    }, [])
     // GET EXPENSES
     useEffect(() => {
-        axios.get("http://localhost:3002/company/expenses", headers).
+        axios.get(`${process.env.REACT_APP_BASE_URL}company/expenses`, headers).
             then(res => {
                 console.log(res.data)
                 setExpenses(res.data)
@@ -107,15 +74,12 @@ function Insights() {
                 for (let entry of Object.entries(byBillNameObj)) {
                     byBillNameArr.push({ bill_name: entry[0], expense: entry[1] })
                 }
-                console.log(byBillNameArr)
                 setMonExpenses(byMonthArr)
                 setTypeExpenses(byBillNameArr)
-                console.log(...byMonthArr)
 
 
 
                 const unsortedRev = res.data.revenues
-                // console.log(res.data)
                 for (let project of unsortedRev) {
                     project.payment_date = new Date(project.payment_date)
                 }
@@ -167,23 +131,16 @@ function Insights() {
                         }
                     }
                 }
-                // console.log('-----------------------')
-                console.log(combinedArr)
                 setRevExp(combinedArr)
-
             }).catch(e => {
                 console.log(e)
             })
     }, [])
     // GET REVENUES
     useEffect(() => {
-        axios.get("http://localhost:3002/company/revenues", headers)
+        axios.get(`${process.env.REACT_APP_BASE_URL}company/revenues`, headers)
             .then(res => {
-                // console.log('------------PROJECT----------')
-                // console.log(res.data)
-                // console.log('-----------/PROJECT----------')
                 const unsortedRev = res.data
-                // console.log(res.data)
                 for (let project of unsortedRev) {
                     project.payment_date = new Date(project.payment_date)
                 }
@@ -227,41 +184,33 @@ function Insights() {
 
     // GET EMPLOYEES TO GET THEIR PAY
     useEffect(() => {
-        axios.get("http://localhost:3002/company/employees", {
-            headers: {
-                authorization: `Bearer ${user.token}`
-            },
-        }).then(res => {
-            const empArr = res.data.employees
-            const byJobPositionObj = {}
-            const byJobPositionArr = []
-            for (let employee of empArr) {
-                if (`${employee.job_position}` in byJobPositionObj) {
-                    byJobPositionObj[`${employee.job_position}`] += parseInt(employee.wage)
-                    byJobPositionObj[`${employee.job_position} count`] += 1
-                } else {
-                    byJobPositionObj[`${employee.job_position}`] = 0
-                    byJobPositionObj[`${employee.job_position} count`] = 0
-                    byJobPositionObj[`${employee.job_position}`] += parseInt(employee.wage)
-                    byJobPositionObj[`${employee.job_position} count`] += 1
-                }
-            }
-            for (let entry of Object.entries(byJobPositionObj)) {
-                for (let secondEntry of Object.entries(byJobPositionObj)) {
-                    if (entry[0] === secondEntry[0].substring(0, secondEntry[0].indexOf(' ')) && secondEntry[0].substring(secondEntry[0].indexOf(' ') + 1) === 'count') {
-                        byJobPositionArr.push({ job_position: entry[0], average: entry[1] / secondEntry[1] })
+        axios.get(`${process.env.REACT_APP_BASE_URL}company/employees`, headers)
+            .then(res => {
+                const empArr = res.data.employees
+                const byJobPositionObj = {}
+                const byJobPositionArr = []
+                for (let employee of empArr) {
+                    if (`${employee.job_position}` in byJobPositionObj) {
+                        byJobPositionObj[`${employee.job_position}`] += parseInt(employee.wage)
+                        byJobPositionObj[`${employee.job_position} count`] += 1
+                    } else {
+                        byJobPositionObj[`${employee.job_position}`] = 0
+                        byJobPositionObj[`${employee.job_position} count`] = 0
+                        byJobPositionObj[`${employee.job_position}`] += parseInt(employee.wage)
+                        byJobPositionObj[`${employee.job_position} count`] += 1
                     }
                 }
-                // console.log(entry)
-            }
-            setEmployeesWage(byJobPositionArr)
-        })
+                for (let entry of Object.entries(byJobPositionObj)) {
+                    for (let secondEntry of Object.entries(byJobPositionObj)) {
+                        if (entry[0] === secondEntry[0].substring(0, secondEntry[0].indexOf(' ')) && secondEntry[0].substring(secondEntry[0].indexOf(' ') + 1) === 'count') {
+                            byJobPositionArr.push({ job_position: entry[0], average: entry[1] / secondEntry[1] })
+                        }
+                    }
+                }
+                setEmployeesWage(byJobPositionArr)
+            })
     }, [])
 
-
-    function logData() {
-
-    }
 
 
     return (
@@ -314,7 +263,6 @@ function Insights() {
                                 <CartesianGrid strokeDasharray='1 1' />
                                 <XAxis dataKey={'bill_name'} >
                                 </XAxis>
-                                {/* <Label value={'Company expense types'} offset={0} position="insideTop" /> */}
                                 <YAxis />
                                 <Tooltip />
                                 <Bar dataKey={'expense'} fill="#C1121F" barSize={40} />
@@ -323,21 +271,6 @@ function Insights() {
                     </div>
 
                     {/* MONTHLY PROJECT REVENUE */}
-                    {/* <div className="w-[90%] h-[330px] flex flex-col items-center text-sm">
-                        <h2 className="mb-5 text-2xl font-semibold">Projects Sold during <span>
-                            {todaysMonth}
-                        </span></h2>
-                        <ResponsiveContainer width='100%' height={300}>
-                            <LineChart width={500} height={300} data={dailyRev}>
-                                <CartesianGrid strokeDasharray='2' />
-                                <XAxis dataKey='project.project_name' />
-                                <YAxis />
-                                <ZAxis dataKey='customer.customer_name' />
-                                <Tooltip />
-                                <Line dataKey={'payment'} />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </div> */}
                     <div className="w-[90%] h-[330px] flex flex-col items-center text-sm mb-10">
                         <h2 className="mb-5 text-2xl font-semibold">Projects Sold during <span>
                             {todaysMonth}
@@ -353,10 +286,6 @@ function Insights() {
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
-
-                    {/* FIRST ROW */}
-                    {/* <div className="flex w-full h-[30%] justify-between">
-                    </div> */}
                 </div>
             </section>
         </section >
