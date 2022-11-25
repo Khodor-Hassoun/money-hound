@@ -31,9 +31,9 @@
 
 | Landing                                                                                | Home/Search                                                                               |
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| ![Landing](https://github.com/julescript/spotifyndr/blob/master/demo/Landing_Page.jpg) | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
+| ![Landing](https://drive.google.com/file/d/1uqksbzDH7EdlfECuv9MXzn4Z0eZAu1z1/view?usp=share_link) | ![User companies](https://drive.google.com/file/d/1Mc1i9MiJe2EjCeIzTo2hDC5NP2a3sqqZ/view?usp=share_link) |
 
-| Artists results                                                                                | Artist's Albums                                                                               |
+| Admin Panel                                                                                | Artist's Albums                                                                               |
 | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | ![Artists results](https://github.com/julescript/spotifyndr/blob/master/demo/Artists_Page.jpg) | ![Artist's Albums](https://github.com/julescript/spotifyndr/blob/master/demo/Albums_Page.jpg) |
 
