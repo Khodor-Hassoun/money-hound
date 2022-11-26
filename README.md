@@ -54,6 +54,12 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Uing the above mentioned tecch stacks and the wireframes build with figma from the user sotries we have, the implementation of the app is shown as below, these are screenshots from the real app
 
+| User Signup                                                                                | Company Signup                                                                               |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%20(117).png) | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%20(118).png) |
+
+
+
 | Employee Page                                                                                | Projects Page                                                                               |
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | ![Landing](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(102).png) | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(103).png) |
