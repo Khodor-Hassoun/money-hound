@@ -66,6 +66,10 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%20(111).png)  | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%20(113).png) |
 
+| User Information                                                                | New Project                                                                               |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%20(114).png)  | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%20(112).png) |
+
 
 | Project Sale GIF                                                                                | Insights GIF                                                                               |
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
