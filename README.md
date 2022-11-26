@@ -97,12 +97,12 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    nodemon index
    ```
-3. Install React Packages
+4. Install React Packages
    ```sh
    cd ../frontend/webapp
    npm install
    ```
- 4. Start React
-   ```sh
-   npm start
-   ```
+ 5. Start React
+    ```sh
+    npm start
+    ```
