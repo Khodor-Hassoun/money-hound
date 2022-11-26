@@ -35,7 +35,7 @@
 
 | Admin Panel                                                                                | Employee table                                                                               |
 | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| ![Artists results](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(100).png) | ![Artist's Albums](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%202022-11-25%20220016.png) |
+| ![Artists results](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(100).png) | ![Artist's Albums](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%202022-11-26%20130015.png) |
 
 | Project Details                                                                                | Sell project                                                                               |
 | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
