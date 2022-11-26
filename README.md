@@ -60,11 +60,16 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 | Project Manger                                                                | Company Owner                                                                               |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-|<img src="https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(104).png" width="450">  | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-59190a1074.gif) |
+| ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%20(104).png)  | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%20(116).png) |
 
-| Insights Page                                                                                | Insights gif                                                                               |
+| Company Information                                                                | Employee Information                                                                               |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%20(111).png)  | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/main/readme/project_images/Screenshot%20(113).png) |
+
+
+| Project Sale GIF                                                                                | Insights GIF                                                                               |
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| <img src="https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/Screenshot%20(108).png" width="450"> | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-4812e6f131.gif) |
+| ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-59190a1074.gif) | ![Home/Search](https://github.com/Khodor-Hassoun/money-hound/blob/final-updates-2/readme/project_images/ezgif-2-4812e6f131.gif) |
 <img src="./readme/title6.svg"/>
 
 > This is an example of how you may give instructions on setting up your project locally.
